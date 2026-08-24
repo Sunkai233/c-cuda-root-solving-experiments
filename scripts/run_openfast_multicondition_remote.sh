@@ -61,8 +61,12 @@ run_condition() {
   "$python_of" "$root/references/generate_bem_real_references.py" --dataset "$dataset" \
     --baseline "$base_dir" --bisection-roots "$cond/roots_alg0.bin" --brent-roots "$cond/roots_alg1.bin" \
     --out "$cond/oracle_300" --n 300 --seed "$seed"
-  "$python_of" "$root/scripts/analyze_bem_real_holdout.py" --references "$cond/oracle_300/bem_real_reference.csv" \
-    --roots "$cond/roots_alg4.bin" --out "$cond/adaptive_oracle_analysis"
+  if "$python_of" "$root/scripts/analyze_bem_real_holdout.py" --references "$cond/oracle_300/bem_real_reference.csv" \
+      --roots "$cond/roots_alg4.bin" --out "$cond/adaptive_oracle_analysis"; then
+    printf 'ADAPTIVE_ORACLE_PASS\n' >"$cond/ADAPTIVE_STATUS.txt"
+  else
+    printf 'ADAPTIVE_ORACLE_FAIL\n' >"$cond/ADAPTIVE_STATUS.txt"
+  fi
   sha256sum "$inp" "$bts" "$inflow" "$case_dir/5MW_600s_${tag}.fst" \
     "$case_dir/5MW_600s_${tag}.outb" "$dataset" "$cond"/roots_alg*.bin \
     "$cond/oracle_300/bem_real_reference.csv" >>"$cond/sha256.txt"

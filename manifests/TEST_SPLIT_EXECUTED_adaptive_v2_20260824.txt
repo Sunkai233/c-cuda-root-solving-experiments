@@ -1,0 +1,5 @@
+config_id=adaptive_v2_20260824
+candidate_commit=1fa526aab65f287db1f10ffbfd3188a51a14eca7
+run_id=20260824T072516Z_frozen_test_v2_rtx5090
+executed_utc=2026-08-24T07:25:28Z
+policy=single frozen test execution; do not rerun

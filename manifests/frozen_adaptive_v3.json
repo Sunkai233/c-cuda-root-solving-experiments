@@ -1,0 +1,30 @@
+{
+  "config_id": "adaptive_v3_20260824",
+  "reference_manifest": "references/ref_v3_20260824/manifest.json",
+  "development_evidence": [
+    "results_raw/20260824T072737Z_tau_x_sweep_v2_devcal_rtx5090",
+    "results_raw/20260824T073335Z_validation_v3_devcal_rtx5090"
+  ],
+  "selected_using": ["v2 dev", "v2 cal", "v3 dev", "v3 cal"],
+  "forbidden_selection_input": "v3 test",
+  "test_policy": "single run after manifest and source commit; raw per-sample outputs mandatory",
+  "tau_x": 3e-8,
+  "tau_gradient_relative": 1e-4,
+  "selection_rule": "Choose a threshold from the pre-run v2 dev/cal sweep that passes every maximum margin and gives additional BEM/Kepler tail headroom; 3e-8 was then confirmed on v3 dev/cal before test.",
+  "noninferiority_margins": {
+    "root_absolute_max": 1e-7,
+    "gradient_relative_max_main_domains": 2e-6,
+    "gradient_relative_max_peng_robinson": 1e-4,
+    "wrong_branch_count": 0,
+    "nonfinite_count": 0
+  },
+  "fixed_steps": {
+    "single_root_fp32": 10,
+    "single_root_fp64": 60,
+    "cstr_branch_scan_intervals": 256,
+    "cstr_fp32_bisection": 32,
+    "cstr_fp64_bisection": 60,
+    "peng_robinson": "dedicated_analytic_cubic"
+  },
+  "audit_note": "Adaptive v2 test is retained as a failed frozen run because three gradient-tail samples exceeded the pre-registered maximum margins. No v2 test sample was used in the v3 threshold sweep or v3 dev/cal confirmation."
+}

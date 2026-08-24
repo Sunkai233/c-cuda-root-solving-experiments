@@ -1,0 +1,11 @@
+{
+  "id": "bem_real_gradient_v1_20260824",
+  "candidate_commit": "1c4e02d0c90ea21dbae010376f9194af62958a14",
+  "reference": "references/bem_real_ref_v2_test_20260824/bem_real_reference.csv",
+  "derivative": "piecewise forward AD for phi and Vx with left/right polar segment selection",
+  "root_post_correction_steps": 2,
+  "root_absolute_error_margin_rad": 1e-10,
+  "gradient_relative_error_margin": 1e-7,
+  "nonfinite_margin": 0,
+  "test_policy": "gradient candidate is frozen before first gradient evaluation on this holdout"
+}

@@ -1,0 +1,22 @@
+{
+  "id": "bem_real_adaptive_v1_20260824",
+  "candidate_commit": "1b292855b2a90803703c7a188c42b5c6d706bbe7",
+  "dataset": "results_raw/20260824T060500Z_bem_real_dataset_v2/bem_real_f64_soa.bin",
+  "development_calibration_reference": "references/bem_real_ref_v1_20260824/bem_real_reference.csv",
+  "untouched_test_reference": "references/bem_real_ref_v2_test_20260824/bem_real_reference.csv",
+  "target_rule": "first valid solver region, then certified crossing closest to previous-step hint",
+  "algorithm": 4,
+  "fast_path": "certified nearest-root outward scan in first physical region",
+  "fast_scan_cells": 16,
+  "fallback": "atomic compacted queue followed by Brent nearest-root region scan",
+  "compile_precision": "strict_fp64",
+  "root_absolute_error_margin_rad": 1e-7,
+  "wrong_branch_margin": 0,
+  "nonfinite_margin": 0,
+  "timing": {
+    "warmups": 10,
+    "repetitions": 30,
+    "kernel_and_end_to_end_reported_separately": true
+  },
+  "test_policy": "execute once after the reference directory is complete and hashed; never tune from its result"
+}

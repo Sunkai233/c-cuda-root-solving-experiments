@@ -7,10 +7,10 @@ rather than pretending that equal repetition numbers are paired observations.
 """
 import argparse
 import csv
-import random
 import statistics
 from collections import defaultdict
 from pathlib import Path
+import numpy as np
 
 
 def quantile(values, p):
@@ -19,13 +19,11 @@ def quantile(values, p):
 
 
 def independent_bootstrap(numerator, denominator, seed, draws=10000):
-    rng = random.Random(seed)
-    nn, nd = len(numerator), len(denominator)
-    samples = []
-    for _ in range(draws):
-        a = statistics.median(numerator[rng.randrange(nn)] for _ in range(nn))
-        b = statistics.median(denominator[rng.randrange(nd)] for _ in range(nd))
-        samples.append(a / b)
+    rng = np.random.default_rng(seed)
+    a, b = np.asarray(numerator), np.asarray(denominator)
+    ai = rng.integers(0, len(a), size=(draws, len(a)))
+    bi = rng.integers(0, len(b), size=(draws, len(b)))
+    samples = np.median(a[ai], axis=1) / np.median(b[bi], axis=1)
     point = statistics.median(numerator) / statistics.median(denominator)
     return point, quantile(samples, .025), quantile(samples, .975)
 

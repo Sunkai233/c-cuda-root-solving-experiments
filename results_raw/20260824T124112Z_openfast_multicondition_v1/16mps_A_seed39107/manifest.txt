@@ -1,0 +1,6 @@
+condition_start=2026-08-24T13:13:14Z
+tag=16mps_A_seed39107
+URef=16
+seed=39107
+IEC_class=A
+condition_end=2026-08-24T13:16:19Z

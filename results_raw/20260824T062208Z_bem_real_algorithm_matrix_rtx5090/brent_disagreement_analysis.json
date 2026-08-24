@@ -1,0 +1,15 @@
+{
+  "comparison": "CPU Brent versus CPU bisection, circular root distance > 1e-6 rad",
+  "count": 944,
+  "fraction_of_2448000": 0.00038562091503267975,
+  "ordinary_node_zero_based_counts": {"14": 149, "15": 548, "16": 247},
+  "brent_closer_to_openfast_public_phi": 755,
+  "bisection_closer_to_openfast_public_phi": 189,
+  "ties": 0,
+  "root_delta_rad": {
+    "min": 0.013469766794873994,
+    "median": 0.05147330169562303,
+    "max": 0.06586661473170885
+  },
+  "interpretation": "All disagreements occur at the three outermost ordinary blade nodes. They are alternate crossings within a nonlinear region, not CPU/GPU drift. OpenFAST public Phi is an engineering cross-check, not a strict residual oracle."
+}

@@ -1,0 +1,11 @@
+source_commit=3a9d3f2
+start_utc=2026-08-24T04:57:21Z
+end_utc=2026-08-24T05:05:48Z
+feb6a6c8de4f16ab957778d88363d335243b3c21f7f4eaf6c08f9ec8295a9d03  90m_12mps_twr.inp
+951e02395ef7032b5578bbd8fb3163fca4644ec23a3b3b4a62accb0bfb14d256  90m_12mps_twr.bts
+bts_bytes=70881358
+     0.050  Time step [seconds]
+   630.000  Analysis time [seconds]
+   600.000  Usable output time [seconds]
+   Number of time steps output                      =    12242
+Processing complete.  507.42 CPU seconds used.

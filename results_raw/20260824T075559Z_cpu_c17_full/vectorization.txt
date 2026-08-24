@@ -1,0 +1,1874 @@
+src_cpu/benchmark_cpu.c:64:102: note: ***** Analysis failed with vector mode V8DF
+src_cpu/benchmark_cpu.c:64:102: note: ***** Skipping vector mode V64QI, which would repeat the analysis for V8DF
+src_cpu/benchmark_cpu.c:46:18: missed: couldn't vectorize loop
+src_cpu/benchmark_cpu.c:49:22: missed: not vectorized: unsupported use in stmt.
+src_cpu/benchmark_cpu.c:49:22: note: ***** Analysis failed with vector mode V8DF
+src_cpu/benchmark_cpu.c:49:22: note: ***** The result for vector mode V64QI would be the same
+src_cpu/benchmark_cpu.c:49:22: note: ***** Re-trying analysis with vector mode V32QI
+src_cpu/benchmark_cpu.c:49:22: note: ***** Analysis failed with vector mode V32QI
+src_cpu/benchmark_cpu.c:49:22: note: ***** Re-trying analysis with vector mode V16QI
+src_cpu/benchmark_cpu.c:49:22: note: ***** Analysis failed with vector mode V16QI
+src_cpu/benchmark_cpu.c:49:22: note: ***** Re-trying analysis with vector mode V8QI
+src_cpu/benchmark_cpu.c:49:22: note: ***** Analysis failed with vector mode V8QI
+src_cpu/benchmark_cpu.c:49:22: note: ***** Re-trying analysis with vector mode V4QI
+src_cpu/benchmark_cpu.c:49:22: note: ***** Analysis failed with vector mode V4QI
+src_cpu/benchmark_cpu.c:36:16: missed: couldn't vectorize loop
+src_cpu/benchmark_cpu.c:36:117: missed: not vectorized: unsupported use in stmt.
+src_cpu/benchmark_cpu.c:49:22: note: ***** Analysis failed with vector mode V8DF
+src_cpu/benchmark_cpu.c:49:22: note: ***** The result for vector mode V64QI would be the same
+src_cpu/benchmark_cpu.c:49:22: note: ***** Re-trying analysis with vector mode V32QI
+src_cpu/benchmark_cpu.c:49:22: note: ***** Analysis failed with vector mode V32QI
+src_cpu/benchmark_cpu.c:49:22: note: ***** Re-trying analysis with vector mode V16QI
+src_cpu/benchmark_cpu.c:49:22: note: ***** Analysis failed with vector mode V16QI
+src_cpu/benchmark_cpu.c:49:22: note: ***** Re-trying analysis with vector mode V8QI
+src_cpu/benchmark_cpu.c:49:22: note: ***** Analysis failed with vector mode V8QI
+src_cpu/benchmark_cpu.c:49:22: note: ***** Re-trying analysis with vector mode V4QI
+src_cpu/benchmark_cpu.c:49:22: note: ***** Analysis failed with vector mode V4QI
+src_cpu/benchmark_cpu.c:42:16: missed: couldn't vectorize loop
+src_cpu/benchmark_cpu.c:49:22: missed: not vectorized: unsupported use in stmt.
+src_cpu/benchmark_cpu.c:49:22: note: ***** Analysis failed with vector mode V8DF
+src_cpu/benchmark_cpu.c:49:22: note: ***** The result for vector mode V64QI would be the same
+src_cpu/benchmark_cpu.c:49:22: note: ***** Re-trying analysis with vector mode V32QI
+src_cpu/benchmark_cpu.c:49:22: note: ***** Analysis failed with vector mode V32QI
+src_cpu/benchmark_cpu.c:49:22: note: ***** Re-trying analysis with vector mode V16QI
+src_cpu/benchmark_cpu.c:49:22: note: ***** Analysis failed with vector mode V16QI
+src_cpu/benchmark_cpu.c:49:22: note: ***** Re-trying analysis with vector mode V8QI
+src_cpu/benchmark_cpu.c:49:22: note: ***** Analysis failed with vector mode V8QI
+src_cpu/benchmark_cpu.c:49:22: note: ***** Re-trying analysis with vector mode V4QI
+src_cpu/benchmark_cpu.c:49:22: note: ***** Analysis failed with vector mode V4QI
+src_cpu/benchmark_cpu.c:38:73: missed: couldn't vectorize loop
+src_cpu/benchmark_cpu.c:49:22: missed: not vectorized: unsupported use in stmt.
+src_cpu/benchmark_cpu.c:49:22: note: ***** Analysis failed with vector mode V8DF
+src_cpu/benchmark_cpu.c:49:22: note: ***** The result for vector mode V64QI would be the same
+src_cpu/benchmark_cpu.c:49:22: note: ***** Re-trying analysis with vector mode V32QI
+src_cpu/benchmark_cpu.c:49:22: note: ***** Analysis failed with vector mode V32QI
+src_cpu/benchmark_cpu.c:49:22: note: ***** Re-trying analysis with vector mode V16QI
+src_cpu/benchmark_cpu.c:49:22: note: ***** Analysis failed with vector mode V16QI
+src_cpu/benchmark_cpu.c:49:22: note: ***** Re-trying analysis with vector mode V8QI
+src_cpu/benchmark_cpu.c:49:22: note: ***** Analysis failed with vector mode V8QI
+src_cpu/benchmark_cpu.c:49:22: note: ***** Re-trying analysis with vector mode V4QI
+src_cpu/benchmark_cpu.c:49:22: note: ***** Analysis failed with vector mode V4QI
+src_cpu/benchmark_cpu.c:36:16: missed: couldn't vectorize loop
+src_cpu/benchmark_cpu.c:36:117: missed: not vectorized: unsupported use in stmt.
+src_cpu/benchmark_cpu.c:49:22: note: ***** Analysis failed with vector mode V8DF
+src_cpu/benchmark_cpu.c:49:22: note: ***** The result for vector mode V64QI would be the same
+src_cpu/benchmark_cpu.c:49:22: note: ***** Re-trying analysis with vector mode V32QI
+src_cpu/benchmark_cpu.c:49:22: note: ***** Analysis failed with vector mode V32QI
+src_cpu/benchmark_cpu.c:49:22: note: ***** Re-trying analysis with vector mode V16QI
+src_cpu/benchmark_cpu.c:49:22: note: ***** Analysis failed with vector mode V16QI
+src_cpu/benchmark_cpu.c:49:22: note: ***** Re-trying analysis with vector mode V8QI
+src_cpu/benchmark_cpu.c:49:22: note: ***** Analysis failed with vector mode V8QI
+src_cpu/benchmark_cpu.c:49:22: note: ***** Re-trying analysis with vector mode V4QI
+src_cpu/benchmark_cpu.c:49:22: note: ***** Analysis failed with vector mode V4QI
+src_cpu/benchmark_cpu.c:36:16: missed: couldn't vectorize loop
+src_cpu/benchmark_cpu.c:36:117: missed: not vectorized: unsupported use in stmt.
+src_cpu/benchmark_cpu.c:49:22: note: ***** Analysis failed with vector mode V8DF
+src_cpu/benchmark_cpu.c:49:22: note: ***** The result for vector mode V64QI would be the same
+src_cpu/benchmark_cpu.c:49:22: note: ***** Re-trying analysis with vector mode V32QI
+src_cpu/benchmark_cpu.c:49:22: note: ***** Analysis failed with vector mode V32QI
+src_cpu/benchmark_cpu.c:49:22: note: ***** Re-trying analysis with vector mode V16QI
+src_cpu/benchmark_cpu.c:49:22: note: ***** Analysis failed with vector mode V16QI
+src_cpu/benchmark_cpu.c:49:22: note: ***** Re-trying analysis with vector mode V8QI
+src_cpu/benchmark_cpu.c:49:22: note: ***** Analysis failed with vector mode V8QI
+src_cpu/benchmark_cpu.c:49:22: note: ***** Re-trying analysis with vector mode V4QI
+src_cpu/benchmark_cpu.c:49:22: note: ***** Analysis failed with vector mode V4QI
+src_cpu/benchmark_cpu.c:36:16: missed: couldn't vectorize loop
+src_cpu/benchmark_cpu.c:36:117: missed: not vectorized: unsupported use in stmt.
+src_cpu/benchmark_cpu.c:49:22: note: ***** Analysis failed with vector mode V8DF
+src_cpu/benchmark_cpu.c:49:22: note: ***** The result for vector mode V64QI would be the same
+src_cpu/benchmark_cpu.c:49:22: note: ***** Re-trying analysis with vector mode V32QI
+src_cpu/benchmark_cpu.c:49:22: note: ***** Analysis failed with vector mode V32QI
+src_cpu/benchmark_cpu.c:49:22: note: ***** Re-trying analysis with vector mode V16QI
+src_cpu/benchmark_cpu.c:49:22: note: ***** Analysis failed with vector mode V16QI
+src_cpu/benchmark_cpu.c:49:22: note: ***** Re-trying analysis with vector mode V8QI
+src_cpu/benchmark_cpu.c:49:22: note: ***** Analysis failed with vector mode V8QI
+src_cpu/benchmark_cpu.c:49:22: note: ***** Re-trying analysis with vector mode V4QI
+src_cpu/benchmark_cpu.c:49:22: note: ***** Analysis failed with vector mode V4QI
+src_cpu/benchmark_cpu.c:36:16: missed: couldn't vectorize loop
+src_cpu/benchmark_cpu.c:36:117: missed: not vectorized: unsupported use in stmt.
+src_cpu/benchmark_cpu.c:49:22: note: ***** Analysis failed with vector mode V8DF
+src_cpu/benchmark_cpu.c:49:22: note: ***** The result for vector mode V64QI would be the same
+src_cpu/benchmark_cpu.c:49:22: note: ***** Re-trying analysis with vector mode V32QI
+src_cpu/benchmark_cpu.c:49:22: note: ***** Analysis failed with vector mode V32QI
+src_cpu/benchmark_cpu.c:49:22: note: ***** Re-trying analysis with vector mode V16QI
+src_cpu/benchmark_cpu.c:49:22: note: ***** Analysis failed with vector mode V16QI
+src_cpu/benchmark_cpu.c:49:22: note: ***** Re-trying analysis with vector mode V8QI
+src_cpu/benchmark_cpu.c:49:22: note: ***** Analysis failed with vector mode V8QI
+src_cpu/benchmark_cpu.c:49:22: note: ***** Re-trying analysis with vector mode V4QI
+src_cpu/benchmark_cpu.c:49:22: note: ***** Analysis failed with vector mode V4QI
+src_cpu/benchmark_cpu.c:49:22: note: vectorized 0 loops in function.
+src_cpu/benchmark_cpu.c:53:202: missed: not vectorized: more than one data ref in stmt: <retval> = o;
+src_cpu/benchmark_cpu.c:53:202: note: ***** Analysis succeeded with vector mode V16SI
+src_cpu/benchmark_cpu.c:53:202: note: SLPing BB part
+src_cpu/benchmark_cpu.c:53:202: note: Costing subgraph: 
+src_cpu/benchmark_cpu.c:53:202: note: node 0x1b8eb198 (max_nunits=4, refcnt=1) vector(4) double
+src_cpu/benchmark_cpu.c:53:202: note: op template: o.root = iftmp.32_862;
+src_cpu/benchmark_cpu.c:53:202: note: 	stmt 0 o.root = iftmp.32_862;
+src_cpu/benchmark_cpu.c:53:202: note: 	stmt 1 o.residual = _42;
+src_cpu/benchmark_cpu.c:53:202: note: 	stmt 2 o.gradient = _45;
+src_cpu/benchmark_cpu.c:53:202: note: 	stmt 3 o.condition = _48;
+src_cpu/benchmark_cpu.c:53:202: note: 	children 0x1b8eb298
+src_cpu/benchmark_cpu.c:53:202: note: node (external) 0x1b8eb298 (max_nunits=1, refcnt=1) vector(4) double
+src_cpu/benchmark_cpu.c:53:202: note: 	{ iftmp.32_862, _42, _45, _48 }
+src_cpu/benchmark_cpu.c:53:202: note: Cost model analysis: 
+src_cpu/benchmark_cpu.c:53:202: note: Cost model analysis for part in loop 0:
+  Vector cost: 44
+  Scalar cost: 64
+src_cpu/benchmark_cpu.c:53:202: note: Basic block will be vectorized using SLP
+src_cpu/benchmark_cpu.c:53:202: note: Vectorizing SLP tree:
+src_cpu/benchmark_cpu.c:53:202: note: node 0x1b8eb198 (max_nunits=4, refcnt=1) vector(4) double
+src_cpu/benchmark_cpu.c:53:202: note: op template: o.root = iftmp.32_862;
+src_cpu/benchmark_cpu.c:53:202: note: 	stmt 0 o.root = iftmp.32_862;
+src_cpu/benchmark_cpu.c:53:202: note: 	stmt 1 o.residual = _42;
+src_cpu/benchmark_cpu.c:53:202: note: 	stmt 2 o.gradient = _45;
+src_cpu/benchmark_cpu.c:53:202: note: 	stmt 3 o.condition = _48;
+src_cpu/benchmark_cpu.c:53:202: note: 	children 0x1b8eb298
+src_cpu/benchmark_cpu.c:53:202: note: node (external) 0x1b8eb298 (max_nunits=1, refcnt=1) vector(4) double
+src_cpu/benchmark_cpu.c:53:202: note: 	{ iftmp.32_862, _42, _45, _48 }
+src_cpu/benchmark_cpu.c:53:202: note: ------>vectorizing SLP node starting from: o.root = iftmp.32_862;
+src_cpu/benchmark_cpu.c:53:202: note: vect_is_simple_use: operand ABS_EXPR <y_740>, type of def: internal
+src_cpu/benchmark_cpu.c:53:202: note: vect_is_simple_use: operand prephitmp_1968 / dy_744, type of def: internal
+src_cpu/benchmark_cpu.c:53:202: note: vect_is_simple_use: operand 1.0e+0 / _47, type of def: internal
+src_cpu/benchmark_cpu.c:53:202: note: transform store. ncopies = 1
+src_cpu/benchmark_cpu.c:53:202: note: create vector_type-pointer variable to type: vector(4) double  vectorizing a pointer ref: o.root
+src_cpu/benchmark_cpu.c:53:202: note: created &o
+src_cpu/benchmark_cpu.c:53:202: note: add new stmt: MEM <vector(4) double> [(double *)&o] = _1465;
+src_cpu/benchmark_cpu.c:53:202: note: vectorizing stmts using SLP.
+src_cpu/benchmark_cpu.c:53:202: optimized: basic block part vectorized using 64 byte vectors
+src_cpu/benchmark_cpu.c:53:202: note: ***** The result for vector mode V64QI would be the same
+src_cpu/benchmark_cpu.c:73:44: missed: couldn't vectorize loop
+src_cpu/benchmark_cpu.c:73:33: missed: statement clobbers memory: *_24 = solve_one (_22);
+src_cpu/benchmark_cpu.c:72:13: note: vectorized 0 loops in function.
+src_cpu/benchmark_cpu.c:73:33: missed: statement clobbers memory: *_24 = solve_one (_22);
+src_cpu/benchmark_cpu.c:72:13: note: ***** Analysis failed with vector mode V8DI
+src_cpu/benchmark_cpu.c:72:13: note: ***** The result for vector mode V64QI would be the same
+src_cpu/benchmark_cpu.c:72:13: note: ***** Re-trying analysis with vector mode V32QI
+src_cpu/benchmark_cpu.c:72:13: note: ***** Analysis failed with vector mode V32QI
+src_cpu/benchmark_cpu.c:72:13: note: ***** Re-trying analysis with vector mode V16QI
+src_cpu/benchmark_cpu.c:72:13: note: ***** Analysis failed with vector mode V16QI
+src_cpu/benchmark_cpu.c:72:13: note: ***** Re-trying analysis with vector mode V8QI
+src_cpu/benchmark_cpu.c:72:13: note: ***** Analysis failed with vector mode V8QI
+src_cpu/benchmark_cpu.c:72:13: note: ***** Re-trying analysis with vector mode V4QI
+src_cpu/benchmark_cpu.c:72:13: note: ***** Analysis failed with vector mode V4QI
+src_cpu/benchmark_cpu.c:67:31: missed: couldn't vectorize loop
+src_cpu/benchmark_cpu.c:67:43: missed: statement clobbers memory: *_4 = solve_one (_2); [return slot optimization]
+src_cpu/benchmark_cpu.c:70:44: missed: couldn't vectorize loop
+src_cpu/benchmark_cpu.c:70:33: missed: statement clobbers memory: *_30 = solve_one (_28); [return slot optimization]
+src_cpu/benchmark_cpu.c:66:15: note: vectorized 0 loops in function.
+src_cpu/benchmark_cpu.c:63:46: missed: statement clobbers memory: clock_gettime (4, &t);
+src_cpu/benchmark_cpu.c:66:15: missed: statement clobbers memory: __builtin_GOMP_parallel (run._omp_fn.0, &.omp_data_o.28, threads.31_22, 0);
+src_cpu/benchmark_cpu.c:70:33: missed: statement clobbers memory: *_30 = solve_one (_28); [return slot optimization]
+src_cpu/benchmark_cpu.c:67:43: missed: statement clobbers memory: *_4 = solve_one (_2); [return slot optimization]
+src_cpu/benchmark_cpu.c:63:46: missed: statement clobbers memory: clock_gettime (4, &t);
+src_cpu/benchmark_cpu.c:72:13: note: ***** Analysis succeeded with vector mode V8DI
+src_cpu/benchmark_cpu.c:72:13: note: SLPing BB part
+src_cpu/benchmark_cpu.c:72:13: note: Costing subgraph: 
+src_cpu/benchmark_cpu.c:72:13: note: node 0x1ba0e858 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:72:13: note: op template: .omp_data_o.28.p = p_20(D);
+src_cpu/benchmark_cpu.c:72:13: note: 	stmt 0 .omp_data_o.28.p = p_20(D);
+src_cpu/benchmark_cpu.c:72:13: note: 	stmt 1 .omp_data_o.28.o = o_18(D);
+src_cpu/benchmark_cpu.c:72:13: note: 	children 0x1ba0e8d8
+src_cpu/benchmark_cpu.c:72:13: note: node (external) 0x1ba0e8d8 (max_nunits=1, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:72:13: note: 	{ p_20(D), o_18(D) }
+src_cpu/benchmark_cpu.c:72:13: note: Cost model analysis: 
+src_cpu/benchmark_cpu.c:72:13: note: Cost model analysis for part in loop 0:
+  Vector cost: 32
+  Scalar cost: 32
+src_cpu/benchmark_cpu.c:72:13: note: Basic block will be vectorized using SLP
+src_cpu/benchmark_cpu.c:72:13: note: Vectorizing SLP tree:
+src_cpu/benchmark_cpu.c:72:13: note: node 0x1ba0e858 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:72:13: note: op template: .omp_data_o.28.p = p_20(D);
+src_cpu/benchmark_cpu.c:72:13: note: 	stmt 0 .omp_data_o.28.p = p_20(D);
+src_cpu/benchmark_cpu.c:72:13: note: 	stmt 1 .omp_data_o.28.o = o_18(D);
+src_cpu/benchmark_cpu.c:72:13: note: 	children 0x1ba0e8d8
+src_cpu/benchmark_cpu.c:72:13: note: node (external) 0x1ba0e8d8 (max_nunits=1, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:72:13: note: 	{ p_20(D), o_18(D) }
+src_cpu/benchmark_cpu.c:72:13: note: ------>vectorizing SLP node starting from: .omp_data_o.28.p = p_20(D);
+src_cpu/benchmark_cpu.c:72:13: note: vect_is_simple_use: operand o_18(D), type of def: external
+src_cpu/benchmark_cpu.c:72:13: note: conflicting alias set types.
+src_cpu/benchmark_cpu.c:72:13: note: transform store. ncopies = 1
+src_cpu/benchmark_cpu.c:72:13: note: create vector_type-pointer variable to type: vector(2) long unsigned int  vectorizing a pointer ref: .omp_data_o.28.p
+src_cpu/benchmark_cpu.c:72:13: note: created &.omp_data_o.28
+src_cpu/benchmark_cpu.c:72:13: note: add new stmt: MEM <vector(2) long unsigned int> [(void *)&.omp_data_o.28] = _13;
+src_cpu/benchmark_cpu.c:72:13: note: vectorizing stmts using SLP.
+src_cpu/benchmark_cpu.c:72:13: optimized: basic block part vectorized using 64 byte vectors
+src_cpu/benchmark_cpu.c:72:13: note: ***** The result for vector mode V64QI would be the same
+src_cpu/benchmark_cpu.c:75:5: missed: couldn't vectorize loop
+src_cpu/benchmark_cpu.c:75:5: missed: not vectorized: loop nest containing two or more consecutive inner loops cannot be vectorized
+src_cpu/benchmark_cpu.c:78:97: missed: couldn't vectorize loop
+src_cpu/benchmark_cpu.c:78:97: missed: not vectorized: loop nest containing two or more consecutive inner loops cannot be vectorized
+src_cpu/benchmark_cpu.c:79:24: missed: couldn't vectorize loop
+src_cpu/benchmark_cpu.c:79:24: missed: not vectorized: loop nest containing two or more consecutive inner loops cannot be vectorized
+src_cpu/benchmark_cpu.c:80:20: missed: couldn't vectorize loop
+src_cpu/benchmark_cpu.c:80:20: missed: not vectorized: control flow in loop.
+src_cpu/benchmark_cpu.c:80:102: missed: couldn't vectorize loop
+src_cpu/benchmark_cpu.c:80:119: missed: not vectorized: no vectype for stmt: _30 = _29->root;
+ scalar_type: double
+src_cpu/benchmark_cpu.c:79:80: missed: couldn't vectorize loop
+src_cpu/benchmark_cpu.c:79:90: missed: statement clobbers memory: run (p.9_18, o.8_17, prephitmp_342, mode_425, iftmp.4_82);
+src_cpu/benchmark_cpu.c:78:290: missed: couldn't vectorize loop
+src_cpu/benchmark_cpu.c:78:290: missed: not vectorized: control flow in loop.
+src_cpu/benchmark_cpu.c:78:290: missed: couldn't vectorize loop
+src_cpu/benchmark_cpu.c:78:302: missed: not vectorized: no vectype for stmt: MEM <double> [(struct Param *)_63] = cstore_372;
+ scalar_type: double
+src_cpu/benchmark_cpu.c:78:302: note: ***** Analysis succeeded with vector mode V8DF
+src_cpu/benchmark_cpu.c:78:302: note: SLPing BB part
+src_cpu/benchmark_cpu.c:78:302: note: Costing subgraph: 
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90548 (max_nunits=2, refcnt=1) vector(2) int
+src_cpu/benchmark_cpu.c:78:302: note: op template: MEM <int> [(struct Param *)_63 + 48B] = dom_412;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 MEM <int> [(struct Param *)_63 + 48B] = dom_412;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 MEM <int> [(struct Param *)_63 + 52B] = _515;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90948
+src_cpu/benchmark_cpu.c:78:302: note: node (external) 0x1ba90948 (max_nunits=1, refcnt=1) vector(2) int
+src_cpu/benchmark_cpu.c:78:302: note: 	{ dom_412, _515 }
+src_cpu/benchmark_cpu.c:78:302: note: Cost model analysis: 
+src_cpu/benchmark_cpu.c:78:302: note: Cost model analysis for part in loop 8:
+  Vector cost: 32
+  Scalar cost: 32
+src_cpu/benchmark_cpu.c:78:302: note: Costing subgraph: 
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90848 (max_nunits=2, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: op template: MEM <double> [(struct Param *)_63] = cstore_372;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 MEM <double> [(struct Param *)_63] = cstore_372;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 MEM <double> [(struct Param *)_63 + 8B] = iftmp.19_373;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba906c8
+src_cpu/benchmark_cpu.c:78:302: note: node (external) 0x1ba906c8 (max_nunits=2, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 cstore_372 = _537 ? iftmp.18_363 : iftmp.18_371;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 iftmp.19_373 = _537 ? iftmp.19_360 : iftmp.19_370;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba905c8 0x1ba907c8 0x1ba908c8
+src_cpu/benchmark_cpu.c:78:302: note: node (external) 0x1ba905c8 (max_nunits=1, refcnt=1)
+src_cpu/benchmark_cpu.c:78:302: note: 	{ _537, _537 }
+src_cpu/benchmark_cpu.c:78:302: note: node (external) 0x1ba907c8 (max_nunits=1, refcnt=1)
+src_cpu/benchmark_cpu.c:78:302: note: 	{ iftmp.18_363, iftmp.19_360 }
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba908c8 (max_nunits=2, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: op template: iftmp.18_371 = _596 * 9.899999999999999911182158029987476766109466552734375e-1;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 iftmp.18_371 = _596 * 9.899999999999999911182158029987476766109466552734375e-1;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 iftmp.19_370 = _548 * 3.141592653589793115997963468544185161590576171875e+0;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba903c8 0x1ba91348
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba903c8 (max_nunits=2, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: op template: _596 = _597 * 1.1102230246251565404236316680908203125e-16;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _596 = _597 * 1.1102230246251565404236316680908203125e-16;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _548 = _569 * 1.1102230246251565404236316680908203125e-16;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90748 0x1ba912c8
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90748 (max_nunits=2, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: op template: _597 = (double) _598;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _597 = (double) _598;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _569 = (double) _573;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90448
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90448 (max_nunits=2, refcnt=1) vector(2) signed long
+src_cpu/benchmark_cpu.c:78:302: note: op template: _598 = (signed long) _605;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _598 = (signed long) _605;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _573 = (signed long) _574;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba909c8
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba909c8 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _605 = _606 >> 11;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _605 = _606 >> 11;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _574 = _575 >> 11;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90a48 0x1ba91248
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90a48 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _606 = x_610 ^ _609;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _606 = x_610 ^ _609;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _575 = x_577 ^ _576;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90ac8 0x1ba91148
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90ac8 (max_nunits=2, refcnt=2) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: x_610 = _611 * 10723151780598845931;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 x_610 = _611 * 10723151780598845931;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 x_577 = _578 * 10723151780598845931;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90b48 0x1ba910c8
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90b48 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _611 = x_613 ^ _612;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _611 = x_613 ^ _612;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _578 = x_580 ^ _579;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90bc8 0x1ba90fc8
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90bc8 (max_nunits=2, refcnt=2) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: x_613 = _614 * 13787848793156543929;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 x_613 = _614 * 13787848793156543929;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 x_580 = _590 * 13787848793156543929;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90c48 0x1ba90f48
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90c48 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _614 = x_616 ^ _615;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _614 = x_616 ^ _615;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _590 = x_592 ^ _591;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90cc8 0x1ba90e48
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90cc8 (max_nunits=2, refcnt=2) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: x_616 = _618 + 11400714819323198485;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 x_616 = _618 + 11400714819323198485;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 x_592 = _618 + 11400714819323198486;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90d48 0x1ba90dc8
+src_cpu/benchmark_cpu.c:78:302: note: node (external) 0x1ba90d48 (max_nunits=1, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: 	{ _618, _618 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba90dc8 (max_nunits=1, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 11400714819323198485, 11400714819323198486 }
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90e48 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _615 = x_616 >> 30;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _615 = x_616 >> 30;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _591 = x_592 >> 30;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90cc8 0x1ba90ec8
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba90ec8 (max_nunits=1, refcnt=1)
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 30, 30 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba90f48 (max_nunits=1, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 13787848793156543929, 13787848793156543929 }
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90fc8 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _612 = x_613 >> 27;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _612 = x_613 >> 27;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _579 = x_580 >> 27;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90bc8 0x1ba91048
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba91048 (max_nunits=1, refcnt=1)
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 27, 27 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba910c8 (max_nunits=1, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 10723151780598845931, 10723151780598845931 }
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba91148 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _609 = x_610 >> 31;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _609 = x_610 >> 31;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _576 = x_577 >> 31;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90ac8 0x1ba911c8
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba911c8 (max_nunits=1, refcnt=1)
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 31, 31 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba91248 (max_nunits=1, refcnt=1)
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 11, 11 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba912c8 (max_nunits=1, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 1.1102230246251565404236316680908203125e-16, 1.1102230246251565404236316680908203125e-16 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba91348 (max_nunits=1, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 9.899999999999999911182158029987476766109466552734375e-1, 3.141592653589793115997963468544185161590576171875e+0 }
+src_cpu/benchmark_cpu.c:78:302: note: Cost model analysis: 
+src_cpu/benchmark_cpu.c:78:302: note: Cost model analysis for part in loop 8:
+  Vector cost: 20
+  Scalar cost: 32
+src_cpu/benchmark_cpu.c:78:302: note: Costing subgraph: 
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba913c8 (max_nunits=4, refcnt=1) vector(4) double
+src_cpu/benchmark_cpu.c:78:302: note: op template: MEM <double> [(struct Param *)_63 + 16B] = 0.0;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 MEM <double> [(struct Param *)_63 + 16B] = 0.0;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 MEM <double> [(struct Param *)_63 + 24B] = 0.0;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 2 MEM <double> [(struct Param *)_63 + 32B] = 0.0;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 3 MEM <double> [(struct Param *)_63 + 40B] = 0.0;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba91448
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba91448 (max_nunits=1, refcnt=1) vector(4) double
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 0.0, 0.0, 0.0, 0.0 }
+src_cpu/benchmark_cpu.c:78:302: note: Cost model analysis: 
+src_cpu/benchmark_cpu.c:78:302: note: Cost model analysis for part in loop 8:
+  Vector cost: 44
+  Scalar cost: 64
+src_cpu/benchmark_cpu.c:78:302: note: not profitable because of unprofitable if-converted scalar code
+src_cpu/benchmark_cpu.c:78:302: note: ***** The result for vector mode V64QI would be the same
+src_cpu/benchmark_cpu.c:78:302: note: ***** Re-trying analysis with vector mode V32QI
+src_cpu/benchmark_cpu.c:78:302: note: ***** Analysis succeeded with vector mode V32QI
+src_cpu/benchmark_cpu.c:78:302: note: SLPing BB part
+src_cpu/benchmark_cpu.c:78:302: note: Costing subgraph: 
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba913c8 (max_nunits=2, refcnt=1) vector(2) int
+src_cpu/benchmark_cpu.c:78:302: note: op template: MEM <int> [(struct Param *)_63 + 48B] = dom_412;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 MEM <int> [(struct Param *)_63 + 48B] = dom_412;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 MEM <int> [(struct Param *)_63 + 52B] = _515;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba91448
+src_cpu/benchmark_cpu.c:78:302: note: node (external) 0x1ba91448 (max_nunits=1, refcnt=1) vector(2) int
+src_cpu/benchmark_cpu.c:78:302: note: 	{ dom_412, _515 }
+src_cpu/benchmark_cpu.c:78:302: note: Cost model analysis: 
+src_cpu/benchmark_cpu.c:78:302: note: Cost model analysis for part in loop 8:
+  Vector cost: 32
+  Scalar cost: 32
+src_cpu/benchmark_cpu.c:78:302: note: Costing subgraph: 
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba906c8 (max_nunits=2, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: op template: MEM <double> [(struct Param *)_63] = cstore_372;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 MEM <double> [(struct Param *)_63] = cstore_372;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 MEM <double> [(struct Param *)_63 + 8B] = iftmp.19_373;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba908c8
+src_cpu/benchmark_cpu.c:78:302: note: node (external) 0x1ba908c8 (max_nunits=2, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 cstore_372 = _537 ? iftmp.18_363 : iftmp.18_371;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 iftmp.19_373 = _537 ? iftmp.19_360 : iftmp.19_370;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba91348 0x1ba912c8 0x1ba90748
+src_cpu/benchmark_cpu.c:78:302: note: node (external) 0x1ba91348 (max_nunits=1, refcnt=1)
+src_cpu/benchmark_cpu.c:78:302: note: 	{ _537, _537 }
+src_cpu/benchmark_cpu.c:78:302: note: node (external) 0x1ba912c8 (max_nunits=1, refcnt=1)
+src_cpu/benchmark_cpu.c:78:302: note: 	{ iftmp.18_363, iftmp.19_360 }
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90748 (max_nunits=2, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: op template: iftmp.18_371 = _596 * 9.899999999999999911182158029987476766109466552734375e-1;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 iftmp.18_371 = _596 * 9.899999999999999911182158029987476766109466552734375e-1;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 iftmp.19_370 = _548 * 3.141592653589793115997963468544185161590576171875e+0;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90448 0x1ba90948
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90448 (max_nunits=2, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: op template: _596 = _597 * 1.1102230246251565404236316680908203125e-16;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _596 = _597 * 1.1102230246251565404236316680908203125e-16;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _548 = _569 * 1.1102230246251565404236316680908203125e-16;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba909c8 0x1ba90548
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba909c8 (max_nunits=2, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: op template: _597 = (double) _598;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _597 = (double) _598;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _569 = (double) _573;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba91248
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba91248 (max_nunits=2, refcnt=1) vector(2) signed long
+src_cpu/benchmark_cpu.c:78:302: note: op template: _598 = (signed long) _605;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _598 = (signed long) _605;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _573 = (signed long) _574;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90a48
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90a48 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _605 = _606 >> 11;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _605 = _606 >> 11;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _574 = _575 >> 11;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba91148 0x1ba905c8
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba91148 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _606 = x_610 ^ _609;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _606 = x_610 ^ _609;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _575 = x_577 ^ _576;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba911c8 0x1ba90d48
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba911c8 (max_nunits=2, refcnt=2) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: x_610 = _611 * 10723151780598845931;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 x_610 = _611 * 10723151780598845931;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 x_577 = _578 * 10723151780598845931;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90ac8 0x1ba90dc8
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90ac8 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _611 = x_613 ^ _612;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _611 = x_613 ^ _612;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _578 = x_580 ^ _579;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba910c8 0x1ba90ec8
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba910c8 (max_nunits=2, refcnt=2) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: x_613 = _614 * 13787848793156543929;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 x_613 = _614 * 13787848793156543929;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 x_580 = _590 * 13787848793156543929;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90b48 0x1ba90e48
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90b48 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _614 = x_616 ^ _615;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _614 = x_616 ^ _615;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _590 = x_592 ^ _591;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90fc8 0x1ba90f48
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90fc8 (max_nunits=2, refcnt=2) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: x_616 = _618 + 11400714819323198485;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 x_616 = _618 + 11400714819323198485;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 x_592 = _618 + 11400714819323198486;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba91048 0x1ba90bc8
+src_cpu/benchmark_cpu.c:78:302: note: node (external) 0x1ba91048 (max_nunits=1, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: 	{ _618, _618 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba90bc8 (max_nunits=1, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 11400714819323198485, 11400714819323198486 }
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90f48 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _615 = x_616 >> 30;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _615 = x_616 >> 30;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _591 = x_592 >> 30;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90fc8 0x1ba90c48
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba90c48 (max_nunits=1, refcnt=1)
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 30, 30 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba90e48 (max_nunits=1, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 13787848793156543929, 13787848793156543929 }
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90ec8 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _612 = x_613 >> 27;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _612 = x_613 >> 27;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _579 = x_580 >> 27;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba910c8 0x1ba90cc8
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba90cc8 (max_nunits=1, refcnt=1)
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 27, 27 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba90dc8 (max_nunits=1, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 10723151780598845931, 10723151780598845931 }
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90d48 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _609 = x_610 >> 31;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _609 = x_610 >> 31;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _576 = x_577 >> 31;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba911c8 0x1ba907c8
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba907c8 (max_nunits=1, refcnt=1)
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 31, 31 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba905c8 (max_nunits=1, refcnt=1)
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 11, 11 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba90548 (max_nunits=1, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 1.1102230246251565404236316680908203125e-16, 1.1102230246251565404236316680908203125e-16 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba90948 (max_nunits=1, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 9.899999999999999911182158029987476766109466552734375e-1, 3.141592653589793115997963468544185161590576171875e+0 }
+src_cpu/benchmark_cpu.c:78:302: note: Cost model analysis: 
+src_cpu/benchmark_cpu.c:78:302: note: Cost model analysis for part in loop 8:
+  Vector cost: 20
+  Scalar cost: 32
+src_cpu/benchmark_cpu.c:78:302: note: Costing subgraph: 
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba91548 (max_nunits=4, refcnt=1) vector(4) double
+src_cpu/benchmark_cpu.c:78:302: note: op template: MEM <double> [(struct Param *)_63 + 16B] = 0.0;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 MEM <double> [(struct Param *)_63 + 16B] = 0.0;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 MEM <double> [(struct Param *)_63 + 24B] = 0.0;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 2 MEM <double> [(struct Param *)_63 + 32B] = 0.0;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 3 MEM <double> [(struct Param *)_63 + 40B] = 0.0;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba904c8
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba904c8 (max_nunits=1, refcnt=1) vector(4) double
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 0.0, 0.0, 0.0, 0.0 }
+src_cpu/benchmark_cpu.c:78:302: note: Cost model analysis: 
+src_cpu/benchmark_cpu.c:78:302: note: Cost model analysis for part in loop 8:
+  Vector cost: 44
+  Scalar cost: 64
+src_cpu/benchmark_cpu.c:78:302: note: not profitable because of unprofitable if-converted scalar code
+src_cpu/benchmark_cpu.c:78:302: note: ***** Re-trying analysis with vector mode V16QI
+src_cpu/benchmark_cpu.c:78:302: note: ***** Analysis succeeded with vector mode V16QI
+src_cpu/benchmark_cpu.c:78:302: note: SLPing BB part
+src_cpu/benchmark_cpu.c:78:302: note: Costing subgraph: 
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba91548 (max_nunits=2, refcnt=1) vector(2) int
+src_cpu/benchmark_cpu.c:78:302: note: op template: MEM <int> [(struct Param *)_63 + 48B] = dom_412;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 MEM <int> [(struct Param *)_63 + 48B] = dom_412;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 MEM <int> [(struct Param *)_63 + 52B] = _515;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba904c8
+src_cpu/benchmark_cpu.c:78:302: note: node (external) 0x1ba904c8 (max_nunits=1, refcnt=1) vector(2) int
+src_cpu/benchmark_cpu.c:78:302: note: 	{ dom_412, _515 }
+src_cpu/benchmark_cpu.c:78:302: note: Cost model analysis: 
+src_cpu/benchmark_cpu.c:78:302: note: Cost model analysis for part in loop 8:
+  Vector cost: 32
+  Scalar cost: 32
+src_cpu/benchmark_cpu.c:78:302: note: Costing subgraph: 
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba908c8 (max_nunits=2, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: op template: MEM <double> [(struct Param *)_63] = cstore_372;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 MEM <double> [(struct Param *)_63] = cstore_372;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 MEM <double> [(struct Param *)_63 + 8B] = iftmp.19_373;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90748
+src_cpu/benchmark_cpu.c:78:302: note: node (external) 0x1ba90748 (max_nunits=2, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 cstore_372 = _537 ? iftmp.18_363 : iftmp.18_371;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 iftmp.19_373 = _537 ? iftmp.19_360 : iftmp.19_370;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90948 0x1ba90548 0x1ba909c8
+src_cpu/benchmark_cpu.c:78:302: note: node (external) 0x1ba90948 (max_nunits=1, refcnt=1)
+src_cpu/benchmark_cpu.c:78:302: note: 	{ _537, _537 }
+src_cpu/benchmark_cpu.c:78:302: note: node (external) 0x1ba90548 (max_nunits=1, refcnt=1)
+src_cpu/benchmark_cpu.c:78:302: note: 	{ iftmp.18_363, iftmp.19_360 }
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba909c8 (max_nunits=2, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: op template: iftmp.18_371 = _596 * 9.899999999999999911182158029987476766109466552734375e-1;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 iftmp.18_371 = _596 * 9.899999999999999911182158029987476766109466552734375e-1;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 iftmp.19_370 = _548 * 3.141592653589793115997963468544185161590576171875e+0;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba91248 0x1ba91448
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba91248 (max_nunits=2, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: op template: _596 = _597 * 1.1102230246251565404236316680908203125e-16;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _596 = _597 * 1.1102230246251565404236316680908203125e-16;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _548 = _569 * 1.1102230246251565404236316680908203125e-16;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90a48 0x1ba913c8
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90a48 (max_nunits=2, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: op template: _597 = (double) _598;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _597 = (double) _598;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _569 = (double) _573;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba905c8
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba905c8 (max_nunits=2, refcnt=1) vector(2) signed long
+src_cpu/benchmark_cpu.c:78:302: note: op template: _598 = (signed long) _605;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _598 = (signed long) _605;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _573 = (signed long) _574;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba91148
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba91148 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _605 = _606 >> 11;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _605 = _606 >> 11;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _574 = _575 >> 11;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90d48 0x1ba91348
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90d48 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _606 = x_610 ^ _609;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _606 = x_610 ^ _609;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _575 = x_577 ^ _576;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba907c8 0x1ba91048
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba907c8 (max_nunits=2, refcnt=2) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: x_610 = _611 * 10723151780598845931;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 x_610 = _611 * 10723151780598845931;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 x_577 = _578 * 10723151780598845931;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba911c8 0x1ba90bc8
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba911c8 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _611 = x_613 ^ _612;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _611 = x_613 ^ _612;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _578 = x_580 ^ _579;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90dc8 0x1ba90c48
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90dc8 (max_nunits=2, refcnt=2) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: x_613 = _614 * 13787848793156543929;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 x_613 = _614 * 13787848793156543929;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 x_580 = _590 * 13787848793156543929;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90ac8 0x1ba90f48
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90ac8 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _614 = x_616 ^ _615;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _614 = x_616 ^ _615;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _590 = x_592 ^ _591;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90ec8 0x1ba90e48
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90ec8 (max_nunits=2, refcnt=2) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: x_616 = _618 + 11400714819323198485;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 x_616 = _618 + 11400714819323198485;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 x_592 = _618 + 11400714819323198486;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90cc8 0x1ba910c8
+src_cpu/benchmark_cpu.c:78:302: note: node (external) 0x1ba90cc8 (max_nunits=1, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: 	{ _618, _618 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba910c8 (max_nunits=1, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 11400714819323198485, 11400714819323198486 }
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90e48 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _615 = x_616 >> 30;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _615 = x_616 >> 30;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _591 = x_592 >> 30;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90ec8 0x1ba90b48
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba90b48 (max_nunits=1, refcnt=1)
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 30, 30 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba90f48 (max_nunits=1, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 13787848793156543929, 13787848793156543929 }
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90c48 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _612 = x_613 >> 27;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _612 = x_613 >> 27;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _579 = x_580 >> 27;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90dc8 0x1ba90fc8
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba90fc8 (max_nunits=1, refcnt=1)
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 27, 27 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba90bc8 (max_nunits=1, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 10723151780598845931, 10723151780598845931 }
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba91048 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _609 = x_610 >> 31;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _609 = x_610 >> 31;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _576 = x_577 >> 31;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba907c8 0x1ba912c8
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba912c8 (max_nunits=1, refcnt=1)
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 31, 31 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba91348 (max_nunits=1, refcnt=1)
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 11, 11 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba913c8 (max_nunits=1, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 1.1102230246251565404236316680908203125e-16, 1.1102230246251565404236316680908203125e-16 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba91448 (max_nunits=1, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 9.899999999999999911182158029987476766109466552734375e-1, 3.141592653589793115997963468544185161590576171875e+0 }
+src_cpu/benchmark_cpu.c:78:302: note: Cost model analysis: 
+src_cpu/benchmark_cpu.c:78:302: note: Cost model analysis for part in loop 8:
+  Vector cost: 20
+  Scalar cost: 32
+src_cpu/benchmark_cpu.c:78:302: note: Costing subgraph: 
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90648 (max_nunits=2, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: op template: MEM <double> [(struct Param *)_63 + 16B] = 0.0;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 MEM <double> [(struct Param *)_63 + 16B] = 0.0;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 MEM <double> [(struct Param *)_63 + 24B] = 0.0;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 2 MEM <double> [(struct Param *)_63 + 32B] = 0.0;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 3 MEM <double> [(struct Param *)_63 + 40B] = 0.0;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90848
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba90848 (max_nunits=1, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 0.0, 0.0, 0.0, 0.0 }
+src_cpu/benchmark_cpu.c:78:302: note: Cost model analysis: 
+src_cpu/benchmark_cpu.c:78:302: note: Cost model analysis for part in loop 8:
+  Vector cost: 52
+  Scalar cost: 64
+src_cpu/benchmark_cpu.c:78:302: note: not profitable because of unprofitable if-converted scalar code
+src_cpu/benchmark_cpu.c:78:302: note: ***** Re-trying analysis with vector mode V8QI
+src_cpu/benchmark_cpu.c:78:302: note: ***** Analysis succeeded with vector mode V8QI
+src_cpu/benchmark_cpu.c:78:302: note: SLPing BB part
+src_cpu/benchmark_cpu.c:78:302: note: Costing subgraph: 
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90648 (max_nunits=2, refcnt=1) vector(2) int
+src_cpu/benchmark_cpu.c:78:302: note: op template: MEM <int> [(struct Param *)_63 + 48B] = dom_412;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 MEM <int> [(struct Param *)_63 + 48B] = dom_412;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 MEM <int> [(struct Param *)_63 + 52B] = _515;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90848
+src_cpu/benchmark_cpu.c:78:302: note: node (external) 0x1ba90848 (max_nunits=1, refcnt=1) vector(2) int
+src_cpu/benchmark_cpu.c:78:302: note: 	{ dom_412, _515 }
+src_cpu/benchmark_cpu.c:78:302: note: Cost model analysis: 
+src_cpu/benchmark_cpu.c:78:302: note: Cost model analysis for part in loop 8:
+  Vector cost: 32
+  Scalar cost: 32
+src_cpu/benchmark_cpu.c:78:302: note: not profitable because of unprofitable if-converted scalar code
+src_cpu/benchmark_cpu.c:78:302: note: ***** Re-trying analysis with vector mode V4QI
+src_cpu/benchmark_cpu.c:78:302: note: ***** Analysis succeeded with vector mode V4QI
+src_cpu/benchmark_cpu.c:78:302: note: SLPing BB part
+src_cpu/benchmark_cpu.c:78:302: note: Costing subgraph: 
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90648 (max_nunits=1, refcnt=1) vector(1) int
+src_cpu/benchmark_cpu.c:78:302: note: op template: MEM <int> [(struct Param *)_63 + 48B] = dom_412;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 MEM <int> [(struct Param *)_63 + 48B] = dom_412;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 MEM <int> [(struct Param *)_63 + 52B] = _515;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90848
+src_cpu/benchmark_cpu.c:78:302: note: node (external) 0x1ba90848 (max_nunits=1, refcnt=1) vector(1) int
+src_cpu/benchmark_cpu.c:78:302: note: 	{ dom_412, _515 }
+src_cpu/benchmark_cpu.c:78:302: note: Cost model analysis: 
+src_cpu/benchmark_cpu.c:78:302: note: Cost model analysis for part in loop 8:
+  Vector cost: 40
+  Scalar cost: 32
+src_cpu/benchmark_cpu.c:78:302: missed: not vectorized: vectorization is not profitable.
+src_cpu/benchmark_cpu.c:78:290: missed: couldn't vectorize loop
+src_cpu/benchmark_cpu.c:78:302: missed: not vectorized: no vectype for stmt: MEM <double> [(struct Param *)_13] = _212;
+ scalar_type: double
+src_cpu/benchmark_cpu.c:78:302: note: ***** Analysis succeeded with vector mode V8DF
+src_cpu/benchmark_cpu.c:78:302: note: SLPing BB part
+src_cpu/benchmark_cpu.c:78:302: note: Costing subgraph: 
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90748 (max_nunits=2, refcnt=1) vector(2) int
+src_cpu/benchmark_cpu.c:78:302: note: op template: MEM <int> [(struct Param *)_13 + 48B] = dom_412;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 MEM <int> [(struct Param *)_13 + 48B] = dom_412;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 MEM <int> [(struct Param *)_13 + 52B] = _210;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90a48
+src_cpu/benchmark_cpu.c:78:302: note: node (external) 0x1ba90a48 (max_nunits=1, refcnt=1) vector(2) int
+src_cpu/benchmark_cpu.c:78:302: note: 	{ dom_412, _210 }
+src_cpu/benchmark_cpu.c:78:302: note: Cost model analysis: 
+src_cpu/benchmark_cpu.c:78:302: note: Cost model analysis for part in loop 3:
+  Vector cost: 32
+  Scalar cost: 32
+src_cpu/benchmark_cpu.c:78:302: note: Costing subgraph: 
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90848 (max_nunits=2, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: op template: MEM <double> [(struct Param *)_13] = _212;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 MEM <double> [(struct Param *)_13] = _212;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 MEM <double> [(struct Param *)_13 + 8B] = _214;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba914c8
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba914c8 (max_nunits=2, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: op template: _212 = _211 + 1.0e+0;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _212 = _211 + 1.0e+0;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _214 = _213 + 2.00000000000000004163336342344337026588618755340576171875e-2;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba905c8 0x1ba90ac8
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba905c8 (max_nunits=2, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: op template: _211 = _182 * 1.3e+1;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _211 = _182 * 1.3e+1;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _213 = _195 * 1.79999999999999993338661852249060757458209991455078125e-1;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba909c8 0x1ba90f48
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba909c8 (max_nunits=2, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: op template: _182 = _181 * 1.1102230246251565404236316680908203125e-16;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _182 = _181 * 1.1102230246251565404236316680908203125e-16;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _195 = _194 * 1.1102230246251565404236316680908203125e-16;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba91148 0x1ba90548
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba91148 (max_nunits=2, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: op template: _181 = (double) _180;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _181 = (double) _180;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _194 = (double) _193;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba904c8
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba904c8 (max_nunits=2, refcnt=1) vector(2) signed long
+src_cpu/benchmark_cpu.c:78:302: note: op template: _180 = (signed long) _179;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _180 = (signed long) _179;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _193 = (signed long) _192;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90448
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90448 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _179 = _178 >> 11;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _179 = _178 >> 11;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _192 = _191 >> 11;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba91248 0x1ba911c8
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba91248 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _178 = x_176 ^ _177;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _178 = x_176 ^ _177;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _191 = x_189 ^ _190;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba91348 0x1ba91548
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba91348 (max_nunits=2, refcnt=2) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: x_176 = _175 * 10723151780598845931;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 x_176 = _175 * 10723151780598845931;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 x_189 = _188 * 10723151780598845931;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90ec8 0x1ba91048
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90ec8 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _175 = x_173 ^ _174;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _175 = x_173 ^ _174;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _188 = x_186 ^ _187;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba912c8 0x1ba90c48
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba912c8 (max_nunits=2, refcnt=2) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: x_173 = _172 * 13787848793156543929;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 x_173 = _172 * 13787848793156543929;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 x_186 = _185 * 13787848793156543929;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90dc8 0x1ba90e48
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90dc8 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _172 = x_170 ^ _171;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _172 = x_170 ^ _171;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _185 = x_183 ^ _184;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90cc8 0x1ba907c8
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90cc8 (max_nunits=2, refcnt=2) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: x_170 = _169 + 11400714819323198485;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 x_170 = _169 + 11400714819323198485;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 x_183 = _169 + 11400714819323198486;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90fc8 0x1ba910c8
+src_cpu/benchmark_cpu.c:78:302: note: node (external) 0x1ba90fc8 (max_nunits=1, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: 	{ _169, _169 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba910c8 (max_nunits=1, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 11400714819323198485, 11400714819323198486 }
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba907c8 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _171 = x_170 >> 30;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _171 = x_170 >> 30;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _184 = x_183 >> 30;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90cc8 0x1ba90948
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba90948 (max_nunits=1, refcnt=1)
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 30, 30 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba90e48 (max_nunits=1, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 13787848793156543929, 13787848793156543929 }
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90c48 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _174 = x_173 >> 27;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _174 = x_173 >> 27;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _187 = x_186 >> 27;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba912c8 0x1ba90bc8
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba90bc8 (max_nunits=1, refcnt=1)
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 27, 27 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba91048 (max_nunits=1, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 10723151780598845931, 10723151780598845931 }
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba91548 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _177 = x_176 >> 31;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _177 = x_176 >> 31;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _190 = x_189 >> 31;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba91348 0x1ba90b48
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba90b48 (max_nunits=1, refcnt=1)
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 31, 31 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba911c8 (max_nunits=1, refcnt=1)
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 11, 11 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba90548 (max_nunits=1, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 1.1102230246251565404236316680908203125e-16, 1.1102230246251565404236316680908203125e-16 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba90f48 (max_nunits=1, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 1.3e+1, 1.79999999999999993338661852249060757458209991455078125e-1 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba90ac8 (max_nunits=1, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 1.0e+0, 2.00000000000000004163336342344337026588618755340576171875e-2 }
+src_cpu/benchmark_cpu.c:78:302: note: Cost model analysis: 
+src_cpu/benchmark_cpu.c:78:302: note: Cost model analysis for part in loop 3:
+  Vector cost: 256
+  Scalar cost: 240
+src_cpu/benchmark_cpu.c:78:302: missed: not vectorized: vectorization is not profitable.
+src_cpu/benchmark_cpu.c:78:302: note: not profitable because of unprofitable if-converted scalar code
+src_cpu/benchmark_cpu.c:78:302: note: ***** The result for vector mode V64QI would be the same
+src_cpu/benchmark_cpu.c:78:302: note: ***** Re-trying analysis with vector mode V32QI
+src_cpu/benchmark_cpu.c:78:302: note: ***** Analysis succeeded with vector mode V32QI
+src_cpu/benchmark_cpu.c:78:302: note: SLPing BB part
+src_cpu/benchmark_cpu.c:78:302: note: Costing subgraph: 
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90848 (max_nunits=2, refcnt=1) vector(2) int
+src_cpu/benchmark_cpu.c:78:302: note: op template: MEM <int> [(struct Param *)_13 + 48B] = dom_412;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 MEM <int> [(struct Param *)_13 + 48B] = dom_412;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 MEM <int> [(struct Param *)_13 + 52B] = _210;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba914c8
+src_cpu/benchmark_cpu.c:78:302: note: node (external) 0x1ba914c8 (max_nunits=1, refcnt=1) vector(2) int
+src_cpu/benchmark_cpu.c:78:302: note: 	{ dom_412, _210 }
+src_cpu/benchmark_cpu.c:78:302: note: Cost model analysis: 
+src_cpu/benchmark_cpu.c:78:302: note: Cost model analysis for part in loop 3:
+  Vector cost: 32
+  Scalar cost: 32
+src_cpu/benchmark_cpu.c:78:302: note: Costing subgraph: 
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba905c8 (max_nunits=2, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: op template: MEM <double> [(struct Param *)_13] = _212;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 MEM <double> [(struct Param *)_13] = _212;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 MEM <double> [(struct Param *)_13 + 8B] = _214;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90f48
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90f48 (max_nunits=2, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: op template: _212 = _211 + 1.0e+0;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _212 = _211 + 1.0e+0;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _214 = _213 + 2.00000000000000004163336342344337026588618755340576171875e-2;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba909c8 0x1ba90d48
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba909c8 (max_nunits=2, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: op template: _211 = _182 * 1.3e+1;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _211 = _182 * 1.3e+1;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _213 = _195 * 1.79999999999999993338661852249060757458209991455078125e-1;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90548 0x1ba90a48
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90548 (max_nunits=2, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: op template: _182 = _181 * 1.1102230246251565404236316680908203125e-16;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _182 = _181 * 1.1102230246251565404236316680908203125e-16;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _195 = _194 * 1.1102230246251565404236316680908203125e-16;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba91148 0x1ba90748
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba91148 (max_nunits=2, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: op template: _181 = (double) _180;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _181 = (double) _180;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _194 = (double) _193;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba904c8
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba904c8 (max_nunits=2, refcnt=1) vector(2) signed long
+src_cpu/benchmark_cpu.c:78:302: note: op template: _180 = (signed long) _179;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _180 = (signed long) _179;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _193 = (signed long) _192;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90448
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90448 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _179 = _178 >> 11;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _179 = _178 >> 11;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _192 = _191 >> 11;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba911c8 0x1ba90fc8
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba911c8 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _178 = x_176 ^ _177;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _178 = x_176 ^ _177;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _191 = x_189 ^ _190;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba91248 0x1ba90cc8
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba91248 (max_nunits=2, refcnt=2) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: x_176 = _175 * 10723151780598845931;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 x_176 = _175 * 10723151780598845931;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 x_189 = _188 * 10723151780598845931;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba91548 0x1ba90948
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba91548 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _175 = x_173 ^ _174;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _175 = x_173 ^ _174;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _188 = x_186 ^ _187;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90b48 0x1ba90dc8
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90b48 (max_nunits=2, refcnt=2) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: x_173 = _172 * 13787848793156543929;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 x_173 = _172 * 13787848793156543929;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 x_186 = _185 * 13787848793156543929;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba91348 0x1ba90e48
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba91348 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _172 = x_170 ^ _171;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _172 = x_170 ^ _171;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _185 = x_183 ^ _184;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba91048 0x1ba90bc8
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba91048 (max_nunits=2, refcnt=2) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: x_170 = _169 + 11400714819323198485;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 x_170 = _169 + 11400714819323198485;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 x_183 = _169 + 11400714819323198486;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90ec8 0x1ba90c48
+src_cpu/benchmark_cpu.c:78:302: note: node (external) 0x1ba90ec8 (max_nunits=1, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: 	{ _169, _169 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba90c48 (max_nunits=1, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 11400714819323198485, 11400714819323198486 }
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90bc8 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _171 = x_170 >> 30;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _171 = x_170 >> 30;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _184 = x_183 >> 30;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba91048 0x1ba912c8
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba912c8 (max_nunits=1, refcnt=1)
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 30, 30 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba90e48 (max_nunits=1, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 13787848793156543929, 13787848793156543929 }
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90dc8 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _174 = x_173 >> 27;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _174 = x_173 >> 27;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _187 = x_186 >> 27;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90b48 0x1ba907c8
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba907c8 (max_nunits=1, refcnt=1)
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 27, 27 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba90948 (max_nunits=1, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 10723151780598845931, 10723151780598845931 }
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90cc8 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _177 = x_176 >> 31;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _177 = x_176 >> 31;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _190 = x_189 >> 31;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba91248 0x1ba910c8
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba910c8 (max_nunits=1, refcnt=1)
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 31, 31 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba90fc8 (max_nunits=1, refcnt=1)
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 11, 11 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba90748 (max_nunits=1, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 1.1102230246251565404236316680908203125e-16, 1.1102230246251565404236316680908203125e-16 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba90a48 (max_nunits=1, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 1.3e+1, 1.79999999999999993338661852249060757458209991455078125e-1 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba90d48 (max_nunits=1, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 1.0e+0, 2.00000000000000004163336342344337026588618755340576171875e-2 }
+src_cpu/benchmark_cpu.c:78:302: note: Cost model analysis: 
+src_cpu/benchmark_cpu.c:78:302: note: Cost model analysis for part in loop 3:
+  Vector cost: 256
+  Scalar cost: 240
+src_cpu/benchmark_cpu.c:78:302: missed: not vectorized: vectorization is not profitable.
+src_cpu/benchmark_cpu.c:78:302: note: not profitable because of unprofitable if-converted scalar code
+src_cpu/benchmark_cpu.c:78:302: note: ***** Re-trying analysis with vector mode V16QI
+src_cpu/benchmark_cpu.c:78:302: note: ***** Analysis succeeded with vector mode V16QI
+src_cpu/benchmark_cpu.c:78:302: note: SLPing BB part
+src_cpu/benchmark_cpu.c:78:302: note: Costing subgraph: 
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba905c8 (max_nunits=2, refcnt=1) vector(2) int
+src_cpu/benchmark_cpu.c:78:302: note: op template: MEM <int> [(struct Param *)_13 + 48B] = dom_412;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 MEM <int> [(struct Param *)_13 + 48B] = dom_412;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 MEM <int> [(struct Param *)_13 + 52B] = _210;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90f48
+src_cpu/benchmark_cpu.c:78:302: note: node (external) 0x1ba90f48 (max_nunits=1, refcnt=1) vector(2) int
+src_cpu/benchmark_cpu.c:78:302: note: 	{ dom_412, _210 }
+src_cpu/benchmark_cpu.c:78:302: note: Cost model analysis: 
+src_cpu/benchmark_cpu.c:78:302: note: Cost model analysis for part in loop 3:
+  Vector cost: 32
+  Scalar cost: 32
+src_cpu/benchmark_cpu.c:78:302: note: Costing subgraph: 
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba909c8 (max_nunits=2, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: op template: MEM <double> [(struct Param *)_13] = _212;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 MEM <double> [(struct Param *)_13] = _212;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 MEM <double> [(struct Param *)_13 + 8B] = _214;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90a48
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90a48 (max_nunits=2, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: op template: _212 = _211 + 1.0e+0;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _212 = _211 + 1.0e+0;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _214 = _213 + 2.00000000000000004163336342344337026588618755340576171875e-2;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90548 0x1ba915c8
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90548 (max_nunits=2, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: op template: _211 = _182 * 1.3e+1;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _211 = _182 * 1.3e+1;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _213 = _195 * 1.79999999999999993338661852249060757458209991455078125e-1;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90748 0x1ba914c8
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90748 (max_nunits=2, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: op template: _182 = _181 * 1.1102230246251565404236316680908203125e-16;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _182 = _181 * 1.1102230246251565404236316680908203125e-16;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _195 = _194 * 1.1102230246251565404236316680908203125e-16;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba91148 0x1ba90848
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba91148 (max_nunits=2, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: op template: _181 = (double) _180;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _181 = (double) _180;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _194 = (double) _193;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba904c8
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba904c8 (max_nunits=2, refcnt=1) vector(2) signed long
+src_cpu/benchmark_cpu.c:78:302: note: op template: _180 = (signed long) _179;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _180 = (signed long) _179;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _193 = (signed long) _192;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90448
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90448 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _179 = _178 >> 11;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _179 = _178 >> 11;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _192 = _191 >> 11;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90fc8 0x1ba90ec8
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90fc8 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _178 = x_176 ^ _177;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _178 = x_176 ^ _177;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _191 = x_189 ^ _190;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba911c8 0x1ba91048
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba911c8 (max_nunits=2, refcnt=2) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: x_176 = _175 * 10723151780598845931;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 x_176 = _175 * 10723151780598845931;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 x_189 = _188 * 10723151780598845931;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90cc8 0x1ba912c8
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90cc8 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _175 = x_173 ^ _174;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _175 = x_173 ^ _174;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _188 = x_186 ^ _187;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba910c8 0x1ba91348
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba910c8 (max_nunits=2, refcnt=2) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: x_173 = _172 * 13787848793156543929;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 x_173 = _172 * 13787848793156543929;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 x_186 = _185 * 13787848793156543929;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba91248 0x1ba90e48
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba91248 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _172 = x_170 ^ _171;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _172 = x_170 ^ _171;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _185 = x_183 ^ _184;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90948 0x1ba907c8
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90948 (max_nunits=2, refcnt=2) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: x_170 = _169 + 11400714819323198485;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 x_170 = _169 + 11400714819323198485;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 x_183 = _169 + 11400714819323198486;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba91548 0x1ba90dc8
+src_cpu/benchmark_cpu.c:78:302: note: node (external) 0x1ba91548 (max_nunits=1, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: 	{ _169, _169 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba90dc8 (max_nunits=1, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 11400714819323198485, 11400714819323198486 }
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba907c8 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _171 = x_170 >> 30;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _171 = x_170 >> 30;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _184 = x_183 >> 30;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90948 0x1ba90b48
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba90b48 (max_nunits=1, refcnt=1)
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 30, 30 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba90e48 (max_nunits=1, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 13787848793156543929, 13787848793156543929 }
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba91348 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _174 = x_173 >> 27;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _174 = x_173 >> 27;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _187 = x_186 >> 27;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba910c8 0x1ba90bc8
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba90bc8 (max_nunits=1, refcnt=1)
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 27, 27 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba912c8 (max_nunits=1, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 10723151780598845931, 10723151780598845931 }
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba91048 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _177 = x_176 >> 31;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _177 = x_176 >> 31;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _190 = x_189 >> 31;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba911c8 0x1ba90c48
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba90c48 (max_nunits=1, refcnt=1)
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 31, 31 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba90ec8 (max_nunits=1, refcnt=1)
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 11, 11 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba90848 (max_nunits=1, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 1.1102230246251565404236316680908203125e-16, 1.1102230246251565404236316680908203125e-16 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba914c8 (max_nunits=1, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 1.3e+1, 1.79999999999999993338661852249060757458209991455078125e-1 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba915c8 (max_nunits=1, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 1.0e+0, 2.00000000000000004163336342344337026588618755340576171875e-2 }
+src_cpu/benchmark_cpu.c:78:302: note: Cost model analysis: 
+src_cpu/benchmark_cpu.c:78:302: note: Cost model analysis for part in loop 3:
+  Vector cost: 256
+  Scalar cost: 240
+src_cpu/benchmark_cpu.c:78:302: missed: not vectorized: vectorization is not profitable.
+src_cpu/benchmark_cpu.c:78:302: note: not profitable because of unprofitable if-converted scalar code
+src_cpu/benchmark_cpu.c:78:302: note: ***** Re-trying analysis with vector mode V8QI
+src_cpu/benchmark_cpu.c:78:302: note: ***** Analysis succeeded with vector mode V8QI
+src_cpu/benchmark_cpu.c:78:302: note: SLPing BB part
+src_cpu/benchmark_cpu.c:78:302: note: Costing subgraph: 
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba909c8 (max_nunits=2, refcnt=1) vector(2) int
+src_cpu/benchmark_cpu.c:78:302: note: op template: MEM <int> [(struct Param *)_13 + 48B] = dom_412;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 MEM <int> [(struct Param *)_13 + 48B] = dom_412;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 MEM <int> [(struct Param *)_13 + 52B] = _210;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90a48
+src_cpu/benchmark_cpu.c:78:302: note: node (external) 0x1ba90a48 (max_nunits=1, refcnt=1) vector(2) int
+src_cpu/benchmark_cpu.c:78:302: note: 	{ dom_412, _210 }
+src_cpu/benchmark_cpu.c:78:302: note: Cost model analysis: 
+src_cpu/benchmark_cpu.c:78:302: note: Cost model analysis for part in loop 3:
+  Vector cost: 32
+  Scalar cost: 32
+src_cpu/benchmark_cpu.c:78:302: note: not profitable because of unprofitable if-converted scalar code
+src_cpu/benchmark_cpu.c:78:302: note: ***** Re-trying analysis with vector mode V4QI
+src_cpu/benchmark_cpu.c:78:302: note: ***** Analysis succeeded with vector mode V4QI
+src_cpu/benchmark_cpu.c:78:302: note: SLPing BB part
+src_cpu/benchmark_cpu.c:78:302: note: Costing subgraph: 
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba909c8 (max_nunits=1, refcnt=1) vector(1) int
+src_cpu/benchmark_cpu.c:78:302: note: op template: MEM <int> [(struct Param *)_13 + 48B] = dom_412;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 MEM <int> [(struct Param *)_13 + 48B] = dom_412;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 MEM <int> [(struct Param *)_13 + 52B] = _210;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90a48
+src_cpu/benchmark_cpu.c:78:302: note: node (external) 0x1ba90a48 (max_nunits=1, refcnt=1) vector(1) int
+src_cpu/benchmark_cpu.c:78:302: note: 	{ dom_412, _210 }
+src_cpu/benchmark_cpu.c:78:302: note: Cost model analysis: 
+src_cpu/benchmark_cpu.c:78:302: note: Cost model analysis for part in loop 3:
+  Vector cost: 40
+  Scalar cost: 32
+src_cpu/benchmark_cpu.c:78:302: missed: not vectorized: vectorization is not profitable.
+src_cpu/benchmark_cpu.c:75:5: note: vectorized 0 loops in function.
+src_cpu/benchmark_cpu.c:75:102: missed: statement clobbers memory: iftmp.1_78 = strtoull (_1, 0B, 10);
+/usr/include/stdlib.h:483:16: missed: statement clobbers memory: _141 = strtol (_2, 0B, 10);
+/usr/include/stdlib.h:483:16: missed: statement clobbers memory: _143 = strtol (_3, 0B, 10);
+/usr/include/stdlib.h:483:16: missed: statement clobbers memory: _145 = strtol (_4, 0B, 10);
+/usr/include/stdlib.h:483:16: missed: statement clobbers memory: _147 = strtol (_5, 0B, 10);
+src_cpu/benchmark_cpu.c:76:10: missed: statement clobbers memory: f_84 = fopen (iftmp.0_156, "w");
+/usr/include/x86_64-linux-gnu/bits/stdio2.h:79:10: missed: statement clobbers memory: __fprintf_chk (f_84, 2, "domain,n,mode,repetition,time_ms,throughput_mroots_s,checksum,nonfinite\n");
+src_cpu/benchmark_cpu.c:78:138: missed: statement clobbers memory: _7 = posix_memalign (&p, 64, _6);
+src_cpu/benchmark_cpu.c:78:182: missed: statement clobbers memory: _9 = posix_memalign (&o, 64, _8);
+src_cpu/benchmark_cpu.c:79:90: missed: statement clobbers memory: run (p.9_18, o.8_17, prephitmp_342, mode_425, iftmp.4_82);
+src_cpu/benchmark_cpu.c:79:124: missed: statement clobbers memory: ts_118 = malloc (_20);
+src_cpu/benchmark_cpu.c:80:37: missed: statement clobbers memory: _26 = run (p.11_22, o.10_21, prephitmp_342, mode_425, iftmp.4_82);
+/usr/include/x86_64-linux-gnu/bits/stdio2.h:79:10: missed: statement clobbers memory: __fprintf_chk (f_84, 2, "%s,%zu,%s,%d,%.12g,%.12g,%.17g,%zu\n", _45, prephitmp_342, _44, r_427, _26, _43, sum_429, nf_432);
+src_cpu/benchmark_cpu.c:80:269: missed: statement clobbers memory: fflush (f_84);
+src_cpu/benchmark_cpu.c:65:38: missed: statement clobbers memory: qsort (ts_118, _19, 8, cmpd);
+/usr/include/x86_64-linux-gnu/bits/stdio2.h:86:10: missed: statement clobbers memory: __printf_chk (2, "%-14s n=%9zu %-17s median=%10.4f ms\n", _47, prephitmp_342, _46, _153);
+src_cpu/benchmark_cpu.c:80:377: missed: statement clobbers memory: free (ts_118);
+src_cpu/benchmark_cpu.c:81:5: missed: statement clobbers memory: free (o.14_48);
+src_cpu/benchmark_cpu.c:81:13: missed: statement clobbers memory: free (p.15_49);
+/usr/include/x86_64-linux-gnu/bits/stdio2.h:79:10: missed: statement clobbers memory: __fprintf_chk (stderr.6_10, 2, "allocation failed\n");
+src_cpu/benchmark_cpu.c:82:4: missed: statement clobbers memory: fclose (f_84);
+src_cpu/benchmark_cpu.c:76:32: missed: statement clobbers memory: perror ("fopen");
+src_cpu/benchmark_cpu.c:78:302: note: ***** Analysis succeeded with vector mode V8DI
+src_cpu/benchmark_cpu.c:78:302: note: SLPing BB part
+src_cpu/benchmark_cpu.c:77:16: note: Costing subgraph: 
+src_cpu/benchmark_cpu.c:77:16: note: node 0x1ba90448 (max_nunits=8, refcnt=1) vector(8) long unsigned int
+src_cpu/benchmark_cpu.c:77:16: note: op template: ns[1] = 8;
+src_cpu/benchmark_cpu.c:77:16: note: 	stmt 0 ns[1] = 8;
+src_cpu/benchmark_cpu.c:77:16: note: 	stmt 1 ns[2] = 32;
+src_cpu/benchmark_cpu.c:77:16: note: 	stmt 2 ns[3] = 128;
+src_cpu/benchmark_cpu.c:77:16: note: 	stmt 3 ns[4] = 512;
+src_cpu/benchmark_cpu.c:77:16: note: 	stmt 4 ns[5] = 2048;
+src_cpu/benchmark_cpu.c:77:16: note: 	stmt 5 ns[6] = 8192;
+src_cpu/benchmark_cpu.c:77:16: note: 	stmt 6 ns[7] = 32768;
+src_cpu/benchmark_cpu.c:77:16: note: 	stmt 7 ns[8] = 131072;
+src_cpu/benchmark_cpu.c:77:16: note: 	children 0x1ba904c8
+src_cpu/benchmark_cpu.c:77:16: note: node (constant) 0x1ba904c8 (max_nunits=1, refcnt=1) vector(8) long unsigned int
+src_cpu/benchmark_cpu.c:77:16: note: 	{ 8, 32, 128, 512, 2048, 8192, 32768, 131072 }
+src_cpu/benchmark_cpu.c:77:16: note: Cost model analysis: 
+src_cpu/benchmark_cpu.c:77:16: note: Cost model analysis for part in loop 0:
+  Vector cost: 48
+  Scalar cost: 128
+src_cpu/benchmark_cpu.c:77:16: note: Costing subgraph: 
+src_cpu/benchmark_cpu.c:77:16: note: node 0x1ba90548 (max_nunits=4, refcnt=1) vector(4) long unsigned int
+src_cpu/benchmark_cpu.c:77:16: note: op template: ns[9] = 524288;
+src_cpu/benchmark_cpu.c:77:16: note: 	stmt 0 ns[9] = 524288;
+src_cpu/benchmark_cpu.c:77:16: note: 	stmt 1 ns[10] = 2097152;
+src_cpu/benchmark_cpu.c:77:16: note: 	stmt 2 ns[11] = 8388608;
+src_cpu/benchmark_cpu.c:77:16: note: 	stmt 3 ns[12] = 16777216;
+src_cpu/benchmark_cpu.c:77:16: note: 	children 0x1ba905c8
+src_cpu/benchmark_cpu.c:77:16: note: node (constant) 0x1ba905c8 (max_nunits=1, refcnt=1) vector(4) long unsigned int
+src_cpu/benchmark_cpu.c:77:16: note: 	{ 524288, 2097152, 8388608, 16777216 }
+src_cpu/benchmark_cpu.c:77:16: note: Cost model analysis: 
+src_cpu/benchmark_cpu.c:77:16: note: Cost model analysis for part in loop 0:
+  Vector cost: 44
+  Scalar cost: 64
+src_cpu/benchmark_cpu.c:77:104: note: Costing subgraph: 
+src_cpu/benchmark_cpu.c:77:104: note: node 0x1ba906c8 (max_nunits=4, refcnt=1) vector(4) long unsigned int
+src_cpu/benchmark_cpu.c:77:104: note: op template: dn[0] = "bem";
+src_cpu/benchmark_cpu.c:77:104: note: 	stmt 0 dn[0] = "bem";
+src_cpu/benchmark_cpu.c:77:104: note: 	stmt 1 dn[1] = "kepler";
+src_cpu/benchmark_cpu.c:77:104: note: 	stmt 2 dn[2] = "pv";
+src_cpu/benchmark_cpu.c:77:104: note: 	stmt 3 dn[3] = "cstr";
+src_cpu/benchmark_cpu.c:77:104: note: 	children 0x1ba90748
+src_cpu/benchmark_cpu.c:77:104: note: node (external) 0x1ba90748 (max_nunits=1, refcnt=1) vector(4) long unsigned int
+src_cpu/benchmark_cpu.c:77:104: note: 	{ "bem", "kepler", "pv", "cstr" }
+src_cpu/benchmark_cpu.c:77:104: note: Cost model analysis: 
+src_cpu/benchmark_cpu.c:77:104: note: Cost model analysis for part in loop 0:
+  Vector cost: 44
+  Scalar cost: 64
+src_cpu/benchmark_cpu.c:77:155: note: Costing subgraph: 
+src_cpu/benchmark_cpu.c:77:155: note: node 0x1ba90848 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:77:155: note: op template: mn[0] = "serial";
+src_cpu/benchmark_cpu.c:77:155: note: 	stmt 0 mn[0] = "serial";
+src_cpu/benchmark_cpu.c:77:155: note: 	stmt 1 mn[1] = "omp_simd_1t";
+src_cpu/benchmark_cpu.c:77:155: note: 	children 0x1ba908c8
+src_cpu/benchmark_cpu.c:77:155: note: node (external) 0x1ba908c8 (max_nunits=1, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:77:155: note: 	{ "serial", "omp_simd_1t" }
+src_cpu/benchmark_cpu.c:77:155: note: Cost model analysis: 
+src_cpu/benchmark_cpu.c:77:155: note: Cost model analysis for part in loop 0:
+  Vector cost: 20
+  Scalar cost: 32
+src_cpu/benchmark_cpu.c:78:302: note: Costing subgraph: 
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90948 (max_nunits=2, refcnt=1) vector(2) int
+src_cpu/benchmark_cpu.c:78:302: note: op template: MEM <int> [(struct Param *)_359 + 48B] = dom_412;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 MEM <int> [(struct Param *)_359 + 48B] = dom_412;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 MEM <int> [(struct Param *)_359 + 52B] = _446;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90a48
+src_cpu/benchmark_cpu.c:78:302: note: node (external) 0x1ba90a48 (max_nunits=1, refcnt=1) vector(2) int
+src_cpu/benchmark_cpu.c:78:302: note: 	{ dom_412, _446 }
+src_cpu/benchmark_cpu.c:78:302: note: Cost model analysis: 
+src_cpu/benchmark_cpu.c:78:302: note: Cost model analysis for part in loop 11:
+  Vector cost: 32
+  Scalar cost: 32
+src_cpu/benchmark_cpu.c:78:302: note: Costing subgraph: 
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90b48 (max_nunits=2, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: op template: MEM <double> [(struct Param *)_359] = _444;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 MEM <double> [(struct Param *)_359] = _444;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 MEM <double> [(struct Param *)_359 + 8B] = _411;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90bc8
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90bc8 (max_nunits=2, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: op template: _444 = _445 + 1.0e+0;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _444 = _445 + 1.0e+0;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _411 = _443 + 2.00000000000000004163336342344337026588618755340576171875e-2;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90c48 0x1ba91848
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90c48 (max_nunits=2, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: op template: _445 = _344 * 1.3e+1;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _445 = _344 * 1.3e+1;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _443 = _319 * 1.79999999999999993338661852249060757458209991455078125e-1;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90cc8 0x1ba917c8
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90cc8 (max_nunits=2, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: op template: _344 = _345 * 1.1102230246251565404236316680908203125e-16;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _344 = _345 * 1.1102230246251565404236316680908203125e-16;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _319 = _324 * 1.1102230246251565404236316680908203125e-16;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90d48 0x1ba91748
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90d48 (max_nunits=2, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: op template: _345 = (double) _346;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _345 = (double) _346;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _324 = (double) _326;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90dc8
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90dc8 (max_nunits=2, refcnt=1) vector(2) signed long
+src_cpu/benchmark_cpu.c:78:302: note: op template: _346 = (signed long) _347;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _346 = (signed long) _347;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _326 = (signed long) _327;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90e48
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90e48 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _347 = _348 >> 11;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _347 = _348 >> 11;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _327 = _330 >> 11;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90ec8 0x1ba916c8
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90ec8 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _348 = x_350 ^ _349;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _348 = x_350 ^ _349;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _330 = x_332 ^ _331;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90f48 0x1ba915c8
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90f48 (max_nunits=2, refcnt=2) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: x_350 = _351 * 10723151780598845931;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 x_350 = _351 * 10723151780598845931;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 x_332 = _334 * 10723151780598845931;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90fc8 0x1ba91548
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90fc8 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _351 = x_353 ^ _352;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _351 = x_353 ^ _352;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _334 = x_336 ^ _335;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba91048 0x1ba91448
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba91048 (max_nunits=2, refcnt=2) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: x_353 = _354 * 13787848793156543929;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 x_353 = _354 * 13787848793156543929;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 x_336 = _337 * 13787848793156543929;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba910c8 0x1ba913c8
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba910c8 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _354 = x_356 ^ _355;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _354 = x_356 ^ _355;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _337 = x_340 ^ _339;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba91148 0x1ba912c8
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba91148 (max_nunits=2, refcnt=2) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: x_356 = _357 + 11400714819323198485;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 x_356 = _357 + 11400714819323198485;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 x_340 = _357 + 11400714819323198486;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba911c8 0x1ba91248
+src_cpu/benchmark_cpu.c:78:302: note: node (external) 0x1ba911c8 (max_nunits=1, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: 	{ _357, _357 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba91248 (max_nunits=1, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 11400714819323198485, 11400714819323198486 }
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba912c8 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _355 = x_356 >> 30;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _355 = x_356 >> 30;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _339 = x_340 >> 30;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba91148 0x1ba91348
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba91348 (max_nunits=1, refcnt=1)
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 30, 30 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba913c8 (max_nunits=1, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 13787848793156543929, 13787848793156543929 }
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba91448 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _352 = x_353 >> 27;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _352 = x_353 >> 27;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _335 = x_336 >> 27;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba91048 0x1ba914c8
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba914c8 (max_nunits=1, refcnt=1)
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 27, 27 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba91548 (max_nunits=1, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 10723151780598845931, 10723151780598845931 }
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba915c8 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _349 = x_350 >> 31;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _349 = x_350 >> 31;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _331 = x_332 >> 31;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90f48 0x1ba91648
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba91648 (max_nunits=1, refcnt=1)
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 31, 31 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba916c8 (max_nunits=1, refcnt=1)
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 11, 11 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba91748 (max_nunits=1, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 1.1102230246251565404236316680908203125e-16, 1.1102230246251565404236316680908203125e-16 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba917c8 (max_nunits=1, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 1.3e+1, 1.79999999999999993338661852249060757458209991455078125e-1 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba91848 (max_nunits=1, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 1.0e+0, 2.00000000000000004163336342344337026588618755340576171875e-2 }
+src_cpu/benchmark_cpu.c:78:302: note: Cost model analysis: 
+src_cpu/benchmark_cpu.c:78:302: note: Cost model analysis for part in loop 11:
+  Vector cost: 256
+  Scalar cost: 240
+src_cpu/benchmark_cpu.c:78:302: missed: not vectorized: vectorization is not profitable.
+src_cpu/benchmark_cpu.c:78:302: note: Costing subgraph: 
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba91948 (max_nunits=2, refcnt=1) vector(2) int
+src_cpu/benchmark_cpu.c:78:302: note: op template: MEM <int> [(struct Param *)_540 + 48B] = dom_412;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 MEM <int> [(struct Param *)_540 + 48B] = dom_412;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 MEM <int> [(struct Param *)_540 + 52B] = _567;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba91a48
+src_cpu/benchmark_cpu.c:78:302: note: node (external) 0x1ba91a48 (max_nunits=1, refcnt=1) vector(2) int
+src_cpu/benchmark_cpu.c:78:302: note: 	{ dom_412, _567 }
+src_cpu/benchmark_cpu.c:78:302: note: Cost model analysis: 
+src_cpu/benchmark_cpu.c:78:302: note: Cost model analysis for part in loop 10:
+  Vector cost: 32
+  Scalar cost: 32
+src_cpu/benchmark_cpu.c:78:302: note: Costing subgraph: 
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba91b48 (max_nunits=2, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: op template: MEM <double> [(struct Param *)_540] = cstore_555;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 MEM <double> [(struct Param *)_540] = cstore_555;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 MEM <double> [(struct Param *)_540 + 8B] = iftmp.19_556;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba91bc8
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba91bc8 (max_nunits=2, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: op template: cstore_555 = PHI <iftmp.18_562(114), iftmp.18_558(115)>
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 cstore_555 = PHI <iftmp.18_562(114), iftmp.18_558(115)>
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 iftmp.19_556 = PHI <iftmp.19_559(114), iftmp.19_557(115)>
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba91cc8 0x1ba91d48
+src_cpu/benchmark_cpu.c:78:302: note: node (external) 0x1ba91cc8 (max_nunits=1, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: 	{ iftmp.18_562, iftmp.19_559 }
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba91d48 (max_nunits=2, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: op template: iftmp.18_558 = _654 * 9.899999999999999911182158029987476766109466552734375e-1;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 iftmp.18_558 = _654 * 9.899999999999999911182158029987476766109466552734375e-1;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 iftmp.19_557 = _570 * 3.141592653589793115997963468544185161590576171875e+0;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba91dc8 0x1ba928c8
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba91dc8 (max_nunits=2, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: op template: _654 = _653 * 1.1102230246251565404236316680908203125e-16;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _654 = _653 * 1.1102230246251565404236316680908203125e-16;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _570 = _571 * 1.1102230246251565404236316680908203125e-16;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba91e48 0x1ba92848
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba91e48 (max_nunits=2, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: op template: _653 = (double) _652;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _653 = (double) _652;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _571 = (double) _572;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba91ec8
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba91ec8 (max_nunits=2, refcnt=1) vector(2) signed long
+src_cpu/benchmark_cpu.c:78:302: note: op template: _652 = (signed long) _651;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _652 = (signed long) _651;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _572 = (signed long) _220;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba91f48
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba91f48 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _651 = _650 >> 11;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _651 = _650 >> 11;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _220 = _219 >> 11;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba91fc8 0x1ba927c8
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba91fc8 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _650 = x_648 ^ _649;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _650 = x_648 ^ _649;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _219 = x_329 ^ _629;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba92048 0x1ba926c8
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba92048 (max_nunits=2, refcnt=2) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: x_648 = _656 * 10723151780598845931;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 x_648 = _656 * 10723151780598845931;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 x_329 = _628 * 10723151780598845931;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba920c8 0x1ba92648
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba920c8 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _656 = x_657 ^ _655;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _656 = x_657 ^ _655;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _628 = x_292 ^ _293;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba92148 0x1ba92548
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba92148 (max_nunits=2, refcnt=2) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: x_657 = _533 * 13787848793156543929;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 x_657 = _533 * 13787848793156543929;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 x_292 = _621 * 13787848793156543929;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba921c8 0x1ba924c8
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba921c8 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _533 = x_535 ^ _534;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _533 = x_535 ^ _534;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _621 = x_647 ^ _338;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba92248 0x1ba923c8
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba92248 (max_nunits=2, refcnt=2) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: x_535 = _536 + 11400714819323198485;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 x_535 = _536 + 11400714819323198485;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 x_647 = _536 + 11400714819323198486;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba922c8 0x1ba92348
+src_cpu/benchmark_cpu.c:78:302: note: node (external) 0x1ba922c8 (max_nunits=1, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: 	{ _536, _536 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba92348 (max_nunits=1, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 11400714819323198485, 11400714819323198486 }
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba923c8 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _534 = x_535 >> 30;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _534 = x_535 >> 30;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _338 = x_647 >> 30;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba92248 0x1ba92448
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba92448 (max_nunits=1, refcnt=1)
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 30, 30 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba924c8 (max_nunits=1, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 13787848793156543929, 13787848793156543929 }
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba92548 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _655 = x_657 >> 27;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _655 = x_657 >> 27;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _293 = x_292 >> 27;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba92148 0x1ba925c8
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba925c8 (max_nunits=1, refcnt=1)
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 27, 27 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba92648 (max_nunits=1, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 10723151780598845931, 10723151780598845931 }
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba926c8 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _649 = x_648 >> 31;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _649 = x_648 >> 31;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _629 = x_329 >> 31;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba92048 0x1ba92748
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba92748 (max_nunits=1, refcnt=1)
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 31, 31 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba927c8 (max_nunits=1, refcnt=1)
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 11, 11 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba92848 (max_nunits=1, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 1.1102230246251565404236316680908203125e-16, 1.1102230246251565404236316680908203125e-16 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba928c8 (max_nunits=1, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 9.899999999999999911182158029987476766109466552734375e-1, 3.141592653589793115997963468544185161590576171875e+0 }
+src_cpu/benchmark_cpu.c:78:302: note: Cost model analysis: 
+src_cpu/benchmark_cpu.c:78:302: note: Cost model analysis for part in loop 10:
+  Vector cost: 236
+  Scalar cost: 240
+src_cpu/benchmark_cpu.c:78:302: note: Costing subgraph: 
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba92948 (max_nunits=4, refcnt=1) vector(4) double
+src_cpu/benchmark_cpu.c:78:302: note: op template: MEM <double> [(struct Param *)_540 + 16B] = 0.0;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 MEM <double> [(struct Param *)_540 + 16B] = 0.0;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 MEM <double> [(struct Param *)_540 + 24B] = 0.0;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 2 MEM <double> [(struct Param *)_540 + 32B] = 0.0;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 3 MEM <double> [(struct Param *)_540 + 40B] = 0.0;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba929c8
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba929c8 (max_nunits=1, refcnt=1) vector(4) double
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 0.0, 0.0, 0.0, 0.0 }
+src_cpu/benchmark_cpu.c:78:302: note: Cost model analysis: 
+src_cpu/benchmark_cpu.c:78:302: note: Cost model analysis for part in loop 10:
+  Vector cost: 44
+  Scalar cost: 64
+src_cpu/benchmark_cpu.c:62:32: note: Costing subgraph: 
+src_cpu/benchmark_cpu.c:62:32: note: node 0x1ba92ac8 (max_nunits=2, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:62:32: note: op template: A[0] = 3.3511620289999999311447709260392002761363983154296875e-1;
+src_cpu/benchmark_cpu.c:62:32: note: 	stmt 0 A[0] = 3.3511620289999999311447709260392002761363983154296875e-1;
+src_cpu/benchmark_cpu.c:62:32: note: 	stmt 1 A[1] = 2.8883024410000002202281166319153271615505218505859375e-1;
+src_cpu/benchmark_cpu.c:62:32: note: 	children 0x1ba92b48
+src_cpu/benchmark_cpu.c:62:32: note: node (constant) 0x1ba92b48 (max_nunits=1, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:62:32: note: 	{ 3.3511620289999999311447709260392002761363983154296875e-1, 2.8883024410000002202281166319153271615505218505859375e-1 }
+src_cpu/benchmark_cpu.c:62:32: note: Cost model analysis: 
+src_cpu/benchmark_cpu.c:62:32: note: Cost model analysis for part in loop 9:
+  Vector cost: 36
+  Scalar cost: 32
+src_cpu/benchmark_cpu.c:62:32: missed: not vectorized: vectorization is not profitable.
+src_cpu/benchmark_cpu.c:62:74: note: Costing subgraph: 
+src_cpu/benchmark_cpu.c:62:74: note: node 0x1ba92c48 (max_nunits=2, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:62:74: note: op template: B[0] = 4.27966276199999995366596294843475334346294403076171875e-2;
+src_cpu/benchmark_cpu.c:62:74: note: 	stmt 0 B[0] = 4.27966276199999995366596294843475334346294403076171875e-2;
+src_cpu/benchmark_cpu.c:62:74: note: 	stmt 1 B[1] = 3.1303836949999996885907194155151955783367156982421875e-2;
+src_cpu/benchmark_cpu.c:62:74: note: 	children 0x1ba92cc8
+src_cpu/benchmark_cpu.c:62:74: note: node (constant) 0x1ba92cc8 (max_nunits=1, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:62:74: note: 	{ 4.27966276199999995366596294843475334346294403076171875e-2, 3.1303836949999996885907194155151955783367156982421875e-2 }
+src_cpu/benchmark_cpu.c:62:74: note: Cost model analysis: 
+src_cpu/benchmark_cpu.c:62:74: note: Cost model analysis for part in loop 9:
+  Vector cost: 36
+  Scalar cost: 32
+src_cpu/benchmark_cpu.c:62:74: missed: not vectorized: vectorization is not profitable.
+src_cpu/benchmark_cpu.c:61:46: note: Costing subgraph: 
+src_cpu/benchmark_cpu.c:61:46: note: node 0x1ba92dc8 (max_nunits=2, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:61:46: note: op template: da[0] = 1.042097772199999938802505994317471049726009368896484375e-2;
+src_cpu/benchmark_cpu.c:61:46: note: 	stmt 0 da[0] = 1.042097772199999938802505994317471049726009368896484375e-2;
+src_cpu/benchmark_cpu.c:61:46: note: 	stmt 1 da[1] = 2.84527981699999980846893521402307669632136821746826171875e-3;
+src_cpu/benchmark_cpu.c:61:46: note: 	children 0x1ba92e48
+src_cpu/benchmark_cpu.c:61:46: note: node (constant) 0x1ba92e48 (max_nunits=1, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:61:46: note: 	{ 1.042097772199999938802505994317471049726009368896484375e-2, 2.84527981699999980846893521402307669632136821746826171875e-3 }
+src_cpu/benchmark_cpu.c:61:46: note: Cost model analysis: 
+src_cpu/benchmark_cpu.c:61:46: note: Cost model analysis for part in loop 9:
+  Vector cost: 36
+  Scalar cost: 32
+src_cpu/benchmark_cpu.c:61:46: missed: not vectorized: vectorization is not profitable.
+src_cpu/benchmark_cpu.c:61:96: note: Costing subgraph: 
+src_cpu/benchmark_cpu.c:61:96: note: node 0x1ba92f48 (max_nunits=2, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:61:96: note: op template: g[0] = 8.8354752079999997249615262262523174285888671875e+1;
+src_cpu/benchmark_cpu.c:61:96: note: 	stmt 0 g[0] = 8.8354752079999997249615262262523174285888671875e+1;
+src_cpu/benchmark_cpu.c:61:96: note: 	stmt 1 g[1] = 1.9265442140000001103317117667756974697113037109375e+1;
+src_cpu/benchmark_cpu.c:61:96: note: 	children 0x1ba92fc8
+src_cpu/benchmark_cpu.c:61:96: note: node (constant) 0x1ba92fc8 (max_nunits=1, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:61:96: note: 	{ 8.8354752079999997249615262262523174285888671875e+1, 1.9265442140000001103317117667756974697113037109375e+1 }
+src_cpu/benchmark_cpu.c:61:96: note: Cost model analysis: 
+src_cpu/benchmark_cpu.c:61:96: note: Cost model analysis for part in loop 9:
+  Vector cost: 36
+  Scalar cost: 32
+src_cpu/benchmark_cpu.c:61:96: missed: not vectorized: vectorization is not profitable.
+src_cpu/benchmark_cpu.c:61:138: note: Costing subgraph: 
+src_cpu/benchmark_cpu.c:61:138: note: node 0x1ba930c8 (max_nunits=2, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:61:138: note: op template: be[0] = 2.0491295650000001415946826455183327198028564453125e+1;
+src_cpu/benchmark_cpu.c:61:138: note: 	stmt 0 be[0] = 2.0491295650000001415946826455183327198028564453125e+1;
+src_cpu/benchmark_cpu.c:61:138: note: 	stmt 1 be[1] = 2.2710979630000000639711288386024534702301025390625e+1;
+src_cpu/benchmark_cpu.c:61:138: note: 	children 0x1ba93148
+src_cpu/benchmark_cpu.c:61:138: note: node (constant) 0x1ba93148 (max_nunits=1, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:61:138: note: 	{ 2.0491295650000001415946826455183327198028564453125e+1, 2.2710979630000000639711288386024534702301025390625e+1 }
+src_cpu/benchmark_cpu.c:61:138: note: Cost model analysis: 
+src_cpu/benchmark_cpu.c:61:138: note: Cost model analysis for part in loop 9:
+  Vector cost: 36
+  Scalar cost: 32
+src_cpu/benchmark_cpu.c:61:138: missed: not vectorized: vectorization is not profitable.
+src_cpu/benchmark_cpu.c:78:302: note: Costing subgraph: 
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba931c8 (max_nunits=2, refcnt=1) vector(2) int
+src_cpu/benchmark_cpu.c:78:302: note: op template: MEM <int> [(struct Param *)_410 + 48B] = dom_412;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 MEM <int> [(struct Param *)_410 + 48B] = dom_412;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 MEM <int> [(struct Param *)_410 + 52B] = _620;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba932c8
+src_cpu/benchmark_cpu.c:78:302: note: node (external) 0x1ba932c8 (max_nunits=1, refcnt=1) vector(2) int
+src_cpu/benchmark_cpu.c:78:302: note: 	{ dom_412, _620 }
+src_cpu/benchmark_cpu.c:78:302: note: Cost model analysis: 
+src_cpu/benchmark_cpu.c:78:302: note: Cost model analysis for part in loop 9:
+  Vector cost: 32
+  Scalar cost: 32
+src_cpu/benchmark_cpu.c:78:302: note: Costing subgraph: 
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba933c8 (max_nunits=4, refcnt=1) vector(4) double
+src_cpu/benchmark_cpu.c:78:302: note: op template: MEM <double> [(struct Param *)_410] = p$a_736;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 MEM <double> [(struct Param *)_410] = p$a_736;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 MEM <double> [(struct Param *)_410 + 8B] = p$b_737;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 2 MEM <double> [(struct Param *)_410 + 16B] = p$c_738;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 3 MEM <double> [(struct Param *)_410 + 24B] = p$d_739;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba93748
+src_cpu/benchmark_cpu.c:78:302: note: node (external) 0x1ba93748 (max_nunits=1, refcnt=1) vector(4) double
+src_cpu/benchmark_cpu.c:78:302: note: 	{ p$a_736, p$b_737, p$c_738, p$d_739 }
+src_cpu/benchmark_cpu.c:78:302: note: Cost model analysis: 
+src_cpu/benchmark_cpu.c:78:302: note: Cost model analysis for part in loop 9:
+  Vector cost: 44
+  Scalar cost: 64
+src_cpu/benchmark_cpu.c:78:302: note: Costing subgraph: 
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba936c8 (max_nunits=2, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: op template: MEM <double> [(struct Param *)_410 + 32B] = p$e_740;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 MEM <double> [(struct Param *)_410 + 32B] = p$e_740;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 MEM <double> [(struct Param *)_410 + 40B] = p$f_741;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba935c8
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba935c8 (max_nunits=2, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: op template: p$e_740 = PHI <0.0(100), 0.0(99), 0.0(97), _667(93), 0.0(96)>
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 p$e_740 = PHI <0.0(100), 0.0(99), 0.0(97), _667(93), 0.0(96)>
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 p$f_741 = PHI <0.0(100), 0.0(99), 0.0(97), _670(93), 0.0(96)>
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba93548 0x1ba934c8 0x1ba937c8 0x1ba938c8 0x1ba93948
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba93548 (max_nunits=1, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 0.0, 0.0 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba934c8 (max_nunits=1, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 0.0, 0.0 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba937c8 (max_nunits=1, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 0.0, 0.0 }
+src_cpu/benchmark_cpu.c:78:302: note: node (external) 0x1ba938c8 (max_nunits=1, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: 	{ _667, _670 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba93948 (max_nunits=1, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 0.0, 0.0 }
+src_cpu/benchmark_cpu.c:78:302: note: Cost model analysis: 
+src_cpu/benchmark_cpu.c:78:302: note: Cost model analysis for part in loop 9:
+  Vector cost: 112
+  Scalar cost: 56
+src_cpu/benchmark_cpu.c:78:302: missed: not vectorized: vectorization is not profitable.
+src_cpu/benchmark_cpu.c:78:302: note: Basic block will be vectorized using SLP
+src_cpu/benchmark_cpu.c:78:302: note: Vectorizing SLP tree:
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90448 (max_nunits=8, refcnt=1) vector(8) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: ns[1] = 8;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 ns[1] = 8;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 ns[2] = 32;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 2 ns[3] = 128;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 3 ns[4] = 512;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 4 ns[5] = 2048;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 5 ns[6] = 8192;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 6 ns[7] = 32768;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 7 ns[8] = 131072;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba904c8
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba904c8 (max_nunits=1, refcnt=1) vector(8) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 8, 32, 128, 512, 2048, 8192, 32768, 131072 }
+src_cpu/benchmark_cpu.c:78:302: note: ------>vectorizing SLP node starting from: ns[1] = 8;
+src_cpu/benchmark_cpu.c:78:302: note: vect_is_simple_use: operand 32, type of def: constant
+src_cpu/benchmark_cpu.c:78:302: note: vect_is_simple_use: operand 128, type of def: constant
+src_cpu/benchmark_cpu.c:78:302: note: vect_is_simple_use: operand 512, type of def: constant
+src_cpu/benchmark_cpu.c:78:302: note: vect_is_simple_use: operand 2048, type of def: constant
+src_cpu/benchmark_cpu.c:78:302: note: vect_is_simple_use: operand 8192, type of def: constant
+src_cpu/benchmark_cpu.c:78:302: note: vect_is_simple_use: operand 32768, type of def: constant
+src_cpu/benchmark_cpu.c:78:302: note: vect_is_simple_use: operand 131072, type of def: constant
+src_cpu/benchmark_cpu.c:78:302: note: transform store. ncopies = 1
+src_cpu/benchmark_cpu.c:78:302: note: create vector_type-pointer variable to type: vector(8) long unsigned int  vectorizing a pointer ref: ns[1]
+src_cpu/benchmark_cpu.c:78:302: note: created &ns[1]
+src_cpu/benchmark_cpu.c:78:302: note: add new stmt: MEM <vector(8) long unsigned int> [(long unsigned int *)&ns + 8B] = { 8, 32, 128, 512, 2048, 8192, 32768, 131072 };
+src_cpu/benchmark_cpu.c:78:302: note: vectorizing stmts using SLP.
+src_cpu/benchmark_cpu.c:78:302: optimized: basic block part vectorized using 64 byte vectors
+src_cpu/benchmark_cpu.c:78:302: note: Vectorizing SLP tree:
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90548 (max_nunits=4, refcnt=1) vector(4) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: ns[9] = 524288;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 ns[9] = 524288;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 ns[10] = 2097152;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 2 ns[11] = 8388608;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 3 ns[12] = 16777216;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba905c8
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba905c8 (max_nunits=1, refcnt=1) vector(4) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 524288, 2097152, 8388608, 16777216 }
+src_cpu/benchmark_cpu.c:78:302: note: ------>vectorizing SLP node starting from: ns[9] = 524288;
+src_cpu/benchmark_cpu.c:78:302: note: vect_is_simple_use: operand 2097152, type of def: constant
+src_cpu/benchmark_cpu.c:78:302: note: vect_is_simple_use: operand 8388608, type of def: constant
+src_cpu/benchmark_cpu.c:78:302: note: vect_is_simple_use: operand 16777216, type of def: constant
+src_cpu/benchmark_cpu.c:78:302: note: transform store. ncopies = 1
+src_cpu/benchmark_cpu.c:78:302: note: create vector_type-pointer variable to type: vector(4) long unsigned int  vectorizing a pointer ref: ns[9]
+src_cpu/benchmark_cpu.c:78:302: note: created &ns[9]
+src_cpu/benchmark_cpu.c:78:302: note: add new stmt: MEM <vector(4) long unsigned int> [(long unsigned int *)&ns + 72B] = { 524288, 2097152, 8388608, 16777216 };
+src_cpu/benchmark_cpu.c:78:302: note: vectorizing stmts using SLP.
+src_cpu/benchmark_cpu.c:78:302: optimized: basic block part vectorized using 64 byte vectors
+src_cpu/benchmark_cpu.c:78:302: note: Vectorizing SLP tree:
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba906c8 (max_nunits=4, refcnt=1) vector(4) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: dn[0] = "bem";
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 dn[0] = "bem";
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 dn[1] = "kepler";
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 2 dn[2] = "pv";
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 3 dn[3] = "cstr";
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90748
+src_cpu/benchmark_cpu.c:78:302: note: node (external) 0x1ba90748 (max_nunits=1, refcnt=1) vector(4) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: 	{ "bem", "kepler", "pv", "cstr" }
+src_cpu/benchmark_cpu.c:78:302: note: ------>vectorizing SLP node starting from: dn[0] = "bem";
+src_cpu/benchmark_cpu.c:78:302: note: vect_is_simple_use: operand "kepler", type of def: external
+src_cpu/benchmark_cpu.c:78:302: note: vect_is_simple_use: operand "pv", type of def: external
+src_cpu/benchmark_cpu.c:78:302: note: vect_is_simple_use: operand "cstr", type of def: external
+src_cpu/benchmark_cpu.c:78:302: note: transform store. ncopies = 1
+src_cpu/benchmark_cpu.c:78:302: note: create vector_type-pointer variable to type: vector(4) long unsigned int  vectorizing a pointer ref: dn[0]
+src_cpu/benchmark_cpu.c:78:302: note: created &dn[0]
+src_cpu/benchmark_cpu.c:78:302: note: add new stmt: MEM <vector(4) long unsigned int> [(const char * *)&dn] = _613;
+src_cpu/benchmark_cpu.c:78:302: note: vectorizing stmts using SLP.
+src_cpu/benchmark_cpu.c:78:302: optimized: basic block part vectorized using 64 byte vectors
+src_cpu/benchmark_cpu.c:78:302: note: Vectorizing SLP tree:
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90848 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: mn[0] = "serial";
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 mn[0] = "serial";
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 mn[1] = "omp_simd_1t";
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba908c8
+src_cpu/benchmark_cpu.c:78:302: note: node (external) 0x1ba908c8 (max_nunits=1, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: 	{ "serial", "omp_simd_1t" }
+src_cpu/benchmark_cpu.c:78:302: note: ------>vectorizing SLP node starting from: mn[0] = "serial";
+src_cpu/benchmark_cpu.c:78:302: note: vect_is_simple_use: operand "omp_simd_1t", type of def: external
+src_cpu/benchmark_cpu.c:78:302: note: transform store. ncopies = 1
+src_cpu/benchmark_cpu.c:78:302: note: create vector_type-pointer variable to type: vector(2) long unsigned int  vectorizing a pointer ref: mn[0]
+src_cpu/benchmark_cpu.c:78:302: note: created &mn[0]
+src_cpu/benchmark_cpu.c:78:302: note: add new stmt: MEM <vector(2) long unsigned int> [(const char * *)&mn] = _609;
+src_cpu/benchmark_cpu.c:78:302: note: vectorizing stmts using SLP.
+src_cpu/benchmark_cpu.c:78:302: optimized: basic block part vectorized using 64 byte vectors
+src_cpu/benchmark_cpu.c:78:302: note: Vectorizing SLP tree:
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba90948 (max_nunits=2, refcnt=1) vector(2) int
+src_cpu/benchmark_cpu.c:78:302: note: op template: MEM <int> [(struct Param *)_359 + 48B] = dom_412;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 MEM <int> [(struct Param *)_359 + 48B] = dom_412;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 MEM <int> [(struct Param *)_359 + 52B] = _446;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba90a48
+src_cpu/benchmark_cpu.c:78:302: note: node (external) 0x1ba90a48 (max_nunits=1, refcnt=1) vector(2) int
+src_cpu/benchmark_cpu.c:78:302: note: 	{ dom_412, _446 }
+src_cpu/benchmark_cpu.c:78:302: note: ------>vectorizing SLP node starting from: MEM <int> [(struct Param *)_359 + 48B] = dom_412;
+src_cpu/benchmark_cpu.c:78:302: note: vect_is_simple_use: operand _447 & 1, type of def: internal
+src_cpu/benchmark_cpu.c:78:302: note: transform store. ncopies = 1
+src_cpu/benchmark_cpu.c:78:302: note: create vector_type-pointer variable to type: vector(2) int  vectorizing a pointer ref: MEM <int> [(struct Param *)_359 + 48B]
+src_cpu/benchmark_cpu.c:78:302: note: created vectp.237_598
+src_cpu/benchmark_cpu.c:78:302: note: add new stmt: MEM <vector(2) int> [(struct Param *)vectp.237_598] = _605;
+src_cpu/benchmark_cpu.c:78:302: note: vectorizing stmts using SLP.
+src_cpu/benchmark_cpu.c:78:302: optimized: basic block part vectorized using 64 byte vectors
+src_cpu/benchmark_cpu.c:78:302: note: Vectorizing SLP tree:
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba91948 (max_nunits=2, refcnt=1) vector(2) int
+src_cpu/benchmark_cpu.c:78:302: note: op template: MEM <int> [(struct Param *)_540 + 48B] = dom_412;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 MEM <int> [(struct Param *)_540 + 48B] = dom_412;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 MEM <int> [(struct Param *)_540 + 52B] = _567;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba91a48
+src_cpu/benchmark_cpu.c:78:302: note: node (external) 0x1ba91a48 (max_nunits=1, refcnt=1) vector(2) int
+src_cpu/benchmark_cpu.c:78:302: note: 	{ dom_412, _567 }
+src_cpu/benchmark_cpu.c:78:302: note: ------>vectorizing SLP node starting from: MEM <int> [(struct Param *)_540 + 48B] = dom_412;
+src_cpu/benchmark_cpu.c:78:302: note: vect_is_simple_use: operand _568 & 1, type of def: internal
+src_cpu/benchmark_cpu.c:78:302: note: transform store. ncopies = 1
+src_cpu/benchmark_cpu.c:78:302: note: create vector_type-pointer variable to type: vector(2) int  vectorizing a pointer ref: MEM <int> [(struct Param *)_540 + 48B]
+src_cpu/benchmark_cpu.c:78:302: note: created vectp.239_592
+src_cpu/benchmark_cpu.c:78:302: note: add new stmt: MEM <vector(2) int> [(struct Param *)vectp.239_592] = _596;
+src_cpu/benchmark_cpu.c:78:302: note: vectorizing stmts using SLP.
+src_cpu/benchmark_cpu.c:78:302: optimized: basic block part vectorized using 64 byte vectors
+src_cpu/benchmark_cpu.c:78:302: note: Vectorizing SLP tree:
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba91b48 (max_nunits=2, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: op template: MEM <double> [(struct Param *)_540] = cstore_555;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 MEM <double> [(struct Param *)_540] = cstore_555;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 MEM <double> [(struct Param *)_540 + 8B] = iftmp.19_556;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba91bc8
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba91bc8 (max_nunits=2, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: op template: cstore_555 = PHI <iftmp.18_562(114), iftmp.18_558(115)>
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 cstore_555 = PHI <iftmp.18_562(114), iftmp.18_558(115)>
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 iftmp.19_556 = PHI <iftmp.19_559(114), iftmp.19_557(115)>
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba91cc8 0x1ba91d48
+src_cpu/benchmark_cpu.c:78:302: note: node (external) 0x1ba91cc8 (max_nunits=1, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: 	{ iftmp.18_562, iftmp.19_559 }
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba91d48 (max_nunits=2, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: op template: iftmp.18_558 = _654 * 9.899999999999999911182158029987476766109466552734375e-1;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 iftmp.18_558 = _654 * 9.899999999999999911182158029987476766109466552734375e-1;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 iftmp.19_557 = _570 * 3.141592653589793115997963468544185161590576171875e+0;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba91dc8 0x1ba928c8
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba91dc8 (max_nunits=2, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: op template: _654 = _653 * 1.1102230246251565404236316680908203125e-16;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _654 = _653 * 1.1102230246251565404236316680908203125e-16;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _570 = _571 * 1.1102230246251565404236316680908203125e-16;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba91e48 0x1ba92848
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba91e48 (max_nunits=2, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: op template: _653 = (double) _652;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _653 = (double) _652;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _571 = (double) _572;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba91ec8
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba91ec8 (max_nunits=2, refcnt=1) vector(2) signed long
+src_cpu/benchmark_cpu.c:78:302: note: op template: _652 = (signed long) _651;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _652 = (signed long) _651;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _572 = (signed long) _220;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba91f48
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba91f48 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _651 = _650 >> 11;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _651 = _650 >> 11;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _220 = _219 >> 11;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba91fc8 0x1ba927c8
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba91fc8 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _650 = x_648 ^ _649;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _650 = x_648 ^ _649;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _219 = x_329 ^ _629;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba92048 0x1ba926c8
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba92048 (max_nunits=2, refcnt=2) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: x_648 = _656 * 10723151780598845931;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 x_648 = _656 * 10723151780598845931;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 x_329 = _628 * 10723151780598845931;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba920c8 0x1ba92648
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba920c8 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _656 = x_657 ^ _655;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _656 = x_657 ^ _655;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _628 = x_292 ^ _293;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba92148 0x1ba92548
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba92148 (max_nunits=2, refcnt=2) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: x_657 = _533 * 13787848793156543929;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 x_657 = _533 * 13787848793156543929;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 x_292 = _621 * 13787848793156543929;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba921c8 0x1ba924c8
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba921c8 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _533 = x_535 ^ _534;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _533 = x_535 ^ _534;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _621 = x_647 ^ _338;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba92248 0x1ba923c8
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba92248 (max_nunits=2, refcnt=2) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: x_535 = _536 + 11400714819323198485;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 x_535 = _536 + 11400714819323198485;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 x_647 = _536 + 11400714819323198486;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba922c8 0x1ba92348
+src_cpu/benchmark_cpu.c:78:302: note: node (external) 0x1ba922c8 (max_nunits=1, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: 	{ _536, _536 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba92348 (max_nunits=1, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 11400714819323198485, 11400714819323198486 }
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba923c8 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _534 = x_535 >> 30;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _534 = x_535 >> 30;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _338 = x_647 >> 30;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba92248 0x1ba92448
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba92448 (max_nunits=1, refcnt=1)
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 30, 30 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba924c8 (max_nunits=1, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 13787848793156543929, 13787848793156543929 }
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba92548 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _655 = x_657 >> 27;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _655 = x_657 >> 27;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _293 = x_292 >> 27;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba92148 0x1ba925c8
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba925c8 (max_nunits=1, refcnt=1)
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 27, 27 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba92648 (max_nunits=1, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 10723151780598845931, 10723151780598845931 }
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba926c8 (max_nunits=2, refcnt=1) vector(2) long unsigned int
+src_cpu/benchmark_cpu.c:78:302: note: op template: _649 = x_648 >> 31;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 _649 = x_648 >> 31;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 _629 = x_329 >> 31;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba92048 0x1ba92748
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba92748 (max_nunits=1, refcnt=1)
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 31, 31 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba927c8 (max_nunits=1, refcnt=1)
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 11, 11 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba92848 (max_nunits=1, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 1.1102230246251565404236316680908203125e-16, 1.1102230246251565404236316680908203125e-16 }
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba928c8 (max_nunits=1, refcnt=1) vector(2) double
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 9.899999999999999911182158029987476766109466552734375e-1, 3.141592653589793115997963468544185161590576171875e+0 }
+src_cpu/benchmark_cpu.c:78:302: note: ------>vectorizing SLP node starting from: x_535 = _536 + 11400714819323198485;
+src_cpu/benchmark_cpu.c:78:302: note: transform binary/unary operation.
+src_cpu/benchmark_cpu.c:78:302: note: add new stmt: vect_x_535.240_579 = _580 + { 11400714819323198485, 11400714819323198486 };
+src_cpu/benchmark_cpu.c:78:302: note: ------>vectorizing SLP node starting from: _534 = x_535 >> 30;
+src_cpu/benchmark_cpu.c:78:302: note: vect_is_simple_use: operand _536 + 11400714819323198485, type of def: internal
+src_cpu/benchmark_cpu.c:78:302: note: vector/scalar shift/rotate found.
+src_cpu/benchmark_cpu.c:78:302: note: transform binary/unary operation.
+src_cpu/benchmark_cpu.c:78:302: note: operand 1 using scalar mode.
+src_cpu/benchmark_cpu.c:78:302: note: add new stmt: vect__534.241_578 = vect_x_535.240_579 >> 30;
+src_cpu/benchmark_cpu.c:78:302: note: ------>vectorizing SLP node starting from: _533 = x_535 ^ _534;
+src_cpu/benchmark_cpu.c:78:302: note: vect_is_simple_use: operand _536 + 11400714819323198485, type of def: internal
+src_cpu/benchmark_cpu.c:78:302: note: vect_is_simple_use: operand x_535 >> 30, type of def: internal
+src_cpu/benchmark_cpu.c:78:302: note: transform binary/unary operation.
+src_cpu/benchmark_cpu.c:78:302: note: add new stmt: vect__533.242_577 = vect_x_535.240_579 ^ vect__534.241_578;
+src_cpu/benchmark_cpu.c:78:302: note: ------>vectorizing SLP node starting from: x_657 = _533 * 13787848793156543929;
+src_cpu/benchmark_cpu.c:78:302: note: vect_is_simple_use: operand x_535 ^ _534, type of def: internal
+src_cpu/benchmark_cpu.c:78:302: note: transform binary/unary operation.
+src_cpu/benchmark_cpu.c:78:302: note: add new stmt: vect_x_657.243_576 = vect__533.242_577 * { 13787848793156543929, 13787848793156543929 };
+src_cpu/benchmark_cpu.c:78:302: note: ------>vectorizing SLP node starting from: _655 = x_657 >> 27;
+src_cpu/benchmark_cpu.c:78:302: note: vect_is_simple_use: operand _533 * 13787848793156543929, type of def: internal
+src_cpu/benchmark_cpu.c:78:302: note: vector/scalar shift/rotate found.
+src_cpu/benchmark_cpu.c:78:302: note: transform binary/unary operation.
+src_cpu/benchmark_cpu.c:78:302: note: operand 1 using scalar mode.
+src_cpu/benchmark_cpu.c:78:302: note: add new stmt: vect__655.244_575 = vect_x_657.243_576 >> 27;
+src_cpu/benchmark_cpu.c:78:302: note: ------>vectorizing SLP node starting from: _656 = x_657 ^ _655;
+src_cpu/benchmark_cpu.c:78:302: note: vect_is_simple_use: operand _533 * 13787848793156543929, type of def: internal
+src_cpu/benchmark_cpu.c:78:302: note: vect_is_simple_use: operand x_657 >> 27, type of def: internal
+src_cpu/benchmark_cpu.c:78:302: note: transform binary/unary operation.
+src_cpu/benchmark_cpu.c:78:302: note: add new stmt: vect__656.245_574 = vect_x_657.243_576 ^ vect__655.244_575;
+src_cpu/benchmark_cpu.c:78:302: note: ------>vectorizing SLP node starting from: x_648 = _656 * 10723151780598845931;
+src_cpu/benchmark_cpu.c:78:302: note: vect_is_simple_use: operand x_657 ^ _655, type of def: internal
+src_cpu/benchmark_cpu.c:78:302: note: transform binary/unary operation.
+src_cpu/benchmark_cpu.c:78:302: note: add new stmt: vect_x_648.246_573 = vect__656.245_574 * { 10723151780598845931, 10723151780598845931 };
+src_cpu/benchmark_cpu.c:78:302: note: ------>vectorizing SLP node starting from: _649 = x_648 >> 31;
+src_cpu/benchmark_cpu.c:78:302: note: vect_is_simple_use: operand _656 * 10723151780598845931, type of def: internal
+src_cpu/benchmark_cpu.c:78:302: note: vector/scalar shift/rotate found.
+src_cpu/benchmark_cpu.c:78:302: note: transform binary/unary operation.
+src_cpu/benchmark_cpu.c:78:302: note: operand 1 using scalar mode.
+src_cpu/benchmark_cpu.c:78:302: note: add new stmt: vect__649.247_569 = vect_x_648.246_573 >> 31;
+src_cpu/benchmark_cpu.c:78:302: note: ------>vectorizing SLP node starting from: _650 = x_648 ^ _649;
+src_cpu/benchmark_cpu.c:78:302: note: vect_is_simple_use: operand _656 * 10723151780598845931, type of def: internal
+src_cpu/benchmark_cpu.c:78:302: note: vect_is_simple_use: operand x_648 >> 31, type of def: internal
+src_cpu/benchmark_cpu.c:78:302: note: transform binary/unary operation.
+src_cpu/benchmark_cpu.c:78:302: note: add new stmt: vect__650.248_548 = vect_x_648.246_573 ^ vect__649.247_569;
+src_cpu/benchmark_cpu.c:78:302: note: ------>vectorizing SLP node starting from: _651 = _650 >> 11;
+src_cpu/benchmark_cpu.c:78:302: note: vect_is_simple_use: operand x_648 ^ _649, type of def: internal
+src_cpu/benchmark_cpu.c:78:302: note: vector/scalar shift/rotate found.
+src_cpu/benchmark_cpu.c:78:302: note: transform binary/unary operation.
+src_cpu/benchmark_cpu.c:78:302: note: operand 1 using scalar mode.
+src_cpu/benchmark_cpu.c:78:302: note: add new stmt: vect__651.249_532 = vect__650.248_548 >> 11;
+src_cpu/benchmark_cpu.c:78:302: note: ------>vectorizing SLP node starting from: _652 = (signed long) _651;
+src_cpu/benchmark_cpu.c:78:302: note: vect_is_simple_use: operand _650 >> 11, type of def: internal
+src_cpu/benchmark_cpu.c:78:302: note: transform assignment.
+src_cpu/benchmark_cpu.c:78:302: note: add new stmt: vect__652.250_515 = VIEW_CONVERT_EXPR<vector(2) signed long>(vect__651.249_532);
+src_cpu/benchmark_cpu.c:78:302: note: ------>vectorizing SLP node starting from: _653 = (double) _652;
+src_cpu/benchmark_cpu.c:78:302: note: vect_is_simple_use: operand (signed long) _651, type of def: internal
+src_cpu/benchmark_cpu.c:78:302: note: transform conversion. ncopies = 1.
+src_cpu/benchmark_cpu.c:78:302: note: add new stmt: vect__653.251_374 = (vector(2) double) vect__652.250_515;
+src_cpu/benchmark_cpu.c:78:302: note: ------>vectorizing SLP node starting from: _654 = _653 * 1.1102230246251565404236316680908203125e-16;
+src_cpu/benchmark_cpu.c:78:302: note: vect_is_simple_use: operand (double) _652, type of def: internal
+src_cpu/benchmark_cpu.c:78:302: note: transform binary/unary operation.
+src_cpu/benchmark_cpu.c:78:302: note: add new stmt: vect__654.252_369 = vect__653.251_374 * { 1.1102230246251565404236316680908203125e-16, 1.1102230246251565404236316680908203125e-16 };
+src_cpu/benchmark_cpu.c:78:302: note: extracting lane for live stmt _654 = _653 * 1.1102230246251565404236316680908203125e-16;
+src_cpu/benchmark_cpu.c:78:302: note: extracting lane for live stmt _570 = _571 * 1.1102230246251565404236316680908203125e-16;
+src_cpu/benchmark_cpu.c:78:302: note: ------>vectorizing SLP node starting from: iftmp.18_558 = _654 * 9.899999999999999911182158029987476766109466552734375e-1;
+src_cpu/benchmark_cpu.c:78:302: note: vect_is_simple_use: operand _653 * 1.1102230246251565404236316680908203125e-16, type of def: internal
+src_cpu/benchmark_cpu.c:78:302: note: transform binary/unary operation.
+src_cpu/benchmark_cpu.c:78:302: note: add new stmt: vect_iftmp.18_558.253_363 = vect__654.252_369 * { 9.899999999999999911182158029987476766109466552734375e-1, 3.141592653589793115997963468544185161590576171875e+0 };
+src_cpu/benchmark_cpu.c:78:302: note: ------>vectorizing SLP node starting from: cstore_555 = PHI <iftmp.18_562(114), iftmp.18_558(115)>
+src_cpu/benchmark_cpu.c:78:302: note: ------>vectorizing SLP node starting from: MEM <double> [(struct Param *)_540] = cstore_555;
+src_cpu/benchmark_cpu.c:78:302: note: vect_is_simple_use: operand cstore_555 = PHI <iftmp.18_562(114), iftmp.18_558(115)>, type of def: internal
+src_cpu/benchmark_cpu.c:78:302: note: vect_is_simple_use: operand iftmp.19_556 = PHI <iftmp.19_559(114), iftmp.19_557(115)>, type of def: internal
+src_cpu/benchmark_cpu.c:78:302: note: transform store. ncopies = 1
+src_cpu/benchmark_cpu.c:78:302: note: create vector_type-pointer variable to type: vector(2) double  vectorizing a pointer ref: MEM <double> [(struct Param *)_540]
+src_cpu/benchmark_cpu.c:78:302: note: created vectp.256_361
+src_cpu/benchmark_cpu.c:78:302: note: add new stmt: MEM <vector(2) double> [(struct Param *)vectp.256_361] = vect_cstore_555.254_362;
+src_cpu/benchmark_cpu.c:78:302: note: vectorizing stmts using SLP.
+src_cpu/benchmark_cpu.c:78:302: optimized: basic block part vectorized using 64 byte vectors
+src_cpu/benchmark_cpu.c:78:302: note: Vectorizing SLP tree:
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba92948 (max_nunits=4, refcnt=1) vector(4) double
+src_cpu/benchmark_cpu.c:78:302: note: op template: MEM <double> [(struct Param *)_540 + 16B] = 0.0;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 MEM <double> [(struct Param *)_540 + 16B] = 0.0;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 MEM <double> [(struct Param *)_540 + 24B] = 0.0;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 2 MEM <double> [(struct Param *)_540 + 32B] = 0.0;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 3 MEM <double> [(struct Param *)_540 + 40B] = 0.0;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba929c8
+src_cpu/benchmark_cpu.c:78:302: note: node (constant) 0x1ba929c8 (max_nunits=1, refcnt=1) vector(4) double
+src_cpu/benchmark_cpu.c:78:302: note: 	{ 0.0, 0.0, 0.0, 0.0 }
+src_cpu/benchmark_cpu.c:78:302: note: ------>vectorizing SLP node starting from: MEM <double> [(struct Param *)_540 + 16B] = 0.0;
+src_cpu/benchmark_cpu.c:78:302: note: vect_is_simple_use: operand 0.0, type of def: constant
+src_cpu/benchmark_cpu.c:78:302: note: vect_is_simple_use: operand 0.0, type of def: constant
+src_cpu/benchmark_cpu.c:78:302: note: vect_is_simple_use: operand 0.0, type of def: constant
+src_cpu/benchmark_cpu.c:78:302: note: transform store. ncopies = 1
+src_cpu/benchmark_cpu.c:78:302: note: create vector_type-pointer variable to type: vector(4) double  vectorizing a pointer ref: MEM <double> [(struct Param *)_540 + 16B]
+src_cpu/benchmark_cpu.c:78:302: note: created vectp.258_537
+src_cpu/benchmark_cpu.c:78:302: note: add new stmt: MEM <vector(4) double> [(struct Param *)vectp.258_537] = { 0.0, 0.0, 0.0, 0.0 };
+src_cpu/benchmark_cpu.c:78:302: note: vectorizing stmts using SLP.
+src_cpu/benchmark_cpu.c:78:302: optimized: basic block part vectorized using 64 byte vectors
+src_cpu/benchmark_cpu.c:78:302: note: Vectorizing SLP tree:
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba931c8 (max_nunits=2, refcnt=1) vector(2) int
+src_cpu/benchmark_cpu.c:78:302: note: op template: MEM <int> [(struct Param *)_410 + 48B] = dom_412;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 MEM <int> [(struct Param *)_410 + 48B] = dom_412;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 MEM <int> [(struct Param *)_410 + 52B] = _620;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba932c8
+src_cpu/benchmark_cpu.c:78:302: note: node (external) 0x1ba932c8 (max_nunits=1, refcnt=1) vector(2) int
+src_cpu/benchmark_cpu.c:78:302: note: 	{ dom_412, _620 }
+src_cpu/benchmark_cpu.c:78:302: note: ------>vectorizing SLP node starting from: MEM <int> [(struct Param *)_410 + 48B] = dom_412;
+src_cpu/benchmark_cpu.c:78:302: note: vect_is_simple_use: operand _333 & 1, type of def: internal
+src_cpu/benchmark_cpu.c:78:302: note: transform store. ncopies = 1
+src_cpu/benchmark_cpu.c:78:302: note: create vector_type-pointer variable to type: vector(2) int  vectorizing a pointer ref: MEM <int> [(struct Param *)_410 + 48B]
+src_cpu/benchmark_cpu.c:78:302: note: created vectp.260_373
+src_cpu/benchmark_cpu.c:78:302: note: add new stmt: MEM <vector(2) int> [(struct Param *)vectp.260_373] = _370;
+src_cpu/benchmark_cpu.c:78:302: note: vectorizing stmts using SLP.
+src_cpu/benchmark_cpu.c:78:302: optimized: basic block part vectorized using 64 byte vectors
+src_cpu/benchmark_cpu.c:78:302: note: Vectorizing SLP tree:
+src_cpu/benchmark_cpu.c:78:302: note: node 0x1ba933c8 (max_nunits=4, refcnt=1) vector(4) double
+src_cpu/benchmark_cpu.c:78:302: note: op template: MEM <double> [(struct Param *)_410] = p$a_736;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 0 MEM <double> [(struct Param *)_410] = p$a_736;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 1 MEM <double> [(struct Param *)_410 + 8B] = p$b_737;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 2 MEM <double> [(struct Param *)_410 + 16B] = p$c_738;
+src_cpu/benchmark_cpu.c:78:302: note: 	stmt 3 MEM <double> [(struct Param *)_410 + 24B] = p$d_739;
+src_cpu/benchmark_cpu.c:78:302: note: 	children 0x1ba93748
+src_cpu/benchmark_cpu.c:78:302: note: node (external) 0x1ba93748 (max_nunits=1, refcnt=1) vector(4) double
+src_cpu/benchmark_cpu.c:78:302: note: 	{ p$a_736, p$b_737, p$c_738, p$d_739 }
+src_cpu/benchmark_cpu.c:78:302: note: ------>vectorizing SLP node starting from: MEM <double> [(struct Param *)_410] = p$a_736;
+src_cpu/benchmark_cpu.c:78:302: note: vect_is_simple_use: operand p$b_737 = PHI <_734(100), _728(99), _709(97), _676(93), _697(96)>, type of def: internal
+src_cpu/benchmark_cpu.c:78:302: note: vect_is_simple_use: operand p$c_738 = PHI <0.0(100), 0.0(99), _711(97), _663(93), _701(96)>, type of def: internal
+src_cpu/benchmark_cpu.c:78:302: note: vect_is_simple_use: operand p$d_739 = PHI <0.0(100), 0.0(99), 0.0(97), _665(93), 0.0(96)>, type of def: internal
+src_cpu/benchmark_cpu.c:78:302: note: transform store. ncopies = 1
+src_cpu/benchmark_cpu.c:78:302: note: create vector_type-pointer variable to type: vector(4) double  vectorizing a pointer ref: MEM <double> [(struct Param *)_410]
+src_cpu/benchmark_cpu.c:78:302: note: created vectp.262_252
+src_cpu/benchmark_cpu.c:78:302: note: add new stmt: MEM <vector(4) double> [(struct Param *)vectp.262_252] = _275;
+src_cpu/benchmark_cpu.c:78:302: note: vectorizing stmts using SLP.
+src_cpu/benchmark_cpu.c:78:302: optimized: basic block part vectorized using 64 byte vectors
+src_cpu/benchmark_cpu.c:78:302: note: ***** The result for vector mode V64QI would be the same

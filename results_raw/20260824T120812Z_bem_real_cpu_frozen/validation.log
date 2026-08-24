@@ -1,0 +1,4 @@
+bisection  n=3000 root_max=2.179e-08 wrong=0 branch=0 nonfinite=0
+brent      n=3000 root_max=1.288e-08 wrong=0 branch=0 nonfinite=0
+illinois   n=3000 root_max=2.179e-08 wrong=0 branch=0 nonfinite=0
+adaptive   n=3000 root_max=1.288e-08 wrong=0 branch=0 nonfinite=0

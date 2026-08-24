@@ -1,0 +1,22 @@
+ptxas info    : 272 bytes gmem
+ptxas info    : Compiling entry function '_Z21solve_fallback_kernelPKdS0_S0_S0_PdPhPKmPKjm' for 'sm_120'
+ptxas info    : Function properties for _Z21solve_fallback_kernelPKdS0_S0_S0_PdPhPKmPKjm
+    96 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 88 registers, used 0 barriers, 96 bytes cumulative stack size
+ptxas info    : Compile time = 246.460 ms
+ptxas info    : Function properties for __internal_trig_reduction_slowpathd
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Compiling entry function '_Z17solve_hint_kernelPKdS0_S0_S0_PdPhPmPjm' for 'sm_120'
+ptxas info    : Function properties for _Z17solve_hint_kernelPKdS0_S0_S0_PdPhPmPjm
+    48 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 84 registers, used 0 barriers, 48 bytes cumulative stack size
+ptxas info    : Compile time = 231.505 ms
+ptxas info    : Function properties for __internal_trig_reduction_slowpathd
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Compiling entry function '_Z12solve_kernelPKdS0_S0_S0_PdPhmi' for 'sm_120'
+ptxas info    : Function properties for _Z12solve_kernelPKdS0_S0_S0_PdPhmi
+    96 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 94 registers, used 0 barriers, 96 bytes cumulative stack size
+ptxas info    : Compile time = 1575.766 ms
+ptxas info    : Function properties for __internal_trig_reduction_slowpathd
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads

@@ -1,0 +1,10 @@
+run_id=20260824T001143Z_all_rtx5090_adaptive
+source_sha256=7cefdda3e083b07710b5720979c41055becda9caad3974419315fb3e05a7c193
+git_commit=uncommitted
+型号名称：                            AMD EPYC 9654 96-Core Processor
+NUMA 节点：                           2
+NUMA 节点0 CPU：                      0-95,192-287
+NUMA 节点1 CPU：                      96-191,288-383
+name, uuid, driver_version, temperature.gpu, power.limit [W], memory.total [MiB], compute_cap
+NVIDIA GeForce RTX 5090, GPU-ce54419c-71ca-69b8-681a-75d41cdaf0c7, 580.105.08, 51, 600.00 W, 32607 MiB, 12.0
+NVIDIA GeForce RTX 5090, GPU-4bbdc599-a71d-9ae4-188b-e1d3a0a8745f, 580.105.08, 36, 600.00 W, 32607 MiB, 12.0

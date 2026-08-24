@@ -1,0 +1,78 @@
+src_cuda/validate_algorithms.cu(110): warning #550-D: variable "fb" was set but never used
+  __attribute__((host)) __attribute__((device)) inline double solve_pv_bishop(const Param&p,uint32_t&used){double lo=p.b,hi=p.b+p.e*p.a,fa,fb;
+                                                                                                                                           ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+ptxas info    : 296 bytes gmem
+ptxas info    : Compiling entry function '_Z16kernel_algorithmPK5ParamP6Outputmi' for 'sm_120'
+ptxas info    : Function properties for _Z16kernel_algorithmPK5ParamP6Outputmi
+    144 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 84 registers, used 0 barriers, 144 bytes cumulative stack size
+ptxas info    : Compile time = 729.103 ms
+ptxas info    : Function properties for _Z11bracket_forRK5ParamRdS2_
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Function properties for _Z16solve_newton_algRK5ParamRjb
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Function properties for __internal_trig_reduction_slowpathd
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Compiling entry function '_Z15kernel_adaptivePK5ParamP6Outputmdd' for 'sm_120'
+ptxas info    : Function properties for _Z15kernel_adaptivePK5ParamP6Outputmdd
+    128 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 64 registers, used 0 barriers, 128 bytes cumulative stack size
+ptxas info    : Compile time = 2112.829 ms
+ptxas info    : Function properties for __internal_trig_reduction_slowpathd
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Compiling entry function '_Z11kernel_fp64PK5ParamP6Outputm' for 'sm_120'
+ptxas info    : Function properties for _Z11kernel_fp64PK5ParamP6Outputm
+    40 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 56 registers, used 0 barriers, 40 bytes cumulative stack size
+ptxas info    : Compile time = 606.416 ms
+ptxas info    : Function properties for __internal_trig_reduction_slowpathd
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Compiling entry function '_Z11kernel_fp32PK5ParamP6Outputm' for 'sm_120'
+ptxas info    : Function properties for _Z11kernel_fp32PK5ParamP6Outputm
+    72 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 48 registers, used 0 barriers, 72 bytes cumulative stack size
+ptxas info    : Compile time = 519.122 ms
+ptxas info    : Function properties for __internal_trig_reduction_slowpathd
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+src_cuda/validate_algorithms.cu(110): warning #550-D: variable "fb" was set but never used
+  __attribute__((host)) __attribute__((device)) inline double solve_pv_bishop(const Param&p,uint32_t&used){double lo=p.b,hi=p.b+p.e*p.a,fa,fb;
+                                                                                                                                           ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+ptxas info    : 296 bytes gmem
+ptxas info    : Compiling entry function '_Z16kernel_algorithmPK5ParamP6Outputmi' for 'sm_120'
+ptxas info    : Function properties for _Z16kernel_algorithmPK5ParamP6Outputmi
+    144 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 84 registers, used 0 barriers, 144 bytes cumulative stack size
+ptxas info    : Compile time = 728.906 ms
+ptxas info    : Function properties for _Z11bracket_forRK5ParamRdS2_
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Function properties for _Z16solve_newton_algRK5ParamRjb
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Function properties for __internal_trig_reduction_slowpathd
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Compiling entry function '_Z15kernel_adaptivePK5ParamP6Outputmdd' for 'sm_120'
+ptxas info    : Function properties for _Z15kernel_adaptivePK5ParamP6Outputmdd
+    128 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 64 registers, used 0 barriers, 128 bytes cumulative stack size
+ptxas info    : Compile time = 2091.153 ms
+ptxas info    : Function properties for __internal_trig_reduction_slowpathd
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Compiling entry function '_Z11kernel_fp64PK5ParamP6Outputm' for 'sm_120'
+ptxas info    : Function properties for _Z11kernel_fp64PK5ParamP6Outputm
+    40 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 56 registers, used 0 barriers, 40 bytes cumulative stack size
+ptxas info    : Compile time = 605.411 ms
+ptxas info    : Function properties for __internal_trig_reduction_slowpathd
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Compiling entry function '_Z11kernel_fp32PK5ParamP6Outputm' for 'sm_120'
+ptxas info    : Function properties for _Z11kernel_fp32PK5ParamP6Outputm
+    72 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 48 registers, used 0 barriers, 72 bytes cumulative stack size
+ptxas info    : Compile time = 518.164 ms
+ptxas info    : Function properties for __internal_trig_reduction_slowpathd
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads

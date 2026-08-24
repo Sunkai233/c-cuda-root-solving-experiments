@@ -1,0 +1,15 @@
+{
+  "created_utc": "2026-08-24",
+  "mpmath_dps": 80,
+  "selection": {
+    "remaining_bisection_brent_disagreements": 0,
+    "nearest_polar_knots": 300,
+    "total": 300,
+    "random_seed": 27183,
+    "excluded_references": [],
+    "forced_split": null
+  },
+  "target_rule": "first valid solver region, then certified crossing closest to previous-step hint",
+  "dataset_sha256": "512a30fe33882ce75b250b3a8d2852ceafdf172553dc3567cb073f9c71f9545a",
+  "csv_sha256": "9d1b1dfe259434b6238dd47d3f77a9638a011b03a5feede5da2f59be7192ae1c"
+}

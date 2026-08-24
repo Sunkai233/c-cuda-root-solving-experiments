@@ -1,0 +1,6 @@
+condition_start=2026-08-24T12:41:25Z
+tag=8mps_C_seed27183
+URef=8
+seed=27183
+IEC_class=C
+condition_end=2026-08-24T13:04:32Z

@@ -1,0 +1,13 @@
+{
+  "bootstrap_resamples": 10000,
+  "raw_rows": 17550,
+  "groups": 585,
+  "all_groups_have_30": true,
+  "adaptive_e2e_sustained_crossover_ci_low_gt_1": {
+    "bem": 32768,
+    "cstr": 8192,
+    "kepler": 8192,
+    "peng_robinson": null,
+    "pv": 32768
+  }
+}

@@ -1,0 +1,2 @@
+split,n,root_max,gradient_p99,gradient_max,condition_max,regularized_max,wrong_branch_or_count,nonfinite,continuation_n,continuation_root_max,continuation_wrong,ambiguous_n,ambiguous_wrong
+dev,1800,0.98598462348496418,146076359.02725089,366765723.99273068,7716.0362515993611,272482507.73280036,226,0,486,2.2204460492503131e-16,0,3,0

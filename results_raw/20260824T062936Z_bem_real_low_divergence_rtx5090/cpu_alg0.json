@@ -1,0 +1,1 @@
+{"algorithm":0,"records_total":2448000,"stride":1,"evaluated":2448000,"solve_ms":6762.402896,"throughput_roots_s":362001.501189,"solver_failures":0,"branch_error_gt_1e-3":81679,"root_abs_rad":{"median":2.5308697360060251e-09,"p95":2.6684390519449153e-07,"p99":0.043189520050141983,"max":3.1415343824502484},"vs_bisection":{"gt_1e-8":0,"gt_1e-6":0,"p99":0,"max":0}}

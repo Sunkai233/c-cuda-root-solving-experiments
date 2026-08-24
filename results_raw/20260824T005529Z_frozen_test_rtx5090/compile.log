@@ -1,0 +1,22 @@
+ptxas info    : 296 bytes gmem
+ptxas info    : Compiling entry function '_Z15kernel_adaptivePK5ParamP6Outputmdd' for 'sm_120'
+ptxas info    : Function properties for _Z15kernel_adaptivePK5ParamP6Outputmdd
+    128 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 64 registers, used 0 barriers, 128 bytes cumulative stack size
+ptxas info    : Compile time = 2155.528 ms
+ptxas info    : Function properties for __internal_trig_reduction_slowpathd
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Compiling entry function '_Z11kernel_fp64PK5ParamP6Outputm' for 'sm_120'
+ptxas info    : Function properties for _Z11kernel_fp64PK5ParamP6Outputm
+    40 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 56 registers, used 0 barriers, 40 bytes cumulative stack size
+ptxas info    : Compile time = 628.363 ms
+ptxas info    : Function properties for __internal_trig_reduction_slowpathd
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Compiling entry function '_Z11kernel_fp32PK5ParamP6Outputm' for 'sm_120'
+ptxas info    : Function properties for _Z11kernel_fp32PK5ParamP6Outputm
+    72 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 48 registers, used 0 barriers, 72 bytes cumulative stack size
+ptxas info    : Compile time = 520.173 ms
+ptxas info    : Function properties for __internal_trig_reduction_slowpathd
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads

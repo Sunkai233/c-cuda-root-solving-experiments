@@ -1,0 +1,4 @@
+test fp32 n=1000 rootmax=1.110e-02 wrong1e-7=913 branch=2 nf=2 corr=0.000
+test fp32_df32_refine n=1000 rootmax=2.175e-03 wrong1e-7=2 branch=2 nf=2 corr=0.000
+test fp64 n=1000 rootmax=7.072e-10 wrong1e-7=0 branch=0 nf=0 corr=0.000
+test adaptive n=1000 rootmax=2.984e-08 wrong1e-7=0 branch=0 nf=0 corr=0.972

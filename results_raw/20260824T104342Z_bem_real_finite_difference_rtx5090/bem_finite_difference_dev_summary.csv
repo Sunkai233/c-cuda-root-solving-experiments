@@ -1,0 +1,4 @@
+group,n,best_step_relative_error_median,p99,max,no_valid_step,branch_change_step_count,nonfinite_step_count
+all,1800,6.05995e-09,0.00010709,0.00326803,0,55,0
+near_knot,421,3.85144e-09,0.000508489,0.00326803,0,55,0
+away,1379,7.38667e-09,1.47925e-05,5.09458e-05,0,55,0

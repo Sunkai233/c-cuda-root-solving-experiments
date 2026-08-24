@@ -1,0 +1,5 @@
+bem            root_max=1.004e-13 grad_p99=2.137e-12 wrong=0 nf=0 it99=48
+kepler         root_max=2.655e-12 grad_p99=3.487e-10 wrong=0 nf=0 it99=52
+pv             root_max=2.736e-13 grad_p99=8.183e-14 wrong=0 nf=0 it99=50
+cstr           root_max=1.025e-13 grad_p99=4.506e-08 wrong=0 nf=0 it99=36
+peng_robinson  root_max=1.040e-13 grad_p99=2.909e-08 wrong=0 nf=0 it99=48

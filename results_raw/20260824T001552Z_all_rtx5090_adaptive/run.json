@@ -1,0 +1,8 @@
+{
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "compute_capability": "12.0",
+  "warmups": 10,
+  "repetitions": 30,
+  "precision": "fp32_fp64_adaptive",
+  "measurements": "measurements.csv"
+}

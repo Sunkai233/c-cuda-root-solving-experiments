@@ -1,0 +1,20 @@
+source_commit=3a9d3f2
+start_utc=2026-08-24T05:19:11Z
+end_utc=2026-08-24T05:20:14Z
+dt_seconds=0.0125
+tmax_seconds=600
+blade_nodes=19
+blades=3
+time_steps_excluding_initial=48000
+root_instances_excluding_initial=2736000
+nodal_fields=Vx,Vy,Phi,Alpha,Theta,AxInd,TnInd,Cl,Cd,Cx,Cy,Fl,Fd
+f76f682c450768a069e2d95ece9aaa4e51a487500405b1c8c1503f3be73e96ca  5MW_600s_alpha.fst
+d350ae8b9dd8dc250c9683b50f257c10db8491756d49dbef7f1ffbe3832a2aea  NRELOffshrBsline5MW_Onshore_AeroDyn_noUA_debug.dat
+ef84e85d145aa52371999845f5e35c5a63a0e32ae2b654de7d51774078bdc128  NRELOffshrBsline5MW_Onshore_ElastoDyn.dat
+951e02395ef7032b5578bbd8fb3163fca4644ec23a3b3b4a62accb0bfb14d256  /home/abc/supplementary_experiments/domains/bem/openfast/5MW_Baseline/Wind/90m_12mps_twr.bts
+240235a46eeb7e0ac1f3a8c81eb711ccb79247a43ae4ab4d9e78c066b8ef8e5c  5MW_600s_alpha.outb
+outb_bytes=298390168
+  Total Real Time:       1.0598 minutes
+  Simulation CPU Time:   1.0514 minutes
+  Simulated Time:        10 minutes
+  Time Ratio (Sim/CPU):  9.5113

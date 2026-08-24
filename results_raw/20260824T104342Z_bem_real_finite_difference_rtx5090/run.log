@@ -1,0 +1,2 @@
+n=1800 best_rel_max=3.268e-03 p99=1.071e-04 no_valid=0 branch_steps=55 nonfinite_steps=0
+n=600 best_rel_max=2.211e-04 p99=1.012e-04 no_valid=0 branch_steps=18 nonfinite_steps=0

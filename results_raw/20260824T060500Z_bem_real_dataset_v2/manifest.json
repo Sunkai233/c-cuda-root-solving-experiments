@@ -1,0 +1,56 @@
+{
+  "format": "BEMREAL2",
+  "version": 2,
+  "layout": "32-byte header, then SoA little-endian float64 Vx,Vy,ThetaRad,PhiRefRad,PhiHintPreviousStepRad, then uint8 GeomPhiFlag",
+  "records": 2448000,
+  "steps": 48000,
+  "ordinary_nodes_per_step": 51,
+  "included_original_nodes": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18
+  ],
+  "blades": 3,
+  "source_outb": "/home/abc/supplementary_experiments/domains/bem/openfast/5MW_Land_600s_rigid_noskew/5MW_600s_alpha.outb",
+  "source_outb_sha256": "9e70051bf4ae952ea3e955020d0346f1c65eb844d1071a499b3d150e6b876d21",
+  "dataset": "bem_real_f64_soa.bin",
+  "dataset_bytes": 100368032,
+  "dataset_sha256": "2ed1dfc2a9c5cea03cccc163e90c8b7d6e84dc0efe950aca8b6a2b4902581b01",
+  "geometric_phi_flags": 0,
+  "ranges": {
+    "Vx": [
+      -19.10042492473814,
+      17.904069524912106
+    ],
+    "Vy": [
+      -12.266649834652982,
+      92.43336234642346
+    ],
+    "ThetaRad": [
+      0.0018500489996829612,
+      0.23226841688125846
+    ],
+    "PhiRefRad": [
+      -3.141517145145156,
+      3.1415343824502484
+    ],
+    "PhiHintPreviousStepRad": [
+      -3.141517145145156,
+      3.1415343824502484
+    ]
+  }
+}

@@ -1,0 +1,4 @@
+bisection threads=1 median_ms=11646.294
+brent threads=1 median_ms=8389.716
+illinois threads=1 median_ms=11990.191
+adaptive_compacted threads=1 median_ms=8668.205

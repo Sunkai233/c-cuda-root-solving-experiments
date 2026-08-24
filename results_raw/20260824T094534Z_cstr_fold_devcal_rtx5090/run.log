@@ -1,0 +1,1 @@
+split=dev n=1800 root_max=9.860e-01 grad_max=3.668e+08 reg_max=2.725e+08 wrong=226 nonfinite=0 continuation_max=2.220e-16 continuation_wrong=0 ambiguous_wrong=0

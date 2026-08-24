@@ -1,0 +1,2 @@
+split,n,root_max,gradient_p99,gradient_max,condition_max,regularized_max,wrong_branch_or_count,nonfinite,continuation_n,continuation_root_max,continuation_wrong,ambiguous_n,ambiguous_wrong
+cal,600,1.0365042157900461e-12,1.7250575839879576e-08,6.6296697031952386e-08,6.6288071273803914e-08,2.5815281451871841e-08,0,0,486,2.2204460492503131e-16,0,3,0

@@ -1,0 +1,8 @@
+{
+  "bootstrap_resamples": 10000,
+  "raw_rows": 16380,
+  "groups": 546,
+  "all_groups_have_30": true,
+  "comparison_baseline": "brent_dekker",
+  "speedup_definition": "median(brent_dekker_time / candidate_time)"
+}

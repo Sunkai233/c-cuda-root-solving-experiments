@@ -1,0 +1,26 @@
+In file included from src_c/validate_bem_real_cpu.c:7:
+src_c/../include/bem_real_solver.h: In function ‘bem_scan_region_nearest_hint’:
+src_c/../include/bem_real_solver.h:215:3: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  215 |   if(center<0)center=0;if(center>=BEM_SCAN_CELLS)center=BEM_SCAN_CELLS-1;
+      |   ^~
+src_c/../include/bem_real_solver.h:215:24: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  215 |   if(center<0)center=0;if(center>=BEM_SCAN_CELLS)center=BEM_SCAN_CELLS-1;
+      |                        ^~
+src_c/validate_bem_real_cpu.c: In function ‘load’:
+src_c/validate_bem_real_cpu.c:21:7: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+   21 |       if (!grown) return -1; *refs = grown;
+      |       ^~
+src_c/validate_bem_real_cpu.c:21:30: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+   21 |       if (!grown) return -1; *refs = grown;
+      |                              ^
+src_c/validate_bem_real_cpu.c: In function ‘main’:
+src_c/validate_bem_real_cpu.c:61:7: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+   61 |       if (error > root_max) root_max = error; if (fabs(residual) > residual_max) residual_max = fabs(residual);
+      |       ^~
+src_c/validate_bem_real_cpu.c:61:47: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+   61 |       if (error > root_max) root_max = error; if (fabs(residual) > residual_max) residual_max = fabs(residual);
+      |                                               ^~
+src_c/validate_bem_real_cpu.c: In function ‘load’:
+src_c/validate_bem_real_cpu.c:13:70: warning: ignoring return value of ‘getline’ declared with attribute ‘warn_unused_result’ [-Wunused-result]
+   13 |   char *line = NULL; size_t cap = 0; int n = 0, allocated = 0; (void)getline(&line, &cap, fp);
+      |                                                                      ^~~~~~~~~~~~~~~~~~~~~~~~

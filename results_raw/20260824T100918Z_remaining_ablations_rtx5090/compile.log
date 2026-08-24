@@ -1,0 +1,51 @@
+ptxas info    : 272 bytes gmem
+ptxas info    : Compiling entry function '_Z10trig_recurP2SCmi' for 'sm_120'
+ptxas info    : Function properties for _Z10trig_recurP2SCmi
+    48 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 40 registers, used 0 barriers, 48 bytes cumulative stack size
+ptxas info    : Compile time = 20.657 ms
+ptxas info    : Function properties for __internal_trig_reduction_slowpathd
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Compiling entry function '_Z11trig_directP2SCmi' for 'sm_120'
+ptxas info    : Function properties for _Z11trig_directP2SCmi
+    48 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 38 registers, used 0 barriers, 48 bytes cumulative stack size
+ptxas info    : Compile time = 13.921 ms
+ptxas info    : Function properties for __internal_trig_reduction_slowpathd
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Compiling entry function '_Z8unrolledP2RGm' for 'sm_120'
+ptxas info    : Function properties for _Z8unrolledP2RGm
+    48 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 128 registers, used 0 barriers, 48 bytes cumulative stack size
+ptxas info    : Compile time = 266.692 ms
+ptxas info    : Function properties for __internal_accurate_pow
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Function properties for __internal_trig_reduction_slowpathd
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Compiling entry function '_Z8gradientPKdP2RGm' for 'sm_120'
+ptxas info    : Function properties for _Z8gradientPKdP2RGm
+    48 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 32 registers, used 0 barriers, 48 bytes cumulative stack size
+ptxas info    : Compile time = 15.759 ms
+ptxas info    : Function properties for __internal_accurate_pow
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Function properties for __internal_trig_reduction_slowpathd
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Compiling entry function '_Z5rootsPdm' for 'sm_120'
+ptxas info    : Function properties for _Z5rootsPdm
+    56 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 40 registers, used 0 barriers, 56 bytes cumulative stack size
+ptxas info    : Compile time = 108.537 ms
+ptxas info    : Function properties for __internal_accurate_pow
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Function properties for __internal_trig_reduction_slowpathd
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Compiling entry function '_Z5fusedP2RGm' for 'sm_120'
+ptxas info    : Function properties for _Z5fusedP2RGm
+    48 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 40 registers, used 0 barriers, 48 bytes cumulative stack size
+ptxas info    : Compile time = 114.845 ms
+ptxas info    : Function properties for __internal_accurate_pow
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Function properties for __internal_trig_reduction_slowpathd
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads

@@ -1,0 +1,8 @@
+ptxas info    : 272 bytes gmem
+ptxas info    : Compiling entry function '_Z12solve_kernelPKdS0_S0_S0_PdPhm' for 'sm_120'
+ptxas info    : Function properties for _Z12solve_kernelPKdS0_S0_S0_PdPhm
+    88 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 64 registers, used 0 barriers, 88 bytes cumulative stack size
+ptxas info    : Compile time = 152.235 ms
+ptxas info    : Function properties for __internal_trig_reduction_slowpathd
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads

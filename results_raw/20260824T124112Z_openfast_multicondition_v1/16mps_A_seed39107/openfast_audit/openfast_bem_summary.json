@@ -1,0 +1,33 @@
+{
+  "file": "5MW_600s_16mps_A_seed39107.outb",
+  "rows_including_initial": 48001,
+  "time_steps_excluding_initial": 48000,
+  "channels": 835,
+  "time_start": 0.0,
+  "time_end": 600.0,
+  "dt_min": 0.012499999999931788,
+  "dt_max": 0.012500000000045475,
+  "blade_node_channels": {
+    "Vx": 57,
+    "Vy": 57,
+    "Phi": 57,
+    "Alpha": 57,
+    "Theta": 57,
+    "AxI": 57,
+    "TnI": 57,
+    "Cl": 57,
+    "Cd": 57,
+    "Cx": 57,
+    "Cy": 57,
+    "Fl": 57,
+    "Fd": 57
+  },
+  "node_states_excluding_initial": 2736000,
+  "fixed_induction_states_excluding_initial": 288000,
+  "ordinary_root_instances_excluding_initial": 2448000,
+  "root_outputs_including_initial": 2736057,
+  "nodal_nonfinite": 0,
+  "theta_identity_max_abs_deg": 5.684341886080802e-14,
+  "shape_and_channel_audit_pass": true,
+  "finite_audit_pass": true
+}

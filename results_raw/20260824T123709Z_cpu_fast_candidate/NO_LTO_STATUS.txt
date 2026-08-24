@@ -1,0 +1,1 @@
+NO_LTO_TEST_PASS

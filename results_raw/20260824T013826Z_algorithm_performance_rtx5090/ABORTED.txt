@@ -1,0 +1,7 @@
+ABORTED 2026-08-24
+
+The online correctness sentinel found 10,911 wrong BEM roots among the first
+100,000 checked samples for Brent at N=8,388,608 and N=16,777,216.  The global
+BEM bracket can contain a non-target root for part of the generated workload,
+so these timings are invalid and excluded from all analysis.  The partial raw
+files are retained for audit.  No rows from this run may enter a paper table.

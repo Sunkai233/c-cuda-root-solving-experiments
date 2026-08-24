@@ -1,0 +1,1 @@
+split=test n=600 root_max=2.040e-14 power_max=1.258e-12 grad_max=dI_dV:4.194e-15,dI_dIL:3.981e-15,dI_dI0:4.251e-15,dI_da:4.252e-15,dI_dRs:1.786e-08,dI_dRsh:3.726e-15 nonfinite=0 overflow=0 underflow=0

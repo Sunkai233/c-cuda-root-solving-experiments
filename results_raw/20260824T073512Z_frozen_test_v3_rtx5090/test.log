@@ -1,0 +1,15 @@
+bem            fp32                 N=600 root_max=1.114e-02 grad_p99=7.866e-02 gt1e-7=214 corr=0
+bem            fp64                 N=600 root_max=2.220e-16 grad_p99=5.581e-16 gt1e-7=0 corr=600
+bem            adaptive_x3e-08      N=600 root_max=2.999e-08 grad_p99=2.981e-07 gt1e-7=0 corr=287
+kepler         fp32                 N=600 root_max=5.806e-03 grad_p99=5.049e-01 gt1e-7=495 corr=0
+kepler         fp64                 N=600 root_max=4.815e-14 grad_p99=3.383e-12 gt1e-7=0 corr=600
+kepler         adaptive_x3e-08      N=600 root_max=2.854e-08 grad_p99=2.077e-08 gt1e-7=0 corr=570
+pv             fp32                 N=600 root_max=3.142e-01 grad_p99=7.453e-03 gt1e-7=561 corr=0
+pv             fp64                 N=600 root_max=1.510e-14 grad_p99=2.480e-15 gt1e-7=0 corr=600
+pv             adaptive_x3e-08      N=600 root_max=2.820e-08 grad_p99=1.622e-10 gt1e-7=0 corr=587
+cstr           fp32                 N=600 root_max=1.861e-07 grad_p99=7.841e-07 gt1e-7=8 corr=0
+cstr           fp64                 N=600 root_max=3.331e-16 grad_p99=5.208e-15 gt1e-7=0 corr=600
+cstr           adaptive_x3e-08      N=600 root_max=2.936e-08 grad_p99=2.304e-07 gt1e-7=0 corr=126
+peng_robinson  fp32                 N=600 root_max=1.238e-04 grad_p99=1.546e-01 gt1e-7=95 corr=0
+peng_robinson  fp64                 N=600 root_max=1.641e-13 grad_p99=2.462e-10 gt1e-7=0 corr=600
+peng_robinson  adaptive_x3e-08      N=600 root_max=2.997e-08 grad_p99=3.288e-05 gt1e-7=0 corr=352

@@ -1,0 +1,45 @@
+{
+  "source": "results_raw\\20260824T060500Z_bem_real_dataset_v2\\bem_real_f64_soa.bin",
+  "source_sha256": "2ed1dfc2a9c5cea03cccc163e90c8b7d6e84dc0efe950aca8b6a2b4902581b01",
+  "actual_nodes_per_step": 51,
+  "specification_57_node_mismatch": "NREL 5MW AeroDyn input has 17 nodes/blade x 3 blades = 51",
+  "scale_counts": [
+    51,
+    102,
+    204,
+    408,
+    816,
+    1632,
+    3264,
+    13056,
+    52224,
+    208896,
+    835584,
+    3342336
+  ],
+  "conditions": {
+    "baseline": "unmodified sampled real states",
+    "low_wind_075": "Vx x 0.75",
+    "high_wind_125": "Vx x 1.25",
+    "turbulent_gust": "Vx harmonic +/-26%; Vy harmonic +/-8%"
+  },
+  "purpose": "performance/fallback only; zero reference column is not correctness evidence",
+  "files_sha256": {
+    "mixed_51x1.bin": "92a16239396cf867b8ed984b07028a023370fdfd029db3dc4c01e8285e16f277",
+    "mixed_51x2.bin": "28e209493477d898969d2b947154905344c627aeef634eba6e431a00308b6fd0",
+    "mixed_51x4.bin": "dc55c2bfd28ac1d343d74a3ec03211db112928ecff609c1c9b7f46b54ccbce40",
+    "mixed_51x8.bin": "541c3effeaab859aaa8c05489c7bf6a536bf8913d1b5764224039828c28684c8",
+    "mixed_51x16.bin": "aa8904631680eaa688b49ebfa067f3da2484e4899039359c3eff3ccb62f0783e",
+    "mixed_51x32.bin": "f1b3214af89b212a3bc6698a29f611d38a57b5dfaab0df7bebec87383e78ab94",
+    "mixed_51x64.bin": "5693b1a6479a6dee266b5c1536e58fb5f67f4e45b617c188001a007488fe4a40",
+    "mixed_51x256.bin": "6f2a7fb401f11c4004fc74d5137b4ad4c5a8a5fde6abe16c41af1f67125be610",
+    "mixed_51x1024.bin": "f674c752ae9a48ad85ed82bec3b765da11f56815cd0a65d62b9b5039c355a889",
+    "mixed_51x4096.bin": "ed64dd6df5873e5c03b6872ea478e1aba759370913ef6c02da28d5dffce6c2ac",
+    "mixed_51x16384.bin": "ed7bfcadc13e3fee6348458261a337b9fbf5ef784d7c8bf92801c43e3c7c69c9",
+    "mixed_51x65536.bin": "50d0d4d3cdd096d535ab77a24fa63f3035bd9ad68476896f638c795f72970df5",
+    "baseline_524288.bin": "8e6145a6dfc2c2f606ea16e7e95caf9e567d697bde628fffce5bd9d2c8e9ad18",
+    "low_wind_075_524288.bin": "ecefeea75c1734cf6305563e7579b49bc3af5f4237d0aee33ec38e59f0b8f6bc",
+    "high_wind_125_524288.bin": "e60117464ac609aac7bd208f87c81b53a6ac7e2867eda718b33dabba4cd57521",
+    "turbulent_gust_524288.bin": "f0af3f4ca117373c3bf56d725f6d4cfc0fa4e86d43b7f0cabf7dd89b3c9d6101"
+  }
+}

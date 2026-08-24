@@ -1,0 +1,5 @@
+fp64 n=2448000 kernel=472.630 e2e=480.379 corr=0.0000 nf=0
+fp32 n=2448000 kernel=37.142 e2e=44.136 corr=0.0000 nf=888
+df32_adaptive n=2448000 kernel=51.928 e2e=58.934 corr=0.0004 nf=0
+fp32_df32_refine n=2448000 kernel=51.229 e2e=58.167 corr=0.0000 nf=922
+adaptive n=2448000 kernel=500.987 e2e=508.361 corr=0.9759 nf=0

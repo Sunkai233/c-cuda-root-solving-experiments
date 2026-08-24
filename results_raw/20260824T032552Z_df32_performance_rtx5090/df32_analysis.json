@@ -1,0 +1,13 @@
+{
+  "bootstrap_resamples": 10000,
+  "raw_rows": 7800,
+  "groups": 260,
+  "all_groups_have_30": true,
+  "df32_e2e_sustained_crossover": {
+    "bem": 128,
+    "cstr": 131072,
+    "kepler": null,
+    "peng_robinson": null,
+    "pv": null
+  }
+}

@@ -1,0 +1,40 @@
+In file included from src_cpu/validate_cpu_references.c:2:
+src_cpu/benchmark_cpu.c: In function ‘u01’:
+src_cpu/benchmark_cpu.c:56:52: warning: conversion from ‘uint64_t’ {aka ‘long unsigned int’} to ‘double’ may change value [-Wconversion]
+   56 | static double u01(uint64_t x){return (mix64(x)>>11)*0x1.0p-53;}
+      |                                                    ^
+src_cpu/benchmark_cpu.c: In function ‘make_param’:
+src_cpu/benchmark_cpu.c:57:59: warning: conversion to ‘size_t’ {aka ‘long unsigned int’} from ‘int’ may change the sign of the result [-Wsign-conversion]
+   57 | static Param make_param(int dom,size_t i){double u=u01(i*7+dom),v=u01(i*7+dom+1),w=u01(i*7+dom+2);Param p={0};p.domain=dom;p.branch=(int)(i&1);
+      |                                                           ^
+src_cpu/benchmark_cpu.c:57:74: warning: conversion to ‘size_t’ {aka ‘long unsigned int’} from ‘int’ may change the sign of the result [-Wsign-conversion]
+   57 | static Param make_param(int dom,size_t i){double u=u01(i*7+dom),v=u01(i*7+dom+1),w=u01(i*7+dom+2);Param p={0};p.domain=dom;p.branch=(int)(i&1);
+      |                                                                          ^
+src_cpu/benchmark_cpu.c:57:91: warning: conversion to ‘size_t’ {aka ‘long unsigned int’} from ‘int’ may change the sign of the result [-Wsign-conversion]
+   57 | static Param make_param(int dom,size_t i){double u=u01(i*7+dom),v=u01(i*7+dom+1),w=u01(i*7+dom+2);Param p={0};p.domain=dom;p.branch=(int)(i&1);
+      |                                                                                           ^
+src_cpu/benchmark_cpu.c: In function ‘now_ms’:
+src_cpu/benchmark_cpu.c:63:97: warning: conversion from ‘__time_t’ {aka ‘long int’} to ‘double’ may change value [-Wconversion]
+   63 | static double now_ms(void){struct timespec t;clock_gettime(CLOCK_MONOTONIC_RAW,&t);return 1000.0*t.tv_sec+1e-6*t.tv_nsec;}
+      |                                                                                                 ^
+src_cpu/benchmark_cpu.c:63:111: warning: conversion from ‘__syscall_slong_t’ {aka ‘long int’} to ‘double’ may change value [-Wconversion]
+   63 | static double now_ms(void){struct timespec t;clock_gettime(CLOCK_MONOTONIC_RAW,&t);return 1000.0*t.tv_sec+1e-6*t.tv_nsec;}
+      |                                                                                                               ^
+src_cpu/benchmark_cpu.c: In function ‘benchmark_cpu_program_main’:
+src_cpu/benchmark_cpu.c:80:124: warning: conversion from ‘size_t’ {aka ‘long unsigned int’} to ‘double’ may change value [-Wconversion]
+   80 |       for(int r=0;r<reps;r++){ts[r]=run(p,o,n,mode,threads);double sum=0;size_t nf=0;for(size_t i=0;i<n;i++){sum+=o[i].root*(1+(i%17));nf+=o[i].status==ROOT_NONFINITE;}fprintf(f,"%s,%zu,%s,%d,%.12g,%.12g,%.17g,%zu\n",dn[dom],n,mn[mode],r,ts[r],n/ts[r]/1000.0,sum,nf);}fflush(f);double med=median(ts,reps);printf("%-14s n=%9zu %-17s median=%10.4f ms\n",dn[dom],n,mn[mode],med);free(ts);}
+      |                                                                                                                            ^
+src_cpu/benchmark_cpu.c:80:246: warning: conversion from ‘size_t’ {aka ‘long unsigned int’} to ‘double’ may change value [-Wconversion]
+   80 |       for(int r=0;r<reps;r++){ts[r]=run(p,o,n,mode,threads);double sum=0;size_t nf=0;for(size_t i=0;i<n;i++){sum+=o[i].root*(1+(i%17));nf+=o[i].status==ROOT_NONFINITE;}fprintf(f,"%s,%zu,%s,%d,%.12g,%.12g,%.17g,%zu\n",dn[dom],n,mn[mode],r,ts[r],n/ts[r]/1000.0,sum,nf);}fflush(f);double med=median(ts,reps);printf("%-14s n=%9zu %-17s median=%10.4f ms\n",dn[dom],n,mn[mode],med);free(ts);}
+      |                                                                                                                                                                                                                                                      ^
+src_cpu/validate_cpu_references.c: In function ‘main’:
+src_cpu/validate_cpu_references.c:74:7: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+   74 |       if (re > root_max) root_max = re; if (ge > grad_max) grad_max = ge;
+      |       ^~
+src_cpu/validate_cpu_references.c:74:41: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+   74 |       if (re > root_max) root_max = re; if (ge > grad_max) grad_max = ge;
+      |                                         ^~
+src_cpu/validate_cpu_references.c: In function ‘load_refs’:
+src_cpu/validate_cpu_references.c:24:9: warning: ignoring return value of ‘getline’ declared with attribute ‘warn_unused_result’ [-Wunused-result]
+   24 |   (void)getline(&line, &cap, fp);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~

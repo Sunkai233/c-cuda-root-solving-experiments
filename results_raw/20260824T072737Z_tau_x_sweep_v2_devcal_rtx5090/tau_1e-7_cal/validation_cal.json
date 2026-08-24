@@ -1,0 +1,7 @@
+{
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "split": "cal",
+  "reference_dir": "references/ref_v2_20260824",
+  "adaptive_tau_x": 9.9999999999999995e-08,
+  "table": "validation_cal.csv"
+}

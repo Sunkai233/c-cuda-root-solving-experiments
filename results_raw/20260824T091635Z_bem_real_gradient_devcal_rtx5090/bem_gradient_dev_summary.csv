@@ -1,0 +1,5 @@
+group,n,root_max,gradient_median,gradient_p99,gradient_max,nonfinite
+all_sides,3600,5.53202e-09,1.13289e-08,2.65054e-06,0.0143503,0
+near_knot,421,5.53202e-09,9.68081e-09,7.41373e-07,0.0143503,0
+away_from_knot,1379,5.53202e-09,1.80707e-08,3.23618e-06,8.98496e-06,0
+multi_root,570,5.53202e-09,4.55111e-07,5.64643e-06,8.34811e-06,0

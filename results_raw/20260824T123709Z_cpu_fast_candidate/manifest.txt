@@ -1,0 +1,7 @@
+run_id=20260824T123709Z_cpu_fast_candidate
+strict_comparator_run=20260824T075559Z_cpu_c17_full
+threads=96
+affinity=physical_cpus_0-95
+numa_node=0
+flags=-std=c17 -O3 -march=native -mtune=native -flto -fopenmp -DNDEBUG -ffast-math
+gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0

@@ -1,0 +1,7 @@
+{
+ "gpu":"NVIDIA GeForce RTX 5090",
+ "warmups":10,
+ "repetitions":30,
+ "heat_seconds":45,
+ "table":"performance.csv"
+}

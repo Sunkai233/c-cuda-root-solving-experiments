@@ -1,0 +1,7 @@
+{
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "split": "test",
+  "reference_dir": "references/ref_v1_20260824",
+  "adaptive_tau_x": 1e-7,
+  "table": "validation_test.csv"
+}

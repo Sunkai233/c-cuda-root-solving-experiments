@@ -1,0 +1,3 @@
+name, temperature.gpu, power.draw [W], clocks.current.sm [MHz], clocks.current.memory [MHz]
+NVIDIA GeForce RTX 5090, 44, 22.07 W, 247 MHz, 405 MHz
+NVIDIA GeForce RTX 5090, 38, 14.41 W, 195 MHz, 405 MHz

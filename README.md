@@ -1,6 +1,6 @@
 # Supplementary C/CUDA root-solving experiments
 
-本仓库是 `SUPPLEMENTARY_EXPERIMENTS_C_CUDA.md` 的可追溯 C17/CUDA C++ 实验实现。按用户 2026-08-24 的最终范围，E0–E7、E9–E11 均纳入验收；跨硬件 E8 暂不执行。因此所有硬件性能结论只适用于本次 RTX 5090 与 AMD EPYC 9654，仓库不声称可迁移到第二类 GPU。
+本仓库是 [`docs/SUPPLEMENTARY_EXPERIMENTS_C_CUDA.md`](docs/SUPPLEMENTARY_EXPERIMENTS_C_CUDA.md) 的可追溯 C17/CUDA C++ 实验实现。按用户 2026-08-24 的最终范围，E0–E7、E9–E11 均纳入验收；跨硬件 E8 暂不执行。因此所有硬件性能结论只适用于本次 RTX 5090 与 AMD EPYC 9654，仓库不声称可迁移到第二类 GPU。
 
 五域包括解析 BEM、Kepler、单二极管 PV、非等温 CSTR 和 Peng–Robinson 负对照。另有基于 OpenFAST/NREL 5 MW、真实翼型极坐标表的 600 s BEM 工作流。CPU/GPU 对比保持相同残差、物理分支、停止条件和输入；计时分别保存纯内核与 H2D+kernel+D2H，原始结果为追加式时间戳目录。
 
@@ -31,3 +31,5 @@ bash scripts/run_rtx5090.sh
 ```
 
 各正式 runner、冻结 manifest、一次性 test marker、源文件 SHA-256、编译日志、硬件/驱动/温度记录和 CSV/JSON 位于 `scripts/`、`manifests/`、`references/` 与 `results_raw/<run_id>/`。最终验收使用 `scripts/audit_final_no_e8.py`，明确检查 E8 是唯一排除项。
+
+GitHub 版本包含全部源码、协议、冻结参考、正式/失败候选的 CSV/JSON/TXT/日志、Nsight CSV、处理后报告和审计结果。超过普通 GitHub 单文件限制、且可由 runner 重建的 `.bin/.outb/.bts` 与编译产物不进入 Git 历史；其身份、哈希和复现边界见 [`docs/GITHUB_DATA_POLICY.md`](docs/GITHUB_DATA_POLICY.md)。

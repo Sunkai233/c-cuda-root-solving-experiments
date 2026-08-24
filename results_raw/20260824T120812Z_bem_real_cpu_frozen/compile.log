@@ -1,0 +1,8 @@
+In file included from src_c/benchmark_bem_real_frozen_cpu.c:10:
+src_c/../include/bem_real_solver.h: In function ‘bem_scan_region_nearest_hint’:
+src_c/../include/bem_real_solver.h:215:3: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  215 |   if(center<0)center=0;if(center>=BEM_SCAN_CELLS)center=BEM_SCAN_CELLS-1;
+      |   ^~
+src_c/../include/bem_real_solver.h:215:24: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  215 |   if(center<0)center=0;if(center>=BEM_SCAN_CELLS)center=BEM_SCAN_CELLS-1;
+      |                        ^~

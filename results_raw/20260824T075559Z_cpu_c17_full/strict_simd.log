@@ -1,0 +1,65 @@
+bem            n=        1 omp_simd_1t       median=    0.0012 ms
+bem            n=        8 omp_simd_1t       median=    0.0103 ms
+bem            n=       32 omp_simd_1t       median=    0.0408 ms
+bem            n=      128 omp_simd_1t       median=    0.1652 ms
+bem            n=      512 omp_simd_1t       median=    0.6722 ms
+bem            n=     2048 omp_simd_1t       median=    2.7430 ms
+bem            n=     8192 omp_simd_1t       median=   11.0639 ms
+bem            n=    32768 omp_simd_1t       median=   44.2886 ms
+bem            n=   131072 omp_simd_1t       median=  177.2400 ms
+bem            n=   524288 omp_simd_1t       median=  709.0735 ms
+bem            n=  2097152 omp_simd_1t       median= 2836.2665 ms
+bem            n=  8388608 omp_simd_1t       median=11351.7261 ms
+bem            n= 16777216 omp_simd_1t       median=22717.4511 ms
+kepler         n=        1 omp_simd_1t       median=    0.0009 ms
+kepler         n=        8 omp_simd_1t       median=    0.0081 ms
+kepler         n=       32 omp_simd_1t       median=    0.0308 ms
+kepler         n=      128 omp_simd_1t       median=    0.1248 ms
+kepler         n=      512 omp_simd_1t       median=    0.5038 ms
+kepler         n=     2048 omp_simd_1t       median=    2.0907 ms
+kepler         n=     8192 omp_simd_1t       median=    8.5224 ms
+kepler         n=    32768 omp_simd_1t       median=   34.2629 ms
+kepler         n=   131072 omp_simd_1t       median=  137.1800 ms
+kepler         n=   524288 omp_simd_1t       median=  549.0985 ms
+kepler         n=  2097152 omp_simd_1t       median= 2197.1588 ms
+kepler         n=  8388608 omp_simd_1t       median= 8797.6208 ms
+kepler         n= 16777216 omp_simd_1t       median=17605.0127 ms
+pv             n=        1 omp_simd_1t       median=    0.0007 ms
+pv             n=        8 omp_simd_1t       median=    0.0061 ms
+pv             n=       32 omp_simd_1t       median=    0.0236 ms
+pv             n=      128 omp_simd_1t       median=    0.0935 ms
+pv             n=      512 omp_simd_1t       median=    0.3778 ms
+pv             n=     2048 omp_simd_1t       median=    1.5666 ms
+pv             n=     8192 omp_simd_1t       median=    6.3876 ms
+pv             n=    32768 omp_simd_1t       median=   25.6765 ms
+pv             n=   131072 omp_simd_1t       median=  102.8913 ms
+pv             n=   524288 omp_simd_1t       median=  411.7365 ms
+pv             n=  2097152 omp_simd_1t       median= 1648.0220 ms
+pv             n=  8388608 omp_simd_1t       median= 6601.1755 ms
+pv             n= 16777216 omp_simd_1t       median=13201.7262 ms
+cstr           n=        1 omp_simd_1t       median=    0.0026 ms
+cstr           n=        8 omp_simd_1t       median=    0.0204 ms
+cstr           n=       32 omp_simd_1t       median=    0.0810 ms
+cstr           n=      128 omp_simd_1t       median=    0.3279 ms
+cstr           n=      512 omp_simd_1t       median=    1.6136 ms
+cstr           n=     2048 omp_simd_1t       median=    6.8751 ms
+cstr           n=     8192 omp_simd_1t       median=   27.8203 ms
+cstr           n=    32768 omp_simd_1t       median=  111.1458 ms
+cstr           n=   131072 omp_simd_1t       median=  444.5478 ms
+cstr           n=   524288 omp_simd_1t       median= 1777.5134 ms
+cstr           n=  2097152 omp_simd_1t       median= 7109.1536 ms
+cstr           n=  8388608 omp_simd_1t       median=28463.0824 ms
+cstr           n= 16777216 omp_simd_1t       median=56961.9331 ms
+peng_robinson  n=        1 omp_simd_1t       median=    0.0001 ms
+peng_robinson  n=        8 omp_simd_1t       median=    0.0005 ms
+peng_robinson  n=       32 omp_simd_1t       median=    0.0018 ms
+peng_robinson  n=      128 omp_simd_1t       median=    0.0072 ms
+peng_robinson  n=      512 omp_simd_1t       median=    0.0288 ms
+peng_robinson  n=     2048 omp_simd_1t       median=    0.1150 ms
+peng_robinson  n=     8192 omp_simd_1t       median=    0.4635 ms
+peng_robinson  n=    32768 omp_simd_1t       median=    1.9327 ms
+peng_robinson  n=   131072 omp_simd_1t       median=    7.7731 ms
+peng_robinson  n=   524288 omp_simd_1t       median=   31.1339 ms
+peng_robinson  n=  2097152 omp_simd_1t       median=  124.6740 ms
+peng_robinson  n=  8388608 omp_simd_1t       median=  498.5833 ms
+peng_robinson  n= 16777216 omp_simd_1t       median=  997.9381 ms

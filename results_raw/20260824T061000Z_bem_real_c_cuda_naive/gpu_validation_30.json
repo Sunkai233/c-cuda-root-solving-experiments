@@ -1,0 +1,1 @@
+{"records":2448000,"repeats":30,"kernel_ms_mean":47.282600,"kernel_ms_median":47.267010,"kernel_ms_min":46.942303,"kernel_ms_max":47.610527,"end_to_end_ms":51.557823,"throughput_roots_s":51773802.183972,"solver_failures":0,"branch_error_gt_1e-3":81679,"root_abs_rad":{"median":2.5308697360060251e-09,"p95":2.6684390519449153e-07,"p99":0.043189520050141983,"max":3.1415343824502484}}

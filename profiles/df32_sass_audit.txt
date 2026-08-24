@@ -1,0 +1,12 @@
+binary=build/cuda_strict/performance_df32
+kernel=_Z11kernel_df32PK6DParamP7DOutputm
+sass_lines=144372
+DADD=0
+DMUL=0
+DFMA=0
+DSETP=0
+FADD=37075
+FMUL=3013
+FFMA=10130
+FSETP=5411
+MUFU=664

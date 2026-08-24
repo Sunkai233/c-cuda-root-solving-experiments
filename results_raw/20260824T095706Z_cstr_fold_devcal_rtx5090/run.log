@@ -1,0 +1,2 @@
+split=dev n=1800 root_max=3.391e-12 grad_max=1.214e-07 reg_max=5.915e-08 wrong=0 nonfinite=0 continuation_max=2.220e-16 continuation_wrong=0 ambiguous_wrong=0
+split=cal n=600 root_max=1.037e-12 grad_max=6.630e-08 reg_max=2.582e-08 wrong=0 nonfinite=0 continuation_max=2.220e-16 continuation_wrong=0 ambiguous_wrong=0

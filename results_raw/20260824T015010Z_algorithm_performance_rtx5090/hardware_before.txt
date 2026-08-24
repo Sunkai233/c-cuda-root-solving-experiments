@@ -1,0 +1,3 @@
+name, uuid, driver_version, temperature.gpu, power.limit [W], memory.total [MiB], compute_cap
+NVIDIA GeForce RTX 5090, GPU-ce54419c-71ca-69b8-681a-75d41cdaf0c7, 580.105.08, 44, 600.00 W, 32607 MiB, 12.0
+NVIDIA GeForce RTX 5090, GPU-4bbdc599-a71d-9ae4-188b-e1d3a0a8745f, 580.105.08, 37, 600.00 W, 32607 MiB, 12.0

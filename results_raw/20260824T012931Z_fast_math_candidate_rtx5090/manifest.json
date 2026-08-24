@@ -1,0 +1,9 @@
+{
+  "run_id": "20260824T012931Z_fast_math_candidate_rtx5090",
+  "status": "candidate_only",
+  "build": "cuda_fast_math",
+  "compile_flags": "-O3 -arch=sm_120 --use_fast_math",
+  "splits": ["dev", "cal"],
+  "test_split_executed": false,
+  "note": "Post-freeze secondary candidate; not a replacement for the one-shot strict test."
+}

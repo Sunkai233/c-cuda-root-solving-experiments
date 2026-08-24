@@ -1,0 +1,65 @@
+bem            n=        1 serial            median=    0.0012 ms
+bem            n=        8 serial            median=    0.0104 ms
+bem            n=       32 serial            median=    0.0409 ms
+bem            n=      128 serial            median=    0.1654 ms
+bem            n=      512 serial            median=    0.6722 ms
+bem            n=     2048 serial            median=    2.7364 ms
+bem            n=     8192 serial            median=   11.0187 ms
+bem            n=    32768 serial            median=   44.1410 ms
+bem            n=   131072 serial            median=  176.8733 ms
+bem            n=   524288 serial            median=  707.9649 ms
+bem            n=  2097152 serial            median= 2831.9912 ms
+bem            n=  8388608 serial            median=11348.9877 ms
+bem            n= 16777216 serial            median=22714.8439 ms
+kepler         n=        1 serial            median=    0.0009 ms
+kepler         n=        8 serial            median=    0.0082 ms
+kepler         n=       32 serial            median=    0.0309 ms
+kepler         n=      128 serial            median=    0.1250 ms
+kepler         n=      512 serial            median=    0.5061 ms
+kepler         n=     2048 serial            median=    2.0938 ms
+kepler         n=     8192 serial            median=    8.5370 ms
+kepler         n=    32768 serial            median=   34.2824 ms
+kepler         n=   131072 serial            median=  137.1563 ms
+kepler         n=   524288 serial            median=  548.4430 ms
+kepler         n=  2097152 serial            median= 2197.4842 ms
+kepler         n=  8388608 serial            median= 8795.2903 ms
+kepler         n= 16777216 serial            median=17600.4489 ms
+pv             n=        1 serial            median=    0.0007 ms
+pv             n=        8 serial            median=    0.0061 ms
+pv             n=       32 serial            median=    0.0234 ms
+pv             n=      128 serial            median=    0.0931 ms
+pv             n=      512 serial            median=    0.3758 ms
+pv             n=     2048 serial            median=    1.5590 ms
+pv             n=     8192 serial            median=    6.3670 ms
+pv             n=    32768 serial            median=   25.5919 ms
+pv             n=   131072 serial            median=  102.5274 ms
+pv             n=   524288 serial            median=  410.1023 ms
+pv             n=  2097152 serial            median= 1642.0203 ms
+pv             n=  8388608 serial            median= 6570.2540 ms
+pv             n= 16777216 serial            median=13151.8954 ms
+cstr           n=        1 serial            median=    0.0026 ms
+cstr           n=        8 serial            median=    0.0204 ms
+cstr           n=       32 serial            median=    0.0810 ms
+cstr           n=      128 serial            median=    0.3270 ms
+cstr           n=      512 serial            median=    1.6122 ms
+cstr           n=     2048 serial            median=    6.9104 ms
+cstr           n=     8192 serial            median=   27.7617 ms
+cstr           n=    32768 serial            median=  111.1680 ms
+cstr           n=   131072 serial            median=  444.5316 ms
+cstr           n=   524288 serial            median= 1777.4428 ms
+cstr           n=  2097152 serial            median= 7112.6589 ms
+cstr           n=  8388608 serial            median=28467.3358 ms
+cstr           n= 16777216 serial            median=56936.0127 ms
+peng_robinson  n=        1 serial            median=    0.0001 ms
+peng_robinson  n=        8 serial            median=    0.0005 ms
+peng_robinson  n=       32 serial            median=    0.0018 ms
+peng_robinson  n=      128 serial            median=    0.0073 ms
+peng_robinson  n=      512 serial            median=    0.0288 ms
+peng_robinson  n=     2048 serial            median=    0.1153 ms
+peng_robinson  n=     8192 serial            median=    0.4643 ms
+peng_robinson  n=    32768 serial            median=    1.9332 ms
+peng_robinson  n=   131072 serial            median=    7.7797 ms
+peng_robinson  n=   524288 serial            median=   31.1484 ms
+peng_robinson  n=  2097152 serial            median=  124.6990 ms
+peng_robinson  n=  8388608 serial            median=  499.1455 ms
+peng_robinson  n= 16777216 serial            median=  998.8152 ms

@@ -1,0 +1,18 @@
+{
+  "split": "cal",
+  "mpmath_dps": 80,
+  "steps": [
+    "1e-2",
+    "3e-3",
+    "1e-3",
+    "3e-4",
+    "1e-4",
+    "3e-5",
+    "1e-5"
+  ],
+  "samples": 3000,
+  "raw_rows": 21000,
+  "workers": 32,
+  "samples_without_any_valid_step": 0,
+  "samples_without_observed_convergence": 0
+}

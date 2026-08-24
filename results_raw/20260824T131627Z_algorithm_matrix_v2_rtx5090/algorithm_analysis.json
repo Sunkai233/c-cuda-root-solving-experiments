@@ -1,0 +1,9 @@
+{
+  "bootstrap_resamples": 10000,
+  "bootstrap_design": "independent sequential method blocks",
+  "raw_rows": 19500,
+  "groups": 650,
+  "all_groups_have_30": true,
+  "comparison_baseline": "brent_dekker",
+  "speedup_definition": "median(brent_dekker_time) / median(candidate_time)"
+}

@@ -1,0 +1,8 @@
+add   max_abs=4.547e-13 max_rel=7.094e-15 nf=0 overlap=0
+mul   max_abs=2.396e-12 max_rel=1.348e-14 nf=0 overlap=0
+div   max_abs=2.141e-12 max_rel=1.169e-14 nf=0 overlap=0
+exp   max_abs=3.062e+21 max_rel=2.040e-13 nf=0 overlap=0
+log   max_abs=8.763e-14 max_rel=8.568e-12 nf=0 overlap=0
+sin   max_abs=1.069e-14 max_rel=1.069e-14 nf=0 overlap=0
+cos   max_abs=8.972e-15 max_rel=8.972e-15 nf=0 overlap=0
+sqrt  max_abs=4.456e-09 max_rel=7.262e-15 nf=0 overlap=0

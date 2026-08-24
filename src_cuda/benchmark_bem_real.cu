@@ -21,33 +21,48 @@ __global__ void solve_kernel(const double*vx,const double*vy,const double*theta,
   uint64_t i=(uint64_t)blockIdx.x*blockDim.x+threadIdx.x;
   if(i<n){unsigned node=(unsigned)(i%51)%17;double r;int good=bem_solve_algorithm(vx[i],vy[i],theta[i],hint[i],node,algorithm,&r);roots[i]=r;ok[i]=(uint8_t)good;}
 }
+__global__ void solve_hint_kernel(const double*vx,const double*vy,const double*theta,const double*hint,
+                                  double*roots,uint8_t*ok,uint64_t*queue,uint32_t*queue_count,uint64_t n){
+  uint64_t i=(uint64_t)blockIdx.x*blockDim.x+threadIdx.x;if(i>=n)return;unsigned node=(unsigned)(i%51)%17;double r;
+  int good=bem_solve_hint_only(vx[i],vy[i],theta[i],hint[i],node,&r);roots[i]=r;ok[i]=(uint8_t)good;
+  if(!good){uint32_t slot=atomicAdd(queue_count,1u);queue[slot]=i;}
+}
+__global__ void solve_fallback_kernel(const double*vx,const double*vy,const double*theta,const double*hint,
+                                      double*roots,uint8_t*ok,const uint64_t*queue,const uint32_t*queue_count,uint64_t n){
+  uint64_t slot=(uint64_t)blockIdx.x*blockDim.x+threadIdx.x;uint32_t count=*queue_count;if(slot>=count||slot>=n)return;
+  uint64_t i=queue[slot];unsigned node=(unsigned)(i%51)%17;double r;int good=bem_solve_robust_nearest(vx[i],vy[i],theta[i],hint[i],node,1,&r);roots[i]=r;ok[i]=(uint8_t)good;
+}
+static void launch_solver(const double*vx,const double*vy,const double*theta,const double*hint,double*roots,uint8_t*ok,
+                          uint64_t*queue,uint32_t*queue_count,uint64_t n,int algorithm){
+  int blocks=(int)((n+255)/256);if(algorithm!=4){solve_kernel<<<blocks,256>>>(vx,vy,theta,hint,roots,ok,n,algorithm);return;}
+  CK(cudaMemsetAsync(queue_count,0,sizeof(uint32_t)));solve_hint_kernel<<<blocks,256>>>(vx,vy,theta,hint,roots,ok,queue,queue_count,n);
+  solve_fallback_kernel<<<blocks,256>>>(vx,vy,theta,hint,roots,ok,queue,queue_count,n);
+}
 
 int main(int argc,char**argv){
-  if(argc<2){fprintf(stderr,"usage: %s dataset.bin [repeats] [algorithm] [roots.bin]\n",argv[0]);return 2;}
+  if(argc<2){fprintf(stderr,"usage: %s dataset.bin [repeats] [algorithm] [roots.bin] [warmups]\n",argv[0]);return 2;}
   int repeats=argc>2?atoi(argv[2]):7;if(repeats<1)repeats=1;
-  int algorithm=argc>3?atoi(argv[3]):0;if(algorithm<0||algorithm>3)return 2;
+  int algorithm=argc>3?atoi(argv[3]):0;if(algorithm<0||algorithm>4)return 2;
+  int warmups=argc>5?atoi(argv[5]):10;if(warmups<0)warmups=0;
   FILE*f=fopen(argv[1],"rb");if(!f){perror("fopen");return 2;}Header h;
   if(fread(&h,1,sizeof h,f)!=sizeof h||memcmp(h.magic,"BEMREAL2",8)||h.nf!=5){fprintf(stderr,"bad header\n");return 2;}
   size_t db=(size_t)h.n*5*sizeof(double), rb=(size_t)h.n*sizeof(double), sb=(size_t)h.n;
   double*hbuf,*hroot;uint8_t*hflags,*hok;CK(cudaMallocHost(&hbuf,db));CK(cudaMallocHost(&hflags,sb));CK(cudaMallocHost(&hroot,rb));CK(cudaMallocHost(&hok,sb));
   if(fread(hbuf,1,db,f)!=db||fread(hflags,1,sb,f)!=sb){fprintf(stderr,"short read\n");return 2;}fclose(f);
-  double*dbuf,*droot;uint8_t*dok;CK(cudaMalloc(&dbuf,db));CK(cudaMalloc(&droot,rb));CK(cudaMalloc(&dok,sb));
+  double*dbuf,*droot;uint8_t*dok;uint64_t*dqueue;uint32_t*dqueue_count;CK(cudaMalloc(&dbuf,db));CK(cudaMalloc(&droot,rb));CK(cudaMalloc(&dok,sb));CK(cudaMalloc(&dqueue,(size_t)h.n*sizeof(uint64_t)));CK(cudaMalloc(&dqueue_count,sizeof(uint32_t)));
   double*vx=dbuf,*vy=vx+h.n,*theta=vy+h.n,*ref=hbuf+3*h.n,*hint=dbuf+4*h.n;
   CK(cudaMemcpy(dbuf,hbuf,db,cudaMemcpyHostToDevice));
-  int threads=256;int blocks=(int)((h.n+threads-1)/threads);
-  for(int i=0;i<2;++i)solve_kernel<<<blocks,threads>>>(vx,vy,theta,hint,droot,dok,h.n,algorithm);CK(cudaDeviceSynchronize());
-  cudaEvent_t a,b;CK(cudaEventCreate(&a));CK(cudaEventCreate(&b));float total=0.0f,*times=(float*)malloc(repeats*sizeof(float));
-  for(int i=0;i<repeats;++i){CK(cudaEventRecord(a));solve_kernel<<<blocks,threads>>>(vx,vy,theta,hint,droot,dok,h.n,algorithm);CK(cudaEventRecord(b));CK(cudaEventSynchronize(b));CK(cudaEventElapsedTime(&times[i],a,b));total+=times[i];}
+  for(int i=0;i<warmups;++i)launch_solver(vx,vy,theta,hint,droot,dok,dqueue,dqueue_count,h.n,algorithm);CK(cudaDeviceSynchronize());
+  cudaEvent_t a,b;CK(cudaEventCreate(&a));CK(cudaEventCreate(&b));float total=0.0f,*times=(float*)malloc(repeats*sizeof(float)),*sorted=(float*)malloc(repeats*sizeof(float));
+  for(int i=0;i<repeats;++i){CK(cudaEventRecord(a));launch_solver(vx,vy,theta,hint,droot,dok,dqueue,dqueue_count,h.n,algorithm);CK(cudaEventRecord(b));CK(cudaEventSynchronize(b));CK(cudaEventElapsedTime(&times[i],a,b));total+=times[i];}
   cudaEvent_t ea,eb;CK(cudaEventCreate(&ea));CK(cudaEventCreate(&eb));
-  CK(cudaEventRecord(ea));
-  CK(cudaMemcpyAsync(dbuf,hbuf,db,cudaMemcpyHostToDevice));
-  solve_kernel<<<blocks,threads>>>(vx,vy,theta,hint,droot,dok,h.n,algorithm);
-  CK(cudaMemcpyAsync(hroot,droot,rb,cudaMemcpyDeviceToHost));
-  CK(cudaMemcpyAsync(hok,dok,sb,cudaMemcpyDeviceToHost));
-  CK(cudaEventRecord(eb));CK(cudaEventSynchronize(eb));float e2e_ms;CK(cudaEventElapsedTime(&e2e_ms,ea,eb));
+  float*e2e=(float*)malloc(repeats*sizeof(float)),*e2e_sorted=(float*)malloc(repeats*sizeof(float));
+  for(int i=0;i<warmups;++i){CK(cudaMemcpyAsync(dbuf,hbuf,db,cudaMemcpyHostToDevice));launch_solver(vx,vy,theta,hint,droot,dok,dqueue,dqueue_count,h.n,algorithm);CK(cudaMemcpyAsync(hroot,droot,rb,cudaMemcpyDeviceToHost));CK(cudaMemcpyAsync(hok,dok,sb,cudaMemcpyDeviceToHost));}CK(cudaDeviceSynchronize());
+  for(int i=0;i<repeats;++i){CK(cudaEventRecord(ea));CK(cudaMemcpyAsync(dbuf,hbuf,db,cudaMemcpyHostToDevice));launch_solver(vx,vy,theta,hint,droot,dok,dqueue,dqueue_count,h.n,algorithm);CK(cudaMemcpyAsync(hroot,droot,rb,cudaMemcpyDeviceToHost));CK(cudaMemcpyAsync(hok,dok,sb,cudaMemcpyDeviceToHost));CK(cudaEventRecord(eb));CK(cudaEventSynchronize(eb));CK(cudaEventElapsedTime(&e2e[i],ea,eb));}
   if(argc>4){FILE*rf=fopen(argv[4],"wb");if(!rf||fwrite(hroot,sizeof(double),(size_t)h.n,rf)!=(size_t)h.n){fprintf(stderr,"root output failed\n");return 2;}fclose(rf);}
-  double*err=(double*)malloc(rb);size_t fail=0,branch=0;for(uint64_t i=0;i<h.n;++i){if(!hok[i])fail++;double e=fabs(host_wrap(hroot[i]-ref[i]));if(e>1e-3)branch++;err[i]=e;}
-  qsort(err,(size_t)h.n,sizeof(double),cmpd);qsort(times,repeats,sizeof(float),cmpf);double ms=total/repeats;
-  printf("{\"algorithm\":%d,\"records\":%" PRIu64 ",\"repeats\":%d,\"kernel_ms_mean\":%.6f,\"kernel_ms_median\":%.6f,\"kernel_ms_min\":%.6f,\"kernel_ms_max\":%.6f,\"end_to_end_ms\":%.6f,\"throughput_roots_s\":%.6f,\"solver_failures\":%zu,\"branch_error_gt_1e-3\":%zu,\"root_abs_rad\":{\"median\":%.17g,\"p95\":%.17g,\"p99\":%.17g,\"max\":%.17g}}\n",algorithm,h.n,repeats,ms,times[repeats/2],times[0],times[repeats-1],e2e_ms,1e3*h.n/ms,fail,branch,q(err,h.n,.5),q(err,h.n,.95),q(err,h.n,.99),err[h.n-1]);
-  free(times);free(err);CK(cudaFree(dok));CK(cudaFree(droot));CK(cudaFree(dbuf));CK(cudaFreeHost(hok));CK(cudaFreeHost(hroot));CK(cudaFreeHost(hflags));CK(cudaFreeHost(hbuf));return 0;
+  double*err=(double*)malloc(rb);size_t fail=0,branch=0,fast=0,fallback=0;for(uint64_t i=0;i<h.n;++i){if(!hok[i])fail++;fast+=hok[i]==2;fallback+=hok[i]==1;double e=fabs(host_wrap(hroot[i]-ref[i]));if(e>1e-3)branch++;err[i]=e;}
+  qsort(err,(size_t)h.n,sizeof(double),cmpd);memcpy(sorted,times,repeats*sizeof(float));memcpy(e2e_sorted,e2e,repeats*sizeof(float));qsort(sorted,repeats,sizeof(float),cmpf);qsort(e2e_sorted,repeats,sizeof(float),cmpf);double ms=total/repeats;
+  printf("{\"algorithm\":%d,\"records\":%" PRIu64 ",\"warmups\":%d,\"repeats\":%d,\"kernel_ms_mean\":%.6f,\"kernel_ms_median\":%.6f,\"kernel_ms_min\":%.6f,\"kernel_ms_max\":%.6f,\"end_to_end_ms_median\":%.6f,\"throughput_roots_s\":%.6f,\"solver_failures\":%zu,\"fast_path\":%zu,\"fallback_path\":%zu,\"branch_error_gt_1e-3\":%zu,\"root_abs_rad\":{\"median\":%.17g,\"p95\":%.17g,\"p99\":%.17g,\"max\":%.17g},\"kernel_times_ms\":[",algorithm,h.n,warmups,repeats,ms,sorted[repeats/2],sorted[0],sorted[repeats-1],e2e_sorted[repeats/2],1e3*h.n/ms,fail,fast,fallback,branch,q(err,h.n,.5),q(err,h.n,.95),q(err,h.n,.99),err[h.n-1]);
+  for(int i=0;i<repeats;i++)printf("%s%.9g",i?",":"",times[i]);printf("],\"end_to_end_times_ms\":[");for(int i=0;i<repeats;i++)printf("%s%.9g",i?",":"",e2e[i]);printf("]}\n");
+  free(e2e_sorted);free(e2e);free(sorted);free(times);free(err);CK(cudaFree(dqueue_count));CK(cudaFree(dqueue));CK(cudaFree(dok));CK(cudaFree(droot));CK(cudaFree(dbuf));CK(cudaFreeHost(hok));CK(cudaFreeHost(hroot));CK(cudaFreeHost(hflags));CK(cudaFreeHost(hbuf));return 0;
 }

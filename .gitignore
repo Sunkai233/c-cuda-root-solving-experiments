@@ -9,3 +9,5 @@ __pycache__/
 *.ech
 *.sum
 references/_bem_real_oracle_smoke/
+references/_cstr_fold_smoke/
+references/_pv_extended_smoke/

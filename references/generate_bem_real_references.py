@@ -87,22 +87,26 @@ class Oracle:
         return -1,[],mp.nan
 
 def main():
-    p=argparse.ArgumentParser();p.add_argument("--dataset",type=Path,required=True);p.add_argument("--baseline",type=Path,required=True);p.add_argument("--bisection-roots",type=Path,required=True);p.add_argument("--brent-roots",type=Path,required=True);p.add_argument("--out",type=Path,required=True);p.add_argument("--n",type=int,default=3000);a=p.parse_args();mp.mp.dps=80
+    p=argparse.ArgumentParser();p.add_argument("--dataset",type=Path,required=True);p.add_argument("--baseline",type=Path,required=True);p.add_argument("--bisection-roots",type=Path,required=True);p.add_argument("--brent-roots",type=Path,required=True);p.add_argument("--out",type=Path,required=True);p.add_argument("--n",type=int,default=3000);p.add_argument("--seed",type=int,default=20260824);p.add_argument("--exclude-reference",type=Path);p.add_argument("--split-label",choices=("dev","cal","test"));a=p.parse_args();mp.mp.dps=80
     with a.dataset.open("rb") as f:magic,ver,n,nf,nodes,steps=struct.unpack("<8sIQIII",f.read(32))
     data=np.memmap(a.dataset,dtype="<f8",mode="r",offset=32,shape=(5,n));bisr=np.memmap(a.bisection_roots,dtype="<f8",mode="r");br=np.memmap(a.brent_roots,dtype="<f8",mode="r")
     delta=np.abs((br-bisr+np.pi)%(2*np.pi)-np.pi);dis=np.flatnonzero(delta>1e-6);theta=data[2];alpha=(br-theta)*180/np.pi;oracle=Oracle(a.baseline);knot=np.empty(n)
     for node in range(17):
         ii=np.arange(node,n,17);kn=np.array([x[0] for x in oracle.ps[oracle.af[node]]]);av=alpha[ii];pos=np.searchsorted(kn,av);left=kn[np.clip(pos-1,0,len(kn)-1)];right=kn[np.clip(pos,0,len(kn)-1)];knot[ii]=np.minimum(abs(av-left),abs(av-right))
-    near=np.argsort(knot)[:700];rng=np.random.default_rng(20260824);pool=np.setdiff1d(np.arange(n),np.union1d(dis,near),assume_unique=False);extra=rng.choice(pool,max(0,a.n-len(np.union1d(dis,near))),replace=False);idx=np.sort(np.union1d(np.union1d(dis,near),extra))[:a.n]
+    available=np.arange(n)
+    if a.exclude_reference:
+        with a.exclude_reference.open(encoding="utf-8") as f:excluded=np.array([int(r["source_index"]) for r in csv.DictReader(f)],dtype=np.int64)
+        available=np.setdiff1d(available,excluded,assume_unique=False)
+    dis=np.intersect1d(dis,available,assume_unique=False);near_count=min(700,a.n,len(available));near=available[np.argsort(knot[available])[:near_count]];rng=np.random.default_rng(a.seed);chosen=np.union1d(dis,near);pool=np.setdiff1d(available,chosen,assume_unique=False);extra=rng.choice(pool,max(0,a.n-len(chosen)),replace=False);idx=np.sort(np.union1d(chosen,extra))[:a.n]
     a.out.mkdir(parents=True,exist_ok=False);fields=["sample_id","source_index","split","node","vx","vy","theta","hint","region","root_count_region","roots","target_root","residual_abs","fphi_left","fphi_right","fvx","gradient_vx_left","gradient_vx_right","polar_knot_distance_deg","bisection_error","brent_error","status"]
     with (a.out/"bem_real_reference.csv").open("w",newline="",encoding="utf-8") as f:
         w=csv.DictWriter(f,fieldnames=fields);w.writeheader()
         for j,i in enumerate(idx):
-            vx,vy,th,hint=(float(data[k,i]) for k in (0,1,2,4));node=int(i%51%17);rid,roots,r=oracle.roots(vx,vy,th,hint,node);row={"sample_id":f"bemreal_{j:06d}","source_index":int(i),"split":split(j),"node":node,"vx":repr(vx),"vy":repr(vy),"theta":repr(th),"hint":repr(hint),"region":rid,"root_count_region":len(roots),"roots":";".join(mp.nstr(x,60) for x in roots),"target_root":mp.nstr(r,60),"polar_knot_distance_deg":repr(float(knot[i]))}
+            vx,vy,th,hint=(float(data[k,i]) for k in (0,1,2,4));node=int(i%51%17);rid,roots,r=oracle.roots(vx,vy,th,hint,node);row={"sample_id":f"bemreal_{j:06d}","source_index":int(i),"split":a.split_label or split(j),"node":node,"vx":repr(vx),"vy":repr(vy),"theta":repr(th),"hint":repr(hint),"region":rid,"root_count_region":len(roots),"roots":";".join(mp.nstr(x,60) for x in roots),"target_root":mp.nstr(r,60),"polar_knot_distance_deg":repr(float(knot[i]))}
             if mp.isfinite(r):
                 h=mp.mpf("1e-20");f0=oracle.f(r,vx,vy,th,node,True);fl=(f0-oracle.f(r-h,vx,vy,th,node,True))/h;fr=(oracle.f(r+h,vx,vy,th,node,True)-f0)/h;hv=mp.mpf("1e-20")*max(1,abs(mp.mpf(str(vx))));fv=(oracle.f(r,mp.mpf(str(vx))+hv,vy,th,node,True)-oracle.f(r,mp.mpf(str(vx))-hv,vy,th,node,True))/(2*hv)
                 row.update(residual_abs=mp.nstr(abs(f0),20),fphi_left=mp.nstr(fl,30),fphi_right=mp.nstr(fr,30),fvx=mp.nstr(fv,30),gradient_vx_left=mp.nstr(-fv/fl,30),gradient_vx_right=mp.nstr(-fv/fr,30),bisection_error=repr(abs(math.remainder(float(bisr[i]-r),2*math.pi))),brent_error=repr(abs(math.remainder(float(br[i]-r),2*math.pi))),status="ROOT_OK")
             else:row.update(status="NO_CERTIFIED_ROOT")
             w.writerow(row)
-    manifest={"created_utc":"2026-08-24","mpmath_dps":80,"selection":{"all_bisection_brent_disagreements":int(len(dis)),"nearest_polar_knots":700,"total":int(len(idx)),"random_seed":20260824},"target_rule":"first valid solver region, then certified crossing closest to previous-step hint","dataset_sha256":hashlib.sha256(a.dataset.read_bytes()).hexdigest(),"csv_sha256":hashlib.sha256((a.out/"bem_real_reference.csv").read_bytes()).hexdigest()};(a.out/"manifest.json").write_text(json.dumps(manifest,indent=2),encoding="utf-8");print(json.dumps(manifest,indent=2))
+    manifest={"created_utc":"2026-08-24","mpmath_dps":80,"selection":{"remaining_bisection_brent_disagreements":int(len(dis)),"nearest_polar_knots":int(near_count),"total":int(len(idx)),"random_seed":a.seed,"excluded_reference":str(a.exclude_reference) if a.exclude_reference else None,"forced_split":a.split_label},"target_rule":"first valid solver region, then certified crossing closest to previous-step hint","dataset_sha256":hashlib.sha256(a.dataset.read_bytes()).hexdigest(),"csv_sha256":hashlib.sha256((a.out/"bem_real_reference.csv").read_bytes()).hexdigest()};(a.out/"manifest.json").write_text(json.dumps(manifest,indent=2),encoding="utf-8");print(json.dumps(manifest,indent=2))
 if __name__=="__main__":main()

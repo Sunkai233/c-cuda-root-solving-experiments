@@ -10,6 +10,9 @@
 
 #define BEM_PI 3.141592653589793238462643383279502884
 #define BEM_EPS2 1.4901161193847656e-7
+#ifndef BEM_FAST_SCAN_CELLS
+#define BEM_FAST_SCAN_CELLS 16
+#endif
 
 BEM_HD double bem_wrap_pi(double x) {
   x = fmod(x + BEM_PI, 2.0*BEM_PI);
@@ -184,14 +187,83 @@ BEM_HD int bem_solve(double vx,double vy,double theta,double hint,unsigned node,
   return 0;
 }
 
-BEM_HD int bem_solve_algorithm(double vx,double vy,double theta,double hint,unsigned node,int algorithm,double *root){
-  if(algorithm==0)return bem_solve(vx,vy,theta,hint,node,root);
+BEM_HD int bem_algorithm_region(double vx,double vy,double theta,unsigned node,
+                                double a,double b,int algorithm,double *root){
+  int ok=algorithm==0?bem_bisect_region(vx,vy,theta,node,a,b,root):
+    (algorithm==1?bem_brent_region(vx,vy,theta,node,a,b,root):
+    (algorithm==2?bem_secant_region(vx,vy,theta,node,a,b,root):
+                  bem_bisect_region_fixed44(vx,vy,theta,node,a,b,root)));
+  if(!ok)return 0;
+  int valid=0;double residual=bem_residual(*root,vx,vy,theta,node,&valid);
+  /* Reject sign changes caused by a piecewise-polar discontinuity. */
+  return valid&&isfinite(residual)&&fabs(residual)<5e-8;
+}
+
+BEM_HD int bem_scan_region_nearest_hint(double vx,double vy,double theta,double hint,
+                                        unsigned node,double lo,double hi,int algorithm,
+                                        int max_cells,double *root){
+  enum{BEM_SCAN_CELLS=512};
+  double t=(hint-lo)/(hi-lo);int center=(int)floor(t*BEM_SCAN_CELLS);
+  if(center<0)center=0;if(center>=BEM_SCAN_CELLS)center=BEM_SCAN_CELLS-1;
+  int left=center,right=center+1,have=0;double best=0.0,best_distance=INFINITY;
+  int scanned=0;while((left>=0||right<BEM_SCAN_CELLS)&&scanned<max_cells){
+    double dl=INFINITY,dr=INFINITY;
+    if(left>=0){double edge=lo+(hi-lo)*(double)(left+1)/(double)BEM_SCAN_CELLS;dl=fabs(bem_wrap_pi(edge-hint));}
+    if(right<BEM_SCAN_CELLS){double edge=lo+(hi-lo)*(double)right/(double)BEM_SCAN_CELLS;dr=fabs(bem_wrap_pi(edge-hint));}
+    if(have&&best_distance<=fmin(dl,dr)){*root=best;return 1;}
+    int cell;
+    if(dl<=dr){cell=left--;}
+    else{cell=right++;}
+    ++scanned;
+    double a=lo+(hi-lo)*(double)cell/(double)BEM_SCAN_CELLS;
+    double b=lo+(hi-lo)*(double)(cell+1)/(double)BEM_SCAN_CELLS,candidate;
+    if(bem_algorithm_region(vx,vy,theta,node,a,b,algorithm,&candidate)){
+      double distance=fabs(bem_wrap_pi(candidate-hint));
+      if(distance<best_distance){best=candidate;best_distance=distance;have=1;}
+    }
+  }
+  if(have&&left<0&&right>=BEM_SCAN_CELLS){*root=best;return 1;}return 0;
+}
+
+BEM_HD int bem_hint_newton_region(double vx,double vy,double theta,double hint,unsigned node,
+                                  double lo,double hi,double *root){
+  const double lower=fmin(lo,hi),upper=fmax(lo,hi),guard=1e-10;
+  double x=fmin(upper-guard,fmax(lower+guard,hint));
+  for(int it=0;it<8;++it){
+    int valid=0;double fx=bem_residual(x,vx,vy,theta,node,&valid);
+    if(valid&&isfinite(fx)&&fabs(fx)<5e-8){*root=x;return 1;}
+    double h=1e-6,fm=bem_residual(x-h,vx,vy,theta,node,&valid),fp=bem_residual(x+h,vx,vy,theta,node,&valid);
+    double derivative=(fp-fm)/(2.0*h);if(!isfinite(fx)||!isfinite(derivative)||fabs(derivative)<1e-10)break;
+    double step=fx/derivative;if(fabs(step)>0.05)step=copysign(0.05,step);
+    double xn=x-step;if(!(xn>lower&&xn<upper))xn=0.5*(x+(step>0.0?lower:upper));x=xn;
+  }
+  int valid=0;double residual=bem_residual(x,vx,vy,theta,node,&valid);
+  if(valid&&isfinite(residual)&&fabs(residual)<5e-8){*root=x;return 1;}return 0;
+}
+
+BEM_HD int bem_solve_hint_only(double vx,double vy,double theta,double hint,unsigned node,double *root){
+  if(fabs(vx)<1e-3){*root=0.0;return 2;}if(fabs(vy)<1e-3){*root=(vx>0?0.5*BEM_PI:-0.5*BEM_PI);return 2;}
+  double lo[3],hi[3];
+  if(vx>0){lo[0]=BEM_EPS2;hi[0]=0.5*BEM_PI-BEM_EPS2;if(hint<0.25*BEM_PI&&hint>-0.25*BEM_PI){lo[1]=-0.25*BEM_PI;hi[1]=-BEM_EPS2;lo[2]=0.5*BEM_PI+BEM_EPS2;hi[2]=BEM_PI-BEM_EPS2;}else{lo[2]=-0.25*BEM_PI;hi[2]=-BEM_EPS2;lo[1]=0.5*BEM_PI+BEM_EPS2;hi[1]=BEM_PI-BEM_EPS2;}}
+  else{lo[0]=-BEM_EPS2;hi[0]=-0.5*BEM_PI+BEM_EPS2;if(hint>-0.25*BEM_PI&&hint<0.25*BEM_PI){lo[1]=0.25*BEM_PI;hi[1]=BEM_EPS2;lo[2]=-0.5*BEM_PI-BEM_EPS2;hi[2]=-BEM_PI+BEM_EPS2;}else{lo[2]=0.25*BEM_PI;hi[2]=BEM_EPS2;lo[1]=-0.5*BEM_PI-BEM_EPS2;hi[1]=-BEM_PI+BEM_EPS2;}}
+  /* A limited outward scan can certify the nearest root without guessing from
+     residual alone.  If it cannot certify, the sample enters the compacted
+     robust queue; later regions cannot be tried before region zero is exhausted. */
+  if(bem_scan_region_nearest_hint(vx,vy,theta,hint,node,lo[0],hi[0],1,BEM_FAST_SCAN_CELLS,root))return 2;
+  return 0;
+}
+
+BEM_HD int bem_solve_robust_nearest(double vx,double vy,double theta,double hint,unsigned node,int algorithm,double *root){
   if(fabs(vx)<1e-3){*root=0.0;return 1;}if(fabs(vy)<1e-3){*root=(vx>0?0.5*BEM_PI:-0.5*BEM_PI);return 1;}
   double lo[3],hi[3];
   if(vx>0){lo[0]=BEM_EPS2;hi[0]=0.5*BEM_PI-BEM_EPS2;if(hint<0.25*BEM_PI&&hint>-0.25*BEM_PI){lo[1]=-0.25*BEM_PI;hi[1]=-BEM_EPS2;lo[2]=0.5*BEM_PI+BEM_EPS2;hi[2]=BEM_PI-BEM_EPS2;}else{lo[2]=-0.25*BEM_PI;hi[2]=-BEM_EPS2;lo[1]=0.5*BEM_PI+BEM_EPS2;hi[1]=BEM_PI-BEM_EPS2;}}
   else{lo[0]=-BEM_EPS2;hi[0]=-0.5*BEM_PI+BEM_EPS2;if(hint>-0.25*BEM_PI&&hint<0.25*BEM_PI){lo[1]=0.25*BEM_PI;hi[1]=BEM_EPS2;lo[2]=-0.5*BEM_PI-BEM_EPS2;hi[2]=-BEM_PI+BEM_EPS2;}else{lo[2]=0.25*BEM_PI;hi[2]=BEM_EPS2;lo[1]=-0.5*BEM_PI-BEM_EPS2;hi[1]=-BEM_PI+BEM_EPS2;}}
-  for(int q=0;q<3;++q){int ok=algorithm==1?bem_brent_region(vx,vy,theta,node,lo[q],hi[q],root):
-    (algorithm==2?bem_secant_region(vx,vy,theta,node,lo[q],hi[q],root):bem_bisect_region_fixed44(vx,vy,theta,node,lo[q],hi[q],root));if(ok)return 1;}
+  for(int q=0;q<3;++q)if(bem_scan_region_nearest_hint(vx,vy,theta,hint,node,lo[q],hi[q],algorithm,512,root))return 1;
   *root=atan2(vx,vy);return 0;
+}
+
+BEM_HD int bem_solve_algorithm(double vx,double vy,double theta,double hint,unsigned node,int algorithm,double *root){
+  if(algorithm==4){int fast=bem_solve_hint_only(vx,vy,theta,hint,node,root);if(fast)return fast;return bem_solve_robust_nearest(vx,vy,theta,hint,node,1,root);}
+  return bem_solve_robust_nearest(vx,vy,theta,hint,node,algorithm,root);
 }
 #endif

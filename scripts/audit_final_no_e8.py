@@ -18,6 +18,7 @@ def main():
     parser.add_argument("--bem-cpu-run", type=Path, required=True)
     parser.add_argument("--cpu-fast-run", type=Path, required=True)
     parser.add_argument("--multicond-run", type=Path, required=True)
+    parser.add_argument("--algorithm-v2-run", type=Path, required=True)
     parser.add_argument("--out", type=Path, required=True)
     args = parser.parse_args()
     root = args.root.resolve(); checks = []
@@ -34,7 +35,7 @@ def main():
 
     reports = [
         "FROZEN_CORRECTNESS_V3.md", "GPU_PERFORMANCE_V3_RTX5090.md",
-        "ALGORITHM_PERFORMANCE_RTX5090_V1.md", "BEM_REAL_FROZEN_RTX5090_V1.md",
+        "ALGORITHM_PERFORMANCE_RTX5090_V2.md", "BEM_REAL_FROZEN_RTX5090_V1.md",
         "BEM_REAL_ALGORITHM_MATRIX_RTX5090_V2.md", "BEM_REAL_PRECISION_PATHS_RTX5090_V1.md",
         "BEM_REAL_FINITE_DIFFERENCE_V1.md", "BEM_SCALE_CONDITION_ABLATIONS_RTX5090.md",
         "PV_EXTENDED_GRADIENTS_RTX5090_V1.md", "CSTR_FOLD_VALIDATION_RTX5090_V1.md",
@@ -61,6 +62,22 @@ def main():
     alg_reps = root / "results_raw/20260824T015010Z_algorithm_performance_rtx5090/algorithm_performance_repetitions.csv"
     check("GPU matrix has 15,600 repetitions", csv_rows(gpu_reps) == 15600, csv_rows(gpu_reps))
     check("algorithm matrix has 16,380 repetitions", csv_rows(alg_reps) == 16380, csv_rows(alg_reps))
+    check("algorithm v2 COMPLETE", (args.algorithm_v2_run / "COMPLETE.txt").is_file(),
+          args.algorithm_v2_run)
+    v2_summary = args.algorithm_v2_run / "algorithm_performance.csv"
+    v2_reps = args.algorithm_v2_run / "algorithm_performance_repetitions.csv"
+    check("algorithm v2 has 325 summary groups", v2_summary.is_file() and csv_rows(v2_summary) == 325,
+          csv_rows(v2_summary) if v2_summary.is_file() else "missing")
+    check("algorithm v2 has 19,500 raw repetitions", v2_reps.is_file() and csv_rows(v2_reps) == 19500,
+          csv_rows(v2_reps) if v2_reps.is_file() else "missing")
+    if v2_summary.is_file():
+        methods = {row["method"] for row in csv.DictReader(v2_summary.open(encoding="utf-8"))}
+    else: methods = set()
+    required_methods = {"mikkola_kepler", "lambert_w", "chandrupatla", "bishop_transform"}
+    check("algorithm v2 includes all specialized methods", required_methods <= methods, sorted(methods))
+    for split in ("dev", "cal"):
+        validation = args.algorithm_v2_run / f"algorithm_validation_{split}.csv"
+        check(f"algorithm v2 {split} validation recorded", validation.is_file(), validation)
 
     for label, run in (("CPU C17", args.cpu_run), ("real BEM CPU", args.bem_cpu_run),
                        ("CPU fast candidate", args.cpu_fast_run)):

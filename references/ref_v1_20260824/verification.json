@@ -1,0 +1,79 @@
+{
+  "reference_directory": "ref_v1_20260824",
+  "verification_dps": 80,
+  "hashes_match_manifest": true,
+  "rows_total": 15000,
+  "split_counts": {
+    "bem|cal": 600,
+    "bem|dev": 1800,
+    "bem|test": 600,
+    "cstr|cal": 600,
+    "cstr|dev": 1800,
+    "cstr|test": 600,
+    "kepler|cal": 600,
+    "kepler|dev": 1800,
+    "kepler|test": 600,
+    "peng_robinson|cal": 600,
+    "peng_robinson|dev": 1800,
+    "peng_robinson|test": 600,
+    "pv|cal": 600,
+    "pv|dev": 1800,
+    "pv|test": 600
+  },
+  "recomputed_residual": {
+    "median": 3.1714682725808814e-56,
+    "p99": 4.374331995259583e-54,
+    "max": 4.1061126653072634e-53
+  },
+  "stored_residual_max": 3.3493164339648677e-54,
+  "finite_difference_relative_error": {
+    "bem": {
+      "median": 1.3193552751580838e-40,
+      "p95": 1.732332921632835e-40,
+      "max": 2.8618048297610226e-40
+    },
+    "cstr": {
+      "median": 1.184070181346927e-40,
+      "p95": 5.0661637371160935e-31,
+      "max": 4.9232748163458074e-30
+    },
+    "kepler": {
+      "median": 2.758717986672846e-41,
+      "p95": 5.561799507590445e-32,
+      "max": 7.381039684273444e-26
+    },
+    "peng_robinson": {
+      "median": 3.457382236512647e-40,
+      "p95": 5.7897786098245005e-39,
+      "max": 7.666436125732469e-35
+    },
+    "pv": {
+      "median": 3.8559459627964025e-42,
+      "p95": 4.056192909818636e-39,
+      "max": 8.054193965858287e-39
+    }
+  },
+  "finite_difference_counts": {
+    "bem": {
+      "accepted": 25,
+      "attempted": 25
+    },
+    "cstr": {
+      "accepted": 25,
+      "attempted": 25
+    },
+    "kepler": {
+      "accepted": 25,
+      "attempted": 25
+    },
+    "peng_robinson": {
+      "accepted": 25,
+      "attempted": 25
+    },
+    "pv": {
+      "accepted": 25,
+      "attempted": 25
+    }
+  },
+  "pass": true
+}

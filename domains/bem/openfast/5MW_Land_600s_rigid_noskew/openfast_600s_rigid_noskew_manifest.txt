@@ -1,0 +1,13 @@
+source_commit=3a9d3f2
+case=rigid_blade_noskew_geomflag
+start_utc=2026-08-24T05:50:46Z
+end_utc=2026-08-24T05:51:49Z
+f76f682c450768a069e2d95ece9aaa4e51a487500405b1c8c1503f3be73e96ca  5MW_600s_alpha.fst
+17e284e33a708725d7753d4a5c37465959e443d8c55556130077afdea337e3de  NRELOffshrBsline5MW_Onshore_AeroDyn_noUA_debug.dat
+5cf83c1da3079090ba1574e4a5868d36fd1c38cd6a483d9c328d84366d6ee307  NRELOffshrBsline5MW_Onshore_ElastoDyn.dat
+9e70051bf4ae952ea3e955020d0346f1c65eb844d1071a499b3d150e6b876d21  5MW_600s_alpha.outb
+outb_bytes=407838148
+  Total Real Time:       1.0427 minutes
+  Simulation CPU Time:   1.0335 minutes
+  Simulated Time:        10 minutes
+  Time Ratio (Sim/CPU):  9.6761

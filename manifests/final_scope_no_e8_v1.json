@@ -1,0 +1,14 @@
+{
+  "scope_id": "supplementary_final_no_e8_v1_20260824",
+  "protocol": "C:/Users/孙凯/Downloads/SUPPLEMENTARY_EXPERIMENTS_C_CUDA.md",
+  "included_experiments": ["E0", "E1", "E2", "E3", "E4", "E5", "E6", "E7", "E9", "E10", "E11"],
+  "excluded_experiments": {
+    "E8": "User explicitly deferred cross-hardware validation on 2026-08-24; a second RTX 5090 is not a second architecture."
+  },
+  "policy": {
+    "test_split": "Do not rerun adaptive_v1_20260824 sealed test; create a new frozen config and untouched holdout only if a materially new candidate requires formal qualification.",
+    "raw_results": "Append-only timestamped directories.",
+    "fast_math": "Candidate only; already rejected for branch changes and may not enter valid-method performance claims.",
+    "openfast_phi": "Engineering cross-check only, not a strict oracle for the frozen legacy residual."
+  }
+}

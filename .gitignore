@@ -1,0 +1,10 @@
+build/
+results_raw/
+profiles/
+__pycache__/
+*.pyc
+*.outb
+*.bts
+*.log
+*.ech
+*.sum

@@ -1,0 +1,7 @@
+{
+  "bootstrap_resamples": 10000,
+  "lut_root_max_difference_rad": 0,
+  "ablation_rows": 10,
+  "scale_rows": 28,
+  "important_caveat": "warm/cold and LUT/binary were sequential runs; intervals quantify repetition noise but not run-order systematic error"
+}

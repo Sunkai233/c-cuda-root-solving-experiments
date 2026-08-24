@@ -1,0 +1,12 @@
+{
+  "bootstrap_resamples": 10000,
+  "raw_rows": 15600,
+  "groups": 520,
+  "all_groups_have_30": true,
+  "methods": [
+    "adaptive_frozen_v3",
+    "adaptive_no_gradient_gate_v3",
+    "fp32",
+    "fp64"
+  ]
+}

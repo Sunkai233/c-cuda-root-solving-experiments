@@ -75,6 +75,14 @@ def main():
               csv_rows(path) if path.is_file() else "missing")
     check("CPU fast validation status recorded", (args.cpu_fast_run / "FAST_STATUS.txt").is_file(),
           args.cpu_fast_run / "FAST_STATUS.txt")
+    for filename in ("fast_omp96.csv", "strict_nolto_omp96.csv"):
+        path = args.cpu_fast_run / filename
+        check(f"CPU compilation candidate {filename} has 1,950 repetitions",
+              path.is_file() and csv_rows(path) == 1950,
+              csv_rows(path) if path.is_file() else "missing")
+    check("CPU no-LTO frozen-reference validation recorded",
+          (args.cpu_fast_run / "nolto_validation/validation_test.csv").is_file(),
+          args.cpu_fast_run / "nolto_validation/validation_test.csv")
     check("CPU vector report recorded", (args.cpu_run / "vectorization.txt").is_file(),
           args.cpu_run / "vectorization.txt")
     check("CPU disassembly recorded", (args.cpu_run / "disassembly.txt").is_file(),

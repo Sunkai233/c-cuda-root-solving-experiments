@@ -1,0 +1,14 @@
+{
+  "id": "pv_extended_v1_20260824",
+  "candidate_commit": "4f1ee77a1b6772e55af2a5a0ad01355c42aca053",
+  "reference": "references/pv_extended_ref_v1_20260824/pv_extended.csv",
+  "mpmath_dps": 70,
+  "test_samples": 600,
+  "root_absolute_error_margin_A": 1e-10,
+  "power_absolute_error_margin_W": 1e-9,
+  "gradient_relative_error_margin": 1e-6,
+  "nonfinite_margin": 0,
+  "exp_overflow_margin": 0,
+  "exp_underflow_margin": 0,
+  "test_policy": "execute exactly once after freeze"
+}

@@ -1,0 +1,16 @@
+{
+  "id": "cstr_fold_v1_20260824",
+  "candidate_commit": "7d26c02f60b21ec67b13e136c9d1137393fc18f6",
+  "reference": "references/cstr_fold_ref_v2_20260824",
+  "mpmath_dps": 80,
+  "test_samples": 600,
+  "root_absolute_error_margin": 1e-10,
+  "gradient_relative_error_margin": 5e-7,
+  "condition_relative_error_margin": 5e-7,
+  "regularized_gradient_relative_error_margin": 5e-7,
+  "continuation_root_absolute_error_margin": 1e-12,
+  "wrong_branch_or_count_margin": 0,
+  "nonfinite_margin": 0,
+  "ambiguous_unknown_history_wrong_margin": 0,
+  "test_policy": "execute exactly once after candidate and margins are frozen"
+}

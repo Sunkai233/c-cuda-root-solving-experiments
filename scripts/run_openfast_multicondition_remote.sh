@@ -45,9 +45,9 @@ run_condition() {
   nvidia-smi --query-gpu=timestamp,name,uuid,temperature.gpu,power.draw,clocks.sm \
     --format=csv,noheader -i 0 >"$cond/gpu_before.csv"
   set +e
-  timeout 45s docker run --rm --gpus device=0 --entrypoint bash -v "$root:/work" -w /work \
+  docker run --rm --gpus device=0 --entrypoint bash -v "$root:/work" -w /work \
     nvidia/cuda:12.8.1-base-ubuntu24.04 -lc \
-    "while :; do build/benchmark_bem_real_v2 '$dataset' 1 1 /dev/null 0 >/dev/null; done"
+    "timeout 45s bash -c 'while :; do build/benchmark_bem_real_v2 \"$dataset\" 1 1 /dev/null 0 >/dev/null; done'"
   heat_rc=$?; set -e; test "$heat_rc" -eq 124
   if [[ "$tag" == 8mps_* ]]; then order="1 4 0"; else order="4 0 1"; fi
   for alg in $order; do

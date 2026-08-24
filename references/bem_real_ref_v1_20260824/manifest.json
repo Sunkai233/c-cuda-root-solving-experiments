@@ -1,0 +1,13 @@
+{
+  "created_utc": "2026-08-24",
+  "mpmath_dps": 80,
+  "selection": {
+    "all_bisection_brent_disagreements": 944,
+    "nearest_polar_knots": 700,
+    "total": 3000,
+    "random_seed": 20260824
+  },
+  "target_rule": "first valid solver region, then certified crossing closest to previous-step hint",
+  "dataset_sha256": "2ed1dfc2a9c5cea03cccc163e90c8b7d6e84dc0efe950aca8b6a2b4902581b01",
+  "csv_sha256": "3a54ac75d9f3c58487757c3fa9bcc9c3a092f34391ad76c6f7434a623be7d7b0"
+}

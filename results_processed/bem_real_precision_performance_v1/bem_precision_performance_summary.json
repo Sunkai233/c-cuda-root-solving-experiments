@@ -1,0 +1,5 @@
+{
+  "bootstrap_resamples": 10000,
+  "groups": 10,
+  "all_groups_have_30": true
+}

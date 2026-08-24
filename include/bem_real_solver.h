@@ -3,6 +3,7 @@
 
 #include <math.h>
 #include "bem_real_tables.h"
+#include "bem_polar_lut.h"
 
 #ifndef BEM_HD
 #define BEM_HD static inline
@@ -26,10 +27,17 @@ BEM_HD void bem_polar(unsigned af, double alpha_rad, double *cl, double *cd) {
   unsigned lo = 0, hi = n-1;
   if (x <= bem_alpha_deg[off]) { *cl=bem_cl[off]; *cd=bem_cd[off]; return; }
   if (x >= bem_alpha_deg[off+n-1]) { *cl=bem_cl[off+n-1]; *cd=bem_cd[off+n-1]; return; }
+#ifdef BEM_DISABLE_O1_LUT
   while (hi-lo > 1) {
     const unsigned m = (lo+hi)>>1;
     if (bem_alpha_deg[off+m] <= x) lo=m; else hi=m;
   }
+#else
+  unsigned bin=(unsigned)fmin(720.0,fmax(0.0,floor((x+180.0)*2.0)));
+  lo=(unsigned)bem_polar_lut[af*721u+bin]-off;hi=lo+1;
+  while(lo>0&&bem_alpha_deg[off+lo]>x){--lo;--hi;}
+  while(hi<n-1&&bem_alpha_deg[off+hi]<=x){++lo;++hi;}
+#endif
   const double x0=bem_alpha_deg[off+lo], x1=bem_alpha_deg[off+hi];
   const double w=(x-x0)/(x1-x0);
   *cl = bem_cl[off+lo] + w*(bem_cl[off+hi]-bem_cl[off+lo]);

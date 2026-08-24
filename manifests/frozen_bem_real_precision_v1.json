@@ -1,0 +1,13 @@
+{
+  "id": "bem_real_precision_v1_20260824",
+  "candidate_commit": "5a62b6a3a7544f713aed5da346335b9cfa3dfeba",
+  "reference": "references/bem_real_ref_v3_precision_test_20260824/bem_real_reference.csv",
+  "test_samples": 1000,
+  "qualifying_paths": ["fp32_df32_refine", "fp64", "adaptive"],
+  "rejected_path": "fp32",
+  "root_absolute_error_margin_rad": 1e-7,
+  "wrong_branch_margin": 0,
+  "nonfinite_margin": 0,
+  "adaptive_tau_x": 3e-8,
+  "test_policy": "execute exactly once after candidate and margins are frozen"
+}

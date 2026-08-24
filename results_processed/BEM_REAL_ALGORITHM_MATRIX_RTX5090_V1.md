@@ -1,5 +1,7 @@
 # Real-table BEM algorithm matrix on RTX 5090 (V1)
 
+> **Deprecated:** this v1 matrix used the earlier “first crossing” physical-root rule and only two warm-ups. Later independent 80-digit review showed same-region multiple roots and froze the rule “first valid physical region, certified crossing closest to previous hint.” Do not use the speedups below as final evidence; the authority is `BEM_REAL_ALGORITHM_MATRIX_RTX5090_V2.md`.
+
 ## Result
 
 The deferred real-table timing stage is complete for one GPU architecture. The

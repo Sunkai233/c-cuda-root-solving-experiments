@@ -17,6 +17,7 @@ def main():
     parser.add_argument("--cpu-run", type=Path, required=True)
     parser.add_argument("--bem-cpu-run", type=Path, required=True)
     parser.add_argument("--cpu-fast-run", type=Path, required=True)
+    parser.add_argument("--multicond-run", type=Path, required=True)
     parser.add_argument("--out", type=Path, required=True)
     args = parser.parse_args()
     root = args.root.resolve(); checks = []
@@ -39,6 +40,7 @@ def main():
         "PV_EXTENDED_GRADIENTS_RTX5090_V1.md", "CSTR_FOLD_VALIDATION_RTX5090_V1.md",
         "REMAINING_CUDA_ABLATIONS_RTX5090.md", "NSIGHT_COMPUTE_RTX5090_V1.md",
         "CPU_C17_PERFORMANCE_V1.md", "BEM_REAL_CPU_GPU_V1.md", "CPU_FAST_MATH_V1.md",
+        "BEM_OPENFAST_MULTICONDITION_V1.md",
         "FINAL_ACCEPTANCE_NO_E8.md",
     ]
     for report in reports:
@@ -77,6 +79,24 @@ def main():
           args.cpu_run / "vectorization.txt")
     check("CPU disassembly recorded", (args.cpu_run / "disassembly.txt").is_file(),
           args.cpu_run / "disassembly.txt")
+    check("OpenFAST multi-condition COMPLETE", (args.multicond_run / "COMPLETE.txt").is_file(),
+          args.multicond_run)
+    for condition in ("8mps_C_seed27183", "16mps_A_seed39107"):
+        cond = args.multicond_run / condition
+        audit = cond / "openfast_audit/openfast_bem_summary.json"
+        oracle = cond / "adaptive_oracle_analysis/bem_real_holdout_analysis.json"
+        audit_data = json.loads(audit.read_text()) if audit.is_file() else {}
+        oracle_data = json.loads(oracle.read_text()) if oracle.is_file() else {}
+        check(f"{condition} OpenFAST shape and finite audit",
+              audit_data.get("shape_and_channel_audit_pass") is True and
+              audit_data.get("finite_audit_pass") is True, audit_data)
+        check(f"{condition} adaptive oracle has zero failures",
+              oracle_data.get("n") == 300 and oracle_data.get("failures") == 0, oracle_data)
+        for algorithm in (0, 1, 4):
+            performance = cond / f"performance_alg{algorithm}.json"
+            perf = json.loads(performance.read_text()) if performance.is_file() else {}
+            check(f"{condition} algorithm {algorithm} has 30 repetitions",
+                  perf.get("repeats") == 30 and perf.get("solver_failures") == 0, perf)
 
     args.out.parent.mkdir(parents=True, exist_ok=True)
     result = {"scope": "E0-E11 excluding E8", "passed": sum(x["pass"] for x in checks),

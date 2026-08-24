@@ -1,0 +1,30 @@
+{
+  "seed": 20260824,
+  "mpmath_dps": 80,
+  "n": 3000,
+  "splits": {
+    "dev": 1800,
+    "cal": 600,
+    "test": 600
+  },
+  "root_counts": {
+    "1": 1500,
+    "3": 1500
+  },
+  "branches": {
+    "single": 1500,
+    "low_triple": 500,
+    "middle_triple": 500,
+    "high_triple": 500
+  },
+  "continuation_histories": 6,
+  "continuation_rows": 486,
+  "ambiguous_unknown_history_cases": 3,
+  "regularization_lambda": 0.0001,
+  "files_sha256": {
+    "cstr.csv": "6c51ba6e6ff385cdff50f280095b2f8ee8cfc546ac058bc195c4e283cc4b04b2",
+    "cstr_fold_metrics.csv": "9d3ca1761aa66161a2655a5a6125f9668d19e4829d5dbf74f194cfc01cae4c01",
+    "cstr_continuation.csv": "d0ab30e81a1f4b67e31ca1f59c4b7368961273ecede3a0441db6bf8e6428ca59",
+    "cstr_unknown_history.csv": "9a76c3c1617c67bf216e9bd0e2bd1d83c6fb77730a82c773f57df7b638acce45"
+  }
+}

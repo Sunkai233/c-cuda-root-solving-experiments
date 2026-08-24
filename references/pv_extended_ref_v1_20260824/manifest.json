@@ -1,0 +1,18 @@
+{
+  "seed": 20260827,
+  "mpmath_dps": 70,
+  "minimum_bits": 232,
+  "n": 3000,
+  "splits": {
+    "dev": 1800,
+    "cal": 600,
+    "test": 600
+  },
+  "regions": {
+    "short_circuit": 750,
+    "open_circuit": 750,
+    "mpp_near": 750,
+    "interior": 750
+  },
+  "csv_sha256": "43434982b05fab40d1a4ef8d76d56a655a25c208dab2dda37d42a8e1ece6cc6e"
+}

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Deterministic paired-bootstrap analysis for the strict FP64 algorithm matrix."""
+"""Independent bootstrap analysis for sequential strict-FP64 method blocks."""
 from __future__ import annotations
 import argparse,csv,json,statistics
 from collections import defaultdict
@@ -9,9 +9,12 @@ import numpy as np
 def quant(values,q):
     s=sorted(values);return s[min(len(s)-1,int(q*(len(s)-1)))]
 def bootstrap_ratio(numerator,denominator,seed,resamples):
-    ratios=np.asarray(numerator)/np.asarray(denominator);rng=np.random.default_rng(seed);n=len(ratios)
-    indexes=rng.integers(0,n,size=(resamples,n));boots=np.median(ratios[indexes],axis=1)
-    return statistics.median(ratios),quant(boots,.025),quant(boots,.975)
+    numerator=np.asarray(numerator);denominator=np.asarray(denominator);rng=np.random.default_rng(seed)
+    ni=len(numerator);nd=len(denominator)
+    bi=np.median(numerator[rng.integers(0,ni,size=(resamples,ni))],axis=1)
+    bd=np.median(denominator[rng.integers(0,nd,size=(resamples,nd))],axis=1)
+    boots=bi/bd
+    return statistics.median(numerator)/statistics.median(denominator),quant(boots,.025),quant(boots,.975)
 def main():
     ap=argparse.ArgumentParser();ap.add_argument("run_dir",type=Path);ap.add_argument("--bootstrap",type=int,default=10000);args=ap.parse_args()
     path=args.run_dir/"algorithm_performance_repetitions.csv";raw=list(csv.DictReader(path.open()))
@@ -27,6 +30,6 @@ def main():
         rows.append({"domain":domain,"n":n,"method":method,"timing_kind":kind,"speedup_vs_brent":med,"ci95_low":lo,"ci95_high":hi,"faster_than_brent":lo>1})
     with (args.run_dir/"algorithm_speedup_bootstrap.csv").open("w",newline="") as f:
         writer=csv.DictWriter(f,fieldnames=rows[0].keys());writer.writeheader();writer.writerows(rows)
-    summary={"bootstrap_resamples":args.bootstrap,"raw_rows":len(raw),"groups":len(groups),"all_groups_have_30":not incomplete,"comparison_baseline":"brent_dekker","speedup_definition":"median(brent_dekker_time / candidate_time)"}
+    summary={"bootstrap_resamples":args.bootstrap,"bootstrap_design":"independent sequential method blocks","raw_rows":len(raw),"groups":len(groups),"all_groups_have_30":not incomplete,"comparison_baseline":"brent_dekker","speedup_definition":"median(brent_dekker_time) / median(candidate_time)"}
     (args.run_dir/"algorithm_analysis.json").write_text(json.dumps(summary,indent=2),encoding="utf-8");print(json.dumps(summary,indent=2))
 if __name__=="__main__":main()

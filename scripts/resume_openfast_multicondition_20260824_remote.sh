@@ -121,7 +121,7 @@ cond="$out/$tag"; case_dir="$root/domains/bem/openfast/5MW_Land_600s_$tag"
 inp="$wind_dir/90m_${tag}.inp"; bts="$wind_dir/90m_${tag}.bts"
 inflow="$base_dir/NRELOffshrBsline5MW_InflowWind_${tag}.dat"
 mkdir -p "$cond" "$case_dir"
-if [[ ! -f "$bts" ]]; then
+if [[ ! -s "$bts" ]]; then
   cp "$wind_dir/90m_12mps_twr.inp" "$inp"
   sed -i -E "s/^[[:space:]]*[0-9-]+([[:space:]]+RandSeed1)/      ${seed}\\1/; s/^\"[ABC]\"([[:space:]]+IECturbc)/\"${turbclass}\"\\1/; s/^[[:space:]]*[0-9.]+([[:space:]]+URef[[:space:]]+- Mean)/         ${uref}\\1/" "$inp"
   (cd "$wind_dir"; "$turbsim" "$(basename "$inp")" >"$cond/turbsim.log" 2>&1)

@@ -11,12 +11,6 @@ def q(values, p):
     values = sorted(values); return values[int(p * (len(values) - 1))]
 
 
-def paired(a, b, seed):
-    ratios = [x / y for x, y in zip(a, b)]; rng = random.Random(seed); n = len(ratios)
-    boot = [statistics.median(ratios[rng.randrange(n)] for _ in range(n)) for _ in range(10000)]
-    return statistics.median(ratios), q(boot, .025), q(boot, .975)
-
-
 def independent(a, b, seed):
     rng = random.Random(seed); na, nb = len(a), len(b); boot = []
     for _ in range(10000):
@@ -46,14 +40,15 @@ def main():
         audit = load(cond / "openfast_audit/openfast_bem_summary.json")
         for alg, method in methods.items():
             item = values[alg]
-            speed = paired(values[1]["end_to_end_times_ms"], item["end_to_end_times_ms"],
-                           20260824 + ci * 10 + alg)
+            speed = independent(values[1]["end_to_end_times_ms"], item["end_to_end_times_ms"],
+                                20260824 + ci * 10 + alg)
             rows.append({"condition": condition, "method": method,
                          "records": item["records"],
                          "kernel_median_ms": statistics.median(item["kernel_times_ms"]),
                          "e2e_median_ms": statistics.median(item["end_to_end_times_ms"]),
                          "brent_over_method_e2e": speed[0], "ci95_low": speed[1],
                          "ci95_high": speed[2], "solver_failures": item["solver_failures"],
+                         "bootstrap_design": "independent_sequential_methods",
                          "oracle_n": oracle["n"], "oracle_failures_adaptive": oracle["failures"],
                          "openfast_shape_pass": audit["shape_and_channel_audit_pass"],
                          "openfast_finite_pass": audit["finite_audit_pass"]})

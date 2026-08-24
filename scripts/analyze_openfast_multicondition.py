@@ -37,6 +37,14 @@ def main():
         cond = args.run / condition
         values = {alg: load(cond / f"performance_alg{alg}.json") for alg in methods}
         oracle = load(cond / "adaptive_oracle_analysis/bem_real_holdout_analysis.json")
+        with (cond / "oracle_300/bem_real_reference.csv").open(newline="", encoding="utf-8") as handle:
+            oracle_rows = list(csv.DictReader(handle))
+        oracle_errors = {
+            "bisection": [float(row["bisection_error"]) if row.get("bisection_error") else float("inf")
+                          for row in oracle_rows],
+            "brent": [float(row["brent_error"]) if row.get("brent_error") else float("inf")
+                      for row in oracle_rows],
+        }
         audit = load(cond / "openfast_audit/openfast_bem_summary.json")
         for alg, method in methods.items():
             item = values[alg]
@@ -52,6 +60,12 @@ def main():
                          "oracle_n": oracle["n"], "oracle_failures_adaptive": oracle["failures"],
                          "openfast_shape_pass": audit["shape_and_channel_audit_pass"],
                          "openfast_finite_pass": audit["finite_audit_pass"]})
+            if method in oracle_errors:
+                rows[-1]["oracle_root_max"] = max(oracle_errors[method])
+                rows[-1]["oracle_wrong_gt_1e-7"] = sum(x > 1e-7 for x in oracle_errors[method])
+            elif method == "adaptive_compacted":
+                rows[-1]["oracle_root_max"] = oracle["groups"]["all"]["1.0"]
+                rows[-1]["oracle_wrong_gt_1e-7"] = oracle["failures"]
         variation = independent(values[4]["end_to_end_times_ms"],
                                 baseline_adaptive["end_to_end_times_ms"], 20261000 + ci)
         rows[-1]["condition_over_12mps_adaptive_e2e"] = variation[0]

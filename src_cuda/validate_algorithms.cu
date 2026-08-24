@@ -82,19 +82,49 @@ HD inline double solve_brent_alg(const Param&p,uint32_t&used){
   }return fabs(fa)<fabs(fb)?a:b;
 }
 
+HD inline double solve_chandrupatla_alg(const Param&p,uint32_t&used){
+  double x1,x2;if(!bracket_for(p,x1,x2)){used=0;return NAN;}double f1,f2,df;residual(p,x1,f1,df);residual(p,x2,f2,df);
+  double x3=x2,f3=f2,t=.5;used=0;
+  for(int k=0;k<100;k++){
+    double x=x1+t*(x2-x1),f;residual(p,x,f,df);used++;double oldx2=x2,oldf2=f2;x3=oldx2;f3=oldf2;
+    if(copysign(1.0,f)==copysign(1.0,f1)){x3=x1;f3=f1;}else{x2=x1;f2=f1;}x1=x;f1=f;
+    double xmin=fabs(f1)<fabs(f2)?x1:x2,fmin=fabs(f1)<fabs(f2)?f1:f2,dx=fabs(x2-x1),tol=4*2.2204460492503131e-16*fabs(xmin)+4*2.2250738585072014e-308;
+    if(fabs(fmin)<1e-14||dx<tol)return xmin;t=.5;double denx=x3-x2,denf=f3-f2;
+    if(fabs(denx)>1e-300&&fabs(denf)>1e-300){double xi=(x1-x2)/denx,phi=(f1-f2)/denf;
+      if(xi>0&&xi<1&&(1-sqrt(1-xi))<phi&&phi<sqrt(xi)){double alpha=(x3-x1)/(x2-x1);
+        t=f1/(f1-f2)*f3/(f3-f2)-alpha*f1/(f3-f1)*f2/(f2-f3);}}
+    double tl=.5*tol/fmax(dx,1e-300);t=clampv(t,tl,1-tl);
+  }return fabs(f1)<fabs(f2)?x1:x2;
+}
+
+HD inline double solve_kepler_mikkola(const Param&p,uint32_t&used){
+  double e=p.a,M=p.b;if(e<1e-14){used=1;return M;}double alpha=(1-e)/(4*e+.5),beta=M/(8*e+1),z=cbrt(beta+sqrt(beta*beta+alpha*alpha*alpha));
+  double s=fabs(z)>1e-300?z-alpha/z:0;s-=.078*s*s*s*s*s/(1+e);double E=M+e*s*(3-4*s*s);used=1;
+  for(int k=0;k<3;k++){double f=E-e*sin(E)-M,fp=1-e*cos(E),fpp=e*sin(E),den=2*fp*fp-f*fpp;E-=fabs(den)>1e-300?2*f*fp/den:f/fp;used++;}return clampv(E,0.0,3.141592653589793);
+}
+
+HD inline double lambertw_from_log(double lz,uint32_t&used){double w=lz>1?lz-log(lz):exp(lz);w=fmax(w,1e-300);used=0;
+  for(int k=0;k<12;k++){double f=w+log(w)-lz,d=1+1/w,step=f/d;w-=step;if(w<=0)w=.5*(w+step);used++;if(fabs(step)<2e-14*fmax(1.0,w))break;}return w;}
+HD inline double solve_pv_lambert(const Param&p,uint32_t&used){double IL=p.a,V=p.b,I0=p.c,a=p.d,Rs=p.e,Rsh=p.f,den=Rs+Rsh;
+  double lz=log(Rs*I0*Rsh/(a*den))+Rsh*(Rs*(IL+I0)+V)/(a*den);double w=lambertw_from_log(lz,used);return (Rsh*(IL+I0)-V)/den-a*w/Rs;}
+HD inline double solve_pv_bishop(const Param&p,uint32_t&used){double lo=p.b,hi=p.b+p.e*p.a,fa,fb;
+  double Ilo=p.a-p.c*(exp(clampv(lo/p.d,-80.0,80.0))-1)-lo/p.f;fa=lo-p.e*Ilo-p.b;
+  double Ihi=p.a-p.c*(exp(clampv(hi/p.d,-80.0,80.0))-1)-hi/p.f;fb=hi-p.e*Ihi-p.b;used=0;
+  for(int k=0;k<100;k++){double m=.5*(lo+hi),I=p.a-p.c*(exp(clampv(m/p.d,-80.0,80.0))-1)-m/p.f,fm=m-p.e*I-p.b;used++;if(fabs(fm)<1e-14||fabs(hi-lo)<2e-13)return I;if(copysign(1.0,fa)!=copysign(1.0,fm)){hi=m;fb=fm;}else{lo=m;fa=fm;}}(void)fb;double vd=.5*(lo+hi);return p.a-p.c*(exp(clampv(vd/p.d,-80.0,80.0))-1)-vd/p.f;}
+
 __global__ void kernel_algorithm(const Param*in,Output*out,size_t n,int method){
   size_t i=(size_t)blockIdx.x*blockDim.x+threadIdx.x;if(i>=n)return;uint32_t it=0;double x;
-  if(method==0)x=solve_brent_alg(in[i],it);else if(method==1)x=solve_bracketed_secant_alg(in[i],it);else if(method==2)x=solve_newton_alg(in[i],it,false);else if(method==3)x=solve_newton_alg(in[i],it,true);else x=solve_pr_cubic<double>(in[i],it);
+  if(method==0)x=solve_brent_alg(in[i],it);else if(method==1)x=solve_bracketed_secant_alg(in[i],it);else if(method==2)x=solve_newton_alg(in[i],it,false);else if(method==3)x=solve_newton_alg(in[i],it,true);else if(method==4)x=solve_pr_cubic<double>(in[i],it);else if(method==5)x=solve_kepler_mikkola(in[i],it);else if(method==6)x=solve_pv_lambert(in[i],it);else if(method==7)x=solve_chandrupatla_alg(in[i],it);else x=solve_pv_bishop(in[i],it);
   out[i]=finish(in[i],x,it,3);
 }
 
 static double relerr_alg(double x,double y){return fabs(x-y)/fmax(fabs(y),1e-300);}
 int main(int argc,char**argv){
-  std::string refdir,split="cal",outdir="results_raw/algorithm_validation";for(int i=1;i<argc;i++){if(!strcmp(argv[i],"--references"))refdir=argv[++i];else if(!strcmp(argv[i],"--split"))split=argv[++i];else if(!strcmp(argv[i],"--out"))outdir=argv[++i];}
-  if(refdir.empty())return 2;std::filesystem::create_directories(outdir);const char*domains[]={"bem","kepler","pv","cstr","peng_robinson"};const char*methods[]={"brent_dekker","bracketed_secant","safeguarded_newton","safeguarded_halley","analytic_cubic"};
+  std::string refdir,split="cal",outdir="results_raw/algorithm_validation",only_domain;for(int i=1;i<argc;i++){if(!strcmp(argv[i],"--references"))refdir=argv[++i];else if(!strcmp(argv[i],"--split"))split=argv[++i];else if(!strcmp(argv[i],"--out"))outdir=argv[++i];else if(!strcmp(argv[i],"--domain"))only_domain=argv[++i];}
+  if(refdir.empty())return 2;std::filesystem::create_directories(outdir);const char*domains[]={"bem","kepler","pv","cstr","peng_robinson"};const char*methods[]={"brent_dekker","bracketed_secant","safeguarded_newton","safeguarded_halley","analytic_cubic","mikkola_kepler","lambert_w","chandrupatla","bishop_transform"};
   std::ofstream csv(outdir+"/algorithm_validation_"+split+".csv"),fail(outdir+"/algorithm_failures_"+split+".csv");csv<<"domain,method,n,root_p99,root_max,gradient_p99,gradient_max,residual_max,nonfinite,wrong_root,iterations_median,iterations_p99\n";fail<<"domain,method,index,p0,p1,reference_root,computed_root,absolute_error,status\n";
-  for(int dom=0;dom<5;dom++){auto refs=load_reference_alg(refdir+"/"+domains[dom]+".csv",dom,split);std::vector<Param>p(refs.size());for(size_t i=0;i<p.size();i++)p[i]=refs[i].p;Param*dp;Output*doo;cudaMalloc(&dp,p.size()*sizeof(Param));cudaMalloc(&doo,p.size()*sizeof(Output));cudaMemcpy(dp,p.data(),p.size()*sizeof(Param),cudaMemcpyHostToDevice);int count=dom==PR?5:4;
-    for(int method=0;method<count;method++){kernel_algorithm<<<int((p.size()+255)/256),256>>>(dp,doo,p.size(),method);cudaDeviceSynchronize();std::vector<Output>o(p.size());cudaMemcpy(o.data(),doo,p.size()*sizeof(Output),cudaMemcpyDeviceToHost);std::vector<double>re,ge,it;size_t nf=0,wrong=0;double resid=0;for(size_t i=0;i<o.size();i++){double er=fabs(o[i].root-refs[i].root);if(!isfinite(o[i].root)||!isfinite(o[i].gradient)){nf++;fail<<domains[dom]<<','<<methods[method]<<','<<i<<','<<std::setprecision(17)<<p[i].a<<','<<p[i].b<<','<<refs[i].root<<','<<o[i].root<<",nan,"<<int(o[i].status)<<'\n';continue;}double eg=relerr_alg(o[i].gradient,refs[i].gradient);re.push_back(er);ge.push_back(eg);it.push_back(o[i].iterations);if(er>1e-7){wrong++;fail<<domains[dom]<<','<<methods[method]<<','<<i<<','<<std::setprecision(17)<<p[i].a<<','<<p[i].b<<','<<refs[i].root<<','<<o[i].root<<','<<er<<','<<int(o[i].status)<<'\n';}resid=fmax(resid,o[i].residual);}if(re.empty()){re.push_back(INFINITY);ge.push_back(INFINITY);it.push_back(INFINITY);}csv<<domains[dom]<<','<<methods[method]<<','<<p.size()<<','<<std::setprecision(12)<<quantile(re,.99)<<','<<*std::max_element(re.begin(),re.end())<<','<<quantile(ge,.99)<<','<<*std::max_element(ge.begin(),ge.end())<<','<<resid<<','<<nf<<','<<wrong<<','<<quantile(it,.5)<<','<<quantile(it,.99)<<'\n';std::printf("%-14s %-20s wrong=%zu root_max=%.3e grad_p99=%.3e it_p99=%.0f\n",domains[dom],methods[method],wrong,*std::max_element(re.begin(),re.end()),quantile(ge,.99),quantile(it,.99));}
+  for(int dom=0;dom<5;dom++){if(!only_domain.empty()&&only_domain!=domains[dom])continue;auto refs=load_reference_alg(refdir+"/"+domains[dom]+".csv",dom,split);if(refs.empty()){std::fprintf(stderr,"no %s rows for split %s\n",domains[dom],split.c_str());return 3;}std::vector<Param>p(refs.size());for(size_t i=0;i<p.size();i++)p[i]=refs[i].p;Param*dp;Output*doo;cudaMalloc(&dp,p.size()*sizeof(Param));cudaMalloc(&doo,p.size()*sizeof(Output));cudaMemcpy(dp,p.data(),p.size()*sizeof(Param),cudaMemcpyHostToDevice);const int ids[5][7]={{0,1,2,3,-1,-1,-1},{0,1,2,3,5,-1,-1},{0,1,2,3,6,7,8},{0,1,2,3,-1,-1,-1},{0,1,2,3,4,-1,-1}};int count=dom==PV?7:(dom==KEPLER||dom==PR?5:4);
+    for(int mi=0;mi<count;mi++){int method=ids[dom][mi];kernel_algorithm<<<int((p.size()+255)/256),256>>>(dp,doo,p.size(),method);cudaDeviceSynchronize();std::vector<Output>o(p.size());cudaMemcpy(o.data(),doo,p.size()*sizeof(Output),cudaMemcpyDeviceToHost);std::vector<double>re,ge,it;size_t nf=0,wrong=0;double resid=0;for(size_t i=0;i<o.size();i++){double er=fabs(o[i].root-refs[i].root);if(!isfinite(o[i].root)||!isfinite(o[i].gradient)){nf++;fail<<domains[dom]<<','<<methods[method]<<','<<i<<','<<std::setprecision(17)<<p[i].a<<','<<p[i].b<<','<<refs[i].root<<','<<o[i].root<<",nan,"<<int(o[i].status)<<'\n';continue;}double eg=relerr_alg(o[i].gradient,refs[i].gradient);re.push_back(er);ge.push_back(eg);it.push_back(o[i].iterations);if(er>1e-7){wrong++;fail<<domains[dom]<<','<<methods[method]<<','<<i<<','<<std::setprecision(17)<<p[i].a<<','<<p[i].b<<','<<refs[i].root<<','<<o[i].root<<','<<er<<','<<int(o[i].status)<<'\n';}resid=fmax(resid,o[i].residual);}if(re.empty()){re.push_back(INFINITY);ge.push_back(INFINITY);it.push_back(INFINITY);}csv<<domains[dom]<<','<<methods[method]<<','<<p.size()<<','<<std::setprecision(12)<<quantile(re,.99)<<','<<*std::max_element(re.begin(),re.end())<<','<<quantile(ge,.99)<<','<<*std::max_element(ge.begin(),ge.end())<<','<<resid<<','<<nf<<','<<wrong<<','<<quantile(it,.5)<<','<<quantile(it,.99)<<'\n';std::printf("%-14s %-20s wrong=%zu root_max=%.3e grad_p99=%.3e it_p99=%.0f\n",domains[dom],methods[method],wrong,*std::max_element(re.begin(),re.end()),quantile(ge,.99),quantile(it,.99));}
     cudaFree(dp);cudaFree(doo);
   }
   return 0;

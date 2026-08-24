@@ -2,6 +2,10 @@
 set -euo pipefail
 root=/home/abc/supplementary_experiments
 cd "$root"
+if find /sys/devices/system/cpu/cpufreq -name scaling_governor -type f -exec cat {} \; 2>/dev/null | grep -vxq performance;then
+  echo "ERROR: every CPU frequency policy must use the performance governor" >&2
+  exit 4
+fi
 run_id="$(date -u +%Y%m%dT%H%M%SZ)_cpu_c17_full"
 out="$root/results_raw/$run_id"
 mkdir -p "$out" build/cpu_strict build/cpu_pgo_train profiles

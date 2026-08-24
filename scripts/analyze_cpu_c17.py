@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Summarize the formal C17 CPU matrix and compare it with frozen GPU FP64.
 
-Python is used only after timing.  Within-CPU ratios use matching repetition
-indices; CPU/GPU ratios use independent bootstrap because the devices were run
-at different times and are not a paired experiment.
+Python is used only after timing.  CPU modes/builds and GPU results were run
+sequentially, so all cross-group confidence intervals use independent bootstrap
+rather than pretending that equal repetition numbers are paired observations.
 """
 import argparse
 import csv
@@ -16,15 +16,6 @@ from pathlib import Path
 def quantile(values, p):
     values = sorted(values)
     return values[int(p * (len(values) - 1))]
-
-
-def paired_bootstrap(numerator, denominator, seed, draws=10000):
-    ratios = [x / y for x, y in zip(numerator, denominator)]
-    rng = random.Random(seed)
-    n = len(ratios)
-    samples = [statistics.median(ratios[rng.randrange(n)] for _ in range(n))
-               for _ in range(draws)]
-    return statistics.median(ratios), quantile(samples, .025), quantile(samples, .975)
 
 
 def independent_bootstrap(numerator, denominator, seed, draws=10000):
@@ -111,11 +102,12 @@ def main():
     ]
     for left, right, name in pairs:
         for index, key in enumerate(sorted(set(data[left]) & set(data[right]))):
-            point, low, high = paired_bootstrap(data[left][key], data[right][key],
-                                                 20260824 + index + 1000 * len(name))
+            point, low, high = independent_bootstrap(data[left][key], data[right][key],
+                                                      20260824 + index + 1000 * len(name))
             comparisons.append({"comparison": name, "domain": key[0], "n": key[1],
-                                "ratio": point, "ci95_low": low, "ci95_high": high})
-    write_csv(args.out / "cpu_c17_paired_bootstrap.csv", list(comparisons[0]), comparisons)
+                                "ratio": point, "ci95_low": low, "ci95_high": high,
+                                "bootstrap_design": "independent_sequential_modes"})
+    write_csv(args.out / "cpu_c17_mode_bootstrap.csv", list(comparisons[0]), comparisons)
 
     gpu = read_gpu_fp64_e2e(args.gpu_repetitions)
     cross = []

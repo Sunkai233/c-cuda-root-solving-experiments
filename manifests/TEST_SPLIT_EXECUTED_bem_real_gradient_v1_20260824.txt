@@ -1,0 +1,3 @@
+started_utc=2026-08-24T09:21:05Z
+run=results_raw/20260824T092105Z_bem_real_gradient_frozen_test_rtx5090
+completed_utc=2026-08-24T09:21:06Z

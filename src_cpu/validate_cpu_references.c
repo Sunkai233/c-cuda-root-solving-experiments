@@ -4,6 +4,13 @@
 
 typedef struct { Param param; double root, gradient; char id[64], branch_name[64]; } Ref;
 
+#ifdef VALIDATE_FAST_SOLVER
+__attribute__((noinline, optimize("fast-math")))
+#else
+__attribute__((noinline))
+#endif
+static Output candidate_solve(const Param *param) { return solve_one(param); }
+
 static int domain_index(const char *name) {
   static const char *names[] = {"bem", "kepler", "pv", "cstr", "peng_robinson"};
   for (int i = 0; i < 5; ++i) if (strcmp(name, names[i]) == 0) return i;
@@ -59,7 +66,7 @@ int main(int argc, char **argv) {
     size_t bad_root = 0, bad_grad = 0, nonfinite = 0;
     const double grad_limit = domain == PR ? 1e-4 : 2e-6;
     for (int i = 0; i < n; ++i) {
-      Output out = solve_one(&refs[i].param);
+      Output out = candidate_solve(&refs[i].param);
       double re = fabs(out.root - refs[i].root);
       double ge = fabs(out.gradient - refs[i].gradient) / fmax(fabs(refs[i].gradient), 1e-300);
       int nf = !isfinite(out.root) || !isfinite(out.gradient) || !isfinite(out.residual);

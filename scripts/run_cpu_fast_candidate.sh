@@ -28,7 +28,7 @@ gcc -std=c17 -O3 -march=native -mtune=native -flto -fopenmp -DNDEBUG \
   -Wshadow -Wconversion src_cpu/benchmark_cpu.c -lm \
   -o build/cpu_fast/benchmark_cpu 2>"$out/compile.log"
 gcc -std=c17 -O3 -march=native -mtune=native -flto -fopenmp -DNDEBUG \
-  -ffast-math -fno-math-errno -fno-trapping-math -Wall -Wextra -Wpedantic \
+  -DVALIDATE_FAST_SOLVER -fno-math-errno -fno-trapping-math -Wall -Wextra -Wpedantic \
   -Wshadow -Wconversion src_cpu/validate_cpu_references.c -lm \
   -o build/cpu_fast/validate_cpu_references 2>"$out/fast_validation_compile.log"
 for split in dev cal test; do

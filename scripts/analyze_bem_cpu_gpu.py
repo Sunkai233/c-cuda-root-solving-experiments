@@ -12,12 +12,6 @@ def q(values, p):
     values = sorted(values); return values[int(p * (len(values) - 1))]
 
 
-def paired(a, b, seed):
-    ratios = [x / y for x, y in zip(a, b)]; rng = random.Random(seed); n = len(ratios)
-    boot = [statistics.median(ratios[rng.randrange(n)] for _ in range(n)) for _ in range(10000)]
-    return statistics.median(ratios), q(boot, .025), q(boot, .975)
-
-
 def independent(a, b, seed):
     rng = random.Random(seed); na, nb = len(a), len(b); boot = []
     for _ in range(10000):
@@ -49,7 +43,7 @@ def main():
     rows = []
     for index, name in enumerate(ids):
         gpu = json.loads((args.gpu_run / f"performance_alg{ids[name]}.json").read_text())
-        serial_over_omp = paired(serial[name], omp[name], 20260824 + index)
+        serial_over_omp = independent(serial[name], omp[name], 20260824 + index)
         omp_over_gpu_kernel = independent(omp[name], gpu["kernel_times_ms"], 20261824 + index)
         omp_over_gpu_e2e = independent(omp[name], gpu["end_to_end_times_ms"], 20262824 + index)
         serial_over_gpu_e2e = independent(serial[name], gpu["end_to_end_times_ms"], 20263824 + index)
@@ -73,6 +67,7 @@ def main():
             "cpu_serial_over_gpu_e2e_ci_high": serial_over_gpu_e2e[2],
             "cpu_failure_sum": sf[name] + of[name],
             "serial_checksum_variants": len(sc[name]), "omp_checksum_variants": len(oc[name]),
+            "bootstrap_design_cpu_modes": "independent_sequential_modes",
             "bootstrap_design_cpu_gpu": "independent",
         })
     path = args.out / "bem_cpu_gpu_bootstrap.csv"

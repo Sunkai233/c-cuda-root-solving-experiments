@@ -90,6 +90,13 @@ def main():
         path = args.bem_cpu_run / filename
         check(f"real BEM CPU {filename} has 120 repetitions", path.is_file() and csv_rows(path) == 120,
               csv_rows(path) if path.is_file() else "missing")
+    bem_validation = args.bem_cpu_run / "validation/bem_cpu_validation_summary.csv"
+    check("real BEM CPU oracle validation has four methods",
+          bem_validation.is_file() and csv_rows(bem_validation) == 4,
+          csv_rows(bem_validation) if bem_validation.is_file() else "missing")
+    check("real BEM CPU validation status recorded",
+          (args.bem_cpu_run / "VALIDATION_STATUS.txt").is_file(),
+          args.bem_cpu_run / "VALIDATION_STATUS.txt")
     check("CPU fast validation status recorded", (args.cpu_fast_run / "FAST_STATUS.txt").is_file(),
           args.cpu_fast_run / "FAST_STATUS.txt")
     for filename in ("fast_omp96.csv", "strict_nolto_omp96.csv"):

@@ -87,7 +87,7 @@ class Oracle:
         return -1,[],mp.nan
 
 def main():
-    p=argparse.ArgumentParser();p.add_argument("--dataset",type=Path,required=True);p.add_argument("--baseline",type=Path,required=True);p.add_argument("--bisection-roots",type=Path,required=True);p.add_argument("--brent-roots",type=Path,required=True);p.add_argument("--out",type=Path,required=True);p.add_argument("--n",type=int,default=3000);p.add_argument("--seed",type=int,default=20260824);p.add_argument("--exclude-reference",type=Path);p.add_argument("--split-label",choices=("dev","cal","test"));a=p.parse_args();mp.mp.dps=80
+    p=argparse.ArgumentParser();p.add_argument("--dataset",type=Path,required=True);p.add_argument("--baseline",type=Path,required=True);p.add_argument("--bisection-roots",type=Path,required=True);p.add_argument("--brent-roots",type=Path,required=True);p.add_argument("--out",type=Path,required=True);p.add_argument("--n",type=int,default=3000);p.add_argument("--seed",type=int,default=20260824);p.add_argument("--exclude-reference",type=Path,action="append",default=[]);p.add_argument("--split-label",choices=("dev","cal","test"));a=p.parse_args();mp.mp.dps=80
     with a.dataset.open("rb") as f:magic,ver,n,nf,nodes,steps=struct.unpack("<8sIQIII",f.read(32))
     data=np.memmap(a.dataset,dtype="<f8",mode="r",offset=32,shape=(5,n));bisr=np.memmap(a.bisection_roots,dtype="<f8",mode="r");br=np.memmap(a.brent_roots,dtype="<f8",mode="r")
     delta=np.abs((br-bisr+np.pi)%(2*np.pi)-np.pi);dis=np.flatnonzero(delta>1e-6);theta=data[2];alpha=(br-theta)*180/np.pi;oracle=Oracle(a.baseline);knot=np.empty(n)
@@ -95,8 +95,10 @@ def main():
         ii=np.arange(node,n,17);kn=np.array([x[0] for x in oracle.ps[oracle.af[node]]]);av=alpha[ii];pos=np.searchsorted(kn,av);left=kn[np.clip(pos-1,0,len(kn)-1)];right=kn[np.clip(pos,0,len(kn)-1)];knot[ii]=np.minimum(abs(av-left),abs(av-right))
     available=np.arange(n)
     if a.exclude_reference:
-        with a.exclude_reference.open(encoding="utf-8") as f:excluded=np.array([int(r["source_index"]) for r in csv.DictReader(f)],dtype=np.int64)
-        available=np.setdiff1d(available,excluded,assume_unique=False)
+        excluded=[]
+        for reference in a.exclude_reference:
+            with reference.open(encoding="utf-8") as f:excluded.extend(int(r["source_index"]) for r in csv.DictReader(f))
+        available=np.setdiff1d(available,np.array(excluded,dtype=np.int64),assume_unique=False)
     dis=np.intersect1d(dis,available,assume_unique=False);near_count=min(700,a.n,len(available));near=available[np.argsort(knot[available])[:near_count]];rng=np.random.default_rng(a.seed);chosen=np.union1d(dis,near);pool=np.setdiff1d(available,chosen,assume_unique=False);extra=rng.choice(pool,max(0,a.n-len(chosen)),replace=False);idx=np.sort(np.union1d(chosen,extra))[:a.n]
     a.out.mkdir(parents=True,exist_ok=False);fields=["sample_id","source_index","split","node","vx","vy","theta","hint","region","root_count_region","roots","target_root","residual_abs","fphi_left","fphi_right","fvx","gradient_vx_left","gradient_vx_right","polar_knot_distance_deg","bisection_error","brent_error","status"]
     with (a.out/"bem_real_reference.csv").open("w",newline="",encoding="utf-8") as f:
@@ -108,5 +110,5 @@ def main():
                 row.update(residual_abs=mp.nstr(abs(f0),20),fphi_left=mp.nstr(fl,30),fphi_right=mp.nstr(fr,30),fvx=mp.nstr(fv,30),gradient_vx_left=mp.nstr(-fv/fl,30),gradient_vx_right=mp.nstr(-fv/fr,30),bisection_error=repr(abs(math.remainder(float(bisr[i]-r),2*math.pi))),brent_error=repr(abs(math.remainder(float(br[i]-r),2*math.pi))),status="ROOT_OK")
             else:row.update(status="NO_CERTIFIED_ROOT")
             w.writerow(row)
-    manifest={"created_utc":"2026-08-24","mpmath_dps":80,"selection":{"remaining_bisection_brent_disagreements":int(len(dis)),"nearest_polar_knots":int(near_count),"total":int(len(idx)),"random_seed":a.seed,"excluded_reference":str(a.exclude_reference) if a.exclude_reference else None,"forced_split":a.split_label},"target_rule":"first valid solver region, then certified crossing closest to previous-step hint","dataset_sha256":hashlib.sha256(a.dataset.read_bytes()).hexdigest(),"csv_sha256":hashlib.sha256((a.out/"bem_real_reference.csv").read_bytes()).hexdigest()};(a.out/"manifest.json").write_text(json.dumps(manifest,indent=2),encoding="utf-8");print(json.dumps(manifest,indent=2))
+    manifest={"created_utc":"2026-08-24","mpmath_dps":80,"selection":{"remaining_bisection_brent_disagreements":int(len(dis)),"nearest_polar_knots":int(near_count),"total":int(len(idx)),"random_seed":a.seed,"excluded_references":[str(x) for x in a.exclude_reference],"forced_split":a.split_label},"target_rule":"first valid solver region, then certified crossing closest to previous-step hint","dataset_sha256":hashlib.sha256(a.dataset.read_bytes()).hexdigest(),"csv_sha256":hashlib.sha256((a.out/"bem_real_reference.csv").read_bytes()).hexdigest()};(a.out/"manifest.json").write_text(json.dumps(manifest,indent=2),encoding="utf-8");print(json.dumps(manifest,indent=2))
 if __name__=="__main__":main()

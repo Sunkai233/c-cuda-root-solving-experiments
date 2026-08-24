@@ -32,15 +32,17 @@ def main():
     rows = []
     for ci, (candidate_name, candidate) in enumerate(candidates.items()):
         for index, key in enumerate(sorted(set(strict) & set(candidate))):
-            ratios = [x / y for x, y in zip(strict[key], candidate[key])]
-            rng = random.Random(20260824 + index + 1000 * ci); n = len(ratios)
-            boot = [statistics.median(ratios[rng.randrange(n)] for _ in range(n))
+            left, right = strict[key], candidate[key]
+            rng = random.Random(20260824 + index + 1000 * ci); nl, nr = len(left), len(right)
+            boot = [statistics.median(left[rng.randrange(nl)] for _ in range(nl)) /
+                    statistics.median(right[rng.randrange(nr)] for _ in range(nr))
                     for _ in range(10000)]
             rows.append({"candidate": candidate_name, "domain": key[0], "n": key[1],
                          "strict_lto_median_ms": statistics.median(strict[key]),
                          "candidate_median_ms": statistics.median(candidate[key]),
-                         "strict_lto_over_candidate": statistics.median(ratios),
-                         "ci95_low": q(boot, .025), "ci95_high": q(boot, .975)})
+                         "strict_lto_over_candidate": statistics.median(left) / statistics.median(right),
+                         "ci95_low": q(boot, .025), "ci95_high": q(boot, .975),
+                         "bootstrap_design": "independent_sequential_runs"})
     args.out.mkdir(parents=True, exist_ok=True)
     with (args.out / "cpu_fast_performance_bootstrap.csv").open("w", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(handle, fieldnames=list(rows[0])); writer.writeheader(); writer.writerows(rows)

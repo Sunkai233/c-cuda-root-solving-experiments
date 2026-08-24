@@ -1,0 +1,29 @@
+#include <cuda_runtime.h>
+#include <algorithm>
+#include <cmath>
+#include <cstdio>
+#include <cstdlib>
+#include <filesystem>
+#include <fstream>
+#include <iomanip>
+#include <string>
+#include <vector>
+struct RG{double root,grad;};struct SC{double s,c;};
+__device__ __forceinline__ void kp(size_t i,double&e,double&M){double u=(double((i*11400714819323198485ull)>>11)+.5)*0x1p-53;e=(i%5==0)?1-pow(10.0,-7-4*u):.9*u;M=1e-8+(3.141592653589793-1e-8)*fmod(u*1.6180339887498948,1.0);}
+__device__ __forceinline__ double solve(size_t i,double*hist=nullptr){double e,M;kp(i,e,M);double x=fmin(3.141592653589793,fmax(0.0,M+copysign(.85*e,sin(M))));if(hist)hist[0]=x;
+#pragma unroll
+ for(int k=0;k<18;k++){double s=sin(x),c=cos(x),f=x-e*s-M,fx=1-e*c,dx=f/fx;if(fabs(dx)>.5)dx=copysign(.5,dx);x=fmin(3.141592653589793,fmax(0.0,x-dx));if(hist)hist[k+1]=x;}return x;}
+__global__ void fused(RG*out,size_t n){size_t i=(size_t)blockIdx.x*blockDim.x+threadIdx.x;if(i>=n)return;double e,M;kp(i,e,M);double x=solve(i);out[i]={x,1/(1-e*cos(x))};}
+__global__ void roots(double*out,size_t n){size_t i=(size_t)blockIdx.x*blockDim.x+threadIdx.x;if(i<n)out[i]=solve(i);}
+__global__ void gradient(const double*root,RG*out,size_t n){size_t i=(size_t)blockIdx.x*blockDim.x+threadIdx.x;if(i>=n)return;double e,M;kp(i,e,M);double x=root[i];out[i]={x,1/(1-e*cos(x))};}
+__global__ void unrolled(RG*out,size_t n){size_t i=(size_t)blockIdx.x*blockDim.x+threadIdx.x;if(i>=n)return;double e,M,x[19];kp(i,e,M);double root=solve(i,x),adj=1,gm=0;
+#pragma unroll
+ for(int k=17;k>=0;k--){double s=sin(x[k]),c=cos(x[k]),f=x[k]-e*s-M,fx=1-e*c,fxx=e*s,raw=f/fx,active=(x[k]-raw>0&&x[k]-raw<3.141592653589793&&fabs(raw)<=.5);if(active){gm+=adj/fx;adj*=f*fxx/(fx*fx);}else adj=0;}gm+=adj;out[i]={root,gm};}
+__global__ void trig_direct(SC*out,size_t n,int steps){size_t i=(size_t)blockIdx.x*blockDim.x+threadIdx.x;if(i>=n)return;int node=i/steps,step=i%steps;double x=.123*node+.009817477042468103*step;out[i]={sin(x),cos(x)};}
+__global__ void trig_recur(SC*out,size_t n,int steps){size_t seg=(size_t)blockIdx.x*blockDim.x+threadIdx.x,start=seg*32;if(start>=n)return;int node=start/steps,step=start%steps;size_t stop=min(start+32,(size_t)(node+1)*steps);double x=.123*node+.009817477042468103*step,s=sin(x),c=cos(x),sd=sin(.009817477042468103),cd=cos(.009817477042468103);for(size_t i=start;i<stop;i++){out[i]={s,c};double ns=fma(s,cd,c*sd),nc=fma(c,cd,-s*sd);s=ns;c=nc;}}
+template<class F>std::vector<double> timing(F f,int warm,int reps){for(int i=0;i<warm;i++)f();cudaDeviceSynchronize();cudaEvent_t a,b;cudaEventCreate(&a);cudaEventCreate(&b);std::vector<double>v;for(int r=0;r<reps;r++){cudaEventRecord(a);f();cudaEventRecord(b);cudaEventSynchronize(b);float ms;cudaEventElapsedTime(&ms,a,b);v.push_back(ms);}cudaEventDestroy(a);cudaEventDestroy(b);return v;}
+static double med(std::vector<double>v){std::sort(v.begin(),v.end());return v[v.size()/2];}static void arr(std::ofstream&f,const std::vector<double>&v){f<<'[';for(size_t i=0;i<v.size();i++){if(i)f<<',';f<<std::setprecision(12)<<v[i];}f<<']';}
+int main(int argc,char**argv){std::string out="results_raw/remaining_ablations";size_t n=51ull*65536;int warm=10,reps=30;for(int i=1;i<argc;i++){if(!strcmp(argv[i],"--out"))out=argv[++i];else if(!strcmp(argv[i],"--n"))n=strtoull(argv[++i],0,10);}std::filesystem::create_directories(out);RG *a,*b;double*r;SC *sd,*sr;cudaMalloc(&a,n*sizeof(RG));cudaMalloc(&b,n*sizeof(RG));cudaMalloc(&r,n*sizeof(double));cudaMalloc(&sd,n*sizeof(SC));cudaMalloc(&sr,n*sizeof(SC));int blocks=int((n+255)/256),segments=int((n+31)/32),sblocks=(segments+255)/256,steps=int(n/51);
+ auto tf=timing([&]{fused<<<blocks,256>>>(a,n);},warm,reps);auto ts=timing([&]{roots<<<blocks,256>>>(r,n);gradient<<<blocks,256>>>(r,b,n);},warm,reps);auto tu=timing([&]{unrolled<<<blocks,256>>>(b,n);},warm,reps);auto td=timing([&]{trig_direct<<<blocks,256>>>(sd,n,steps);},warm,reps);auto tr=timing([&]{trig_recur<<<sblocks,256>>>(sr,n,steps);},warm,reps);
+ fused<<<blocks,256>>>(a,n);unrolled<<<blocks,256>>>(b,n);std::vector<RG>ha(n),hb(n);cudaMemcpy(ha.data(),a,n*sizeof(RG),cudaMemcpyDeviceToHost);cudaMemcpy(hb.data(),b,n*sizeof(RG),cudaMemcpyDeviceToHost);trig_direct<<<blocks,256>>>(sd,n,steps);trig_recur<<<sblocks,256>>>(sr,n,steps);std::vector<SC>hd(n),hr(n);cudaMemcpy(hd.data(),sd,n*sizeof(SC),cudaMemcpyDeviceToHost);cudaMemcpy(hr.data(),sr,n*sizeof(SC),cudaMemcpyDeviceToHost);double rootmax=0,gmax=0,scmax=0,resmax=0;size_t nf=0;for(size_t i=0;i<n;i++){rootmax=fmax(rootmax,fabs(ha[i].root-hb[i].root));gmax=fmax(gmax,fabs(ha[i].grad-hb[i].grad)/fmax(fabs(ha[i].grad),1e-300));scmax=fmax(scmax,fmax(fabs(hd[i].s-hr[i].s),fabs(hd[i].c-hr[i].c)));double e,M;double x=ha[i].root;double u=(double((i*11400714819323198485ull)>>11)+.5)*0x1p-53;e=(i%5==0)?1-pow(10.0,-7-4*u):.9*u;M=1e-8+(3.141592653589793-1e-8)*fmod(u*1.6180339887498948,1.0);resmax=fmax(resmax,fabs(x-e*sin(x)-M));nf+=!isfinite(hb[i].grad);}
+ std::ofstream f(out+"/remaining_ablations.json");f<<"{\n\"n\":"<<n<<",\"warmups\":"<<warm<<",\"repetitions\":"<<reps<<",\n\"fusion\":{\"fused_median_ms\":"<<med(tf)<<",\"split_median_ms\":"<<med(ts)<<",\"fused_times_ms\":";arr(f,tf);f<<",\"split_times_ms\":";arr(f,ts);f<<"},\n\"gradient\":{\"implicit_median_ms\":"<<med(tf)<<",\"unrolled_reverse_median_ms\":"<<med(tu)<<",\"root_max_abs\":"<<rootmax<<",\"gradient_max_rel\":"<<gmax<<",\"residual_max\":"<<resmax<<",\"nonfinite\":"<<nf<<",\"implicit_times_ms\":";arr(f,tf);f<<",\"unrolled_times_ms\":";arr(f,tu);f<<"},\n\"trig\":{\"direct_median_ms\":"<<med(td)<<",\"recurrence_median_ms\":"<<med(tr)<<",\"max_abs\":"<<scmax<<",\"direct_times_ms\":";arr(f,td);f<<",\"recurrence_times_ms\":";arr(f,tr);f<<"}\n}\n";printf("n=%zu fusion %.3f/%.3f ms gradient %.3f/%.3f ms graderr %.3e trig %.3f/%.3f ms trigerr %.3e residual %.3e nf=%zu\n",n,med(tf),med(ts),med(tf),med(tu),gmax,med(td),med(tr),scmax,resmax,nf);}

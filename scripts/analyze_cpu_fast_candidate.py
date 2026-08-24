@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 import argparse
 import csv
-import random
 import statistics
 from collections import defaultdict
 from pathlib import Path
+import numpy as np
 
 
 def q(values, p):
@@ -33,10 +33,11 @@ def main():
     for ci, (candidate_name, candidate) in enumerate(candidates.items()):
         for index, key in enumerate(sorted(set(strict) & set(candidate))):
             left, right = strict[key], candidate[key]
-            rng = random.Random(20260824 + index + 1000 * ci); nl, nr = len(left), len(right)
-            boot = [statistics.median(left[rng.randrange(nl)] for _ in range(nl)) /
-                    statistics.median(right[rng.randrange(nr)] for _ in range(nr))
-                    for _ in range(10000)]
+            rng = np.random.default_rng(20260824 + index + 1000 * ci)
+            la, ra = np.asarray(left), np.asarray(right)
+            li = rng.integers(0, len(la), size=(10000, len(la)))
+            ri = rng.integers(0, len(ra), size=(10000, len(ra)))
+            boot = np.median(la[li], axis=1) / np.median(ra[ri], axis=1)
             rows.append({"candidate": candidate_name, "domain": key[0], "n": key[1],
                          "strict_lto_median_ms": statistics.median(strict[key]),
                          "candidate_median_ms": statistics.median(candidate[key]),

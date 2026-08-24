@@ -1,15 +1,16 @@
 #!/usr/bin/env python3
 """Deterministic paired-bootstrap analysis for the strict FP64 algorithm matrix."""
 from __future__ import annotations
-import argparse,csv,json,random,statistics
+import argparse,csv,json,statistics
 from collections import defaultdict
 from pathlib import Path
+import numpy as np
 
 def quant(values,q):
     s=sorted(values);return s[min(len(s)-1,int(q*(len(s)-1)))]
 def bootstrap_ratio(numerator,denominator,seed,resamples):
-    ratios=[x/y for x,y in zip(numerator,denominator)];rng=random.Random(seed);n=len(ratios)
-    boots=[statistics.median(ratios[rng.randrange(n)] for _ in range(n)) for _ in range(resamples)]
+    ratios=np.asarray(numerator)/np.asarray(denominator);rng=np.random.default_rng(seed);n=len(ratios)
+    indexes=rng.integers(0,n,size=(resamples,n));boots=np.median(ratios[indexes],axis=1)
     return statistics.median(ratios),quant(boots,.025),quant(boots,.975)
 def main():
     ap=argparse.ArgumentParser();ap.add_argument("run_dir",type=Path);ap.add_argument("--bootstrap",type=int,default=10000);args=ap.parse_args()

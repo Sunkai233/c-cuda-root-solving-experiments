@@ -2,10 +2,10 @@
 import argparse
 import csv
 import json
-import random
 import statistics
 from collections import defaultdict
 from pathlib import Path
+import numpy as np
 
 
 def q(values, p):
@@ -13,11 +13,10 @@ def q(values, p):
 
 
 def independent(a, b, seed):
-    rng = random.Random(seed); na, nb = len(a), len(b); boot = []
-    for _ in range(10000):
-        ma = statistics.median(a[rng.randrange(na)] for _ in range(na))
-        mb = statistics.median(b[rng.randrange(nb)] for _ in range(nb))
-        boot.append(ma / mb)
+    rng = np.random.default_rng(seed); aa, bb = np.asarray(a), np.asarray(b)
+    ai = rng.integers(0, len(aa), size=(10000, len(aa)))
+    bi = rng.integers(0, len(bb), size=(10000, len(bb)))
+    boot = np.median(aa[ai], axis=1) / np.median(bb[bi], axis=1)
     return statistics.median(a) / statistics.median(b), q(boot, .025), q(boot, .975)
 
 

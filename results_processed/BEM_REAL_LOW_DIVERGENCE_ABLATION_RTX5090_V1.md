@@ -1,5 +1,9 @@
 # Real-table BEM fixed-step divergence ablation on RTX 5090 (V1)
 
+> Historical V1 result.  The fixed-versus-early conclusion remains negative,
+> but current frozen branch semantics and the compacted two-kernel adaptive
+> comparison are reported in `BEM_REAL_ALGORITHM_MATRIX_RTX5090_V2.md`.
+
 ## Result
 
 The fixed-step low-divergence candidate is a negative performance result on the
@@ -49,6 +53,8 @@ Evidence is append-only under:
 
 `results_raw/20260824T062936Z_bem_real_low_divergence_rtx5090/`
 
-This closes the fixed-step versus early-stop portion of E5. A compact difficult-
-sample queue with a second correction kernel and direct warp metrics remain
-separate work; the second GPU architecture remains deferred by the user.
+This closes the fixed-step versus early-stop portion of E5.  The compact
+difficult-sample queue and second correction kernel were subsequently completed
+in `BEM_REAL_ALGORITHM_MATRIX_RTX5090_V2.md`; direct warp metrics were completed
+in `NSIGHT_COMPUTE_RTX5090_V1.md`.  Only the second GPU architecture (E8)
+remains explicitly excluded by the user.

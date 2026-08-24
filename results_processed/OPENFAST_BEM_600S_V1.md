@@ -54,8 +54,8 @@
 
 早期不含 `Alpha` 或不含直接 `Theta` 通道的 600 秒输出只是预跑，不是权威版本。OpenFAST 把二进制通道后缀 `Alpha`/`Theta` 缩写为 `Alp`/`The`；两次别名识别失败目录 `20260824T050842Z_openfast_bem_600s_FAILED_ALPHA_ALIAS` 和 `20260824T050842Z_openfast_bem_600s_FAILED_THETA_ALIAS` 以及旧目录 `20260824T050842Z_openfast_bem_600s_NO_THETA` 均不得参与统计。
 
-## 5. 尚未完成的真实求根实验
+## 5. 后续工作状态（2026-08-24 更新）
 
-下一阶段要从上述节点状态、叶片几何和翼型极线表构造完全同源的表插值残差，实现 C 串行基线及 CUDA naive/低分歧求根器，并以 OpenFAST 的 `Phi`、`Alpha`、诱导因子为参考进行正确性核验和 RTX 5090 计时。还需专门覆盖翼型表节点附近的可微性与梯度误差。
+本报告是 12 m/s OpenFAST 数据前提的历史记录。随后已经完成同源真实翼型表残差、C17 串行/OpenMP 基线、CUDA 求解器、冻结高精度核验、精度路径、低分歧/两阶段纠错、梯度有限差分和 RTX 5090 端到端计时，分别见 `BEM_REAL_FROZEN_RTX5090_V1.md`、`BEM_REAL_CPU_GPU_V1.md`、`BEM_REAL_ALGORITHM_MATRIX_RTX5090_V2.md`、`BEM_REAL_PRECISION_PATHS_RTX5090_V1.md` 与 `BEM_REAL_FINITE_DIFFERENCE_V1.md`。
 
-当前 v1 只覆盖 12 m/s、NTM B、种子 13428 的一个湍流条件。多风速、多湍流组合及用户明确暂缓的第二种 GPU 架构均不属于本报告已完成范围。
+8 m/s IEC C 和 16 m/s IEC A 的独立风场、600 s OpenFAST、每工况 2,448,000 个根、独立 80 位 oracle 与正式 GPU 计时也已完成，权威汇总为 `BEM_OPENFAST_MULTICONDITION_V1.md`。OpenFAST 的公开 `Phi` 仍只作工程交叉检查；冻结残差的正确性真源是独立多精度 oracle。第二种 GPU 架构 E8 按用户要求排除，仓库不作跨架构迁移性主张。

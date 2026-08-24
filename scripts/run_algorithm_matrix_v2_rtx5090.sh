@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 root=/home/abc/supplementary_experiments; cd "$root"
+python_of=/home/abc/miniconda3/envs/of/bin/python
 build_image=docker.m.daocloud.io/vllm/vllm-openai:latest
 runtime_image=nvidia/cuda:12.8.1-base-ubuntu24.04
 run_id="$(date -u +%Y%m%dT%H%M%SZ)_algorithm_matrix_v2_rtx5090"
@@ -30,10 +31,11 @@ docker run --rm --gpus device=0 --entrypoint bash -v "$root:/work" -w /work \
   "$runtime_image" -lc \
   "build/cuda_strict/performance_algorithms --out '$out' --max-n 16777216 --warmups 10 --repetitions 30 --heat-seconds 45" \
   | tee "$out/performance.log"
-python scripts/analyze_algorithms.py "$out" --bootstrap 10000 | tee "$out/analysis.log"
+"$python_of" scripts/analyze_algorithms.py "$out" --bootstrap 10000 | tee "$out/analysis.log"
 nvidia-smi --query-gpu=name,temperature.gpu,power.draw,clocks.current.sm,clocks.current.memory \
   --format=csv >"$out/hardware_after.csv"
 sha256sum references/ref_v3_20260824/*.csv src_cuda/benchmark.cu \
   src_cuda/validate_algorithms.cu src_cuda/performance_algorithms.cu scripts/analyze_algorithms.py \
+  scripts/run_algorithm_matrix_v2_rtx5090.sh \
   >"$out/sha256.txt"
 printf 'COMPLETE %s\n' "$run_id" | tee "$out/COMPLETE.txt"

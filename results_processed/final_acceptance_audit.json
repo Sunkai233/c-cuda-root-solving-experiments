@@ -1,0 +1,318 @@
+{
+  "scope": "E0-E11 excluding E8",
+  "passed": 62,
+  "total": 62,
+  "all_pass": true,
+  "checks": [
+    {
+      "name": "scope includes E0-E11 except E8",
+      "pass": true,
+      "detail": "['E0', 'E1', 'E2', 'E3', 'E4', 'E5', 'E6', 'E7', 'E9', 'E10', 'E11']"
+    },
+    {
+      "name": "scope excludes only E8",
+      "pass": true,
+      "detail": "{'E8': 'User explicitly deferred cross-hardware validation on 2026-08-24; a second RTX 5090 is not a second architecture.'}"
+    },
+    {
+      "name": "report:FROZEN_CORRECTNESS_V3.md",
+      "pass": true,
+      "detail": "FROZEN_CORRECTNESS_V3.md"
+    },
+    {
+      "name": "report:GPU_PERFORMANCE_V3_RTX5090.md",
+      "pass": true,
+      "detail": "GPU_PERFORMANCE_V3_RTX5090.md"
+    },
+    {
+      "name": "report:ALGORITHM_PERFORMANCE_RTX5090_V2.md",
+      "pass": true,
+      "detail": "ALGORITHM_PERFORMANCE_RTX5090_V2.md"
+    },
+    {
+      "name": "report:BEM_REAL_FROZEN_RTX5090_V1.md",
+      "pass": true,
+      "detail": "BEM_REAL_FROZEN_RTX5090_V1.md"
+    },
+    {
+      "name": "report:BEM_REAL_ALGORITHM_MATRIX_RTX5090_V2.md",
+      "pass": true,
+      "detail": "BEM_REAL_ALGORITHM_MATRIX_RTX5090_V2.md"
+    },
+    {
+      "name": "report:BEM_REAL_PRECISION_PATHS_RTX5090_V1.md",
+      "pass": true,
+      "detail": "BEM_REAL_PRECISION_PATHS_RTX5090_V1.md"
+    },
+    {
+      "name": "report:BEM_REAL_FINITE_DIFFERENCE_V1.md",
+      "pass": true,
+      "detail": "BEM_REAL_FINITE_DIFFERENCE_V1.md"
+    },
+    {
+      "name": "report:BEM_SCALE_CONDITION_ABLATIONS_RTX5090.md",
+      "pass": true,
+      "detail": "BEM_SCALE_CONDITION_ABLATIONS_RTX5090.md"
+    },
+    {
+      "name": "report:PV_EXTENDED_GRADIENTS_RTX5090_V1.md",
+      "pass": true,
+      "detail": "PV_EXTENDED_GRADIENTS_RTX5090_V1.md"
+    },
+    {
+      "name": "report:CSTR_FOLD_VALIDATION_RTX5090_V1.md",
+      "pass": true,
+      "detail": "CSTR_FOLD_VALIDATION_RTX5090_V1.md"
+    },
+    {
+      "name": "report:REMAINING_CUDA_ABLATIONS_RTX5090.md",
+      "pass": true,
+      "detail": "REMAINING_CUDA_ABLATIONS_RTX5090.md"
+    },
+    {
+      "name": "report:NSIGHT_COMPUTE_RTX5090_V1.md",
+      "pass": true,
+      "detail": "NSIGHT_COMPUTE_RTX5090_V1.md"
+    },
+    {
+      "name": "report:CPU_C17_PERFORMANCE_V1.md",
+      "pass": true,
+      "detail": "CPU_C17_PERFORMANCE_V1.md"
+    },
+    {
+      "name": "report:BEM_REAL_CPU_GPU_V1.md",
+      "pass": true,
+      "detail": "BEM_REAL_CPU_GPU_V1.md"
+    },
+    {
+      "name": "report:CPU_FAST_MATH_V1.md",
+      "pass": true,
+      "detail": "CPU_FAST_MATH_V1.md"
+    },
+    {
+      "name": "report:BEM_OPENFAST_MULTICONDITION_V1.md",
+      "pass": true,
+      "detail": "BEM_OPENFAST_MULTICONDITION_V1.md"
+    },
+    {
+      "name": "report:FINAL_ACCEPTANCE_NO_E8.md",
+      "pass": true,
+      "detail": "FINAL_ACCEPTANCE_NO_E8.md"
+    },
+    {
+      "name": "one-shot marker:TEST_SPLIT_EXECUTED_adaptive_v3_20260824.txt",
+      "pass": true,
+      "detail": "TEST_SPLIT_EXECUTED_adaptive_v3_20260824.txt"
+    },
+    {
+      "name": "one-shot marker:TEST_SPLIT_EXECUTED_bem_real_adaptive_v1_20260824.txt",
+      "pass": true,
+      "detail": "TEST_SPLIT_EXECUTED_bem_real_adaptive_v1_20260824.txt"
+    },
+    {
+      "name": "one-shot marker:TEST_SPLIT_EXECUTED_bem_real_gradient_v1_20260824.txt",
+      "pass": true,
+      "detail": "TEST_SPLIT_EXECUTED_bem_real_gradient_v1_20260824.txt"
+    },
+    {
+      "name": "one-shot marker:TEST_SPLIT_EXECUTED_bem_real_precision_v2_20260824.txt",
+      "pass": true,
+      "detail": "TEST_SPLIT_EXECUTED_bem_real_precision_v2_20260824.txt"
+    },
+    {
+      "name": "one-shot marker:TEST_SPLIT_EXECUTED_cstr_fold_v1_20260824.txt",
+      "pass": true,
+      "detail": "TEST_SPLIT_EXECUTED_cstr_fold_v1_20260824.txt"
+    },
+    {
+      "name": "one-shot marker:TEST_SPLIT_EXECUTED_pv_extended_v1_20260824.txt",
+      "pass": true,
+      "detail": "TEST_SPLIT_EXECUTED_pv_extended_v1_20260824.txt"
+    },
+    {
+      "name": "GPU matrix has 15,600 repetitions",
+      "pass": true,
+      "detail": "15600"
+    },
+    {
+      "name": "algorithm matrix has 16,380 repetitions",
+      "pass": true,
+      "detail": "16380"
+    },
+    {
+      "name": "algorithm v2 COMPLETE",
+      "pass": true,
+      "detail": "results_raw\\20260824T131627Z_algorithm_matrix_v2_rtx5090"
+    },
+    {
+      "name": "algorithm v2 has 325 summary groups",
+      "pass": true,
+      "detail": "325"
+    },
+    {
+      "name": "algorithm v2 has 19,500 raw repetitions",
+      "pass": true,
+      "detail": "19500"
+    },
+    {
+      "name": "algorithm v2 includes all specialized methods",
+      "pass": true,
+      "detail": "['analytic_cubic', 'bishop_transform', 'bracketed_secant', 'brent_dekker', 'chandrupatla', 'lambert_w', 'mikkola_kepler', 'safeguarded_halley', 'safeguarded_newton']"
+    },
+    {
+      "name": "algorithm v2 dev validation recorded",
+      "pass": true,
+      "detail": "results_raw\\20260824T131627Z_algorithm_matrix_v2_rtx5090\\algorithm_validation_dev.csv"
+    },
+    {
+      "name": "algorithm v2 cal validation recorded",
+      "pass": true,
+      "detail": "results_raw\\20260824T131627Z_algorithm_matrix_v2_rtx5090\\algorithm_validation_cal.csv"
+    },
+    {
+      "name": "CPU C17 COMPLETE",
+      "pass": true,
+      "detail": "results_raw\\20260824T075559Z_cpu_c17_full"
+    },
+    {
+      "name": "real BEM CPU COMPLETE",
+      "pass": true,
+      "detail": "results_raw\\20260824T120812Z_bem_real_cpu_frozen"
+    },
+    {
+      "name": "CPU fast candidate COMPLETE",
+      "pass": true,
+      "detail": "results_raw\\20260824T123709Z_cpu_fast_candidate"
+    },
+    {
+      "name": "CPU C17 strict_serial.csv has 1,950 repetitions",
+      "pass": true,
+      "detail": "1950"
+    },
+    {
+      "name": "CPU C17 strict_simd.csv has 1,950 repetitions",
+      "pass": true,
+      "detail": "1950"
+    },
+    {
+      "name": "CPU C17 strict_omp96.csv has 1,950 repetitions",
+      "pass": true,
+      "detail": "1950"
+    },
+    {
+      "name": "CPU C17 pgo_omp96.csv has 1,950 repetitions",
+      "pass": true,
+      "detail": "1950"
+    },
+    {
+      "name": "real BEM CPU serial.csv has 120 repetitions",
+      "pass": true,
+      "detail": "120"
+    },
+    {
+      "name": "real BEM CPU omp96.csv has 120 repetitions",
+      "pass": true,
+      "detail": "120"
+    },
+    {
+      "name": "real BEM CPU oracle validation has four methods",
+      "pass": true,
+      "detail": "4"
+    },
+    {
+      "name": "real BEM CPU validation status recorded",
+      "pass": true,
+      "detail": "results_raw\\20260824T120812Z_bem_real_cpu_frozen\\VALIDATION_STATUS.txt"
+    },
+    {
+      "name": "CPU fast validation status recorded",
+      "pass": true,
+      "detail": "results_raw\\20260824T123709Z_cpu_fast_candidate\\FAST_STATUS.txt"
+    },
+    {
+      "name": "CPU compilation candidate fast_omp96.csv has 1,950 repetitions",
+      "pass": true,
+      "detail": "1950"
+    },
+    {
+      "name": "CPU compilation candidate strict_nolto_omp96.csv has 1,950 repetitions",
+      "pass": true,
+      "detail": "1950"
+    },
+    {
+      "name": "CPU no-LTO frozen-reference validation recorded",
+      "pass": true,
+      "detail": "results_raw\\20260824T123709Z_cpu_fast_candidate\\nolto_validation\\validation_test.csv"
+    },
+    {
+      "name": "CPU no-LTO status recorded",
+      "pass": true,
+      "detail": "results_raw\\20260824T123709Z_cpu_fast_candidate\\NO_LTO_STATUS.txt"
+    },
+    {
+      "name": "CPU vector report recorded",
+      "pass": true,
+      "detail": "results_raw\\20260824T075559Z_cpu_c17_full\\vectorization.txt"
+    },
+    {
+      "name": "CPU disassembly recorded",
+      "pass": true,
+      "detail": "results_raw\\20260824T075559Z_cpu_c17_full\\disassembly.txt"
+    },
+    {
+      "name": "OpenFAST multi-condition COMPLETE",
+      "pass": true,
+      "detail": "results_raw\\20260824T124112Z_openfast_multicondition_v1"
+    },
+    {
+      "name": "8mps_C_seed27183 OpenFAST shape and finite audit",
+      "pass": true,
+      "detail": "{'file': '5MW_600s_8mps_C_seed27183.outb', 'rows_including_initial': 48001, 'time_steps_excluding_initial': 48000, 'channels': 835, 'time_start': 0.0, 'time_end': 600.0, 'dt_min': 0.012499999999931788, 'dt_max': 0.012500000000045475, 'blade_node_channels': {'Vx': 57, 'Vy': 57, 'Phi': 57, 'Alpha': 57, 'Theta': 57, 'AxI': 57, 'TnI': 57, 'Cl': 57, 'Cd': 57, 'Cx': 57, 'Cy': 57, 'Fl': 57, 'Fd': 57}, 'node_states_excluding_initial': 2736000, 'fixed_induction_states_excluding_initial': 288000, 'ordinary_root_instances_excluding_initial': 2448000, 'root_outputs_including_initial': 2736057, 'nodal_nonfinite': 0, 'theta_identity_max_abs_deg': 5.684341886080802e-14, 'shape_and_channel_audit_pass': True, 'finite_audit_pass': True}"
+    },
+    {
+      "name": "8mps_C_seed27183 adaptive oracle has zero failures",
+      "pass": true,
+      "detail": "{'n': 300, 'failures': 0, 'observed_pass_fraction': 1.0, 'zero_failure_wilson_95_upper_failure_rate': 0.012643429997735663, 'groups': {'all': {'n': 300, '0.5': 2.5432989048113086e-12, '0.9': 1.2929396442373786e-10, '0.95': 1.810306349270263e-10, '0.99': 2.960514680627746e-10, '0.999': 4.154284624635629e-10, '1.0': 4.792427704680691e-10}, 'near_polar_knot': {'n': 300, '0.5': 2.5432989048113086e-12, '0.9': 1.2929396442373786e-10, '0.95': 1.810306349270263e-10, '0.99': 2.960514680627746e-10, '0.999': 4.154284624635629e-10, '1.0': 4.792427704680691e-10}, 'away_from_knot': {'n': 0}, 'multi_root_region': {'n': 0}, 'single_root_region': {'n': 300, '0.5': 2.5432989048113086e-12, '0.9': 1.2929396442373786e-10, '0.95': 1.810306349270263e-10, '0.99': 2.960514680627746e-10, '0.999': 4.154284624635629e-10, '1.0': 4.792427704680691e-10}}}"
+    },
+    {
+      "name": "8mps_C_seed27183 algorithm 0 has 30 repetitions",
+      "pass": true,
+      "detail": "{'algorithm': 0, 'records': 2448000, 'warmups': 10, 'repeats': 30, 'kernel_inner': 1, 'e2e_inner': 1, 'kernel_ms_mean': 218.822311, 'kernel_ms_median': 218.920609, 'kernel_ms_min': 216.774368, 'kernel_ms_max': 221.310883, 'end_to_end_ms_median': 224.152863, 'throughput_roots_s': 11187159.043896, 'solver_failures': 0, 'fast_path': 0, 'fallback_path': 2448000, 'branch_error_gt_1e-3': 1711918, 'root_abs_rad': {'median': 0.002462028784525394, 'p95': 0.010993278798509643, 'p99': 0.015395419296411639, 'max': 0.06251861928865754}, 'kernel_times_ms': [219.59613, 217.516769, 218.823135, 219.135452, 219.099197, 219.318497, 219.649338, 218.89386, 218.920609, 218.982269, 218.813919, 217.586044, 218.889893, 219.005539, 218.990082, 218.829895, 221.310883, 218.986404, 218.754303, 218.979553, 219.008377, 218.834045, 218.815262, 217.67955, 217.396729, 216.774368, 218.733276, 219.370438, 220.710022, 217.265625], 'end_to_end_times_ms': [223.833191, 223.671066, 223.654343, 223.265381, 224.300476, 226.531326, 223.948486, 224.463303, 224.836578, 222.721954, 224.940857, 222.593018, 224.064026, 224.496552, 223.851715, 224.152863, 224.417191, 225.195389, 224.205063, 224.052414, 224.146072, 225.709091, 224.674271, 224.179581, 222.29277, 224.479065, 222.544388, 222.921982, 224.298553, 223.118118]}"
+    },
+    {
+      "name": "8mps_C_seed27183 algorithm 1 has 30 repetitions",
+      "pass": true,
+      "detail": "{'algorithm': 1, 'records': 2448000, 'warmups': 10, 'repeats': 30, 'kernel_inner': 1, 'e2e_inner': 1, 'kernel_ms_mean': 113.6521, 'kernel_ms_median': 113.730942, 'kernel_ms_min': 111.304291, 'kernel_ms_max': 117.370819, 'end_to_end_ms_median': 118.271393, 'throughput_roots_s': 21539417.295535, 'solver_failures': 0, 'fast_path': 0, 'fallback_path': 2448000, 'branch_error_gt_1e-3': 1711918, 'root_abs_rad': {'median': 0.002462028642242764, 'p95': 0.01099327891331825, 'p99': 0.015395419220785023, 'max': 0.06251861918990098}, 'kernel_times_ms': [113.328194, 113.941345, 113.574722, 113.97139, 112.271484, 113.166237, 114.446014, 112.097214, 112.48333, 112.284035, 114.470627, 114.049408, 113.336899, 113.15181, 113.580322, 117.370819, 113.547165, 114.104286, 114.077469, 112.01683, 114.240829, 113.463715, 113.730942, 114.043007, 113.85424, 114.265312, 111.304291, 115.463745, 114.579041, 113.348511], 'end_to_end_times_ms': [118.339874, 116.457153, 118.846817, 118.357056, 115.874207, 118.952255, 119.061409, 116.265091, 117.933823, 118.295235, 117.520195, 118.869308, 119.151489, 116.883743, 119.146431, 119.469246, 118.980705, 116.004959, 117.26358, 118.131935, 119.906563, 116.596291, 118.932541, 116.811165, 117.610146, 118.945374, 118.134499, 116.964668, 117.615906, 118.271393]}"
+    },
+    {
+      "name": "8mps_C_seed27183 algorithm 4 has 30 repetitions",
+      "pass": true,
+      "detail": "{'algorithm': 4, 'records': 2448000, 'warmups': 10, 'repeats': 30, 'kernel_inner': 1, 'e2e_inner': 1, 'kernel_ms_mean': 68.485237, 'kernel_ms_median': 68.445503, 'kernel_ms_min': 68.104607, 'kernel_ms_max': 70.025345, 'end_to_end_ms_median': 72.623199, 'throughput_roots_s': 35744929.898601, 'solver_failures': 0, 'fast_path': 2440596, 'fallback_path': 7404, 'branch_error_gt_1e-3': 1711918, 'root_abs_rad': {'median': 0.002462028642242764, 'p95': 0.01099327891331825, 'p99': 0.015395419220785023, 'max': 0.06251861918990098}, 'kernel_times_ms': [68.2028809, 68.4812164, 68.5050583, 68.4172134, 68.4298248, 68.404541, 68.4458237, 68.1189117, 68.7571182, 68.4077759, 68.3266525, 68.5501785, 68.4455032, 68.1046066, 68.4140167, 68.5048981, 68.1947174, 68.5624619, 69.0490265, 68.5304031, 68.4087372, 68.5661087, 68.3295975, 68.3056641, 68.5332184, 68.5387192, 68.3585892, 68.5025635, 70.0253448, 68.1356125], 'end_to_end_times_ms': [72.7643509, 72.5588837, 73.2307205, 72.7608032, 72.3252487, 72.5897293, 72.7136993, 72.3321915, 73.0480957, 72.6532135, 72.7922592, 72.7455978, 72.5408936, 72.5717468, 72.3196793, 72.7079697, 72.5650558, 72.6945572, 72.3117752, 72.619133, 72.5271988, 72.9649277, 72.4744949, 72.6543655, 72.6231995, 72.4040298, 73.0664291, 72.610817, 72.6856308, 72.2000961]}"
+    },
+    {
+      "name": "16mps_A_seed39107 OpenFAST shape and finite audit",
+      "pass": true,
+      "detail": "{'file': '5MW_600s_16mps_A_seed39107.outb', 'rows_including_initial': 48001, 'time_steps_excluding_initial': 48000, 'channels': 835, 'time_start': 0.0, 'time_end': 600.0, 'dt_min': 0.012499999999931788, 'dt_max': 0.012500000000045475, 'blade_node_channels': {'Vx': 57, 'Vy': 57, 'Phi': 57, 'Alpha': 57, 'Theta': 57, 'AxI': 57, 'TnI': 57, 'Cl': 57, 'Cd': 57, 'Cx': 57, 'Cy': 57, 'Fl': 57, 'Fd': 57}, 'node_states_excluding_initial': 2736000, 'fixed_induction_states_excluding_initial': 288000, 'ordinary_root_instances_excluding_initial': 2448000, 'root_outputs_including_initial': 2736057, 'nodal_nonfinite': 0, 'theta_identity_max_abs_deg': 5.684341886080802e-14, 'shape_and_channel_audit_pass': True, 'finite_audit_pass': True}"
+    },
+    {
+      "name": "16mps_A_seed39107 adaptive oracle has zero failures",
+      "pass": true,
+      "detail": "{'n': 300, 'failures': 0, 'observed_pass_fraction': 1.0, 'zero_failure_wilson_95_upper_failure_rate': 0.012643429997735663, 'groups': {'all': {'n': 300, '0.5': 3.3718861036646786e-12, '0.9': 2.346960126242692e-10, '0.95': 3.3784441910711394e-10, '0.99': 5.050735940592688e-10, '0.999': 6.173487276939227e-10, '1.0': 6.218018877568454e-10}, 'near_polar_knot': {'n': 300, '0.5': 3.3718861036646786e-12, '0.9': 2.346960126242692e-10, '0.95': 3.3784441910711394e-10, '0.99': 5.050735940592688e-10, '0.999': 6.173487276939227e-10, '1.0': 6.218018877568454e-10}, 'away_from_knot': {'n': 0}, 'multi_root_region': {'n': 0}, 'single_root_region': {'n': 300, '0.5': 3.3718861036646786e-12, '0.9': 2.346960126242692e-10, '0.95': 3.3784441910711394e-10, '0.99': 5.050735940592688e-10, '0.999': 6.173487276939227e-10, '1.0': 6.218018877568454e-10}}}"
+    },
+    {
+      "name": "16mps_A_seed39107 algorithm 0 has 30 repetitions",
+      "pass": true,
+      "detail": "{'algorithm': 0, 'records': 2448000, 'warmups': 10, 'repeats': 30, 'kernel_inner': 1, 'e2e_inner': 1, 'kernel_ms_mean': 299.497345, 'kernel_ms_median': 300.309662, 'kernel_ms_min': 293.345337, 'kernel_ms_max': 303.124939, 'end_to_end_ms_median': 305.436707, 'throughput_roots_s': 8173695.163273, 'solver_failures': 0, 'fast_path': 0, 'fallback_path': 2448000, 'branch_error_gt_1e-3': 1611940, 'root_abs_rad': {'median': 0.0018899428573684318, 'p95': 0.008563021858990716, 'p99': 0.013115370513069546, 'max': 0.05993855978483209}, 'kernel_times_ms': [300.252319, 299.053284, 299.325165, 299.63623, 300.15921, 299.639374, 300.309662, 299.632721, 300.75058, 298.265015, 295.196198, 303.124939, 300.531616, 301.152039, 294.203552, 301.628113, 301.203979, 299.375793, 300.334534, 301.069855, 294.371948, 293.345337, 300.369537, 300.304962, 301.614105, 302.770782, 300.721771, 300.445801, 300.489075, 295.642059], 'end_to_end_times_ms': [300.579773, 301.22522, 306.176483, 305.942657, 305.819214, 306.085419, 299.516388, 305.461578, 305.795898, 306.373474, 299.91156, 303.918793, 305.009979, 304.011292, 300.065063, 305.069122, 306.016388, 301.395325, 301.360992, 305.934296, 305.436707, 305.667542, 299.131104, 305.720154, 302.542114, 306.248047, 300.578247, 306.286804, 306.391205, 300.512634]}"
+    },
+    {
+      "name": "16mps_A_seed39107 algorithm 1 has 30 repetitions",
+      "pass": true,
+      "detail": "{'algorithm': 1, 'records': 2448000, 'warmups': 10, 'repeats': 30, 'kernel_inner': 1, 'e2e_inner': 1, 'kernel_ms_mean': 180.763779, 'kernel_ms_median': 180.534653, 'kernel_ms_min': 176.148102, 'kernel_ms_max': 184.269852, 'end_to_end_ms_median': 186.9039, 'throughput_roots_s': 13542536.10866, 'solver_failures': 0, 'fast_path': 0, 'fallback_path': 2448000, 'branch_error_gt_1e-3': 1611940, 'root_abs_rad': {'median': 0.0018899425746057297, 'p95': 0.008563021930741765, 'p99': 0.013115370016869576, 'max': 0.059938560100596394}, 'kernel_times_ms': [182.625671, 182.877945, 178.395813, 179.151169, 180.508606, 180.512985, 181.485092, 179.292419, 177.55545, 178.602554, 178.915588, 176.148102, 183.037018, 183.129349, 180.15213, 182.738052, 184.269852, 180.534653, 183.489944, 182.80986, 179.769379, 181.206848, 183.184998, 182.937439, 183.212997, 179.238754, 177.102875, 178.845825, 184.092224, 177.090469], 'end_to_end_times_ms': [186.800934, 186.768448, 189.046204, 187.299484, 182.849472, 187.187546, 187.635803, 187.481018, 186.768005, 187.253342, 190.870529, 183.737503, 188.433762, 187.558182, 181.819107, 184.745377, 191.514175, 188.074783, 181.011963, 182.899429, 186.806564, 186.818497, 187.128891, 183.713699, 187.365753, 186.852997, 187.94397, 186.9039, 184.280441, 182.398529]}"
+    },
+    {
+      "name": "16mps_A_seed39107 algorithm 4 has 30 repetitions",
+      "pass": true,
+      "detail": "{'algorithm': 4, 'records': 2448000, 'warmups': 10, 'repeats': 30, 'kernel_inner': 1, 'e2e_inner': 1, 'kernel_ms_mean': 76.3302, 'kernel_ms_median': 76.3647, 'kernel_ms_min': 75.861794, 'kernel_ms_max': 76.615295, 'end_to_end_ms_median': 80.548607, 'throughput_roots_s': 32071185.372711, 'solver_failures': 0, 'fast_path': 2433312, 'fallback_path': 14688, 'branch_error_gt_1e-3': 1611940, 'root_abs_rad': {'median': 0.0018899425746057297, 'p95': 0.008563021930741765, 'p99': 0.013115370016869576, 'max': 0.059938560100596394}, 'kernel_times_ms': [76.2743073, 76.4823685, 76.5442886, 76.2015991, 76.4176025, 76.3916779, 76.3815994, 75.9985275, 76.3191681, 76.4793625, 76.4518433, 75.8617935, 76.337822, 76.3647003, 76.2959671, 76.1290588, 76.5701752, 76.4741745, 76.3288956, 76.0882263, 76.5673904, 76.3038712, 76.6152954, 76.3365097, 76.0819168, 76.5487976, 76.379776, 76.456131, 75.8966064, 76.3264923], 'end_to_end_times_ms': [80.6464996, 81.1416321, 80.4713287, 80.2669144, 80.6285782, 80.5604477, 80.8612823, 80.5868454, 80.1484451, 80.4753265, 80.4831696, 80.4514542, 80.6756134, 80.4263687, 80.584671, 80.4869156, 80.8408966, 80.5036774, 80.2065887, 80.5574112, 80.5513306, 80.6359024, 80.8346558, 80.2313309, 80.3181763, 80.4343033, 80.6304321, 80.5486069, 80.1489563, 80.185791]}"
+    }
+  ]
+}

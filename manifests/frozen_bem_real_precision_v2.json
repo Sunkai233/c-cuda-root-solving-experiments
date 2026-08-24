@@ -1,0 +1,13 @@
+{
+  "id": "bem_real_precision_v2_20260824",
+  "candidate_commit": "cbfaa066f89a1a5f9e0d78aee35fff40711aebf5",
+  "reference_commit": "dcb8f2618f598edbf6a670fcc09a5d328e2c95f9",
+  "reference": "references/bem_real_ref_v4_df32_adaptive_test_20260824/bem_real_reference.csv",
+  "reference_csv_sha256": "7e101ff1ffec3208da6d1234411aa1e07c6facf66ceab4e5f23728abe29a1335",
+  "test_samples": 1000,
+  "qualifying_path": "df32_adaptive",
+  "root_absolute_error_margin_rad": 1e-7,
+  "wrong_branch_margin": 0,
+  "nonfinite_margin": 0,
+  "test_policy": "execute exactly once; v1 failed test remains authoritative for the rejected pure df32 path"
+}

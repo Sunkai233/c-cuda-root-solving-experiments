@@ -33,6 +33,20 @@ run_condition() {
   cp "$source_case"/*.dat "$case_dir/"
   cp "$source_case/5MW_600s_alpha.fst" "$case_dir/5MW_600s_${tag}.fst"
   sed -i "s#NRELOffshrBsline5MW_InflowWind_12mps.dat#NRELOffshrBsline5MW_InflowWind_${tag}.dat#" "$case_dir/5MW_600s_${tag}.fst"
+  # The compact BEM dataset needs the per-node GeomPhi branch flag.  The
+  # source case predates that diagnostic channel, so add it to every copied
+  # condition before OpenFAST is launched.
+  python3 - "$case_dir/NRELOffshrBsline5MW_Onshore_AeroDyn_noUA_debug.dat" <<'PY'
+from pathlib import Path
+import sys
+p = Path(sys.argv[1])
+s = p.read_text()
+needle = '"TnInd"\n'
+if '"GeomPhi"\n' not in s:
+    if needle not in s:
+        raise RuntimeError("TnInd nodal output marker not found")
+    p.write_text(s.replace(needle, needle + '"GeomPhi"\n', 1))
+PY
   printf 'condition_start=%s\ntag=%s\nURef=%s\nseed=%s\nIEC_class=%s\n' "$(date -u +%FT%TZ)" "$tag" "$uref" "$seed" "$turbclass" >"$cond/manifest.txt"
   (cd "$wind_dir"; "$turbsim" "$(basename "$inp")" >"$cond/turbsim.log" 2>&1)
   (cd "$case_dir"; "$openfast" "5MW_600s_${tag}.fst" >"$cond/openfast.log" 2>&1)
@@ -42,25 +56,29 @@ run_condition() {
   "$python_of" "$root/scripts/export_bem_real_dataset.py" --outb "$case_dir/5MW_600s_${tag}.outb" \
     --openfast-io "$root/_deps/openfast_3a9d3f2/openfast_io" --out-dir "$cond/dataset"
   dataset="$cond/dataset/bem_real_f64_soa.bin"
+  dataset_container="/work/results_raw/$run_id/$tag/dataset/bem_real_f64_soa.bin"
+  cond_container="/work/results_raw/$run_id/$tag"
   nvidia-smi --query-gpu=timestamp,name,uuid,temperature.gpu,power.draw,clocks.sm \
     --format=csv,noheader -i 0 >"$cond/gpu_before.csv"
   set +e
   docker run --rm --gpus device=0 --entrypoint bash -v "$root:/work" -w /work \
     nvidia/cuda:12.8.1-base-ubuntu24.04 -lc \
-    "timeout 45s bash -c 'while :; do build/benchmark_bem_real_v2 \"$dataset\" 1 1 /dev/null 0 >/dev/null; done'"
+    "timeout 45s bash -c 'while :; do build/benchmark_bem_real_v2 \"$dataset_container\" 1 1 /dev/null 0 >/dev/null; done'"
   heat_rc=$?; set -e; test "$heat_rc" -eq 124
   if [[ "$tag" == 8mps_* ]]; then order="1 4 0"; else order="4 0 1"; fi
   for alg in $order; do
     docker run --rm --gpus device=0 --entrypoint bash -v "$root:/work" -w /work \
       nvidia/cuda:12.8.1-base-ubuntu24.04 -lc \
-      "build/benchmark_bem_real_v2 '$dataset' 30 '$alg' '$cond/roots_alg${alg}.bin' 10" \
+      "build/benchmark_bem_real_v2 '$dataset_container' 30 '$alg' '$cond_container/roots_alg${alg}.bin' 10" \
       | tee "$cond/performance_alg${alg}.json"
   done
   nvidia-smi --query-gpu=timestamp,name,uuid,temperature.gpu,power.draw,clocks.sm \
     --format=csv,noheader -i 0 >"$cond/gpu_after.csv"
-  "$python_of" "$root/references/generate_bem_real_references.py" --dataset "$dataset" \
-    --baseline "$base_dir" --bisection-roots "$cond/roots_alg0.bin" --brent-roots "$cond/roots_alg1.bin" \
-    --out "$cond/oracle_300" --n 300 --seed "$seed"
+  docker run --rm --entrypoint python3 -v "$root:/work" -w /work \
+    docker.m.daocloud.io/vllm/vllm-openai:latest references/generate_bem_real_references.py \
+    --dataset "$dataset_container" --baseline /work/domains/bem/openfast/5MW_Baseline \
+    --bisection-roots "$cond_container/roots_alg0.bin" --brent-roots "$cond_container/roots_alg1.bin" \
+    --out "$cond_container/oracle_300" --n 300 --seed "$seed"
   if "$python_of" "$root/scripts/analyze_bem_real_holdout.py" --references "$cond/oracle_300/bem_real_reference.csv" \
       --roots "$cond/roots_alg4.bin" --out "$cond/adaptive_oracle_analysis"; then
     printf 'ADAPTIVE_ORACLE_PASS\n' >"$cond/ADAPTIVE_STATUS.txt"

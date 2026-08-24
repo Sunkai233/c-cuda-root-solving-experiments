@@ -100,6 +100,8 @@ def main():
     check("CPU no-LTO frozen-reference validation recorded",
           (args.cpu_fast_run / "nolto_validation/validation_test.csv").is_file(),
           args.cpu_fast_run / "nolto_validation/validation_test.csv")
+    check("CPU no-LTO status recorded", (args.cpu_fast_run / "NO_LTO_STATUS.txt").is_file(),
+          args.cpu_fast_run / "NO_LTO_STATUS.txt")
     check("CPU vector report recorded", (args.cpu_run / "vectorization.txt").is_file(),
           args.cpu_run / "vectorization.txt")
     check("CPU disassembly recorded", (args.cpu_run / "disassembly.txt").is_file(),

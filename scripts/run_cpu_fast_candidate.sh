@@ -35,8 +35,12 @@ for split in dev cal test; do
   taskset -c 0 build/cpu_strict/validate_cpu_references references/ref_v3_20260824 \
     "$split" "$out/strict_validation" | tee -a "$out/strict_validation.log"
 done
-taskset -c 0 build/cpu_nolto/validate_cpu_references references/ref_v3_20260824 test \
-  "$out/nolto_validation" | tee "$out/nolto_validation.log"
+if taskset -c 0 build/cpu_nolto/validate_cpu_references references/ref_v3_20260824 test \
+    "$out/nolto_validation" | tee "$out/nolto_validation.log"; then
+  printf 'NO_LTO_TEST_PASS\n' >"$out/NO_LTO_STATUS.txt"
+else
+  printf 'NO_LTO_TEST_FAIL\n' >"$out/NO_LTO_STATUS.txt"
+fi
 fast_ok=1
 for split in dev cal; do
   if ! taskset -c 0 build/cpu_fast/validate_cpu_references references/ref_v3_20260824 \

@@ -7,7 +7,7 @@ import mpmath as mp
 BASE=[(88.35475208,20.49129565),(19.26544214,22.71097963),(27.34093610,74.11707092)]
 FIELDS=["domain","sample_id","split","branch","p0","p1","p2","p3","p4","p5","root","gradient","residual","root_count","status"]
 def split(i):return "dev" if i%10<6 else("cal" if i%10<8 else "test")
-def bisect(f,a,b,n=90):
+def bisect(f,a,b,n=140):
     a,b=mp.mpf(a),mp.mpf(b);fa=f(a)
     for _ in range(n):
         m=(a+b)/2;fm=f(m)

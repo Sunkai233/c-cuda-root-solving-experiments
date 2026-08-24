@@ -31,21 +31,33 @@ def folds(g,b):
         a,fa=z,fz
     return out
 def main():
-    p=argparse.ArgumentParser();p.add_argument("--out",type=Path,required=True);p.add_argument("--n",type=int,default=3000);p.add_argument("--seed",type=int,default=20260824);a=p.parse_args();a.out.mkdir(parents=True,exist_ok=False);mp.mp.dps=80;rng=random.Random(a.seed);rows=[];extended=[];i=0
+    p=argparse.ArgumentParser();p.add_argument("--out",type=Path,required=True);p.add_argument("--n",type=int,default=3000);p.add_argument("--seed",type=int,default=20260824);a=p.parse_args();a.out.mkdir(parents=True,exist_ok=False);mp.mp.dps=80;rng=random.Random(a.seed);rows=[];extended=[];i=0;triple_index=0
     while i<a.n:
         g0,b0=BASE[i%len(BASE)];g=mp.mpf(str(g0*(.95+.1*rng.random())));b=mp.mpf(str(b0*(.95+.1*rng.random())));ff=folds(g,b)
         if len(ff)!=2:continue
         xf=ff[(i//3)&1];daf=xf/(1-xf)*mp.exp(-g*b*xf/(g+b*xf));delta=mp.power(10,-8+6*rng.random());da=daf*(1+delta if (i&2) else 1-delta)
         fun=lambda x:x-(da*mp.exp(g*b*x/(g+b*x)))/(1+da*mp.exp(g*b*x/(g+b*x)));rr=roots(fun)
         if len(rr) not in (1,3):continue
-        high=bool(i&1);x=rr[-1] if high else rr[0];den=g+b*x;r=da*mp.exp(g*b*x/den);fx=1-r*g*g*b/(den*den*(1+r)**2);fda=-(r/da)/(1+r)**2;grad=-fda/fx;cond=1/abs(fx);lam=mp.mpf("1e-4");greg=-fda*fx/(fx*fx+lam*lam);spacing=min([abs(rr[j+1]-rr[j]) for j in range(len(rr)-1)]or[mp.inf]);branch=("high"if high else"low")+("_triple"if len(rr)==3 else"_single")
+        selector=triple_index%3 if len(rr)==3 else 0;triple_index+=len(rr)==3;x=rr[selector];den=g+b*x;r=da*mp.exp(g*b*x/den);fx=1-r*g*g*b/(den*den*(1+r)**2);fda=-(r/da)/(1+r)**2;grad=-fda/fx;cond=1/abs(fx);lam=mp.mpf("1e-4");greg=-fda*fx/(fx*fx+lam*lam);spacing=min([abs(rr[j+1]-rr[j]) for j in range(len(rr)-1)]or[mp.inf]);branch=(("low","middle","high")[selector]+"_triple") if len(rr)==3 else "single"
         row=["cstr",f"cstrfold_{i:07d}",split(i),branch,*[mp.nstr(q,55) for q in (da,g,b,0,0,0,x,grad,abs(fun(x)))],len(rr),"ROOT_OK"];rows.append(row)
         extended.append({"sample_id":row[1],"fold_side":"upper"if (i//3)&1 else"lower","relative_fold_offset":mp.nstr((da-daf)/daf,25),"fold_x":mp.nstr(xf,30),"fold_Da":mp.nstr(daf,30),"root_spacing_min":mp.nstr(spacing,30),"Fx":mp.nstr(fx,30),"condition":mp.nstr(cond,30),"raw_gradient":mp.nstr(grad,30),"regularized_gradient_lambda_1e-4":mp.nstr(greg,30),"regularization_relative_bias":mp.nstr(abs(greg-grad)/max(abs(grad),mp.mpf("1e-300")),30),"root_count":len(rr),"selected_branch":branch});i+=1
     with (a.out/"cstr.csv").open("w",newline="",encoding="utf-8") as f:w=csv.writer(f);w.writerow(FIELDS);w.writerows(rows)
     with (a.out/"cstr_fold_metrics.csv").open("w",newline="",encoding="utf-8") as f:w=csv.DictWriter(f,fieldnames=list(extended[0]));w.writeheader();w.writerows(extended)
+    histories=[];ambiguous=[]
+    for case,(g0,b0) in enumerate(BASE):
+        g,b=mp.mpf(str(g0)),mp.mpf(str(b0));xf=folds(g,b);fold_da=sorted(x/(1-x)*mp.exp(-g*b*x/(g+b*x)) for x in xf);lo_da,hi_da=fold_da[0]*mp.mpf("0.8"),fold_da[1]*mp.mpf("1.2")
+        for direction in ("cold_up","hot_down"):
+            seq=[lo_da+(hi_da-lo_da)*k/80 for k in range(81)];seq=seq if direction=="cold_up" else seq[::-1];prev=None;previous_branch=None
+            for step,da in enumerate(seq):
+                fun=lambda x:x-(da*mp.exp(g*b*x/(g+b*x)))/(1+da*mp.exp(g*b*x/(g+b*x)));rr=roots(fun)
+                x=(rr[0] if direction=="cold_up" else rr[-1]) if prev is None else min(rr,key=lambda q:abs(q-prev));idx=rr.index(x);branch=("single" if len(rr)==1 else ("low","middle","high")[idx]);crossed=previous_branch is not None and branch!=previous_branch and "single" in (branch,previous_branch)
+                histories.append({"history_id":f"case{case}_{direction}","direction":direction,"step":step,"Da":mp.nstr(da,35),"gamma":mp.nstr(g,20),"beta":mp.nstr(b,20),"root_count":len(rr),"roots":";".join(mp.nstr(q,35) for q in rr),"selected_root":mp.nstr(x,35),"selected_branch":branch,"crossed_fold":int(crossed),"status":"ROOT_OK"});prev=x;previous_branch=branch
+                if len(rr)==3 and not any(q["history_id"]==f"case{case}_unknown" for q in ambiguous):ambiguous.append({"history_id":f"case{case}_unknown","Da":mp.nstr(da,35),"gamma":mp.nstr(g,20),"beta":mp.nstr(b,20),"root_count":3,"roots":";".join(mp.nstr(q,35) for q in rr),"selected_root":"","status":"ROOT_BRANCH_AMBIGUOUS"})
+    with (a.out/"cstr_continuation.csv").open("w",newline="",encoding="utf-8") as f:w=csv.DictWriter(f,fieldnames=list(histories[0]));w.writeheader();w.writerows(histories)
+    with (a.out/"cstr_unknown_history.csv").open("w",newline="",encoding="utf-8") as f:w=csv.DictWriter(f,fieldnames=list(ambiguous[0]));w.writeheader();w.writerows(ambiguous)
     split_counts={name:sum(row[2]==name for row in rows) for name in ("dev","cal","test")}
     root_counts={str(k):sum(int(row[-2])==k for row in rows) for k in (1,3)}
     assert len(rows)==a.n and sum(split_counts.values())==a.n
     assert len(extended)==a.n and sum(root_counts.values())==a.n
-    manifest={"seed":a.seed,"mpmath_dps":80,"n":a.n,"splits":split_counts,"root_counts":root_counts,"regularization_lambda":1e-4,"csv_sha256":hashlib.sha256((a.out/"cstr.csv").read_bytes()).hexdigest(),"metrics_sha256":hashlib.sha256((a.out/"cstr_fold_metrics.csv").read_bytes()).hexdigest()};(a.out/"manifest.json").write_text(json.dumps(manifest,indent=2),encoding="utf-8");print(json.dumps(manifest,indent=2))
+    manifest={"seed":a.seed,"mpmath_dps":80,"n":a.n,"splits":split_counts,"root_counts":root_counts,"branches":{name:sum(row[3]==name for row in rows) for name in ("single","low_triple","middle_triple","high_triple")},"continuation_histories":len(set(q["history_id"] for q in histories)),"continuation_rows":len(histories),"ambiguous_unknown_history_cases":len(ambiguous),"regularization_lambda":1e-4,"files_sha256":{name:hashlib.sha256((a.out/name).read_bytes()).hexdigest() for name in ("cstr.csv","cstr_fold_metrics.csv","cstr_continuation.csv","cstr_unknown_history.csv")}};(a.out/"manifest.json").write_text(json.dumps(manifest,indent=2),encoding="utf-8");print(json.dumps(manifest,indent=2))
 if __name__=="__main__":main()

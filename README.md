@@ -1,6 +1,6 @@
 # Supplementary C/CUDA root-solving experiments
 
-本仓库是 [`docs/SUPPLEMENTARY_EXPERIMENTS_C_CUDA.md`](docs/SUPPLEMENTARY_EXPERIMENTS_C_CUDA.md) 的可追溯 C17/CUDA C++ 实验实现。2026-08-24 的历史验收范围曾排除E8；2026-08-26已恢复跨硬件实验，并完成RTX 5090与V100两类架构的首轮冻结复现。结果支持正确性和目标预算迁移，但推翻混合精度加速比及RTX 5090路由阈值的直接迁移；A100、RTX 3090和RTX 4090扩展矩阵仍待执行。
+本仓库是 [`docs/SUPPLEMENTARY_EXPERIMENTS_C_CUDA.md`](docs/SUPPLEMENTARY_EXPERIMENTS_C_CUDA.md) 的可追溯 C17/CUDA C++ 实验实现。2026-08-24 的历史验收范围曾排除E8；2026-08-26已恢复跨硬件实验，并完成RTX 5090、V100与A100三类GPU的冻结复现。结果支持正确性和目标预算迁移，但推翻混合精度加速比及RTX 5090路由阈值的直接迁移；RTX 3090和RTX 4090扩展矩阵仍待执行。
 
 五域包括解析 BEM、Kepler、单二极管 PV、非等温 CSTR 和 Peng–Robinson 负对照。另有基于 OpenFAST/NREL 5 MW、真实翼型极坐标表的 600 s BEM 工作流。CPU/GPU 对比保持相同残差、物理分支、停止条件和输入；计时分别保存纯内核与 H2D+kernel+D2H，原始结果为追加式时间戳目录。
 
@@ -23,7 +23,7 @@
 - `docs/CERTIFICATE_GUIDED_ALGORITHM_V1.md`：E12–E16 新算法的理论条件、实现身份与不可越界表述。
 - `results_processed/E12_E16_CERTIFICATE_GOAL_ROUTING_RTX5090_V1.md`：认证精度选择、目标预算、动态路由与组合消融正式报告。
 - `results_processed/FINAL_ACCEPTANCE_E0_E16_NO_E8.md`：研究深度升级后的总验收入口。
-- `docs/E8_CROSS_ARCHITECTURE_PROTOCOL_V1.md`、`results_processed/E8_CROSS_ARCHITECTURE_V100_RTX5090_V1.md`：E8冻结协议与V100/RTX 5090阶段报告。
+- `docs/E8_CROSS_ARCHITECTURE_PROTOCOL_V1.md`、`results_processed/E8_CROSS_ARCHITECTURE_V100_A100_RTX5090_V2.md`：E8冻结协议与V100/A100/RTX 5090阶段报告；V1保留为两卡历史阶段结果。
 
 “实验完成”不等于所有候选成功。全局 CUDA fast-math 因 CSTR 换根被拒绝；纯 FP32、无纠错 df32、固定 44 步、O(1) 极坐标 LUT 和原始 FP32→FP64 adaptive 均为正式负结果。Peng–Robinson 的 GPU 大批量加速也为负结果。失败运行、失败样本和旧版本均保留，不得选择性删除。
 

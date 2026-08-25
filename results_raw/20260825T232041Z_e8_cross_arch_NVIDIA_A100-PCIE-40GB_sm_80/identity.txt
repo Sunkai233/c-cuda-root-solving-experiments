@@ -1,0 +1,4 @@
+gpu_index=0
+name=NVIDIA_A100-PCIE-40GB
+compute_capability=8.0
+arch=sm_80

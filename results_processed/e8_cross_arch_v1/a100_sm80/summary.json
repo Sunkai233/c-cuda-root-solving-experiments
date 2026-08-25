@@ -1,0 +1,103 @@
+{
+  "run": "20260825T232041Z_e8_cross_arch_NVIDIA_A100-PCIE-40GB_sm_80",
+  "device": {
+    "gpu_index": "0",
+    "name": "NVIDIA_A100-PCIE-40GB",
+    "compute_capability": "8.0",
+    "arch": "sm_80"
+  },
+  "correctness": {
+    "fp32_posterior_false_accept": 0,
+    "df32_posterior_false_accept": 0,
+    "fp32_residual_false_accept": 1,
+    "adaptive_failures": 0
+  },
+  "performance": [
+    {
+      "method": "fp64_compacted",
+      "kernel_median_ms": 163.857407,
+      "e2e_median_ms": 175.155426,
+      "fp64_over_method_kernel": 1.0,
+      "kernel_ci95_low": 0.9991032919873037,
+      "kernel_ci95_high": 1.0008689332897,
+      "fp64_over_method_e2e": 1.0,
+      "e2e_ci95_low": 0.999197330986973,
+      "e2e_ci95_high": 1.0008030144073032,
+      "fp32": 0,
+      "df32": 0,
+      "fp64": 2448000,
+      "solver_failures": 0
+    },
+    {
+      "method": "fixed_df32",
+      "kernel_median_ms": 241.680389,
+      "e2e_median_ms": 253.074814,
+      "fp64_over_method_kernel": 0.6779098322601532,
+      "kernel_ci95_low": 0.6771680951368211,
+      "kernel_ci95_high": 0.6786772715321125,
+      "fp64_over_method_e2e": 0.6921647942449501,
+      "e2e_ci95_low": 0.6904926181131286,
+      "e2e_ci95_high": 0.693359218575088,
+      "fp32": 0,
+      "df32": 2448000,
+      "fp64": 0,
+      "solver_failures": 888
+    },
+    {
+      "method": "threshold_adaptive",
+      "kernel_median_ms": 248.193024,
+      "e2e_median_ms": 259.173096,
+      "fp64_over_method_kernel": 0.6602244101824982,
+      "kernel_ci95_low": 0.6596071943185744,
+      "kernel_ci95_high": 0.6608930661027212,
+      "fp64_over_method_e2e": 0.6759196437027443,
+      "e2e_ci95_low": 0.6749999379153147,
+      "e2e_ci95_high": 0.6765383994767733,
+      "fp32": 0,
+      "df32": 2447017,
+      "fp64": 983,
+      "solver_failures": 0
+    },
+    {
+      "method": "certificate_root_branch",
+      "kernel_median_ms": 440.556549,
+      "e2e_median_ms": 451.290436,
+      "fp64_over_method_kernel": 0.3720125903085532,
+      "kernel_ci95_low": 0.37136972253773665,
+      "kernel_ci95_high": 0.3724916292473094,
+      "fp64_over_method_e2e": 0.3881750594672143,
+      "e2e_ci95_low": 0.3876568129832326,
+      "e2e_ci95_high": 0.3887069663737482,
+      "fp32": 204279,
+      "df32": 2107668,
+      "fp64": 136053,
+      "solver_failures": 0
+    },
+    {
+      "method": "certificate_root_branch_gradient",
+      "kernel_median_ms": 499.106812,
+      "e2e_median_ms": 509.930786,
+      "fp64_over_method_kernel": 0.3283052729297652,
+      "kernel_ci95_low": 0.32801303260914016,
+      "kernel_ci95_high": 0.3286972273401727,
+      "fp64_over_method_e2e": 0.3436667654360336,
+      "e2e_ci95_low": 0.34321588211905013,
+      "e2e_ci95_high": 0.34405246971619763,
+      "fp32": 201120,
+      "df32": 2110820,
+      "fp64": 136060,
+      "solver_failures": 0
+    }
+  ],
+  "goal_all_bounds_pass": true,
+  "routing": {
+    "frozen_max_regret_percent": 69.66764922601658,
+    "calibrated_max_regret_percent": 1.093497832166923,
+    "all_failures_zero": true
+  },
+  "acceptance": {
+    "correctness_transfer": true,
+    "goal_budget_transfer": true,
+    "rtx5090_threshold_transfer_5pct": false
+  }
+}

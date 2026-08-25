@@ -19,6 +19,7 @@
 - `results_processed/BEM_SCALE_CONDITION_ABLATIONS_RTX5090.md`、`REMAINING_CUDA_ABLATIONS_RTX5090.md`、`NSIGHT_COMPUTE_RTX5090_V1.md`：A0–A10 消融及直接 GPU profiling。
 - `results_processed/CPU_FAST_MATH_V1.md` 与 `FAST_MATH_CANDIDATE_RTX5090.md`：CPU/CUDA 编译策略严格分开。
 - `results_processed/FINAL_ACCEPTANCE_NO_E8.md`：最终范围、证据映射、正负结果和机械审计入口。
+- `docs/PAPER_CLAIM_EVIDENCE_MATRIX.md`：写作前的“主张—结果—原始证据—适用边界”冻结矩阵。
 
 “实验完成”不等于所有候选成功。全局 CUDA fast-math 因 CSTR 换根被拒绝；纯 FP32、无纠错 df32、固定 44 步、O(1) 极坐标 LUT 和原始 FP32→FP64 adaptive 均为正式负结果。Peng–Robinson 的 GPU 大批量加速也为负结果。失败运行、失败样本和旧版本均保留，不得选择性删除。
 

@@ -1,0 +1,93 @@
+{
+  "scope": "E8 V100 cross-architecture replication",
+  "passed": 17,
+  "total": 17,
+  "all_pass": true,
+  "checks": [
+    {
+      "name": "formal COMPLETE",
+      "pass": true,
+      "detail": "results_raw\\20260825T224712Z_e8_cross_arch_Tesla_V100-SXM2-32GB_sm_70\\COMPLETE.txt"
+    },
+    {
+      "name": "replication test marker",
+      "pass": true,
+      "detail": "results_raw\\20260825T224712Z_e8_cross_arch_Tesla_V100-SXM2-32GB_sm_70\\TEST_EXECUTED.txt"
+    },
+    {
+      "name": "dataset SHA-256",
+      "pass": true,
+      "detail": "2ed1dfc2a9c5cea03cccc163e90c8b7d6e84dc0efe950aca8b6a2b4902581b01"
+    },
+    {
+      "name": "frozen test SHA-256",
+      "pass": true,
+      "detail": "673e6d3090b1bbd599344c2cfec4d085939076db244a9a0f1ecdd39bb2d74298"
+    },
+    {
+      "name": "native device identity",
+      "pass": true,
+      "detail": "{'gpu_index': '0', 'name': 'Tesla_V100-SXM2-32GB', 'compute_capability': '7.0', 'arch': 'sm_70'}"
+    },
+    {
+      "name": "five performance methods",
+      "pass": true,
+      "detail": "5"
+    },
+    {
+      "name": "eight goal configurations",
+      "pass": true,
+      "detail": "8"
+    },
+    {
+      "name": "36 routing calibration configurations",
+      "pass": true,
+      "detail": "36"
+    },
+    {
+      "name": "45 routing test configurations",
+      "pass": true,
+      "detail": "45"
+    },
+    {
+      "name": "performance 30 repetitions",
+      "pass": true,
+      "detail": "5"
+    },
+    {
+      "name": "goal 30 repetitions",
+      "pass": true,
+      "detail": "8"
+    },
+    {
+      "name": "routing_cal 30 repetitions",
+      "pass": true,
+      "detail": "36"
+    },
+    {
+      "name": "routing_test 30 repetitions",
+      "pass": true,
+      "detail": "45"
+    },
+    {
+      "name": "correctness transfer",
+      "pass": true,
+      "detail": "{'fp32_posterior_false_accept': 0, 'df32_posterior_false_accept': 0, 'fp32_residual_false_accept': 1, 'adaptive_failures': 0}"
+    },
+    {
+      "name": "goal budget transfer",
+      "pass": true,
+      "detail": "True"
+    },
+    {
+      "name": "all routing failures zero",
+      "pass": true,
+      "detail": "{'frozen_max_regret_percent': 128.8168497952901, 'calibrated_max_regret_percent': 0.0, 'all_failures_zero': True}"
+    },
+    {
+      "name": "RTX5090 threshold transfer rejected",
+      "pass": true,
+      "detail": "128.8168497952901"
+    }
+  ]
+}

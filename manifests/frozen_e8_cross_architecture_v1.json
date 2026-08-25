@@ -1,0 +1,39 @@
+{
+  "frozen_utc": "2026-08-26T06:50:00Z",
+  "experiment": "E8 cross-GPU-architecture replication v1",
+  "baseline_commit": "676135abe907ab8f219bab0c9374da852842368b",
+  "timed_implementation": "C-style CUDA C; nvcc C++17 frontend only as required by CUDA; Python excluded from timed paths",
+  "toolkit": "CUDA 12.8.x",
+  "native_compilation": true,
+  "strict_flags": ["-O3", "--fmad=true", "--ftz=false", "--prec-div=true", "--prec-sqrt=true"],
+  "required_devices": [
+    {"model": "Tesla V100-SXM2-32GB", "compute_capability": "7.0"},
+    {"model": "NVIDIA A100-PCIE-40GB", "compute_capability": "8.0"},
+    {"model": "GeForce RTX 3090", "compute_capability": "8.6"},
+    {"model": "GeForce RTX 4090", "compute_capability": "8.9"},
+    {"model": "GeForce RTX 5090", "compute_capability": "12.0"}
+  ],
+  "recommended_additional_devices": [
+    {"model": "Quadro RTX 6000 24GB", "compute_capability": "7.5"},
+    {"model": "GeForce RTX 5060 Ti", "compute_capability": "12.0"}
+  ],
+  "dataset": {
+    "path": "results_raw/20260824T060500Z_bem_real_dataset_v2/bem_real_f64_soa.bin",
+    "sha256": "2ed1dfc2a9c5cea03cccc163e90c8b7d6e84dc0efe950aca8b6a2b4902581b01",
+    "records": 2448000
+  },
+  "frozen_test": {
+    "path": "references/bem_real_ref_v5_certificate_test_20260825/bem_real_reference.csv",
+    "sha256": "673e6d3090b1bbd599344c2cfec4d085939076db244a9a0f1ecdd39bb2d74298",
+    "records": 1000
+  },
+  "formal_protocol": {"warmups": 10, "repetitions": 30, "routing_cal_seed": 17041, "routing_test_seed": 27183},
+  "acceptance": {
+    "complete_posterior_false_acceptance_per_device": 0,
+    "adaptive_root_or_branch_failures_per_device": 0,
+    "goal_bounds_must_close_per_device": true,
+    "frozen_rtx5090_policy_max_regret_percent_for_threshold_transfer_claim": 5.0,
+    "negative_speedup_result_does_not_invalidate_execution": true
+  },
+  "claim_boundary": "Correctness transfer, within-device speedup transfer, and RTX 5090 routing-threshold transfer are evaluated separately. Host-dependent E2E values are not treated as pure GPU-architecture constants."
+}

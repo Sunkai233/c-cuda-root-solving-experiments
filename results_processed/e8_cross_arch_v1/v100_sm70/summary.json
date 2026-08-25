@@ -1,0 +1,103 @@
+{
+  "run": "20260825T224712Z_e8_cross_arch_Tesla_V100-SXM2-32GB_sm_70",
+  "device": {
+    "gpu_index": "0",
+    "name": "Tesla_V100-SXM2-32GB",
+    "compute_capability": "7.0",
+    "arch": "sm_70"
+  },
+  "correctness": {
+    "fp32_posterior_false_accept": 0,
+    "df32_posterior_false_accept": 0,
+    "fp32_residual_false_accept": 1,
+    "adaptive_failures": 0
+  },
+  "performance": [
+    {
+      "method": "fp64_compacted",
+      "kernel_median_ms": 242.709503,
+      "e2e_median_ms": 255.123367,
+      "fp64_over_method_kernel": 1.0,
+      "kernel_ci95_low": 0.9990085955801618,
+      "kernel_ci95_high": 1.000975492333321,
+      "fp64_over_method_e2e": 1.0,
+      "e2e_ci95_low": 0.9990507603149013,
+      "e2e_ci95_high": 1.0009606992060343,
+      "fp32": 0,
+      "df32": 0,
+      "fp64": 2448000,
+      "solver_failures": 0
+    },
+    {
+      "method": "fixed_df32",
+      "kernel_median_ms": 334.57254,
+      "e2e_median_ms": 347.703064,
+      "fp64_over_method_kernel": 0.7253329227829933,
+      "kernel_ci95_low": 0.723951422578133,
+      "kernel_ci95_high": 0.7268434708809979,
+      "fp64_over_method_e2e": 0.7336630397433362,
+      "e2e_ci95_low": 0.7322305518738126,
+      "e2e_ci95_high": 0.7353921741313586,
+      "fp32": 0,
+      "df32": 2448000,
+      "fp64": 0,
+      "solver_failures": 888
+    },
+    {
+      "method": "threshold_adaptive",
+      "kernel_median_ms": 343.752716,
+      "e2e_median_ms": 356.677979,
+      "fp64_over_method_kernel": 0.7059491846121974,
+      "kernel_ci95_low": 0.7047505670280346,
+      "kernel_ci95_high": 0.7066603152254961,
+      "fp64_over_method_e2e": 0.7151957121666513,
+      "e2e_ci95_low": 0.7140078441167287,
+      "e2e_ci95_high": 0.7158823167002994,
+      "fp32": 0,
+      "df32": 2447017,
+      "fp64": 983,
+      "solver_failures": 0
+    },
+    {
+      "method": "certificate_root_branch",
+      "kernel_median_ms": 620.41394,
+      "e2e_median_ms": 633.520813,
+      "fp64_over_method_kernel": 0.3912141597483454,
+      "kernel_ci95_low": 0.390615307237502,
+      "kernel_ci95_high": 0.3918197990143061,
+      "fp64_over_method_e2e": 0.4027014294451347,
+      "e2e_ci95_low": 0.4020746063919396,
+      "e2e_ci95_high": 0.40321908402686074,
+      "fp32": 204279,
+      "df32": 2107668,
+      "fp64": 136053,
+      "solver_failures": 0
+    },
+    {
+      "method": "certificate_root_branch_gradient",
+      "kernel_median_ms": 704.603149,
+      "e2e_median_ms": 717.206116,
+      "fp64_over_method_kernel": 0.34442632400512985,
+      "kernel_ci95_low": 0.3440087423515603,
+      "kernel_ci95_high": 0.3448576391849414,
+      "fp64_over_method_e2e": 0.355698749928256,
+      "e2e_ci95_low": 0.35532571901483295,
+      "e2e_ci95_high": 0.3563624868808067,
+      "fp32": 201120,
+      "df32": 2110820,
+      "fp64": 136060,
+      "solver_failures": 0
+    }
+  ],
+  "goal_all_bounds_pass": true,
+  "routing": {
+    "frozen_max_regret_percent": 128.8168497952901,
+    "calibrated_max_regret_percent": 0.0,
+    "all_failures_zero": true
+  },
+  "acceptance": {
+    "correctness_transfer": true,
+    "goal_budget_transfer": true,
+    "rtx5090_threshold_transfer_5pct": false
+  }
+}

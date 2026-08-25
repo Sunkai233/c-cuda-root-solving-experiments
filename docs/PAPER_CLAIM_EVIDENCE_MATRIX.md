@@ -40,6 +40,11 @@
 | C18 | 当前没有跨 GPU 架构可迁移性证据。 | E8 未执行；第二张同型号 RTX 5090 不算第二类架构。 | `FINAL_ACCEPTANCE_NO_E8.md`、`manifests/final_scope_no_e8_v1.json` | `final_acceptance_audit.json` | 不得声称 B300、RTX 5090 或其他 GPU 间速度比可迁移。 | 禁止写（迁移性主张） |
 | C19 | A4 算子融合是约 0.3% 的小幅正贡献，A6 递推是隔离微内核约 2.18×，二者不能被放大为完整求解器收益。 | A4 两 kernel/融合 `1.00308×`；A6 直接 sincos/递推 `2.1766×`，最大差 `1.308e-13`。 | `REMAINING_CUDA_ABLATIONS_RTX5090.md` | `results_processed/remaining_ablations_v1/`、原始消融目录 | A6 仅有序等步长角度预处理微内核。 | 限定后可写 |
 | C20 | 极坐标热启动的收益依赖工况匹配，不能称为无条件正贡献。 | cold/warm：低风速 `2.467×`、高风速 `2.580×`、阵风 `1.981×`；基线为 `0.941×`。 | `BEM_SCALE_CONDITION_ABLATIONS_RTX5090.md` | `results_processed/bem_ablations_v1/`、历史提示消融原始目录 | 冷/暖顺序独立运行；基线工况出现负收益。 | 限定后可写 |
+| C21 | 完整后验根—分支—梯度门在全新 80 位 test 中未出现错误接受。 | 仅残差 FP32 有 1 次错误接受；完整 FP32/df32 后验门错误接受均为 0；证书 adaptive 1000/1000 未观察到失败。 | `E12_E16_CERTIFICATE_GOAL_ROUTING_RTX5090_V1.md` | `results_raw/20260825T113818Z_e12_e16_certificate_goal_routing_rtx5090/certificate_test/` | sampled majorant 经 test 审计，不是通用严格区间证明；0/1000 不是数学保证。 | 限定后可写 |
+| C22 | 完整根+分支证书在真实 BEM 上相对 FP64 仍有显著 E2E 加速。 | 根+分支 `2.268× [2.262,2.271]`；再含梯度证书 `1.931× [1.926,1.934]`。 | 同上 | `results_processed/e12_e16_v1/certificate_performance_bootstrap.csv` | RTX 5090、2,448,000 状态、当前分支见证与编译配置。 | 限定后可写 |
+| C23 | 目标导向调度在四个预算上均使实际载荷/转矩误差低于一阶预测上界。 | 四预算全部闭合；1e-5 时载荷误差较 uniform 更小但慢约 5.3%；其他时间差小。 | 同上 | `results_processed/e12_e16_v1/goal_budget_summary.csv` | 输出是一阶聚合载荷/转矩代理；不能写成普遍性能提升或无余项严格定理。 | 限定后可写 |
+| C24 | 条件于已知困难比例，冻结的层次化路由策略可接近逐点实测最优。 | 独立排序种子下，auto 在 9 点中 7 点命中最快模式；相对事后最优最大 regret 0.128%。 | 同上 | `results_processed/e12_e16_v1/routing_summary.csv` | 受控基准直接提供 `p`，未单独计入在线估计/归约/决策开销；阈值仅适用于本 RTX 5090、当前批量和 robust 路径；E8 仍未执行。 | 限定后可写 |
+| C25 | 完整同区分支见证不可由“到大物理区边界的距离”替代。 | 关闭完整见证的开发版输出误差超过预测预算；正式版四预算全部闭合。 | `CERTIFICATE_GUIDED_ALGORITHM_V1.md`、E12–E16 报告 | 开发失败记录与正式 goal JSON | 同一物理区可有多个交点；必须见证冻结的最近 hint 分支身份。 | 可写（机制性负例） |
 
 ## 3. 旧结果与新结果的权威关系
 

@@ -1,0 +1,83 @@
+{
+  "scope": "E12-E16 research-depth extension",
+  "passed": 15,
+  "total": 15,
+  "all_pass": true,
+  "checks": [
+    {
+      "name": "formal COMPLETE",
+      "pass": true,
+      "detail": "results_raw\\20260825T113818Z_e12_e16_certificate_goal_routing_rtx5090\\COMPLETE.txt"
+    },
+    {
+      "name": "one-shot marker",
+      "pass": true,
+      "detail": "manifests\\TEST_SPLIT_EXECUTED_certificate_v1_20260825.txt"
+    },
+    {
+      "name": "frozen reference SHA-256",
+      "pass": true,
+      "detail": "673e6d3090b1bbd599344c2cfec4d085939076db244a9a0f1ecdd39bb2d74298"
+    },
+    {
+      "name": "false_accept_zero",
+      "pass": true,
+      "detail": "True"
+    },
+    {
+      "name": "adaptive_failures_zero",
+      "pass": true,
+      "detail": "True"
+    },
+    {
+      "name": "goal_bounds_pass",
+      "pass": true,
+      "detail": "True"
+    },
+    {
+      "name": "routing_failures_zero",
+      "pass": true,
+      "detail": "True"
+    },
+    {
+      "name": "performance methods",
+      "pass": true,
+      "detail": "5"
+    },
+    {
+      "name": "goal configurations",
+      "pass": true,
+      "detail": "8"
+    },
+    {
+      "name": "routing configurations",
+      "pass": true,
+      "detail": "45"
+    },
+    {
+      "name": "performance 30 repetitions",
+      "pass": true,
+      "detail": "5 files"
+    },
+    {
+      "name": "routing 30 repetitions",
+      "pass": true,
+      "detail": "45 files"
+    },
+    {
+      "name": "goal 30 repetitions",
+      "pass": true,
+      "detail": "8 files"
+    },
+    {
+      "name": "test certificate groups",
+      "pass": true,
+      "detail": "9"
+    },
+    {
+      "name": "new frozen test size",
+      "pass": true,
+      "detail": "1000"
+    }
+  ]
+}

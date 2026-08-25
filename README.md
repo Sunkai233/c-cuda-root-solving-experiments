@@ -20,6 +20,9 @@
 - `results_processed/CPU_FAST_MATH_V1.md` 与 `FAST_MATH_CANDIDATE_RTX5090.md`：CPU/CUDA 编译策略严格分开。
 - `results_processed/FINAL_ACCEPTANCE_NO_E8.md`：最终范围、证据映射、正负结果和机械审计入口。
 - `docs/PAPER_CLAIM_EVIDENCE_MATRIX.md`：写作前的“主张—结果—原始证据—适用边界”冻结矩阵。
+- `docs/CERTIFICATE_GUIDED_ALGORITHM_V1.md`：E12–E16 新算法的理论条件、实现身份与不可越界表述。
+- `results_processed/E12_E16_CERTIFICATE_GOAL_ROUTING_RTX5090_V1.md`：认证精度选择、目标预算、动态路由与组合消融正式报告。
+- `results_processed/FINAL_ACCEPTANCE_E0_E16_NO_E8.md`：研究深度升级后的总验收入口。
 
 “实验完成”不等于所有候选成功。全局 CUDA fast-math 因 CSTR 换根被拒绝；纯 FP32、无纠错 df32、固定 44 步、O(1) 极坐标 LUT 和原始 FP32→FP64 adaptive 均为正式负结果。Peng–Robinson 的 GPU 大批量加速也为负结果。失败运行、失败样本和旧版本均保留，不得选择性删除。
 

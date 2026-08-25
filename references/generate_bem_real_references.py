@@ -7,6 +7,7 @@ brackets; every accepted root and derivative is refined/evaluated with mpmath.
 """
 from __future__ import annotations
 import argparse,bisect,csv,hashlib,json,math,struct
+from datetime import datetime,timezone
 from pathlib import Path
 import mpmath as mp
 import numpy as np
@@ -110,5 +111,5 @@ def main():
                 row.update(residual_abs=mp.nstr(abs(f0),20),fphi_left=mp.nstr(fl,30),fphi_right=mp.nstr(fr,30),fvx=mp.nstr(fv,30),gradient_vx_left=mp.nstr(-fv/fl,30),gradient_vx_right=mp.nstr(-fv/fr,30),bisection_error=repr(abs(math.remainder(float(bisr[i]-r),2*math.pi))),brent_error=repr(abs(math.remainder(float(br[i]-r),2*math.pi))),status="ROOT_OK")
             else:row.update(status="NO_CERTIFIED_ROOT")
             w.writerow(row)
-    manifest={"created_utc":"2026-08-24","mpmath_dps":80,"selection":{"remaining_bisection_brent_disagreements":int(len(dis)),"nearest_polar_knots":int(near_count),"total":int(len(idx)),"random_seed":a.seed,"excluded_references":[str(x) for x in a.exclude_reference],"forced_split":a.split_label},"target_rule":"first valid solver region, then certified crossing closest to previous-step hint","dataset_sha256":hashlib.sha256(a.dataset.read_bytes()).hexdigest(),"csv_sha256":hashlib.sha256((a.out/"bem_real_reference.csv").read_bytes()).hexdigest()};(a.out/"manifest.json").write_text(json.dumps(manifest,indent=2),encoding="utf-8");print(json.dumps(manifest,indent=2))
+    manifest={"created_utc":datetime.now(timezone.utc).isoformat(),"mpmath_dps":80,"selection":{"remaining_bisection_brent_disagreements":int(len(dis)),"nearest_polar_knots":int(near_count),"total":int(len(idx)),"random_seed":a.seed,"excluded_references":[str(x) for x in a.exclude_reference],"forced_split":a.split_label},"target_rule":"first valid solver region, then certified crossing closest to previous-step hint","dataset_sha256":hashlib.sha256(a.dataset.read_bytes()).hexdigest(),"csv_sha256":hashlib.sha256((a.out/"bem_real_reference.csv").read_bytes()).hexdigest()};(a.out/"manifest.json").write_text(json.dumps(manifest,indent=2),encoding="utf-8");print(json.dumps(manifest,indent=2))
 if __name__=="__main__":main()

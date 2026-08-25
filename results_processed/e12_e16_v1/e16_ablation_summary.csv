@@ -1,0 +1,7 @@
+module,evidence,full,disabled,interpretation
+root posterior versus residual-only,new frozen test FP32,0,1,residual-only falsely accepts a wrong candidate
+gradient certificate,full-state performance,245.657059,209.119934,gradient certificate has measurable cost; root/branch correctness is unchanged
+goal-oriented allocation,four output budgets,1.1234287309077982e-08,1.1234287309077982e-08,compare path allocation and time against uniform tolerance; both retain branch witness
+dynamic routing,"nine p values, independent ordering seed",0.1274271201916255,94.3140816753869,values are worst regret percentages for auto and always-inline
+df32 path,full-state performance,209.119934,474.486145,certificate path versus all-FP64
+robust fallback,full-state performance,0,888,fixed df32 without fallback leaves failures

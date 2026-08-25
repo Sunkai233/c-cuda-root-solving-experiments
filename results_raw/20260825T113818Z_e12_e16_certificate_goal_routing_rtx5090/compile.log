@@ -1,0 +1,128 @@
+
+==========
+== CUDA ==
+==========
+
+CUDA Version 12.8.1
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+ptxas info    : 296 bytes gmem
+ptxas info    : Compiling entry function '_Z15adaptive_kernelPK4CaseP6Resultmdd' for 'sm_120'
+ptxas info    : Function properties for _Z15adaptive_kernelPK4CaseP6Resultmdd
+    112 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 152 registers, used 0 barriers, 112 bytes cumulative stack size
+ptxas info    : Compile time = 6221.596 ms
+ptxas info    : Function properties for _Z11bd_residual4df32dddjRi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Function properties for _Z13evaluate_pathRK4Caseiddi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Function properties for _Z9bd_refinefdddj
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Function properties for __internal_trig_reduction_slowpathd
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Compiling entry function '_Z11gate_kernelPK4CaseP6Resultmiddi' for 'sm_120'
+ptxas info    : Function properties for _Z11gate_kernelPK4CaseP6Resultmiddi
+    112 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 102 registers, used 0 barriers, 112 bytes cumulative stack size
+ptxas info    : Compile time = 5909.733 ms
+ptxas info    : Function properties for _Z11bd_residual4df32dddjRi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Function properties for _Z13evaluate_pathRK4Caseiddi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Function properties for _Z9bd_refinefdddj
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Function properties for __internal_trig_reduction_slowpathd
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : 296 bytes gmem
+ptxas info    : Compiling entry function '_Z15fallback_kernelPKdS0_S0_S0_PdS1_PhS2_PKmPKjm' for 'sm_120'
+ptxas info    : Function properties for _Z15fallback_kernelPKdS0_S0_S0_PdS1_PhS2_PKmPKjm
+    96 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 90 registers, used 0 barriers, 96 bytes cumulative stack size
+ptxas info    : Compile time = 517.949 ms
+ptxas info    : Function properties for __internal_trig_reduction_slowpathd
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Compiling entry function '_Z12first_kernelPKdS0_S0_S0_PdS1_PhS2_PmPjmidd' for 'sm_120'
+ptxas info    : Function properties for _Z12first_kernelPKdS0_S0_S0_PdS1_PhS2_PmPjmidd
+    112 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 100 registers, used 0 barriers, 112 bytes cumulative stack size
+ptxas info    : Compile time = 9703.962 ms
+ptxas info    : Function properties for _Z11bd_residual4df32dddjRi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Function properties for _Z9bd_refinefdddj
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Function properties for __internal_trig_reduction_slowpathd
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : 296 bytes gmem
+ptxas info    : Compiling entry function '_Z10qoi_kernelPKdS0_S0_S0_P3Qoimdd' for 'sm_120'
+ptxas info    : Function properties for _Z10qoi_kernelPKdS0_S0_S0_P3Qoimdd
+    48 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 52 registers, used 0 barriers, 48 bytes cumulative stack size
+ptxas info    : Compile time = 50.169 ms
+ptxas info    : Function properties for __internal_trig_reduction_slowpathd
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Compiling entry function '_Z15fallback_kernelPKdS0_S0_S0_PdS1_S1_PhS2_PKmPKjmdd' for 'sm_120'
+ptxas info    : Function properties for _Z15fallback_kernelPKdS0_S0_S0_PdS1_S1_PhS2_PKmPKjmdd
+    96 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 86 registers, used 0 barriers, 96 bytes cumulative stack size
+ptxas info    : Compile time = 593.097 ms
+ptxas info    : Function properties for __internal_trig_reduction_slowpathd
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Compiling entry function '_Z13select_kernelPKdS0_S0_S0_PdS1_S1_PhS2_PmPjmiddd' for 'sm_120'
+ptxas info    : Function properties for _Z13select_kernelPKdS0_S0_S0_PdS1_S1_PhS2_PmPjmiddd
+    96 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 94 registers, used 0 barriers, 96 bytes cumulative stack size
+ptxas info    : Compile time = 1803.677 ms
+ptxas info    : Function properties for _Z11bd_residual4df32dddjRi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Function properties for __internal_trig_reduction_slowpathd
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Compiling entry function '_Z16reference_kernelPKdS0_S0_S0_PdP3QoiPhmdd' for 'sm_120'
+ptxas info    : Function properties for _Z16reference_kernelPKdS0_S0_S0_PdP3QoiPhmdd
+    96 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 86 registers, used 0 barriers, 96 bytes cumulative stack size
+ptxas info    : Compile time = 562.278 ms
+ptxas info    : Function properties for __internal_trig_reduction_slowpathd
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : 272 bytes gmem
+ptxas info    : Compiling entry function '_Z11warp_kernelPKdS0_S0_S0_PdPhmmm' for 'sm_120'
+ptxas info    : Function properties for _Z11warp_kernelPKdS0_S0_S0_PdPhmmm
+    96 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 88 registers, used 0 barriers, 96 bytes cumulative stack size
+ptxas info    : Compile time = 441.109 ms
+ptxas info    : Function properties for __internal_trig_reduction_slowpathd
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Compiling entry function '_Z12block_kernelPKdS0_S0_S0_PdPhmmm' for 'sm_120'
+ptxas info    : Function properties for _Z12block_kernelPKdS0_S0_S0_PdPhmmm
+    96 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 90 registers, used 1 barriers, 96 bytes cumulative stack size, 2052 bytes smem
+ptxas info    : Compile time = 403.980 ms
+ptxas info    : Function properties for __internal_trig_reduction_slowpathd
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Compiling entry function '_Z15global_fallbackPKdS0_S0_S0_PdPhPKmPKjm' for 'sm_120'
+ptxas info    : Function properties for _Z15global_fallbackPKdS0_S0_S0_PdPhPKmPKjm
+    96 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 88 registers, used 0 barriers, 96 bytes cumulative stack size
+ptxas info    : Compile time = 237.216 ms
+ptxas info    : Function properties for __internal_trig_reduction_slowpathd
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Compiling entry function '_Z15classify_globalPKdS0_S0_S0_PdPhPmPjmmm' for 'sm_120'
+ptxas info    : Function properties for _Z15classify_globalPKdS0_S0_S0_PdPhPmPjmmm
+    48 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 62 registers, used 0 barriers, 48 bytes cumulative stack size
+ptxas info    : Compile time = 149.022 ms
+ptxas info    : Function properties for __internal_trig_reduction_slowpathd
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Compiling entry function '_Z13inline_kernelPKdS0_S0_S0_PdPhmmm' for 'sm_120'
+ptxas info    : Function properties for _Z13inline_kernelPKdS0_S0_S0_PdPhmmm
+    96 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 86 registers, used 0 barriers, 96 bytes cumulative stack size
+ptxas info    : Compile time = 398.071 ms
+ptxas info    : Function properties for __internal_trig_reduction_slowpathd
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads

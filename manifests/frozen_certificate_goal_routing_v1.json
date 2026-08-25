@@ -1,0 +1,49 @@
+{
+  "frozen_utc": "2026-08-25T11:38:00Z",
+  "candidate": "Certificate-Guided, Goal-Oriented Mixed-Precision Batched Root Solving v1",
+  "scope": ["E12", "E13", "E14", "E15", "E16"],
+  "timed_implementation": "C17-style CUDA C, nvcc C++17 only as required by CUDA; Python excluded from timed path",
+  "compiler_image": "nvidia/cuda:12.8.1-devel-ubuntu24.04",
+  "gpu_arch": "sm_120",
+  "strict_flags": ["--fmad=true", "--ftz=false", "--prec-div=true", "--prec-sqrt=true"],
+  "root_tolerance_rad": 1e-7,
+  "gradient_relative_tolerance": 2e-6,
+  "posterior_lipschitz_inflation": 8.0,
+  "roundoff_guard_ulps": 128,
+  "branch_witness": "FP64 limited nearest-hint scan; candidate radius includes distance to witness plus 5e-10 rad",
+  "goal_relative_budgets": [1e-4, 1e-5, 1e-6, 1e-7],
+  "routing_probabilities": [0, 0.001, 0.01, 0.05, 0.1, 0.25, 0.5, 0.75, 1],
+  "routing_test_seed": 27183,
+  "routing_auto_policy": [
+    {"p_lt": 0.0005, "mode": "inline"},
+    {"p_lt": 0.03, "mode": "block_local"},
+    {"p_lt": 0.075, "mode": "global_compact"},
+    {"p_lt": 0.6, "mode": "block_local"},
+    {"p_lt": 0.9, "mode": "global_compact"},
+    {"otherwise": "inline"}
+  ],
+  "frozen_test": {
+    "path": "references/bem_real_ref_v5_certificate_test_20260825/bem_real_reference.csv",
+    "n": 1000,
+    "mpmath_dps": 80,
+    "selection_seed": 20260825,
+    "csv_sha256": "673e6d3090b1bbd599344c2cfec4d085939076db244a9a0f1ecdd39bb2d74298",
+    "excluded_prior_reference_sets": 4
+  },
+  "source_sha256": {
+    "include/bem_posterior_certificate.cuh": "656e0392234b6375bcc66093ce9026897ef0b7a61aac8c4cc7ef03817defa72e",
+    "src_cuda/validate_certificate_precision.cu": "10615ce5fa87588b0e4c6b62489f490c7e79779f25a6f3408878dac67ec09a22",
+    "src_cuda/benchmark_certificate_precision.cu": "4cd16a719b950ff259f647efbb89574a67512f8d6edaeec7fe9ec536f1f23a5e",
+    "src_cuda/benchmark_goal_budget.cu": "9e9b3c4929caadc4ce89560f55940e62de5fa9d80b6c0c4a5c65fee7f91f7e73",
+    "src_cuda/benchmark_dynamic_routing.cu": "c0d823eb5953d5a7132c29c0d7c9e64c30be0b45f75569e3fc171505ed253b75"
+  },
+  "acceptance": {
+    "frozen_test_false_acceptance": 0,
+    "adaptive_root_or_branch_failures": 0,
+    "goal_actual_error_must_not_exceed_reported_bound": true,
+    "all_routing_modes_solver_failures": 0,
+    "formal_repetitions": 30,
+    "bootstrap_resamples": 10000
+  },
+  "theory_boundary": "The Kantorovich radius is conditional on a valid Lipschitz majorant. The CUDA implementation uses an inflated sampled majorant and is empirically audited on an independent 80-digit holdout; it is not described as a general interval-arithmetic proof."
+}

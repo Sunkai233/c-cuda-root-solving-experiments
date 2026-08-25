@@ -1,0 +1,20 @@
+{
+  "created_utc": "2026-08-25T11:36:47.326536+00:00",
+  "mpmath_dps": 80,
+  "selection": {
+    "remaining_bisection_brent_disagreements": 0,
+    "nearest_polar_knots": 700,
+    "total": 1000,
+    "random_seed": 20260825,
+    "excluded_references": [
+      "references/bem_real_ref_v1_20260824/bem_real_reference.csv",
+      "references/bem_real_ref_v2_test_20260824/bem_real_reference.csv",
+      "references/bem_real_ref_v3_precision_test_20260824/bem_real_reference.csv",
+      "references/bem_real_ref_v4_df32_adaptive_test_20260824/bem_real_reference.csv"
+    ],
+    "forced_split": "test"
+  },
+  "target_rule": "first valid solver region, then certified crossing closest to previous-step hint",
+  "dataset_sha256": "2ed1dfc2a9c5cea03cccc163e90c8b7d6e84dc0efe950aca8b6a2b4902581b01",
+  "csv_sha256": "673e6d3090b1bbd599344c2cfec4d085939076db244a9a0f1ecdd39bb2d74298"
+}

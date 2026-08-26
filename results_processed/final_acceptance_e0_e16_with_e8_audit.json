@@ -1,0 +1,51 @@
+{
+  "scope": "E0-E16 including E8 five-GPU matrix",
+  "passed": 145,
+  "total": 145,
+  "all_pass": true,
+  "components": [
+    {
+      "scope": "E0-E11 excluding historical E8",
+      "path": "results_processed/final_acceptance_audit.json",
+      "passed": 62,
+      "total": 62,
+      "all_pass": true
+    },
+    {
+      "scope": "E12-E16 RTX5090 baseline",
+      "path": "results_processed/e12_e16_v1/audit.json",
+      "passed": 15,
+      "total": 15,
+      "all_pass": true
+    },
+    {
+      "scope": "E8 V100 sm70",
+      "path": "results_processed/e8_cross_arch_v1/v100_sm70/audit.json",
+      "passed": 17,
+      "total": 17,
+      "all_pass": true
+    },
+    {
+      "scope": "E8 A100 sm80",
+      "path": "results_processed/e8_cross_arch_v1/a100_sm80/audit.json",
+      "passed": 17,
+      "total": 17,
+      "all_pass": true
+    },
+    {
+      "scope": "E8 RTX3090 sm86",
+      "path": "results_processed/e8_cross_arch_v1/rtx3090_sm86/audit.json",
+      "passed": 17,
+      "total": 17,
+      "all_pass": true
+    },
+    {
+      "scope": "E8 RTX4090 sm89",
+      "path": "results_processed/e8_cross_arch_v1/rtx4090_sm89/audit.json",
+      "passed": 17,
+      "total": 17,
+      "all_pass": true
+    }
+  ],
+  "rtx5090_role": "Frozen E12-E16 baseline; not double-counted as an E8 replication audit."
+}

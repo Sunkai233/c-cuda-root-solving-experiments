@@ -1,0 +1,4 @@
+gpu_index=0
+name=NVIDIA_GeForce_RTX_3090
+compute_capability=8.6
+arch=sm_86

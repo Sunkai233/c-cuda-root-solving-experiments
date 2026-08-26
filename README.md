@@ -1,6 +1,6 @@
 # Supplementary C/CUDA root-solving experiments
 
-本仓库是 [`docs/SUPPLEMENTARY_EXPERIMENTS_C_CUDA.md`](docs/SUPPLEMENTARY_EXPERIMENTS_C_CUDA.md) 的可追溯 C17/CUDA C++ 实验实现。2026-08-24 的历史验收范围曾排除E8；2026-08-26已恢复跨硬件实验，并完成RTX 5090、RTX 4090、V100与A100四类GPU的冻结复现。正确性和目标预算在四卡迁移；混合精度性能与路由阈值只在相近消费级卡间迁移，不能直接搬到V100/A100。扩展矩阵仅剩RTX 3090待执行。
+本仓库是 [`docs/SUPPLEMENTARY_EXPERIMENTS_C_CUDA.md`](docs/SUPPLEMENTARY_EXPERIMENTS_C_CUDA.md) 的可追溯 C17/CUDA C++ 实验实现。2026-08-24 的历史验收范围曾排除E8；2026-08-26已完成RTX 5090、RTX 4090、RTX 3090、V100与A100五卡冻结复现。正确性和目标预算在五卡迁移；合格混合精度方法在三张消费级卡加速、在强FP64的V100/A100变慢。RTX 5090冻结路由在3090/4090通过5%迁移门，但不能直接搬到V100/A100。
 
 五域包括解析 BEM、Kepler、单二极管 PV、非等温 CSTR 和 Peng–Robinson 负对照。另有基于 OpenFAST/NREL 5 MW、真实翼型极坐标表的 600 s BEM 工作流。CPU/GPU 对比保持相同残差、物理分支、停止条件和输入；计时分别保存纯内核与 H2D+kernel+D2H，原始结果为追加式时间戳目录。
 
@@ -22,8 +22,8 @@
 - `docs/PAPER_CLAIM_EVIDENCE_MATRIX.md`：写作前的“主张—结果—原始证据—适用边界”冻结矩阵。
 - `docs/CERTIFICATE_GUIDED_ALGORITHM_V1.md`：E12–E16 新算法的理论条件、实现身份与不可越界表述。
 - `results_processed/E12_E16_CERTIFICATE_GOAL_ROUTING_RTX5090_V1.md`：认证精度选择、目标预算、动态路由与组合消融正式报告。
-- `results_processed/FINAL_ACCEPTANCE_E0_E16_NO_E8.md`：研究深度升级后的总验收入口。
-- `docs/E8_CROSS_ARCHITECTURE_PROTOCOL_V1.md`、`results_processed/E8_CROSS_ARCHITECTURE_V100_A100_RTX4090_RTX5090_V3.md`：E8冻结协议与四卡阶段报告；V1/V2保留为历史阶段结果。
+- `results_processed/FINAL_ACCEPTANCE_E0_E16_WITH_E8.md`：包含E8五卡矩阵的最终总验收入口；历史 `NO_E8` 报告保留用于追踪范围演变。
+- `docs/E8_CROSS_ARCHITECTURE_PROTOCOL_V1.md`、`results_processed/E8_CROSS_ARCHITECTURE_FIVE_GPU_FINAL_V4.md`：E8冻结协议与五卡最终报告；V1–V3保留为历史阶段结果。
 
 “实验完成”不等于所有候选成功。全局 CUDA fast-math 因 CSTR 换根被拒绝；纯 FP32、无纠错 df32、固定 44 步、O(1) 极坐标 LUT 和原始 FP32→FP64 adaptive 均为正式负结果。Peng–Robinson 的 GPU 大批量加速也为负结果。失败运行、失败样本和旧版本均保留，不得选择性删除。
 

@@ -6,7 +6,7 @@
 
 - 实验取证基线：`a6d2cdeda9fc6667007cf97a209edd8fd1d0c5dd`
 - 论文仓库核对基线：`edd79728312bc71fa5b35b12e8c018dae7f34ecf`
-- 历史验收范围：E0–E7、E9–E11，曾排除E8；2026-08-26已完成RTX 5090/V100首轮跨架构复现，扩展五卡矩阵仍在执行。
+- 历史验收范围：E0–E7、E9–E11，曾排除E8；2026-08-26已完成RTX 5090/4090/3090/V100/A100五卡冻结矩阵，E8正式恢复并完成。
 - 机械审计：`results_processed/final_acceptance_audit.json`，`passed=62`、`total=62`、`all_pass=true`。
 
 状态定义：
@@ -37,13 +37,13 @@
 | C15 | CSTR 多根/折叠结果支持“显式分区、历史连续跟踪和近折叠正则化必须分开报告”。 | 三单调区间枚举、连续跟踪、未知历史歧义和正则化梯度均完成验证。 | `CSTR_FOLD_VALIDATION_RTX5090_V1.md` | 对应 CSTR fold 冻结 test 目录、参考集和一次性 marker | 不把正则化梯度冒充奇异点处经典导数；不把历史未知时的分支选择称为唯一真根。 | 可写 |
 | C16 | 全局 CUDA fast-math 被拒绝；CPU fast-math 只能逐域、有条件报告。 | CUDA fast-math 导致 CSTR dev/cal 换根；CPU double fast 五域通过冻结门，但性能显著性逐域不同。SIMD pragma 和 PGO 也不是通用收益。 | `FAST_MATH_CANDIDATE_RTX5090.md`、`CPU_FAST_MATH_V1.md`、`CPU_C17_PERFORMANCE_V1.md` | CUDA fast 原始目录、`results_raw/20260824T123709Z_cpu_fast_candidate/`、CPU 编译机器表 | CPU 与 CUDA 编译策略不能混写；不得写“fast-math 无损且普遍加速”。 | 限定后可写 / CUDA 负结果 |
 | C17 | 两个新增 OpenFAST 600 s 工况支持方法在所测工况内的正确性与性能，但不证明全风况规律。 | 8 m/s 与 16 m/s 各 2,448,000 状态、0 solver failure；困难 oracle 各 300 点未观察到失败；adaptive/Brent E2E 分别 `1.628×`、`2.321×`。 | `BEM_OPENFAST_MULTICONDITION_V1.md` | `results_raw/20260824T124112Z_openfast_multicondition_v1/`、`results_processed/bem_openfast_multicondition_v1/openfast_multicondition_bootstrap.csv` | 只覆盖 8 m/s IEC C、12 m/s NTM B、16 m/s IEC A；不是风况总体统计。 | 限定后可写 |
-| C18 | RTX 5090/4090/V100/A100上冻结正确性和目标预算均通过，但性能迁移按硬件类别分化。 | 完整门均0错误接受、自适应均0/1000失败、四预算闭合；根+分支证书相对FP64在4090为`2.386× [2.378,2.390]`，在V100/A100仅`0.403×/0.388×`。 | `E8_CROSS_ARCHITECTURE_V100_A100_RTX4090_RTX5090_V3.md` | 三个E8跨架构原始目录及`results_processed/e8_cross_arch_v1/{v100_sm70,a100_sm80,rtx4090_sm89}/` | 当前覆盖Blackwell/Ada消费级及Volta/Ampere数据中心GPU；3090未完成前不能升级为消费级Ampere或完整五卡规律。 | 限定后可写 / 性能迁移分类报告 |
+| C18 | RTX 5090/4090/3090/V100/A100上冻结正确性和目标预算均通过，但性能迁移按硬件类别分化。 | 完整门均0错误接受、自适应均0/1000失败、四预算闭合；根+分支证书相对FP64在4090/3090为`2.386×/2.467×`，在V100/A100仅`0.403×/0.388×`。 | `E8_CROSS_ARCHITECTURE_FIVE_GPU_FINAL_V4.md` | 四个E8跨架构原始目录及`results_processed/e8_cross_arch_v1/{v100_sm70,a100_sm80,rtx3090_sm86,rtx4090_sm89}/` | 覆盖所测Volta、Ampere、Ada、Blackwell和两类FP64成本结构；分类结论不能外推到未测设备、数据或编译配置。 | 限定后可写 / 性能迁移分类报告 |
 | C19 | A4 算子融合是约 0.3% 的小幅正贡献，A6 递推是隔离微内核约 2.18×，二者不能被放大为完整求解器收益。 | A4 两 kernel/融合 `1.00308×`；A6 直接 sincos/递推 `2.1766×`，最大差 `1.308e-13`。 | `REMAINING_CUDA_ABLATIONS_RTX5090.md` | `results_processed/remaining_ablations_v1/`、原始消融目录 | A6 仅有序等步长角度预处理微内核。 | 限定后可写 |
 | C20 | 极坐标热启动的收益依赖工况匹配，不能称为无条件正贡献。 | cold/warm：低风速 `2.467×`、高风速 `2.580×`、阵风 `1.981×`；基线为 `0.941×`。 | `BEM_SCALE_CONDITION_ABLATIONS_RTX5090.md` | `results_processed/bem_ablations_v1/`、历史提示消融原始目录 | 冷/暖顺序独立运行；基线工况出现负收益。 | 限定后可写 |
 | C21 | 完整后验根—分支—梯度门在全新 80 位 test 中未出现错误接受。 | 仅残差 FP32 有 1 次错误接受；完整 FP32/df32 后验门错误接受均为 0；证书 adaptive 1000/1000 未观察到失败。 | `E12_E16_CERTIFICATE_GOAL_ROUTING_RTX5090_V1.md` | `results_raw/20260825T113818Z_e12_e16_certificate_goal_routing_rtx5090/certificate_test/` | sampled majorant 经 test 审计，不是通用严格区间证明；0/1000 不是数学保证。 | 限定后可写 |
 | C22 | 完整根+分支证书在真实 BEM 上相对 FP64 仍有显著 E2E 加速。 | 根+分支 `2.268× [2.262,2.271]`；再含梯度证书 `1.931× [1.926,1.934]`。 | 同上 | `results_processed/e12_e16_v1/certificate_performance_bootstrap.csv` | RTX 5090、2,448,000 状态、当前分支见证与编译配置。 | 限定后可写 |
 | C23 | 目标导向调度在四个预算上均使实际载荷/转矩误差低于一阶预测上界。 | 四预算全部闭合；1e-5 时载荷误差较 uniform 更小但慢约 5.3%；其他时间差小。 | 同上 | `results_processed/e12_e16_v1/goal_budget_summary.csv` | 输出是一阶聚合载荷/转矩代理；不能写成普遍性能提升或无余项严格定理。 | 限定后可写 |
-| C24 | 条件于已知困难比例，RTX 5090冻结路由阈值可迁移到RTX 4090，但不可直接搬到V100/A100；框架可按卡校准。 | 5090策略在4090最坏regret `0.931%`，通过5%门；在V100/A100为128.817%/69.668%；本地cal最大regret分别0/1.093%/0.489%。 | E12–E16报告、E8 V3阶段报告 | 四卡路由统计及三个跨架构`routing.csv` | 受控基准直接提供`p`，未计在线估计开销；相近消费卡迁移结果不能外推到连续`p`、3090或其他GPU。 | 限定后可写 |
+| C24 | 条件于已知困难比例，RTX 5090冻结路由阈值可迁移到RTX 4090/3090，但不可直接搬到V100/A100；框架可按卡校准。 | 5090策略在4090/3090最坏regret为`0.931%/1.391%`，均通过5%门；在V100/A100为128.817%/69.668%；3090本地cal最大regret为0.258%。 | E12–E16报告、E8五卡最终报告 | 五卡路由统计及四个跨架构`routing.csv` | 受控基准直接提供`p`，未计在线估计开销；离散网格结果不能外推到连续`p`或未测GPU。 | 限定后可写 |
 | C25 | 完整同区分支见证不可由“到大物理区边界的距离”替代。 | 关闭完整见证的开发版输出误差超过预测预算；正式版四预算全部闭合。 | `CERTIFICATE_GUIDED_ALGORITHM_V1.md`、E12–E16 报告 | 开发失败记录与正式 goal JSON | 同一物理区可有多个交点；必须见证冻结的最近 hint 分支身份。 | 可写（机制性负例） |
 
 ## 3. 旧结果与新结果的权威关系
@@ -54,7 +54,7 @@
 | 主仓 README 和代码索引的“O(1) LUT 工程锁” | 由 C05 推翻；改列正式负结果。 | 不可继续作为正向贡献。 |
 | 旧固定步/无分支低分歧叙述 | 由 C03 推翻；真正受支持的是 C04 的两阶段紧凑回退。 | 不可把 fixed44 与 compacted adaptive 混称为同一优化。 |
 | B300 制造根 v1 报告 | 已由该仓 v2 权威口径取代；其中 3917×、0 warp waste、B300 FP64 满速等旧结论不得引用。 | 只能在明确标为独立历史实验且使用 v2 真源时引用。 |
-| B300 五域与 RTX 5090 新五域 | 硬件、域定义、数据、算法和计时口径不同。 | 只能逐项映射，不能拼接成跨架构趋势；E8 未完成。 |
+| B300 五域与 RTX 5090 新五域 | 硬件、域定义、数据、算法和计时口径不同。 | 只能逐项映射，不能与E8同协议五卡矩阵拼接成一条跨架构趋势。 |
 | 旧 RTX 5090 `RESULTS*.txt` | 保留为早期主实验证据；必须与新真实 BEM 的 51 普通节点/2,448,000 状态口径区分。 | 只有方程、输入、节点定义、精度与计时分母完全一致时才可比较。 |
 
 ## 4. 写作硬约束
@@ -62,7 +62,7 @@
 1. 所有“加速”句必须同时写：硬件、规模、比较对象、精度、kernel 或 E2E、单卡或多卡，以及 95% CI。
 2. 只有 95% CI 下界大于 1 且候选通过对应正确性门时，才使用“显著加速”。
 3. 所有零失败结果写“在 N 个冻结样本中未观察到失败”，不得写成数学保证。
-4. E8 恢复前，不得出现“跨 GPU 架构可迁移”“硬件无关”或同义句。
+4. E8只支持“正确性机制在五张所测GPU迁移、性能按硬件类别分化”；仍不得写“硬件无关”或外推到任意GPU。
 5. LUT、fixed44、原始 FP32→FP64 adaptive、纯 FP32、无门控 df32 和 CUDA 全局 fast-math必须作为负结果保留。
 6. B300 旧实验、旧 RTX 5090 主实验与新补充实验使用独立表格和独立脚注，不混用速度比。
 7. OpenFAST 全模型运行时间不得作为根求解内核分母。

@@ -1,0 +1,10 @@
+fp32 residual accept=57 false_accept=10 false_reject=76 bracket=121/1800
+fp32 condition accept=123 false_accept=0 false_reject=0 bracket=121/1800
+fp32 posterior accept=96 false_accept=0 false_reject=27 bracket=121/1800
+df32 residual accept=1799 false_accept=0 false_reject=0 bracket=1798/1800
+df32 condition accept=1799 false_accept=0 false_reject=0 bracket=1798/1800
+df32 posterior accept=1729 false_accept=0 false_reject=70 bracket=1798/1800
+fp64 residual accept=1799 false_accept=0 false_reject=1 bracket=1795/1800
+fp64 condition accept=1799 false_accept=0 false_reject=1 bracket=1795/1800
+fp64 posterior accept=1720 false_accept=0 false_reject=80 bracket=1795/1800
+adaptive fp32=96 df32=1633 fp64=71 failures=0/1800

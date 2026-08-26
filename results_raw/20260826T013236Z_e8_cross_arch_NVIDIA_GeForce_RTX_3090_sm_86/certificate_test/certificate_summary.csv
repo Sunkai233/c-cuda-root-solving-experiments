@@ -1,0 +1,10 @@
+split,path,gate,n,accepted,false_accept,false_reject,bracket_pass,rho_median,rho_p99,tightness_median,tightness_p99
+test,fp32,residual,1000,25,1,49,73,7.44848e-07,2.3641e-06,1.00068,1.01767
+test,fp32,condition,1000,73,0,0,73,7.44848e-07,2.3641e-06,1.00068,1.01767
+test,fp32,posterior,1000,64,0,9,73,7.44848e-07,2.3641e-06,1.00068,1.01767
+test,df32,residual,1000,1000,0,0,1000,5.00381e-10,1.01137e-09,595352,1.9962e+06
+test,df32,condition,1000,1000,0,0,1000,5.00381e-10,1.01137e-09,595352,1.9962e+06
+test,df32,posterior,1000,948,0,52,1000,5.00381e-10,1.01137e-09,595352,1.9962e+06
+test,fp64,residual,1000,1000,0,0,1000,5e-10,5e-10,430.225,1.1259e+06
+test,fp64,condition,1000,1000,0,0,1000,5e-10,5e-10,430.225,1.1259e+06
+test,fp64,posterior,1000,953,0,47,1000,5e-10,5e-10,430.225,1.1259e+06

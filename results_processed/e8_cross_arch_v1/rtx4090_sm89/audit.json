@@ -1,0 +1,93 @@
+{
+  "scope": "E8 NVIDIA_GeForce_RTX_4090 cross-architecture replication",
+  "passed": 17,
+  "total": 17,
+  "all_pass": true,
+  "checks": [
+    {
+      "name": "formal COMPLETE",
+      "pass": true,
+      "detail": "results_raw\\20260825T234617Z_e8_cross_arch_NVIDIA_GeForce_RTX_4090_sm_89\\COMPLETE.txt"
+    },
+    {
+      "name": "replication test marker",
+      "pass": true,
+      "detail": "results_raw\\20260825T234617Z_e8_cross_arch_NVIDIA_GeForce_RTX_4090_sm_89\\TEST_EXECUTED.txt"
+    },
+    {
+      "name": "dataset SHA-256",
+      "pass": true,
+      "detail": "2ed1dfc2a9c5cea03cccc163e90c8b7d6e84dc0efe950aca8b6a2b4902581b01"
+    },
+    {
+      "name": "frozen test SHA-256",
+      "pass": true,
+      "detail": "673e6d3090b1bbd599344c2cfec4d085939076db244a9a0f1ecdd39bb2d74298"
+    },
+    {
+      "name": "declared native device identity",
+      "pass": true,
+      "detail": "{'gpu_index': '0', 'name': 'NVIDIA_GeForce_RTX_4090', 'compute_capability': '8.9', 'arch': 'sm_89'}"
+    },
+    {
+      "name": "five performance methods",
+      "pass": true,
+      "detail": "5"
+    },
+    {
+      "name": "eight goal configurations",
+      "pass": true,
+      "detail": "8"
+    },
+    {
+      "name": "36 routing calibration configurations",
+      "pass": true,
+      "detail": "36"
+    },
+    {
+      "name": "45 routing test configurations",
+      "pass": true,
+      "detail": "45"
+    },
+    {
+      "name": "performance 30 repetitions",
+      "pass": true,
+      "detail": "5"
+    },
+    {
+      "name": "goal 30 repetitions",
+      "pass": true,
+      "detail": "8"
+    },
+    {
+      "name": "routing_cal 30 repetitions",
+      "pass": true,
+      "detail": "36"
+    },
+    {
+      "name": "routing_test 30 repetitions",
+      "pass": true,
+      "detail": "45"
+    },
+    {
+      "name": "correctness transfer",
+      "pass": true,
+      "detail": "{'fp32_posterior_false_accept': 0, 'df32_posterior_false_accept': 0, 'fp32_residual_false_accept': 1, 'adaptive_failures': 0}"
+    },
+    {
+      "name": "goal budget transfer",
+      "pass": true,
+      "detail": "True"
+    },
+    {
+      "name": "all routing failures zero",
+      "pass": true,
+      "detail": "{'frozen_max_regret_percent': 0.9312213994717267, 'calibrated_max_regret_percent': 0.48891094434655447, 'all_failures_zero': True}"
+    },
+    {
+      "name": "RTX5090 threshold transfer classification consistent",
+      "pass": true,
+      "detail": "{'transfer': True, 'max_regret_percent': 0.9312213994717267}"
+    }
+  ]
+}

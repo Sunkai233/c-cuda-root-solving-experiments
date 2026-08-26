@@ -1,0 +1,4 @@
+src_cuda/validate_certificate_precision.cu:16:10: fatal error: bem_real_solver.h: No such file or directory
+   16 | #include "bem_real_solver.h"
+      |          ^~~~~~~~~~~~~~~~~~~
+compilation terminated.

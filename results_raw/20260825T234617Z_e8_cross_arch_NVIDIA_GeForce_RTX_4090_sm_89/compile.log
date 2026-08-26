@@ -1,0 +1,99 @@
+ptxas info    : 296 bytes gmem, 32340 bytes cmem[3], 24 bytes cmem[4]
+ptxas info    : Compiling entry function '_Z15adaptive_kernelPK4CaseP6Resultmdd' for 'sm_89'
+ptxas info    : Function properties for _Z15adaptive_kernelPK4CaseP6Resultmdd
+    112 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 224 registers, used 0 barriers, 112 bytes cumulative stack size, 392 bytes cmem[0], 704 bytes cmem[2]
+ptxas info    : Compile time = 12676.837 ms
+ptxas info    : Function properties for _Z13evaluate_pathRK4Caseiddi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Function properties for __internal_trig_reduction_slowpathd
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Compiling entry function '_Z11gate_kernelPK4CaseP6Resultmiddi' for 'sm_89'
+ptxas info    : Function properties for _Z11gate_kernelPK4CaseP6Resultmiddi
+    112 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 128 registers, used 0 barriers, 112 bytes cumulative stack size, 404 bytes cmem[0], 704 bytes cmem[2]
+ptxas info    : Compile time = 8528.963 ms
+ptxas info    : Function properties for _Z13evaluate_pathRK4Caseiddi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Function properties for __internal_trig_reduction_slowpathd
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : 296 bytes gmem, 32340 bytes cmem[3], 24 bytes cmem[4]
+ptxas info    : Compiling entry function '_Z15fallback_kernelPKdS0_S0_S0_PdS1_PhS2_PKmPKjm' for 'sm_89'
+ptxas info    : Function properties for _Z15fallback_kernelPKdS0_S0_S0_PdS1_PhS2_PKmPKjm
+    96 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 108 registers, used 0 barriers, 96 bytes cumulative stack size, 440 bytes cmem[0], 640 bytes cmem[2]
+ptxas info    : Compile time = 1004.695 ms
+ptxas info    : Function properties for __internal_trig_reduction_slowpathd
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Compiling entry function '_Z12first_kernelPKdS0_S0_S0_PdS1_PhS2_PmPjmidd' for 'sm_89'
+ptxas info    : Function properties for _Z12first_kernelPKdS0_S0_S0_PdS1_PhS2_PmPjmidd
+    120 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 115 registers, used 0 barriers, 120 bytes cumulative stack size, 464 bytes cmem[0], 704 bytes cmem[2]
+ptxas info    : Compile time = 21094.789 ms
+ptxas info    : Function properties for __internal_trig_reduction_slowpathd
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : 296 bytes gmem, 32340 bytes cmem[3], 24 bytes cmem[4]
+ptxas info    : Compiling entry function '_Z10qoi_kernelPKdS0_S0_S0_P3Qoimdd' for 'sm_89'
+ptxas info    : Function properties for _Z10qoi_kernelPKdS0_S0_S0_P3Qoimdd
+    48 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 50 registers, used 0 barriers, 48 bytes cumulative stack size, 416 bytes cmem[0], 112 bytes cmem[2]
+ptxas info    : Compile time = 85.696 ms
+ptxas info    : Function properties for __internal_trig_reduction_slowpathd
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Compiling entry function '_Z15fallback_kernelPKdS0_S0_S0_PdS1_S1_PhS2_PKmPKjmdd' for 'sm_89'
+ptxas info    : Function properties for _Z15fallback_kernelPKdS0_S0_S0_PdS1_S1_PhS2_PKmPKjmdd
+    96 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 108 registers, used 0 barriers, 96 bytes cumulative stack size, 464 bytes cmem[0], 664 bytes cmem[2]
+ptxas info    : Compile time = 1301.528 ms
+ptxas info    : Function properties for __internal_trig_reduction_slowpathd
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Compiling entry function '_Z13select_kernelPKdS0_S0_S0_PdS1_S1_PhS2_PmPjmiddd' for 'sm_89'
+ptxas info    : Function properties for _Z13select_kernelPKdS0_S0_S0_PdS1_S1_PhS2_PmPjmiddd
+    96 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 116 registers, used 0 barriers, 96 bytes cumulative stack size, 480 bytes cmem[0], 544 bytes cmem[2]
+ptxas info    : Compile time = 5741.860 ms
+ptxas info    : Function properties for __internal_trig_reduction_slowpathd
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Compiling entry function '_Z16reference_kernelPKdS0_S0_S0_PdP3QoiPhmdd' for 'sm_89'
+ptxas info    : Function properties for _Z16reference_kernelPKdS0_S0_S0_PdP3QoiPhmdd
+    96 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 106 registers, used 0 barriers, 96 bytes cumulative stack size, 432 bytes cmem[0], 664 bytes cmem[2]
+ptxas info    : Compile time = 1302.625 ms
+ptxas info    : Function properties for __internal_trig_reduction_slowpathd
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : 272 bytes gmem, 32058 bytes cmem[3], 16 bytes cmem[4]
+ptxas info    : Compiling entry function '_Z11warp_kernelPKdS0_S0_S0_PdPhmmm' for 'sm_89'
+ptxas info    : Function properties for _Z11warp_kernelPKdS0_S0_S0_PdPhmmm
+    96 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 104 registers, used 0 barriers, 96 bytes cumulative stack size, 424 bytes cmem[0], 664 bytes cmem[2]
+ptxas info    : Compile time = 1396.526 ms
+ptxas info    : Function properties for __internal_trig_reduction_slowpathd
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Compiling entry function '_Z12block_kernelPKdS0_S0_S0_PdPhmmm' for 'sm_89'
+ptxas info    : Function properties for _Z12block_kernelPKdS0_S0_S0_PdPhmmm
+    96 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 110 registers, used 1 barriers, 96 bytes cumulative stack size, 2052 bytes smem, 424 bytes cmem[0], 664 bytes cmem[2]
+ptxas info    : Compile time = 806.426 ms
+ptxas info    : Function properties for __internal_trig_reduction_slowpathd
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Compiling entry function '_Z15global_fallbackPKdS0_S0_S0_PdPhPKmPKjm' for 'sm_89'
+ptxas info    : Function properties for _Z15global_fallbackPKdS0_S0_S0_PdPhPKmPKjm
+    96 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 103 registers, used 0 barriers, 96 bytes cumulative stack size, 424 bytes cmem[0], 640 bytes cmem[2]
+ptxas info    : Compile time = 419.718 ms
+ptxas info    : Function properties for __internal_trig_reduction_slowpathd
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Compiling entry function '_Z15classify_globalPKdS0_S0_S0_PdPhPmPjmmm' for 'sm_89'
+ptxas info    : Function properties for _Z15classify_globalPKdS0_S0_S0_PdPhPmPjmmm
+    48 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 56 registers, used 0 barriers, 48 bytes cumulative stack size, 440 bytes cmem[0], 480 bytes cmem[2]
+ptxas info    : Compile time = 219.630 ms
+ptxas info    : Function properties for __internal_trig_reduction_slowpathd
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Compiling entry function '_Z13inline_kernelPKdS0_S0_S0_PdPhmmm' for 'sm_89'
+ptxas info    : Function properties for _Z13inline_kernelPKdS0_S0_S0_PdPhmmm
+    96 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 108 registers, used 0 barriers, 96 bytes cumulative stack size, 424 bytes cmem[0], 664 bytes cmem[2]
+ptxas info    : Compile time = 704.072 ms
+ptxas info    : Function properties for __internal_trig_reduction_slowpathd
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads

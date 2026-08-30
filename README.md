@@ -4,6 +4,16 @@
 
 五域包括解析 BEM、Kepler、单二极管 PV、非等温 CSTR 和 Peng–Robinson 负对照。另有基于 OpenFAST/NREL 5 MW、真实翼型极坐标表的 600 s BEM 工作流。CPU/GPU 对比保持相同残差、物理分支、停止条件和输入；计时分别保存纯内核与 H2D+kernel+D2H，原始结果为追加式时间戳目录。
 
+## OpenFAST 真实数据论文图
+
+[`paper_figures/real_simulation_v1/`](paper_figures/real_simulation_v1/) 提供三组可直接用于论文排版的可复现图：NREL 5 MW 真实叶片几何与 TurbSim 全场湍流入流、单个真实叶素的速度三角形与 C 残差曲线、以及完整 2,448,000 个 OpenFAST 参考根的二维/三维时空分布。图 1 的流场体积使用 Taylor 冻结湍流假设从 `.bts` 时间序列重建，明确不表述为 Navier–Stokes CFD。数据边界、建议图注和复现命令见 [`FIGURE_NOTES.md`](paper_figures/real_simulation_v1/FIGURE_NOTES.md)。
+
+![OpenFAST/TurbSim full-field inflow and NREL 5 MW rotor](paper_figures/real_simulation_v1/fig1_openfast_turbulent_rotor.png)
+
+![Real blade-element geometry, velocity triangle and released C residual](paper_figures/real_simulation_v1/fig2_real_bem_section_residual.png)
+
+![Complete 2,448,000-root OpenFAST batch field](paper_figures/real_simulation_v1/fig3_real_batch_spacetime.png)
+
 ## 权威结果
 
 - `results_processed/FROZEN_CORRECTNESS_V3.md`：五域冻结高精度正确性；V1/V2 保留为历史/失败候选。

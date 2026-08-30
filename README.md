@@ -6,13 +6,13 @@
 
 ## OpenFAST 真实数据论文图
 
-[`paper_figures/real_simulation_v1/`](paper_figures/real_simulation_v1/) 提供三组可直接用于论文排版的可复现图：NREL 5 MW 真实叶片几何与 TurbSim 全场湍流入流、单个真实叶素的速度三角形与 C 残差曲线、以及完整 2,448,000 个 OpenFAST 参考根的二维/三维时空分布。图 1 的流场体积使用 Taylor 冻结湍流假设从 `.bts` 时间序列重建，明确不表述为 Navier–Stokes CFD。数据边界、建议图注和复现命令见 [`FIGURE_NOTES.md`](paper_figures/real_simulation_v1/FIGURE_NOTES.md)。
+[`paper_figures/real_simulation_v1/`](paper_figures/real_simulation_v1/) 提供三组纯二维、可直接用于论文排版的可复现图：TurbSim 瞬时转子平面三分量流场与真实叶片投影、单个真实叶素从翼型/速度三角形到极坐标插值和非线性残差项的完整诊断、以及全部 2,448,000 个 OpenFAST 参考根的二维时空矩阵。全部图只使用真实数据切片或精确 C 公式，不包含三维重建。数据边界、建议图注和复现命令见 [`FIGURE_NOTES.md`](paper_figures/real_simulation_v1/FIGURE_NOTES.md)。
 
-![OpenFAST/TurbSim full-field inflow and NREL 5 MW rotor](paper_figures/real_simulation_v1/fig1_openfast_turbulent_rotor.png)
+![TurbSim rotor-plane velocity field and projected NREL 5 MW rotor](paper_figures/real_simulation_v1/fig1_turbsim_rotor_plane_2d.png)
 
-![Real blade-element geometry, velocity triangle and released C residual](paper_figures/real_simulation_v1/fig2_real_bem_section_residual.png)
+![Detailed real blade-element diagnostics](paper_figures/real_simulation_v1/fig2_bem_element_diagnostics_2d.png)
 
-![Complete 2,448,000-root OpenFAST batch field](paper_figures/real_simulation_v1/fig3_real_batch_spacetime.png)
+![Complete two-dimensional 2,448,000-root OpenFAST batch field](paper_figures/real_simulation_v1/fig3_batch_field_2d.png)
 
 ## 权威结果
 

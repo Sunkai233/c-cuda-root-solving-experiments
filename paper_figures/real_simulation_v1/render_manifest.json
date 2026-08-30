@@ -1,26 +1,31 @@
 {
   "generator": "scripts/visualization/render_real_bem_figures.py",
-  "truth_boundary": "OpenFAST/AeroDyn/TurbSim simulation data; Fig. 1 uses Taylor reconstruction and is not Navier-Stokes CFD",
+  "truth_boundary": "Only direct two-dimensional OpenFAST/AeroDyn/TurbSim/BEM data views; no 3-D reconstruction",
   "fig1": {
-    "file": "fig1_openfast_turbulent_rotor.png",
+    "files": [
+      "fig1_turbsim_rotor_plane_2d.png",
+      "fig1_turbsim_rotor_plane_2d.pdf",
+      "fig1_turbsim_rotor_plane_2d.svg"
+    ],
     "blade_input": "domains/bem/openfast/5MW_Baseline/NRELOffshrBsline5MW_AeroDyn_blade.dat",
     "turbulence_input": "domains/bem/openfast/5MW_Baseline/Wind/90m_12mps_twr.bts",
     "turbulence_sha256": "951e02395ef7032b5578bbd8fb3163fca4644ec23a3b3b4a62accb0bfb14d256",
-    "mapping": "Taylor frozen-turbulence reconstruction x=Uref*(t-t0); not Navier-Stokes CFD",
-    "grid": [
-      3,
-      12242,
+    "time_index": 6122,
+    "time_s": 306.10000456,
+    "grid_yz": [
       31,
       31
     ],
-    "dt_s": 0.05,
-    "u_ref_mps": 12.0
+    "u_min_mps": 6.086783553760063,
+    "u_max_mps": 17.606761326303545,
+    "u_std_mps": 1.9092975999928987,
+    "truth_boundary": "direct TurbSim rotor-plane sample; no CFD reconstruction or interpolation beyond contour rendering"
   },
   "fig2": {
     "files": [
-      "fig2_real_bem_section_residual.png",
-      "fig2_real_bem_section_residual.pdf",
-      "fig2_real_bem_section_residual.svg"
+      "fig2_bem_element_diagnostics_2d.png",
+      "fig2_bem_element_diagnostics_2d.pdf",
+      "fig2_bem_element_diagnostics_2d.svg"
     ],
     "dataset": "results_raw/20260824T060500Z_bem_real_dataset_v2/bem_real_f64_soa.bin",
     "dataset_sha256": "2ed1dfc2a9c5cea03cccc163e90c8b7d6e84dc0efe950aca8b6a2b4902581b01",
@@ -34,13 +39,22 @@
     "Vy_mps": 41.53216370893221,
     "theta_rad": 0.11421434625050886,
     "phi_openfast_rad": 0.24104283027332024,
+    "phi_exact_c_zero_rad": 0.24104278004606625,
+    "reference_minus_c_zero_microdeg": 2.877809670435876,
     "residual_at_reference": 5.369351152584301e-08,
-    "airfoil_file": "DU25_A17_coords.txt"
+    "airfoil_file": "DU25_A17_coords.txt",
+    "Cl_at_reference": 1.2790732645156513,
+    "Cd_at_reference": 0.01378682108440886,
+    "F_at_c_zero": 0.9984045407918577,
+    "a_at_c_zero": 0.23262063596275503,
+    "kappa_prime_at_c_zero": 0.018318097755121297,
+    "solidity": 0.05554063920740525
   },
   "fig3": {
     "files": [
-      "fig3_real_batch_spacetime.png",
-      "fig3_real_batch_spacetime.pdf"
+      "fig3_batch_field_2d.png",
+      "fig3_batch_field_2d.pdf",
+      "fig3_batch_field_2d.svg"
     ],
     "dataset": "results_raw/20260824T060500Z_bem_real_dataset_v2/bem_real_f64_soa.bin",
     "dataset_sha256": "2ed1dfc2a9c5cea03cccc163e90c8b7d6e84dc0efe950aca8b6a2b4902581b01",
@@ -53,6 +67,11 @@
     "phi_deg_range": [
       -179.99567368480467,
       179.99666130963666
-    ]
+    ],
+    "detail_window_s": [
+      300.0,
+      320.0
+    ],
+    "radial_profile_time_s": 306.09387695576993
   }
 }

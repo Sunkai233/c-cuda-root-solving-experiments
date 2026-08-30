@@ -22,6 +22,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.colors import Normalize, TwoSlopeNorm
 from matplotlib.patches import Arc, FancyArrowPatch, Polygon
+from scipy.optimize import brentq
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -204,6 +205,8 @@ def render_rotor_inflow(out: Path, meta: dict) -> None:
     # Wind turbine geometry is built from actual station-wise chord/twist/airfoils.
     p.add_mesh(tower_mesh(), color="#f2f4f5", smooth_shading=True, ambient=0.42, diffuse=0.52,
                specular=0.22, specular_power=18)
+    tables = load_tables()
+    nt = tables["bem_node_r"]
     for az in (90.0, 210.0, 330.0):
         mesh = blade_mesh(blade, az)
         p.add_mesh(mesh, color="#f7f8f8", smooth_shading=True, ambient=0.48, diffuse=0.47,
@@ -294,6 +297,32 @@ def residual(t, phi, vx, vy, theta, node):
                     s * (1 - k) - c / (vy / vx) * (1 - kp))
 
 
+def residual_components(t, phi, vx, vy, theta, node):
+    """Vectorized diagnostic terms, algebraically identical to bem_residual()."""
+    phi = np.asarray(phi, dtype=float)
+    cl, cd = polar(t, int(t["bem_node_afid"][node]), phi - theta)
+    s, c = np.sin(phi), np.cos(phi)
+    ass = np.abs(s)
+    ft = (2 / np.pi) * np.arccos(np.minimum(1.0, np.exp(-t["bem_node_tip_const"][node] / np.maximum(ass, 1e-300))))
+    fh = (2 / np.pi) * np.arccos(np.minimum(1.0, np.exp(-t["bem_node_hub_const"][node] / np.maximum(ass, 1e-300))))
+    F = np.maximum(ft * fh, 1e-4)
+    sigma = 3 * t["bem_node_chord"][node] / (2 * np.pi * t["bem_node_r"][node])
+    k = sigma * (cl * c) / (4 * F * s * s)
+    kp = sigma * (cl * s) / (4 * F * s * c)
+    if vx < 0:
+        kp = -kp
+    tt = 2 * F * k
+    g1 = tt - (10 / 9 - F)
+    g2 = tt - (4 / 3 - F) * F
+    g3 = tt - (25 / 9 - 2 * F)
+    a = np.where(k <= 2 / 3, k / (1 + k),
+                 np.where(np.abs(g3) < 1e-6, 1 - 0.5 / np.sqrt(np.maximum(g2, 1e-300)),
+                          (g1 - np.sqrt(np.abs(g2))) / g3))
+    R = residual(t, phi, vx, vy, theta, node)
+    return {"cl": cl, "cd": cd, "F": F, "sigma": np.full_like(phi, sigma),
+            "k": k, "kp": kp, "a": a, "R": R}
+
+
 def open_dataset():
     path = ROOT / "results_raw/20260824T060500Z_bem_real_dataset_v2/bem_real_f64_soa.bin"
     with path.open("rb") as f:
@@ -307,6 +336,108 @@ def open_dataset():
 def arrow(ax, p0, p1, color, label, text_offset=(0, 0), lw=1.6):
     ax.add_patch(FancyArrowPatch(p0, p1, arrowstyle="-|>", mutation_scale=11, lw=lw, color=color))
     ax.text(p1[0] + text_offset[0], p1[1] + text_offset[1], label, color=color, fontsize=8)
+
+
+def render_rotor_plane_2d(out: Path, meta: dict) -> None:
+    """Actual TurbSim rotor-plane slice with projected AeroDyn blade planform."""
+    from openfast_io.turbsim_file import TurbSimFile
+
+    blade_file = ROOT / "domains/bem/openfast/5MW_Baseline/NRELOffshrBsline5MW_AeroDyn_blade.dat"
+    bts_file = ROOT / "domains/bem/openfast/5MW_Baseline/Wind/90m_12mps_twr.bts"
+    blade = read_blade_table(blade_file)
+    ts = TurbSimFile(str(bts_file))
+    uvw = np.asarray(ts["u"], dtype=float)
+    y = np.asarray(ts["y"], dtype=float)
+    z = np.asarray(ts["z"], dtype=float)
+    tt = np.asarray(ts["t"], dtype=float)
+    i = int(np.argmin(np.abs(tt - 306.1)))
+    u, v, w = uvw[:, i]
+    levels = np.linspace(float(np.percentile(u, 1)), float(np.percentile(u, 99)), 25)
+
+    fig = plt.figure(figsize=(7.25, 4.65))
+    gs = fig.add_gridspec(1, 2, width_ratios=(1.48, 0.72), left=0.075, right=0.975,
+                          bottom=0.105, top=0.97, wspace=0.24)
+    ax = fig.add_subplot(gs[0, :])
+    cf = ax.contourf(y, z, u.T, levels=levels, cmap="turbo", extend="both")
+    cs = ax.contour(y, z, u.T, levels=levels[::4], colors="#20343f", linewidths=0.35, alpha=0.40)
+    # Actual transverse velocity components on the same TurbSim grid.
+    iy = np.arange(1, len(y), 3)
+    iz = np.arange(1, len(z), 3)
+    Yq, Zq = np.meshgrid(y[iy], z[iz], indexing="ij")
+    ax.quiver(Yq, Zq, v[np.ix_(iy, iz)], w[np.ix_(iy, iz)], color="white",
+              angles="xy", scale_units="xy", scale=0.24, width=0.0030,
+              headwidth=3.2, headlength=4.0, alpha=0.82)
+
+    # Rotor outline and projected blade planforms use the 19 released stations.
+    th = np.linspace(0, 2 * np.pi, 720)
+    ax.plot(63 * np.cos(th), HUB_HEIGHT + 63 * np.sin(th), color="white", lw=0.8, ls=(0, (4, 3)), alpha=0.88)
+    nt = load_tables()["bem_node_r"]
+    for az in (90.0, 210.0, 330.0):
+        psi = np.deg2rad(az)
+        er = np.array([np.cos(psi), np.sin(psi)])
+        et = np.array([-np.sin(psi), np.cos(psi)])
+        r = HUB_RADIUS + blade[:, 0]
+        projected_chord = blade[:, 5] * np.cos(np.deg2rad(blade[:, 4]))
+        center = np.array([0.0, HUB_HEIGHT]) + r[:, None] * er + blade[:, 1][:, None] * et
+        side1 = center + 0.5 * projected_chord[:, None] * et
+        side2 = center - 0.5 * projected_chord[:, None] * et
+        poly = np.vstack([side1, side2[::-1]])
+        ax.add_patch(Polygon(poly, closed=True, facecolor="#f5f7f7", edgecolor="#17262e", lw=0.75, zorder=6))
+        # The 17 ordinary BEM nodes are marked at their exact released radii.
+        node_curve = np.interp(nt - HUB_RADIUS, blade[:, 0], blade[:, 1])
+        nodes = np.array([0.0, HUB_HEIGHT]) + nt[:, None] * er + node_curve[:, None] * et
+        ax.scatter(nodes[:, 0], nodes[:, 1], s=5.5, facecolor="#f7f8f8", edgecolor="#17262e", lw=0.35, zorder=7)
+    ax.add_patch(plt.Circle((0, HUB_HEIGHT), 3.0, facecolor="#e4e8ea", edgecolor="#17262e", lw=0.8, zorder=8))
+    tower_y = np.array([-3.2, 3.2, 1.95, -1.95])
+    tower_z = np.array([0, 0, HUB_HEIGHT - 2, HUB_HEIGHT - 2])
+    ax.add_patch(Polygon(np.c_[tower_y, tower_z], closed=True, facecolor="#e7ebed", edgecolor="#17262e", lw=0.7, zorder=5))
+    ax.annotate("17 BEM nodes per blade", xy=(-28, 137), xytext=(-69, 155), color="#17262e", fontsize=7.6,
+                arrowprops=dict(arrowstyle="->", color="#17262e", lw=0.7))
+    ax.set_xlim(y.min(), y.max())
+    ax.set_ylim(z.min(), z.max())
+    ax.set_aspect("equal")
+    ax.set_xlabel("lateral coordinate $y$  [m]")
+    ax.set_ylabel("height $z$  [m]")
+    ax.text(0.015, 0.035, "a", transform=ax.transAxes, va="bottom", color="white", fontweight="bold")
+    cb = fig.colorbar(cf, ax=ax, orientation="horizontal", pad=0.115, fraction=0.042, aspect=40)
+    cb.set_label(r"TurbSim streamwise velocity $u(y,z,t=306.1\,\mathrm{s})$  [m s$^{-1}$]")
+
+    izh = int(np.argmin(np.abs(z - HUB_HEIGHT)))
+    iyh = int(np.argmin(np.abs(y)))
+    gps = gs[0, 1].subgridspec(2, 1, hspace=0.10)
+    axpv = fig.add_subplot(gps[0])
+    axph = fig.add_subplot(gps[1], sharex=axpv)
+    axpv.plot(u[iyh, :], z, color="#2166ac", lw=1.4)
+    axph.plot(u[:, izh], y, color="#b2182b", lw=1.4)
+    for ap in (axpv, axph):
+        ap.axvline(float(ts["uRef"]), color="#3c474c", lw=0.8, ls="--")
+        ap.grid(color="#c7ced2", lw=0.45)
+        ap.yaxis.tick_right()
+        ap.yaxis.set_label_position("right")
+    axpv.set_ylabel(r"height $z$  [m]")
+    axph.set_ylabel(r"lateral $y$  [m]")
+    axph.set_xlabel(r"streamwise velocity $u$  [m s$^{-1}$]")
+    axpv.tick_params(labelbottom=False)
+    axpv.text(0.035, 0.98, "b", transform=axpv.transAxes, va="top", fontweight="bold")
+    axpv.text(0.55, 0.08, r"vertical cut, $y=0$ m", transform=axpv.transAxes, color="#2166ac", fontsize=7.1)
+    axph.text(0.44, 0.08, r"horizontal cut, $z=90$ m", transform=axph.transAxes, color="#b2182b", fontsize=7.1)
+    axph.text(0.58, 0.90, r"$U_{ref}=12$ m s$^{-1}$", transform=axph.transAxes, fontsize=7.0, va="top")
+    stats = (rf"$u_{{min}}={u.min():.2f}$ m s$^{{-1}}$" + "\n" +
+             rf"$u_{{max}}={u.max():.2f}$ m s$^{{-1}}$" + "\n" +
+             rf"$\sigma_u={u.std():.2f}$ m s$^{{-1}}$")
+    axpv.text(0.05, 0.77, stats, transform=axpv.transAxes, fontsize=7.2, va="top")
+    for ext in ("png", "pdf", "svg"):
+        fig.savefig(out / f"fig1_turbsim_rotor_plane_2d.{ext}", bbox_inches="tight", facecolor="white")
+    plt.close(fig)
+    meta["fig1"] = {
+        "files": [f"fig1_turbsim_rotor_plane_2d.{x}" for x in ("png", "pdf", "svg")],
+        "blade_input": blade_file.relative_to(ROOT).as_posix(),
+        "turbulence_input": bts_file.relative_to(ROOT).as_posix(),
+        "turbulence_sha256": sha256(bts_file), "time_index": i, "time_s": float(tt[i]),
+        "grid_yz": [int(len(y)), int(len(z))], "u_min_mps": float(u.min()),
+        "u_max_mps": float(u.max()), "u_std_mps": float(u.std()),
+        "truth_boundary": "direct TurbSim rotor-plane sample; no CFD reconstruction or interpolation beyond contour rendering",
+    }
 
 
 def render_local_section(out: Path, meta: dict) -> None:
@@ -323,8 +454,21 @@ def render_local_section(out: Path, meta: dict) -> None:
     chord = float(t["bem_node_chord"][local_node])
     alpha = phi_ref - theta
 
-    fig = plt.figure(figsize=(7.15, 3.25), constrained_layout=True)
-    gs = fig.add_gridspec(1, 2, width_ratios=(1.12, 0.88))
+    ph = np.linspace(np.deg2rad(0.2), np.deg2rad(89.5), 5000)
+    comp = residual_components(t, ph, vx, vy, theta, local_node)
+    # Locate the exact zero of the released C residual nearest the OpenFAST root.
+    j = int(np.argmin(np.abs(ph - phi_ref)))
+    changes = np.where(np.signbit(comp["R"][:-1]) != np.signbit(comp["R"][1:]))[0]
+    kroot = int(changes[np.argmin(np.abs(changes - j))])
+    phi_zero = brentq(lambda q: float(residual(t, np.array([q]), vx, vy, theta, local_node)[0]),
+                      float(ph[kroot]), float(ph[kroot + 1]), xtol=5e-15)
+    rref = float(residual(t, np.array([phi_ref]), vx, vy, theta, local_node)[0])
+    delta_microdeg = (phi_ref - phi_zero) * 180 / np.pi * 1e6
+    croot = residual_components(t, np.array([phi_zero]), vx, vy, theta, local_node)
+
+    fig = plt.figure(figsize=(7.25, 6.0))
+    gs = fig.add_gridspec(2, 2, width_ratios=(1.08, 0.92), height_ratios=(1.00, 0.92),
+                          left=0.09, right=0.965, bottom=0.075, top=0.98, wspace=0.29, hspace=0.34)
     ax = fig.add_subplot(gs[0, 0])
     th = theta
     R = np.array([[np.cos(th), -np.sin(th)], [np.sin(th), np.cos(th)]])
@@ -341,8 +485,8 @@ def render_local_section(out: Path, meta: dict) -> None:
     ax.add_patch(Arc(origin, 2 * arc_r, 2 * arc_r, theta1=0, theta2=np.rad2deg(phi_ref), color="#542788", lw=1.1))
     ax.text(origin[0] + 0.72, origin[1] + 0.16, rf"$\phi={np.rad2deg(phi_ref):.2f}^\circ$", color="#542788", fontsize=8)
     ax.plot([-0.8, 3.6], [0, 0], color="#72848d", lw=0.6, ls="--")
-    ax.text(-0.78, -0.25, rf"Blade {node//17+1}, AeroDyn station {local_node+2}: $r={t['bem_node_r'][local_node]:.2f}$ m, $c={chord:.3f}$ m", fontsize=7.4)
-    ax.text(-0.78, -0.48, rf"$\theta={np.rad2deg(theta):.2f}^\circ$, $\alpha=\phi-\theta={np.rad2deg(alpha):.2f}^\circ$", fontsize=7.4)
+    ax.text(-0.78, -0.25, rf"Blade {node//17+1}, element {local_node+1}: $r={t['bem_node_r'][local_node]:.5f}$ m, $c={chord:.4f}$ m", fontsize=7.2)
+    ax.text(-0.78, -0.48, rf"$\theta={np.rad2deg(theta):.5f}^\circ$, $\alpha=\phi-\theta={np.rad2deg(alpha):.5f}^\circ$", fontsize=7.2)
     ax.set_aspect("equal")
     ax.set_xlim(-0.9, 3.65)
     ax.set_ylim(-0.65, 2.25)
@@ -351,34 +495,89 @@ def render_local_section(out: Path, meta: dict) -> None:
     ax.text(0.015, 0.97, "a", transform=ax.transAxes, va="top", fontweight="bold")
     ax.spines[["top", "right"]].set_visible(False)
 
+    # Exact released polar table and interpolation point.
     ax2 = fig.add_subplot(gs[0, 1])
-    ph = np.linspace(np.deg2rad(0.2), np.deg2rad(89.5), 2400)
-    rr = residual(t, ph, vx, vy, theta, local_node)
+    off = int(t["bem_af_offset"][afid0]); n = int(t["bem_af_count"][afid0])
+    ad = t["bem_alpha_deg"][off:off+n]
+    cltab = t["bem_cl"][off:off+n]; cdtab = t["bem_cd"][off:off+n]
+    region = (ad >= -20) & (ad <= 30)
+    cl0, cd0 = polar(t, afid0, np.array([alpha]))
+    l1 = ax2.plot(ad[region], cltab[region], color="#2166ac", lw=1.35, marker=".", ms=2.3,
+                  label=r"released $C_l(\alpha)$ samples")
+    ax2.scatter([np.rad2deg(alpha)], [cl0[0]], s=34, color="#b2182b", zorder=4)
+    ax2b = ax2.twinx()
+    l2 = ax2b.plot(ad[region], cdtab[region], color="#4d9221", lw=1.15, ls="--",
+                   label=r"released $C_d(\alpha)$ samples")
+    ax2b.scatter([np.rad2deg(alpha)], [cd0[0]], s=28, marker="s", color="#4d9221", zorder=4)
+    ax2.axvline(np.rad2deg(alpha), color="#b2182b", lw=0.7, ls=":")
+    ax2.set_xlabel(r"angle of attack $\alpha$  [deg]")
+    ax2.set_ylabel(r"lift coefficient $C_l$  [-]", color="#2166ac")
+    ax2b.set_ylabel(r"drag coefficient $C_d$  [-]", color="#4d9221")
+    ax2.grid(color="#cad1d5", lw=0.4)
+    ax2.text(0.04, 0.94, r"$C_l$ samples", color="#2166ac", transform=ax2.transAxes, va="top", fontsize=7.2)
+    ax2.text(0.04, 0.87, r"$C_d$ samples", color="#4d9221", transform=ax2.transAxes, va="top", fontsize=7.2)
+    ax2.text(0.025, 0.97, "b", transform=ax2.transAxes, va="top", fontweight="bold")
+    polar_note = (rf"actual $\alpha={np.rad2deg(alpha):.5f}^\circ$" + "\n" +
+                  rf"$C_l={cl0[0]:.6f}$, $C_d={cd0[0]:.6f}$")
+    ax2.annotate(polar_note, (np.rad2deg(alpha), cl0[0]), xytext=(0.58, 0.57),
+                 textcoords="axes fraction", fontsize=7.2,
+                 arrowprops=dict(arrowstyle="->", color="#b2182b", lw=0.7))
+
+    ax3 = fig.add_subplot(gs[1, 0])
+    rr = comp["R"].copy()
     rr[np.abs(rr) > 2.5] = np.nan
-    ax2.axhline(0, color="#6f7b81", lw=0.65)
-    ax2.plot(np.rad2deg(ph), rr, color="#2166ac", lw=1.45, label=r"exact released C residual $R(\phi)$")
-    rref = float(residual(t, np.array([phi_ref]), vx, vy, theta, local_node)[0])
-    ax2.scatter([np.rad2deg(phi_ref)], [rref], s=42, color="#b2182b", edgecolor="white", lw=0.8, zorder=4)
-    ax2.annotate(rf"OpenFAST root  {np.rad2deg(phi_ref):.3f}$^\circ$", (np.rad2deg(phi_ref), rref),
-                 xytext=(31, 0.72), textcoords="data", fontsize=7.7,
-                 arrowprops=dict(arrowstyle="->", lw=0.8, color="#b2182b"))
-    ax2.set_xlim(0, 75)
-    ax2.set_ylim(-1.05, 1.05)
-    ax2.set_xlabel(r"inflow angle $\phi$  [deg]")
-    ax2.set_ylabel(r"BEM residual $R(\phi)$  [-]")
-    ax2.grid(color="#cad1d5", lw=0.45, alpha=0.8)
-    ax2.text(0.015, 0.97, "b", transform=ax2.transAxes, va="top", fontweight="bold")
-    ax2.legend(loc="lower right", frameon=False)
+    ax3.axhline(0, color="#6f7b81", lw=0.65)
+    ax3.plot(np.rad2deg(ph), rr, color="#2166ac", lw=1.35, label=r"exact C residual $R(\phi)$")
+    ax3.axvline(np.rad2deg(theta), color="#7f8c92", lw=0.7, ls=":", label=r"$\phi=\theta$")
+    ax3.scatter([np.rad2deg(phi_zero)], [0], s=39, color="#b2182b", edgecolor="white", lw=0.7, zorder=4)
+    ax3.annotate(rf"C zero  {np.rad2deg(phi_zero):.8f}$^\circ$", (np.rad2deg(phi_zero), 0),
+                 xytext=(28, 0.73), fontsize=7.3, arrowprops=dict(arrowstyle="->", lw=0.7, color="#b2182b"))
+    ax3.set_xlim(0, 75); ax3.set_ylim(-1.05, 1.05)
+    ax3.set_xlabel(r"inflow angle $\phi$  [deg]")
+    ax3.set_ylabel(r"BEM residual $R(\phi)$  [-]")
+    ax3.grid(color="#cad1d5", lw=0.4)
+    ax3.text(0.69, 0.47, r"exact C residual $R(\phi)$", color="#2166ac", transform=ax3.transAxes,
+             ha="center", fontsize=7.1)
+    ax3.text(0.105, 0.07, r"$\phi=\theta$", color="#657981", transform=ax3.transAxes, fontsize=7.1)
+    ax3.text(0.015, 0.97, "c", transform=ax3.transAxes, va="top", fontweight="bold")
+    root_note = (rf"OpenFAST $-$ C zero = {delta_microdeg:.3f} $\mu$deg" + "\n" +
+                 rf"$R(\phi_{{ref}})={rref:.3e}$")
+    ax3.text(0.57, 0.12, root_note, transform=ax3.transAxes, fontsize=7.0)
+
+    ax4 = fig.add_subplot(gs[1, 1])
+    ax4.plot(np.rad2deg(ph), comp["F"], color="#762a83", lw=1.25, label=r"Prandtl loss $F$")
+    ax4.plot(np.rad2deg(ph), comp["a"], color="#d6604d", lw=1.25, label=r"axial induction $a$")
+    ax4.plot(np.rad2deg(ph), comp["kp"], color="#1b7837", lw=1.1, ls="--", label=r"tangential term $\kappa'$ ")
+    ax4.axvline(np.rad2deg(phi_zero), color="#b2182b", lw=0.75, ls=":")
+    ax4.scatter(np.repeat(np.rad2deg(phi_zero), 3),
+                [croot["F"][0], croot["a"][0], croot["kp"][0]],
+                s=[28, 28, 24], color=["#762a83", "#d6604d", "#1b7837"], zorder=4)
+    ax4.set_xlim(0, 45); ax4.set_ylim(-0.15, 1.08)
+    ax4.set_xlabel(r"inflow angle $\phi$  [deg]")
+    ax4.set_ylabel("nonlinear model terms  [-]")
+    ax4.grid(color="#cad1d5", lw=0.4)
+    ax4.text(0.68, 0.79, r"Prandtl loss $F$", color="#762a83", transform=ax4.transAxes, fontsize=7.1)
+    ax4.text(0.68, 0.22, r"axial induction $a$", color="#d6604d", transform=ax4.transAxes, fontsize=7.1)
+    ax4.text(0.68, 0.08, r"tangential term $\kappa'$", color="#1b7837", transform=ax4.transAxes, fontsize=7.1)
+    ax4.text(0.025, 0.97, "d", transform=ax4.transAxes, va="top", fontweight="bold")
+    terms_note = (rf"$F={croot['F'][0]:.6f}$" + "\n" + rf"$a={croot['a'][0]:.6f}$" + "\n" +
+                  rf"$\kappa'={croot['kp'][0]:.6f}$" + "\n" + rf"$\sigma={croot['sigma'][0]:.6f}$")
+    ax4.text(0.05, 0.72, terms_note, transform=ax4.transAxes, fontsize=7.0, va="top")
+
     for ext in ("png", "pdf", "svg"):
-        fig.savefig(out / f"fig2_real_bem_section_residual.{ext}", bbox_inches="tight", facecolor="white")
+        fig.savefig(out / f"fig2_bem_element_diagnostics_2d.{ext}", bbox_inches="tight", facecolor="white")
     plt.close(fig)
     meta["fig2"] = {
-        "files": [f"fig2_real_bem_section_residual.{x}" for x in ("png", "pdf", "svg")],
+        "files": [f"fig2_bem_element_diagnostics_2d.{x}" for x in ("png", "pdf", "svg")],
         "dataset": data_path.relative_to(ROOT).as_posix(), "dataset_sha256": sha256(data_path),
         "dataset_version": version, "flat_record": flat, "time_step": step, "global_node_zero_based": node,
         "blade_one_based": node // 17 + 1, "local_node_zero_based": local_node,
         "Vx_mps": vx, "Vy_mps": vy, "theta_rad": theta, "phi_openfast_rad": phi_ref,
+        "phi_exact_c_zero_rad": phi_zero, "reference_minus_c_zero_microdeg": delta_microdeg,
         "residual_at_reference": rref, "airfoil_file": airfoil_paths()[afid].name,
+        "Cl_at_reference": float(cl0[0]), "Cd_at_reference": float(cd0[0]),
+        "F_at_c_zero": float(croot["F"][0]), "a_at_c_zero": float(croot["a"][0]),
+        "kappa_prime_at_c_zero": float(croot["kp"][0]), "solidity": float(croot["sigma"][0]),
     }
 
 
@@ -390,10 +589,10 @@ def render_batch_field(out: Path, meta: dict) -> None:
     time = np.arange(nsteps) * dt
     radii = t["bem_node_r"]
 
-    fig = plt.figure(figsize=(7.15, 4.8))
-    gs = fig.add_gridspec(2, 1, height_ratios=(0.90, 1.10), hspace=0.28,
-                          left=0.09, right=0.93, bottom=0.07, top=0.98)
-    ax = fig.add_subplot(gs[0])
+    fig = plt.figure(figsize=(7.25, 5.35))
+    gs = fig.add_gridspec(2, 2, height_ratios=(1.12, 0.88), width_ratios=(1.30, 0.70),
+                          hspace=0.34, wspace=0.30, left=0.085, right=0.96, bottom=0.09, top=0.98)
+    ax = fig.add_subplot(gs[0, :])
     im = ax.imshow(np.rad2deg(phi).T, aspect="auto", origin="lower", interpolation="nearest",
                    extent=(0, 600, 0.5, 51.5), cmap="twilight_shifted", vmin=-180, vmax=180,
                    rasterized=True)
@@ -401,92 +600,104 @@ def render_batch_field(out: Path, meta: dict) -> None:
         ax.axhline(yline, color="white", lw=0.8, alpha=0.8)
     ax.set_yticks([9, 26, 43], ["blade 1", "blade 2", "blade 3"])
     ax.set_xlabel("OpenFAST simulation time  [s]")
-    ax.set_ylabel("3 blades × 17 radial elements")
+    ax.set_ylabel("51 equations per time step")
     cb = fig.colorbar(im, ax=ax, orientation="vertical", pad=0.012, aspect=22)
     cb.set_label(r"reference root $\phi$  [deg]")
     ax.text(0.006, 0.96, "a", transform=ax.transAxes, color="white", fontweight="bold", va="top")
 
-    ax3 = fig.add_subplot(gs[1], projection="3d")
-    take = np.arange(0, nsteps, 120)
-    tt = time[take]
-    T, R = np.meshgrid(tt, radii, indexing="xy")
-    norm = Normalize(-180, 180)
-    cmap = mpl.colormaps["twilight_shifted"]
+    ax.text(0.50, 1.025, "48,000 time steps × 51 blade elements = 2,448,000 reference roots",
+            transform=ax.transAxes, ha="center", va="bottom", fontsize=8.2)
+
+    # A 20-second, full-resolution zoom makes each of the 51 simultaneous tasks visible.
+    axz = fig.add_subplot(gs[1, 0])
+    t0, t1 = 300.0, 320.0
+    mask = (time >= t0) & (time <= t1)
+    imz = axz.imshow(np.rad2deg(phi[mask]).T, aspect="auto", origin="lower", interpolation="nearest",
+                     extent=(time[mask][0], time[mask][-1], 0.5, 51.5),
+                     cmap="twilight_shifted", vmin=-180, vmax=180, rasterized=True)
+    for yline in (17.5, 34.5):
+        axz.axhline(yline, color="white", lw=0.8)
+    axz.set_yticks([9, 26, 43], ["blade 1\n17 rows", "blade 2\n17 rows", "blade 3\n17 rows"])
+    axz.set_xlabel("full-resolution time window  [s]")
+    axz.set_ylabel("element index within each blade")
+    axz.text(0.008, 0.96, "b", transform=axz.transAxes, color="white", fontweight="bold", va="top")
+
+    # Radial profiles at the same instant as Figure 1 retain all 17 samples.
+    axr = fig.add_subplot(gs[1, 1])
+    sample_step = int(round(306.1 / dt))
+    cols = ["#b2182b", "#2166ac", "#1b7837"]
+    marks = ["o", "s", "^"]
     for b in range(3):
-        P = np.rad2deg(phi[take, b * 17:(b + 1) * 17]).T
-        Y = R + b * 72.0
-        ax3.plot_surface(T, Y, P, facecolors=cmap(norm(P)), rstride=1, cstride=1,
-                         linewidth=0, antialiased=False, shade=False, alpha=0.96)
-    ax3.set_xlabel("time  [s]", labelpad=5)
-    ax3.set_ylabel("")
-    ax3.set_zlabel(r"$\phi$  [deg]", labelpad=4)
-    ax3.set_yticks([np.mean(radii), np.mean(radii) + 72, np.mean(radii) + 144],
-                   ["blade 1", "blade 2", "blade 3"])
-    ax3.view_init(elev=25, azim=-61)
-    ax3.set_box_aspect((2.6, 1.25, 1.0))
-    ax3.text2D(0.006, 0.97, "b", transform=ax3.transAxes, fontweight="bold", va="top")
-    ax3.text2D(0.08, 0.96, "2,448,000 roots = 48,000 time steps × 3 blades × 17 elements",
-               transform=ax3.transAxes, fontsize=8.2)
-    ax3.xaxis.pane.set_facecolor((0.95, 0.97, 0.98, 1))
-    ax3.yaxis.pane.set_facecolor((0.95, 0.97, 0.98, 1))
-    ax3.zaxis.pane.set_facecolor((0.97, 0.98, 0.99, 1))
-    for ext in ("png", "pdf"):
-        fig.savefig(out / f"fig3_real_batch_spacetime.{ext}", bbox_inches="tight", facecolor="white")
+        vals = np.rad2deg(phi[sample_step, b * 17:(b + 1) * 17])
+        axr.plot(vals, radii, color=cols[b], lw=1.15, marker=marks[b], ms=2.8, label=f"blade {b+1}")
+    axr.set_xlabel(r"reference root $\phi$  [deg]")
+    axr.set_ylabel("element radius $r$  [m]")
+    axr.grid(color="#cad1d5", lw=0.4)
+    axr.legend(frameon=False, loc="best")
+    axr.text(0.035, 0.96, "c", transform=axr.transAxes, fontweight="bold", va="top")
+    axr.text(0.97, 0.04, "17 measured points\nper blade at 306.1 s", transform=axr.transAxes,
+             ha="right", va="bottom", fontsize=7.1)
+    for ext in ("png", "pdf", "svg"):
+        fig.savefig(out / f"fig3_batch_field_2d.{ext}", bbox_inches="tight", facecolor="white")
     plt.close(fig)
 
     valid = np.isfinite(phi)
     meta["fig3"] = {
-        "files": [f"fig3_real_batch_spacetime.{x}" for x in ("png", "pdf")],
+        "files": [f"fig3_batch_field_2d.{x}" for x in ("png", "pdf", "svg")],
         "dataset": data_path.relative_to(ROOT).as_posix(), "dataset_sha256": sha256(data_path),
         "records": int(phi.size), "time_steps": nsteps, "nodes_per_step": nnodes,
         "blades": 3, "elements_per_blade": 17, "valid_roots": int(valid.sum()),
         "phi_deg_range": [float(np.nanmin(np.rad2deg(phi))), float(np.nanmax(np.rad2deg(phi)))],
+        "detail_window_s": [t0, t1], "radial_profile_time_s": float(time[sample_step]),
     }
 
 
 def write_notes(out: Path, meta: dict) -> None:
-    notes = """# Real OpenFAST/BEM publication figures
+    notes = """# Real OpenFAST/BEM two-dimensional publication figures
 
-These are data-driven scientific visualizations, not conceptual schematics.
+All panels are two-dimensional, data-driven scientific visualizations rather
+than conceptual schematics. No three-dimensional reconstruction is used.
 
-## Figure 1 — rotor and full-field turbulent inflow
+## Figure 1 — actual TurbSim rotor-plane field
 
-The three blades are lofted from the released NREL 5-MW AeroDyn station table
-(span, chord, twist, sweep and airfoil ID) and the released airfoil coordinate
-files. The colored plane and streamlines use all three velocity components from
-the released TurbSim `.bts` file. The streamwise coordinate is reconstructed by
-Taylor's frozen-turbulence hypothesis, `x = U_ref (t-t0)`. It must therefore be
-captioned as a **TurbSim full-field inflow reconstruction**, not as a
-Navier–Stokes CFD solution.
+The contour is the direct `y-z` plane at 306.1 s from the released TurbSim
+`.bts` file. Color is the measured streamwise component; arrows are the measured
+lateral and vertical components. The projected blade planforms use all 19
+released AeroDyn span, chord and twist stations, and the markers are the exact
+17 ordinary BEM radii used by each blade. No Taylor or CFD reconstruction is
+present in this figure.
 
-Suggested caption: *NREL 5-MW rotor immersed in the OpenFAST/TurbSim full-field
-inflow used to generate the BEM benchmark. Blade surfaces are lofted from the
-released AeroDyn chord, twist and airfoil definitions. The upstream volume is a
-Taylor reconstruction of the measured TurbSim time series; color denotes the
-streamwise velocity component.*
+Suggested caption: *Instantaneous TurbSim rotor-plane inflow at 306.1 s for the
+NREL 5-MW benchmark. Color denotes streamwise velocity and arrows denote the two
+transverse components. The rotor planform and 51 blade-element nodes are drawn
+from the released AeroDyn geometry and solver tables.*
 
-## Figure 2 — one real blade-element equation
+## Figure 2 — complete diagnostics for one real blade element
 
 Panel (a) uses record 89,241 from the released 2,448,000-record binary dataset
-and the corresponding real airfoil geometry. Panel (b) evaluates the exact
-released C residual and polar tables, then marks the OpenFAST reference root.
+and the corresponding DU25 airfoil coordinates. Panel (b) displays the released
+polar samples and the interpolated operating point. Panel (c) evaluates the
+exact released C residual and locates its numerical zero. Panel (d) exposes the
+Prandtl loss, axial induction, tangential term and solidity that form the same
+residual. The manifest records the difference between the OpenFAST reference
+angle and the exact zero in microdegrees.
 
-Suggested caption: *Local blade-element kinematics and nonlinear residual for a
-representative OpenFAST record. The velocity triangle, airfoil, operating angle
-and marked root are taken from the released benchmark rather than synthesized.*
+Suggested caption: *Data-level audit of a representative OpenFAST blade-element
+root problem: local kinematics and DU25 geometry, released polar interpolation,
+exact C residual, and its nonlinear induction/loss terms.*
 
 ## Figure 3 — why batched solving is required
 
-Every pixel and surface sample comes from the complete released reference-root
+Every pixel and curve sample comes from the complete released reference-root
 array. At every time step, OpenFAST produces 51 coupled-in-time but independently
 solvable blade-element root problems: 3 blades × 17 ordinary elements. Over
 48,000 time steps this yields 2,448,000 solves, exposing the two-dimensional
 parallelism that the GPU implementation batches.
 
 Suggested caption: *Space–time organization of the complete OpenFAST BEM root
-workload. The heat map contains all 2,448,000 reference roots; the surfaces
-separate the three blades and show radial and temporal coherence. The workload
-is naturally batched over blade elements and time.*
+workload. The overview contains all 2,448,000 roots; the full-resolution window
+shows the 51 simultaneous tasks, and the radial profiles retain all 17 elements
+of each blade at the same instant as Figure 1.*
 
 ## Reproduce
 
@@ -494,8 +705,8 @@ is naturally batched over blade elements and time.*
 python scripts/visualization/render_real_bem_figures.py
 ```
 
-Python dependencies: `numpy`, `matplotlib`, `pyvista`, `vtk`, and
-`openfast-io`. The JSON manifest records exact source SHA-256 hashes and selected
+Python dependencies: `numpy`, `matplotlib`, `scipy`, and `openfast-io`. The JSON
+manifest records exact source SHA-256 hashes and selected
 record values.
 """
     (out / "FIGURE_NOTES.md").write_text(notes, encoding="utf-8")
@@ -505,15 +716,21 @@ record values.
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--output", type=Path, default=OUT_DEFAULT)
-    ap.add_argument("--skip-3d", action="store_true")
     args = ap.parse_args()
     out = args.output.resolve()
     out.mkdir(parents=True, exist_ok=True)
     set_paper_style()
+    for obsolete in (
+        "fig1_openfast_turbulent_rotor.png",
+        "fig2_real_bem_section_residual.png", "fig2_real_bem_section_residual.pdf", "fig2_real_bem_section_residual.svg",
+        "fig3_real_batch_spacetime.png", "fig3_real_batch_spacetime.pdf",
+    ):
+        p = out / obsolete
+        if p.exists():
+            p.unlink()
     meta = {"generator": Path(__file__).relative_to(ROOT).as_posix(), "truth_boundary":
-            "OpenFAST/AeroDyn/TurbSim simulation data; Fig. 1 uses Taylor reconstruction and is not Navier-Stokes CFD"}
-    if not args.skip_3d:
-        render_rotor_inflow(out, meta)
+            "Only direct two-dimensional OpenFAST/AeroDyn/TurbSim/BEM data views; no 3-D reconstruction"}
+    render_rotor_plane_2d(out, meta)
     render_local_section(out, meta)
     render_batch_field(out, meta)
     write_notes(out, meta)

@@ -15,6 +15,7 @@ import numpy as np
 import pandas as pd
 from matplotlib.colors import BoundaryNorm, LogNorm
 from matplotlib.patches import Arc, Circle, FancyArrowPatch, Polygon, Rectangle
+from mpl_toolkits.axes_grid1.inset_locator import inset_axes
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -71,6 +72,17 @@ def style_axis(ax, grid: bool = True) -> None:
     if grid:
         ax.grid(True, color="#d7dde5", lw=0.45, alpha=0.75)
     ax.tick_params(direction="out", length=3, width=0.7)
+
+
+def inset_colorbar(fig, ax, mappable, label: str, width: str = "37%"):
+    """Compact Nature-style color key embedded in the data field."""
+    cax = inset_axes(ax, width=width, height="4.5%", loc="upper right", borderpad=0.7)
+    cb = fig.colorbar(mappable, cax=cax, orientation="horizontal")
+    cax.xaxis.set_ticks_position("top")
+    cax.xaxis.set_label_position("top")
+    cax.tick_params(labelsize=6.4, pad=1.0, length=2.0, width=0.55)
+    cb.set_label(label, fontsize=7.0, labelpad=1.2)
+    return cb
 
 
 def audit_layout(fig, named_axes: dict[str, object]) -> dict:
@@ -346,15 +358,21 @@ def render_kepler(out: Path, meta: dict) -> None:
     levels_e = [0.25, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0]
     ce = ax1.contour(mgrid, egrid, E.T, levels=levels_e, colors="white", linewidths=0.55, alpha=0.9)
     ax1.clabel(ce, inline=True, fontsize=6.2, fmt=lambda x: f"E={x:g}")
-    # Show the actual two-dimensional sampling lattice without turning the
-    # panel into a decorative gradient.
-    ax1.scatter(mgrid[::12], np.full_like(mgrid[::12], 0.985), s=7, marker="|",
-                color="white", alpha=0.9, linewidths=0.7)
-    ax1.axhline(0.9, color="white", ls="--", lw=0.75, alpha=0.8)
-    ax1.text(0.04, 0.88, "high-e band", color="white", fontsize=7.2,
-             transform=ax1.transAxes, ha="left", va="top")
-    c1 = fig.colorbar(im1, ax=ax1, pad=0.02, aspect=28)
-    c1.set_label(r"$E$ [rad]")
+    # Visible sample lattice plus matched orbit slices: the field is both a
+    # continuous response and an executed set of individual root problems.
+    mm, ee = np.meshgrid(mgrid[::12], egrid[::6])
+    ax1.scatter(mm, ee, s=5.0, marker="o", facecolors="none", edgecolors="white",
+                alpha=0.48, linewidths=0.30, rasterized=True)
+    slice_specs = [(0.60, mpl.colormaps["viridis"](1 / 3), "S1"),
+                   (0.90, mpl.colormaps["viridis"](2 / 3), "S2"),
+                   (0.99, mpl.colormaps["viridis"](1.0), "S3")]
+    for es, color, tag in slice_specs:
+        ax1.axhline(es, color=color, ls="--", lw=1.0, alpha=0.95)
+        ax1.text(0.56, es - 0.012, f"{tag}  e={es:g}", color="black", fontsize=6.7,
+                 ha="right", va="top",
+                 bbox={"boxstyle": "round,pad=0.16", "fc": "white", "ec": color,
+                       "lw": 0.65, "alpha": 0.88})
+    inset_colorbar(fig, ax1, im1, r"eccentric anomaly $E$ [rad]", width="35%")
     ax1.set_xlabel(r"mean anomaly $M$ [rad]")
     ax1.set_ylabel(r"eccentricity $e$")
     ax1.set_ylim(0, 1.0)
@@ -372,8 +390,10 @@ def render_kepler(out: Path, meta: dict) -> None:
     ax2.annotate("hard-corner sampling", xy=(1e-8, 0.9999999), xytext=(3e-7, 0.99999998),
                  color="white", fontsize=7.0,
                  arrowprops={"arrowstyle": "->", "color": "white", "lw": 0.7})
-    c2 = fig.colorbar(im2, ax=ax2, pad=0.02, aspect=28)
-    c2.set_label(r"$\log_{10}|\partial E/\partial M|$")
+    mms, ees = np.meshgrid(mgrid[positive_m][::14], egrid[::5])
+    ax2.scatter(mms, ees, s=3.8, facecolors="none", edgecolors="white",
+                linewidths=0.25, alpha=0.34, rasterized=True)
+    inset_colorbar(fig, ax2, im2, r"$\log_{10}|\partial E/\partial M|$", width="39%")
     ax2.set_xlabel(r"mean anomaly $M$ [rad]")
     ax2.set_ylabel(r"eccentricity $e$")
     ax2.set_ylim(0.90, 1.0001)
@@ -418,11 +438,19 @@ def render_pv(out: Path, meta: dict) -> None:
     fig, axs = plt.subplots(2, 2, figsize=(14.8, 8.5), layout="constrained")
     ax0, ax1, ax2, ax3 = axs.ravel()
     panel(ax0, "a", "CEC module I-V and P-V curves from pvlib")
+    pv_cases = [(200, 10), (200, 50), (600, 10), (600, 50), (1000, 10), (1000, 50)]
+    pv_tags = {case: chr(ord("A") + i) for i, case in enumerate(pv_cases)}
     for (g, t), grp in curves.groupby(["effective_irradiance_W_m2", "cell_temperature_C"]):
         color = mpl.colormaps["plasma"]((g - 200) / 800)
         ls = "-" if t == 10 else "--"
-        label = fr"{g:.0f} W m$^{{-2}}$, {t:.0f}$^\circ$C"
+        tag = pv_tags[(int(g), int(t))]
+        label = fr"{tag}: {g:.0f} W m$^{{-2}}$, {t:.0f}$^\circ$C"
         ax0.plot(grp.V, grp.I, color=color, ls=ls, lw=1.35, label=label)
+        mpp = grp.iloc[grp.P.argmax()]
+        ax0.scatter(mpp.V, mpp.I, marker="o", s=20, facecolor="white",
+                    edgecolor=color, linewidth=0.8, zorder=5)
+        ax0.text(mpp.V + 0.8, mpp.I + 0.035, tag, fontsize=6.8, color=color,
+                 fontweight="bold", zorder=6)
     ax0.set_xlabel("module voltage [V]")
     ax0.set_ylabel("module current [A]")
     ax0.legend(frameon=False, ncol=2, loc="lower left")
@@ -446,11 +474,19 @@ def render_pv(out: Path, meta: dict) -> None:
     ax1.plot(stc.cell_temperature_C, stc.effective_irradiance_W_m2, marker="*", ms=8,
              color="cyan", mec="black", mew=0.35, zorder=4)
     ax1.annotate(f"near STC\n{stc.p_mp:.1f} W",
-                 (stc.cell_temperature_C, stc.effective_irradiance_W_m2), (43, 1045),
+                 (stc.cell_temperature_C, stc.effective_irradiance_W_m2), (38, 930),
                  color="white", fontsize=7.0, ha="left",
                  arrowprops={"arrowstyle": "->", "color": "white", "lw": 0.7})
-    cb = fig.colorbar(im, ax=ax1, pad=0.02, aspect=28)
-    cb.set_label(r"$P_{mp}$ [W]")
+    # Match every highlighted surface state to the labelled I-V/P-V curve in
+    # panel (a), as in dense field-plus-station figures.
+    for (g, t), tag in pv_tags.items():
+        color = mpl.colormaps["plasma"]((g - 200) / 800)
+        ax1.scatter(t, g, s=25, marker="o", facecolor="white", edgecolor=color,
+                    linewidth=0.9, zorder=6)
+        ax1.text(t + 1.4, g + 12, tag, fontsize=6.8, color="black", fontweight="bold",
+                 bbox={"boxstyle": "round,pad=0.10", "fc": "white", "ec": color,
+                       "lw": 0.6, "alpha": 0.88}, zorder=7)
+    inset_colorbar(fig, ax1, im, r"maximum power $P_{mp}$ [W]", width="36%")
     ax1.set_xlabel(r"cell temperature [$^\circ$C]")
     ax1.set_ylabel("effective irradiance [W m$^{-2}$]")
     style_axis(ax1, False)
@@ -502,10 +538,23 @@ def render_cstr(out: Path, meta: dict) -> None:
     # readable than labeling every temperature level along the discontinuity.
     ax0.contour(tau, tin, temp, levels=[1000], colors="cyan", linewidths=1.05)
     ax0.contour(tau, tin, temp, levels=[1400, 1700], colors="white", linewidths=0.55, alpha=0.8)
-    # A sparse subset of the solved lattice makes the batch density explicit.
-    ttau, ttin = np.meshgrid(tau[::6], tin[::2])
-    ax0.scatter(ttau, ttin, s=5, facecolors="none", edgecolors="white",
-                linewidths=0.3, alpha=0.6, rasterized=True)
+    # Dense executed nodes and three directly comparable inlet-temperature
+    # sections give the field the same measurement-rich grammar as the Nature
+    # latitude-depth sections used as the visual reference.
+    ttau, ttin = np.meshgrid(tau[::3], tin)
+    ax0.scatter(ttau, ttin, s=4.2, facecolors="none", edgecolors="white",
+                linewidths=0.25, alpha=0.48, rasterized=True)
+    cstr_slices = [(400, COLORS["blue"], "S1"),
+                   (600, COLORS["cyan"], "S2"),
+                   (800, COLORS["red"], "S3")]
+    for tsel, color, tag in cstr_slices:
+        ax0.axhline(tsel, color=color, ls="--", lw=0.95, alpha=0.95)
+        dy = -8 if tsel == 800 else 6
+        ax0.text(1.25e-4, tsel + dy, f"{tag}  {tsel} K", fontsize=6.7, ha="left",
+                 va="top" if dy < 0 else "bottom",
+                 color="black",
+                 bbox={"boxstyle": "round,pad=0.14", "fc": "white", "ec": color,
+                       "lw": 0.6, "alpha": 0.88})
     ax0.text(1.7e-4, 340, "extinguished branch", color="white", fontsize=7.2,
              ha="left", va="bottom")
     ax0.text(1.8e-2, 730, "reacting branch", color="#3b1d00", fontsize=7.2,
@@ -513,8 +562,7 @@ def render_cstr(out: Path, meta: dict) -> None:
     ax0.annotate("extinction boundary", xy=(5.3e-4, 455), xytext=(1.6e-4, 535),
                  color="white", fontsize=7.0,
                  arrowprops={"arrowstyle": "->", "color": "white", "lw": 0.7})
-    cb0 = fig.colorbar(im0, ax=ax0, pad=0.02, aspect=28)
-    cb0.set_label("steady reactor temperature [K]")
+    inset_colorbar(fig, ax0, im0, "steady reactor temperature [K]", width="39%")
     ax0.set_xscale("log")
     ax0.set_xlabel(r"residence time $\tau$ [s]")
     ax0.set_ylabel("inlet temperature [K]")
@@ -524,8 +572,7 @@ def render_cstr(out: Path, meta: dict) -> None:
     positive = np.maximum(qdot, 1e-2)
     im1 = ax1.pcolormesh(tau, tin, positive, shading="auto", cmap="magma",
                          norm=LogNorm(vmin=1e2, vmax=max(1e6, np.nanmax(positive))), rasterized=True)
-    cb1 = fig.colorbar(im1, ax=ax1, pad=0.02, aspect=28)
-    cb1.set_label("heat release rate [W m$^{-3}$]")
+    inset_colorbar(fig, ax1, im1, "heat release rate [W m$^{-3}$]", width="39%")
     ignition = ax1.contour(tau, tin, temp, levels=[1000], colors="cyan", linewidths=1.1)
     ax1.clabel(ignition, inline=True, fontsize=6.5, fmt={1000: "T=1000 K"})
     hlevels = [1e4, 1e6, 1e8]
@@ -534,6 +581,13 @@ def render_cstr(out: Path, meta: dict) -> None:
                fmt={1e4: r"$10^4$", 1e6: r"$10^6$", 1e8: r"$10^8$"})
     ax1.scatter(ttau, ttin, s=5, facecolors="none", edgecolors="white",
                 linewidths=0.3, alpha=0.55, rasterized=True)
+    for tsel, color, tag in cstr_slices:
+        ax1.axhline(tsel, color=color, ls="--", lw=0.95, alpha=0.95)
+        dy = -8 if tsel == 800 else 6
+        ax1.text(1.25e-4, tsel + dy, tag, fontsize=6.7, ha="left", color="black",
+                 va="top" if dy < 0 else "bottom",
+                 bbox={"boxstyle": "round,pad=0.12", "fc": "white", "ec": color,
+                       "lw": 0.6, "alpha": 0.88})
     ax1.text(1.6e-4, 330, "negligible heat release", color="white", fontsize=7.0,
              ha="left", va="bottom")
     ax1.set_xscale("log")
@@ -542,14 +596,22 @@ def render_cstr(out: Path, meta: dict) -> None:
     style_axis(ax1, False)
 
     panel(ax2, "c", "Hot-branch continuation for selected inlet states")
+    selected_lookup = {400: (COLORS["blue"], "S1"),
+                       600: (COLORS["cyan"], "S2"),
+                       800: (COLORS["red"], "S3")}
     for k, target in enumerate((300, 400, 500, 600, 700, 800)):
         grp = field[field.inlet_temperature_K == target].sort_values("residence_time_s")
-        ax2.plot(grp.residence_time_s, grp.steady_temperature_K, lw=1.35,
-                 color=mpl.colormaps["viridis"](k / 5), label=f"{target} K")
+        if target in selected_lookup:
+            color, tag = selected_lookup[target]
+            ax2.plot(grp.residence_time_s, grp.steady_temperature_K, lw=1.65,
+                     color=color, label=f"{tag}: {target} K", zorder=4)
+        else:
+            ax2.plot(grp.residence_time_s, grp.steady_temperature_K, lw=0.8,
+                     color="#aab2bd", alpha=0.72, zorder=2)
     ax2.set_xscale("log")
     ax2.set_xlabel(r"residence time $\tau$ [s]")
     ax2.set_ylabel("steady reactor temperature [K]")
-    ax2.legend(frameon=False, ncol=2, loc="upper left")
+    ax2.legend(frameon=False, ncol=3, loc="upper left")
     style_axis(ax2)
 
     panel(ax3, "d", "Exact reduced-model folds require branch history")

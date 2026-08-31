@@ -13,12 +13,12 @@
       },
       {
         "name": "fig4_kepler_orekit_batch_2d.pdf",
-        "sha256": "7ec638c476fa5e8756d499c19c25c781838723261df85207e98e8eae2689f052",
+        "sha256": "610185075eb585d932ae1475ec37a49b7da9f4aedb064a9e2f248dedeacd3ead",
         "bytes": 267604
       },
       {
         "name": "fig4_kepler_orekit_batch_2d.svg",
-        "sha256": "0467e735e7a8f54c8c84e0ef1fcae5ed3b3a0d6870fdcb5a98226bf527967c8f",
+        "sha256": "ca8dc571f212f18bd06fb80c9aeed6139eb2ad30af91a4b048f9250aaed99cc5",
         "bytes": 515423
       }
     ],
@@ -62,12 +62,12 @@
       },
       {
         "name": "fig5_pvlib_module_batch_2d.pdf",
-        "sha256": "3849a32a76eb9e17fdf034a21e834d2e58bffaf87f6504e6a1ebb261de2dec26",
+        "sha256": "43758299a23d0c59f313327d6db16e3f1e37a106aba11e20ffa2592585025eee",
         "bytes": 409148
       },
       {
         "name": "fig5_pvlib_module_batch_2d.svg",
-        "sha256": "bdd892fc64800928351dc691719b88911b07b43bdddd0d26b94652cc13d854dd",
+        "sha256": "65aea4136550a9f5bfb2b8a38ea8b1b887e9cdde0c3a35f7551f508682c03172",
         "bytes": 721703
       }
     ],
@@ -111,12 +111,12 @@
       },
       {
         "name": "fig6_cantera_cstr_batch_2d.pdf",
-        "sha256": "29d1223436d8e6ae8aa7349060c9931fd8e27a9794d68c6f3d0d7f189d6de2ad",
+        "sha256": "1c3b008d98e8c32a8de0dd82977c735d833d828b134d836d64c08e2464880a45",
         "bytes": 233997
       },
       {
         "name": "fig6_cantera_cstr_batch_2d.svg",
-        "sha256": "25ca47173d39c1fc8735f090d75a20fd3759b5599ddf320711f1a86394f171e3",
+        "sha256": "e543c60c622a23f15f4512f894603f037a5568034e7d6be82d5261d83cde7403",
         "bytes": 469079
       }
     ],
@@ -160,12 +160,12 @@
       },
       {
         "name": "fig7_coolprop_peng_robinson_batch_2d.pdf",
-        "sha256": "944d2e25518718d34e5424025f42890342d9338d881f3ac0fa4bef7015c23e0a",
+        "sha256": "3bdd2a508cea8bb2be1746f9a4271a9e00474114a8fc10bfcbf37e8a7b52cb82",
         "bytes": 67269
       },
       {
         "name": "fig7_coolprop_peng_robinson_batch_2d.svg",
-        "sha256": "618d3ed7287a084e14aa48f381ee5c7b67cfc4ed53862d3d5b8d5f94f3b75611",
+        "sha256": "0885ade817df5c06bfb2d6118a917d73e26b96e57dff6c5124913ade36991b33",
         "bytes": 185283
       }
     ],
@@ -194,6 +194,55 @@
           0.004902352941176472,
           0.9314691173027287,
           0.49744191678971905
+        ]
+      },
+      "pairwise_overlaps": [],
+      "outside_figure": []
+    }
+  },
+  "geometry_structures": {
+    "files": [
+      {
+        "name": "fig8_multidomain_geometry_structures_2d.png",
+        "sha256": "0199e329c9729b68403233c7556eecb9a81ba6766a09693a4a3d9f86cbcc1396",
+        "bytes": 722741
+      },
+      {
+        "name": "fig8_multidomain_geometry_structures_2d.pdf",
+        "sha256": "5ac23e9549c1b0f9d27bedc7bca46a2e7bf7b8cce7a1d62da5fd4e86635619fc",
+        "bytes": 88791
+      },
+      {
+        "name": "fig8_multidomain_geometry_structures_2d.svg",
+        "sha256": "7ccabcd2e0cd160d052e8ca12b0c086a7ec0fcb89fc3718d46a7ad567a7f2dda",
+        "bytes": 291811
+      }
+    ],
+    "layout_audit": {
+      "tight_bboxes_xyxy": {
+        "kepler_geometry": [
+          0.029601654028556298,
+          0.48294384057971007,
+          0.4285994693035992,
+          0.9954789932602075
+        ],
+        "pv_structure": [
+          0.5928938652240802,
+          0.5270561594202897,
+          0.880830432948338,
+          0.9954789932602075
+        ],
+        "cstr_structure": [
+          0.09063531259250134,
+          0.004529347826086957,
+          0.3785718803167589,
+          0.47295218166600467
+        ],
+        "pr_structure": [
+          0.5928938652240802,
+          0.004529347826086957,
+          0.8808304329483378,
+          0.47295218166600467
         ]
       },
       "pairwise_overlaps": [],

@@ -110,6 +110,15 @@ dimensions: 12,960 Kepler roots, 357 PV roots and 1,512 CSTR roots. The CSTR
 temperature and heat-release panels share coordinates; their cyan contour is
 the same 1,000 K extinction boundary.
 
+The colored arrows and region labels are a data-checked knowledge layer rather
+than illustrative flow lines. Across the stored grid, `E` is nondecreasing in
+both `M` and `e`; PV maximum power increases with irradiance and decreases with
+cell temperature at every sampled counterpart; and the first 1,000 K CSTR
+crossing moves monotonically from `tau=1.680e-3 s` at `Tin=300 K` to
+`tau=1.000e-4 s` at `Tin=800 K`. White contours use a dark halo and colored
+mechanism annotations use a white halo so that both remain legible across the
+full dynamic range of each colormap.
+
 Suggested caption: *Dense comparison of three framework-backed nonlinear-solve
 fields. Each colored pixel neighborhood is supported by explicitly plotted
 operating nodes, and each labelled section is traced into the adjacent solved

@@ -13,12 +13,12 @@
       },
       {
         "name": "fig4_kepler_orekit_batch_2d.pdf",
-        "sha256": "aa192c087ebd13bb6b42aa9a160e0d47520bbcdd30eb5f764064710a51da09ee",
+        "sha256": "7390df88245d59125ef733783d144e1e002765d907a74b1dfc1d58035210ef9c",
         "bytes": 107981
       },
       {
         "name": "fig4_kepler_orekit_batch_2d.svg",
-        "sha256": "0423e899b6db15d04a51aa7129ff11c4d0a705b259911890f155f10dcb27704d",
+        "sha256": "f15fa747009075f199d643e3639a7638472c0066603e02947ef8d6fe4df6aa7f",
         "bytes": 256427
       }
     ],
@@ -62,12 +62,12 @@
       },
       {
         "name": "fig5_pvlib_module_batch_2d.pdf",
-        "sha256": "6608182066a9a1ab27cb6dde997d568d7400f072dab10f67091d92f7f1f91969",
+        "sha256": "4336e26774064148d1e91423a21e7ef6daa637785c85fd2ca170abe6170c22f9",
         "bytes": 123115
       },
       {
         "name": "fig5_pvlib_module_batch_2d.svg",
-        "sha256": "490d5797054a33bdd8c2b7e237ec79e6c1bd41910282d6923514bffe13773239",
+        "sha256": "ec29e4976d11983cf9b62b3c8b75ee41e271a73a0a9bc5da279883a417b513f7",
         "bytes": 276548
       }
     ],
@@ -111,12 +111,12 @@
       },
       {
         "name": "fig6_cantera_cstr_batch_2d.pdf",
-        "sha256": "1df61a126d0311d223a9358ed6eff48cd0192390f8b906fe4caeb67e0ba2071b",
+        "sha256": "03017fb9ca6fd785b5b6e292c8e9cb63a3d4043625200afba5467db2b1f3797d",
         "bytes": 137015
       },
       {
         "name": "fig6_cantera_cstr_batch_2d.svg",
-        "sha256": "5314105950c8284dfc5d52096aa93640ee9062f89108e4918554a405c198f19a",
+        "sha256": "2124be000f98ee82e1e91b841a67ffdffc5b302eec0f5bfe99fdf000859be225",
         "bytes": 310163
       }
     ],
@@ -160,12 +160,12 @@
       },
       {
         "name": "fig7_coolprop_peng_robinson_batch_2d.pdf",
-        "sha256": "df3318a13a5ee3937f59cad7978a47dc3a824a64c446105baf4a253e539539ea",
+        "sha256": "d21cf747bfd8853a01249d974c4ada3ae5e91bcd51ec2239b41a8c1502a227d9",
         "bytes": 67269
       },
       {
         "name": "fig7_coolprop_peng_robinson_batch_2d.svg",
-        "sha256": "2520bd855d4a57b02048a8e272c48f134b44229352820c9825bd7a43c21655a0",
+        "sha256": "a08890c23c7fe1073a713365807427104285540acae8105e2ffcaaa1571cfa78",
         "bytes": 185283
       }
     ],
@@ -209,12 +209,12 @@
       },
       {
         "name": "fig8_multidomain_geometry_structures_2d.pdf",
-        "sha256": "1606e4890c1f99c02065dec0ad020d7858f2518bd8e1dccee92d21a34f65e0e3",
+        "sha256": "81b50fc0031cbabf4752a69b22c6b15b758c01c083aec2e4dc80a68db1c16c1a",
         "bytes": 91688
       },
       {
         "name": "fig8_multidomain_geometry_structures_2d.svg",
-        "sha256": "f0addb0aee6cb66915671fbda05eabe088749bfcf4d1215508dd8a18a20cebea",
+        "sha256": "e6ef8cdf26f502a4afb657e83246d437915abec098087cd320f8387be3bd0f2a",
         "bytes": 313357
       }
     ],
@@ -253,18 +253,18 @@
     "files": [
       {
         "name": "fig9_dense_gradient_field_comparison_2d.png",
-        "sha256": "573b84dbfff772a6d89a1c5465af767c597e20cc534bec873ad6184191897ad8",
-        "bytes": 1924385
+        "sha256": "de17d22fc1ed341d19a9fcfaad602cb8526d8d70987924205c7a77517aff14ca",
+        "bytes": 2592407
       },
       {
         "name": "fig9_dense_gradient_field_comparison_2d.pdf",
-        "sha256": "806537d097690e8a95bfce6cbb255098ca9cd23138e319b9b8dff74305024b09",
-        "bytes": 211979
+        "sha256": "c38fc6a1b4a27ef0d8129e96a4a40f302c7bfb9ad898dc2f210dd05816777e36",
+        "bytes": 474497
       },
       {
         "name": "fig9_dense_gradient_field_comparison_2d.svg",
-        "sha256": "dd2e994fe7b46f652df63ea1d1710f7f5de8dd2b49942b2af7db317bbd25fd8d",
-        "bytes": 511866
+        "sha256": "a96646a414e0a37d19c1ff4541011f2430a48b5961220b601ec70213d5b3f982",
+        "bytes": 1535885
       }
     ],
     "layout_audit": {

@@ -11,6 +11,7 @@ from pathlib import Path
 
 import matplotlib as mpl
 import matplotlib.pyplot as plt
+import matplotlib.patheffects as pe
 import numpy as np
 import pandas as pd
 from matplotlib.colors import BoundaryNorm, LogNorm
@@ -763,13 +764,42 @@ def render_dense_field_plate(out: Path, meta: dict) -> None:
         ax.text(0.12, 0.98, title, transform=ax.transAxes, ha="left", va="top",
                 fontsize=8.3, fontweight="bold")
 
+    def knowledge_arrow(ax, start, end, text: str, color: str, text_pos,
+                        rad: float = 0.0, align: str = "center") -> None:
+        """Reference-style mechanism arrow with a halo that survives any colormap."""
+        patch = FancyArrowPatch(
+            start, end, transform=ax.transAxes, arrowstyle="-|>", mutation_scale=12,
+            connectionstyle=f"arc3,rad={rad}", color=color, linewidth=1.65,
+            zorder=10, clip_on=True,
+        )
+        patch.set_path_effects([pe.Stroke(linewidth=3.7, foreground="white", alpha=0.88),
+                                pe.Normal()])
+        ax.add_patch(patch)
+        txt = ax.text(
+            text_pos[0], text_pos[1], text, transform=ax.transAxes, color=color,
+            fontsize=7.4, fontweight="bold", ha=align, va="center", zorder=11,
+            linespacing=1.05,
+        )
+        txt.set_path_effects([pe.Stroke(linewidth=2.8, foreground="white", alpha=0.96),
+                              pe.Normal()])
+
+    def halo_contours(contour_set, labels) -> None:
+        contour_set.set_path_effects([
+            pe.Stroke(linewidth=1.65, foreground="#17202a", alpha=0.72), pe.Normal()
+        ])
+        for label in labels:
+            label.set_path_effects([
+                pe.Stroke(linewidth=2.3, foreground="#17202a", alpha=0.85), pe.Normal()
+            ])
+
     # Row 1: one root for every (M, e) sample; field and line cuts use identical tags.
     kmap = ax_k.pcolormesh(mgrid, egrid, eccentric_anomaly.T, shading="auto",
                            cmap="viridis", rasterized=True)
     kc = ax_k.contour(mgrid, egrid, eccentric_anomaly.T,
                       levels=[0.25, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0],
                       colors="white", linewidths=0.52, alpha=0.88)
-    ax_k.clabel(kc, inline=True, fontsize=5.9, fmt=lambda x: f"E={x:g}")
+    klabels = ax_k.clabel(kc, inline=True, fontsize=5.9, fmt=lambda x: f"E={x:g}")
+    halo_contours(kc, klabels)
     km, ke = np.meshgrid(mgrid[::6], egrid[::3])
     ax_k.scatter(km, ke, s=3.8, facecolors="none", edgecolors="white",
                  linewidths=0.24, alpha=0.52, rasterized=True)
@@ -785,6 +815,19 @@ def render_dense_field_plate(out: Path, meta: dict) -> None:
         y = eccentric_anomaly[:, j]
         ax_kcut.plot(mgrid, y, color=color, lw=1.75, label=f"{tag}  e={es:g}")
         ax_kcut.fill_between(mgrid, 0, y, color=color, alpha=0.065)
+    knowledge_arrow(ax_k, (0.25, 0.19), (0.70, 0.19),
+                    "phase advance\n" r"$M\,\uparrow\;\Rightarrow\;E\,\uparrow$",
+                    "#145f82", (0.48, 0.27), rad=-0.08)
+    knowledge_arrow(ax_k, (0.19, 0.36), (0.19, 0.76),
+                    r"eccentricity $\uparrow$" "\n" r"nonlinear shift $\uparrow$",
+                    "#7b2b83", (0.215, 0.56), align="left")
+    knowledge_arrow(ax_k, (0.34, 0.77), (0.025, 0.94),
+                    "near-parabolic corner\n" r"$|\partial E/\partial M|\gg1$",
+                    "#b4232f", (0.355, 0.82), rad=0.16, align="left")
+    bulk = ax_k.text(0.55, 0.08, "well-conditioned bulk", transform=ax_k.transAxes,
+                     color="#173a5e", fontsize=7.1, fontweight="bold",
+                     ha="center", va="center", zorder=11)
+    bulk.set_path_effects([pe.Stroke(linewidth=2.8, foreground="white"), pe.Normal()])
     field_header(ax_k, "a", "Kepler eccentric-anomaly field",
                  f"72 eccentricities × 180 anomalies = {len(kepler):,} independent roots")
     inset_colorbar(fig, ax_k, kmap, r"eccentric anomaly $E$ [rad]", width="27%")
@@ -807,7 +850,8 @@ def render_dense_field_plate(out: Path, meta: dict) -> None:
                              cmap="inferno", rasterized=True)
     pvc = ax_pv.contour(cell_temp, irradiance, pmp.T,
                         levels=[50, 100, 150, 200, 250], colors="white", linewidths=0.55)
-    ax_pv.clabel(pvc, inline=True, fontsize=6.0, fmt="%g W")
+    pvlabels = ax_pv.clabel(pvc, inline=True, fontsize=6.0, fmt="%g W")
+    halo_contours(pvc, pvlabels)
     pt, pg = np.meshgrid(cell_temp, irradiance)
     ax_pv.scatter(pt, pg, s=6.0, facecolors="none", edgecolors="white",
                   linewidths=0.30, alpha=0.70, rasterized=True)
@@ -824,6 +868,22 @@ def render_dense_field_plate(out: Path, meta: dict) -> None:
         ax_pvcut.plot(cell_temp, y, color=color, lw=1.8,
                       label=f"{tag}  {gs} W m$^{{-2}}$")
         ax_pvcut.fill_between(cell_temp, 0, y, color=color, alpha=0.065)
+    ax_pv.plot(25, 1000, marker="*", ms=9.5, mfc="#00e5ff", mec="#14213d",
+               mew=0.65, zorder=12)
+    stc_text = ax_pv.text(27.5, 968, "reference state\n" r"25$^\circ$C, 1000 W m$^{-2}$",
+                          color="#083d56", fontsize=6.8, fontweight="bold",
+                          ha="left", va="top", zorder=12)
+    stc_text.set_path_effects([pe.Stroke(linewidth=2.7, foreground="white"), pe.Normal()])
+    knowledge_arrow(ax_pv, (0.12, 0.19), (0.12, 0.70),
+                    r"irradiance $\uparrow$" "\n" r"photocurrent and $P_{mp}\uparrow$",
+                    "#16854b", (0.145, 0.45), align="left")
+    knowledge_arrow(ax_pv, (0.51, 0.79), (0.83, 0.79),
+                    r"cell heating $\rightarrow$" "\n" r"thermal derating, $P_{mp}\downarrow$",
+                    "#b4232f", (0.67, 0.70), rad=-0.10)
+    low_light = ax_pv.text(0.33, 0.095, "low-light operating region",
+                           transform=ax_pv.transAxes, color="#54c7ec", fontsize=7.0,
+                           fontweight="bold", ha="center", va="center", zorder=11)
+    low_light.set_path_effects([pe.Stroke(linewidth=2.8, foreground="#111827"), pe.Normal()])
     field_header(ax_pv, "c", "PV maximum-power operating surface",
                  f"21 irradiances × 17 temperatures = {len(pv):,} independent roots")
     inset_colorbar(fig, ax_pv, pvmap, r"maximum power $P_{mp}$ [W]", width="27%")
@@ -842,20 +902,28 @@ def render_dense_field_plate(out: Path, meta: dict) -> None:
     # Row 3: two physically complementary fields share the same executed nodes.
     ctmap = ax_ct.pcolormesh(tau, inlet_temp, reactor_temp, shading="auto",
                              cmap="inferno", rasterized=True)
-    ax_ct.contour(tau, inlet_temp, reactor_temp, levels=[1000], colors="cyan", linewidths=1.0)
-    ax_ct.contour(tau, inlet_temp, reactor_temp, levels=[1400, 1700],
-                  colors="white", linewidths=0.50, alpha=0.82)
+    ctext = ax_ct.contour(tau, inlet_temp, reactor_temp, levels=[1000],
+                          colors="cyan", linewidths=1.15)
+    ctext.set_path_effects([pe.Stroke(linewidth=2.7, foreground="#102a43"), pe.Normal()])
+    cthot = ax_ct.contour(tau, inlet_temp, reactor_temp, levels=[1400, 1700],
+                          colors="white", linewidths=0.55, alpha=0.90)
+    ctlabels = ax_ct.clabel(cthot, inline=True, fontsize=5.7,
+                            fmt=lambda x: f"{int(x)} K")
+    halo_contours(cthot, ctlabels)
     qt = np.maximum(heat_release, 1e2)
     cqmap = ax_cq.pcolormesh(tau, inlet_temp, qt, shading="auto", cmap="magma",
                              norm=LogNorm(vmin=1e2, vmax=max(1e6, np.nanmax(qt))),
                              rasterized=True)
-    ax_cq.contour(tau, inlet_temp, reactor_temp, levels=[1000], colors="cyan", linewidths=1.0)
+    cqext = ax_cq.contour(tau, inlet_temp, reactor_temp, levels=[1000],
+                          colors="cyan", linewidths=1.15)
+    cqext.set_path_effects([pe.Stroke(linewidth=2.7, foreground="#102a43"), pe.Normal()])
     hlevels = [v for v in (1e4, 1e6, 1e8) if np.nanmin(qt) < v < np.nanmax(qt)]
     if hlevels:
         hc = ax_cq.contour(tau, inlet_temp, qt, levels=hlevels,
                            colors="white", linewidths=0.48, alpha=0.82)
-        ax_cq.clabel(hc, inline=True, fontsize=5.7,
-                     fmt=lambda x: rf"$10^{{{int(np.log10(x))}}}$")
+        hclabels = ax_cq.clabel(hc, inline=True, fontsize=5.7,
+                                fmt=lambda x: rf"$10^{{{int(np.log10(x))}}}$")
+        halo_contours(hc, hclabels)
     nt, ni = np.meshgrid(tau[::3], inlet_temp)
     c_slices = [(400, "#31a9ff", "C1"), (600, "#52d273", "C2"),
                 (800, "#ff5a5f", "C3")]
@@ -872,6 +940,32 @@ def render_dense_field_plate(out: Path, meta: dict) -> None:
         ax.set_xscale("log")
         ax.set_xlabel(r"residence time $\tau$ [s]")
         style_axis(ax, False)
+    knowledge_arrow(ax_ct, (0.17, 0.22), (0.71, 0.22),
+                    r"residence time $\uparrow$" "\nignition / hot branch",
+                    "#1479b8", (0.46, 0.31), rad=-0.08)
+    knowledge_arrow(ax_ct, (0.25, 0.47), (0.25, 0.76),
+                    r"inlet preheat $\uparrow$" "\nextinction shifts left",
+                    "#16854b", (0.285, 0.62), align="left")
+    cold = ax_ct.text(0.15, 0.10, "cold / extinguished", transform=ax_ct.transAxes,
+                      color="#73d7ff", fontsize=6.9, fontweight="bold",
+                      ha="center", va="center", zorder=11)
+    cold.set_path_effects([pe.Stroke(linewidth=2.7, foreground="#111827"), pe.Normal()])
+    hot = ax_ct.text(0.67, 0.76, "reacting plateau", transform=ax_ct.transAxes,
+                     color="#8b1e1e", fontsize=7.0, fontweight="bold",
+                     ha="center", va="center", zorder=11)
+    hot.set_path_effects([pe.Stroke(linewidth=2.8, foreground="white"), pe.Normal()])
+    knowledge_arrow(ax_cq, (0.18, 0.22), (0.73, 0.28),
+                    "reaction-rate growth\n" r"$\dot q\,\uparrow$ after ignition",
+                    "#b4232f", (0.49, 0.37), rad=-0.10)
+    knowledge_arrow(ax_cq, (0.42, 0.68), (0.18, 0.53),
+                    "same extinction\nboundary",
+                    "#007f91", (0.47, 0.70), rad=0.10)
+    negligible = ax_cq.text(0.15, 0.10, "negligible heat release",
+                            transform=ax_cq.transAxes, color="#73d7ff", fontsize=6.8,
+                            fontweight="bold", ha="center", va="center", zorder=11)
+    negligible.set_path_effects([
+        pe.Stroke(linewidth=2.7, foreground="#111827"), pe.Normal()
+    ])
     for ts, color, tag in c_slices:
         j = int(np.argmin(np.abs(inlet_temp - ts)))
         y = reactor_temp[j, :]

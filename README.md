@@ -18,7 +18,7 @@
 
 [`paper_figures/domain_frameworks_v1/`](paper_figures/domain_frameworks_v1/) extends the same data-driven two-dimensional treatment to Kepler, photovoltaic, CSTR and Peng-Robinson cases.  The application calculations were actually run with Orekit 13.1.5, pvlib 0.15.2, Cantera 3.2.0 and CoolProp 8.0.0.  Framework outputs, exact benchmark checks, source hashes and zero-overlap layout audits are committed with the figures.  The framework-to-equation mapping and the important CSTR non-identity boundary are documented in [`DOMAIN_FRAMEWORK_RESEARCH_V1.md`](docs/DOMAIN_FRAMEWORK_RESEARCH_V1.md).
 
-For a space-efficient manuscript layout, Figure 9 combines the Kepler, PV and CSTR solved fields with directly matched line cuts; embedded count chains expose all 14,829 independent roots without separate white-background validation panels.
+For a space-efficient manuscript layout, Figure 9 combines the Kepler, PV and CSTR solved fields with directly matched line cuts; embedded count chains expose all 14,829 independent roots without separate white-background validation panels. A data-checked knowledge layer identifies response directions, physical mechanisms, operating regions and the shared CSTR extinction boundary; haloed contours and annotations remain legible over every part of the gradient fields.
 
 ![Dense gradient-field comparison with matched response cuts](paper_figures/domain_frameworks_v1/fig9_dense_gradient_field_comparison_2d.png)
 

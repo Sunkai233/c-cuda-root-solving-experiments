@@ -40,9 +40,10 @@ solvable blade-element root problems: 3 blades × 17 ordinary elements. Over
 parallelism that the GPU implementation batches.
 
 Suggested caption: *Space–time organization of the complete OpenFAST BEM root
-workload. The overview contains all 2,448,000 roots; the full-resolution window
-shows the 51 simultaneous tasks, and the radial profiles retain all 17 elements
-of each blade at the same instant as Figure 1.*
+workload. The overview contains all 2,448,000 roots. The labeled 3-by-17 tile
+shows the 51 independent equations solved at one time step, while the
+full-resolution time-by-radius tile exposes the second batching dimension for
+one blade.*
 
 ## Reproduce
 

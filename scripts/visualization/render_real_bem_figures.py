@@ -21,7 +21,7 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.colors import Normalize, TwoSlopeNorm
-from matplotlib.patches import Arc, FancyArrowPatch, Polygon
+from matplotlib.patches import Arc, FancyArrowPatch, Polygon, Rectangle
 from scipy.optimize import brentq
 
 
@@ -55,6 +55,26 @@ def set_paper_style() -> None:
             "ps.fonttype": 42,
         }
     )
+
+
+def audit_layout(fig, named_axes: dict[str, object]) -> dict:
+    """Measure tight element boxes in figure coordinates and report collisions."""
+    fig.canvas.draw()
+    renderer = fig.canvas.get_renderer()
+    boxes = {}
+    for name, artist in named_axes.items():
+        bb = artist.get_tightbbox(renderer).transformed(fig.transFigure.inverted())
+        boxes[name] = [float(bb.x0), float(bb.y0), float(bb.x1), float(bb.y1)]
+    overlaps = []
+    names = list(boxes)
+    for i, a in enumerate(names):
+        for b in names[i + 1:]:
+            aa, bb = boxes[a], boxes[b]
+            w = max(0.0, min(aa[2], bb[2]) - max(aa[0], bb[0]))
+            h = max(0.0, min(aa[3], bb[3]) - max(aa[1], bb[1]))
+            if w * h > 1e-6:
+                overlaps.append({"elements": [a, b], "normalized_area": float(w * h)})
+    return {"tight_bboxes_xyxy": boxes, "pairwise_overlaps": overlaps}
 
 
 def read_blade_table(path: Path) -> np.ndarray:
@@ -354,10 +374,11 @@ def render_rotor_plane_2d(out: Path, meta: dict) -> None:
     u, v, w = uvw[:, i]
     levels = np.linspace(float(np.percentile(u, 1)), float(np.percentile(u, 99)), 25)
 
-    fig = plt.figure(figsize=(7.25, 4.65))
-    gs = fig.add_gridspec(1, 2, width_ratios=(1.48, 0.72), left=0.075, right=0.975,
-                          bottom=0.105, top=0.97, wspace=0.24)
-    ax = fig.add_subplot(gs[0, :])
+    fig = plt.figure(figsize=(7.25, 4.55))
+    gs = fig.add_gridspec(2, 3, width_ratios=(1.64, 0.70, 0.055), height_ratios=(1, 1),
+                          left=0.075, right=0.955, bottom=0.11, top=0.975,
+                          wspace=0.28, hspace=0.10)
+    ax = fig.add_subplot(gs[:, 0])
     cf = ax.contourf(y, z, u.T, levels=levels, cmap="turbo", extend="both")
     cs = ax.contour(y, z, u.T, levels=levels[::4], colors="#20343f", linewidths=0.35, alpha=0.40)
     # Actual transverse velocity components on the same TurbSim grid.
@@ -399,21 +420,19 @@ def render_rotor_plane_2d(out: Path, meta: dict) -> None:
     ax.set_xlabel("lateral coordinate $y$  [m]")
     ax.set_ylabel("height $z$  [m]")
     ax.text(0.015, 0.035, "a", transform=ax.transAxes, va="bottom", color="white", fontweight="bold")
-    cb = fig.colorbar(cf, ax=ax, orientation="horizontal", pad=0.115, fraction=0.042, aspect=40)
+    cax = fig.add_subplot(gs[:, 2])
+    cb = fig.colorbar(cf, cax=cax, orientation="vertical")
     cb.set_label(r"TurbSim streamwise velocity $u(y,z,t=306.1\,\mathrm{s})$  [m s$^{-1}$]")
 
     izh = int(np.argmin(np.abs(z - HUB_HEIGHT)))
     iyh = int(np.argmin(np.abs(y)))
-    gps = gs[0, 1].subgridspec(2, 1, hspace=0.10)
-    axpv = fig.add_subplot(gps[0])
-    axph = fig.add_subplot(gps[1], sharex=axpv)
+    axpv = fig.add_subplot(gs[0, 1])
+    axph = fig.add_subplot(gs[1, 1], sharex=axpv)
     axpv.plot(u[iyh, :], z, color="#2166ac", lw=1.4)
     axph.plot(u[:, izh], y, color="#b2182b", lw=1.4)
     for ap in (axpv, axph):
         ap.axvline(float(ts["uRef"]), color="#3c474c", lw=0.8, ls="--")
         ap.grid(color="#c7ced2", lw=0.45)
-        ap.yaxis.tick_right()
-        ap.yaxis.set_label_position("right")
     axpv.set_ylabel(r"height $z$  [m]")
     axph.set_ylabel(r"lateral $y$  [m]")
     axph.set_xlabel(r"streamwise velocity $u$  [m s$^{-1}$]")
@@ -426,6 +445,8 @@ def render_rotor_plane_2d(out: Path, meta: dict) -> None:
              rf"$u_{{max}}={u.max():.2f}$ m s$^{{-1}}$" + "\n" +
              rf"$\sigma_u={u.std():.2f}$ m s$^{{-1}}$")
     axpv.text(0.05, 0.77, stats, transform=axpv.transAxes, fontsize=7.2, va="top")
+    layout = audit_layout(fig, {"rotor_plane": ax, "vertical_profile": axpv,
+                                "horizontal_profile": axph, "colorbar": cax})
     for ext in ("png", "pdf", "svg"):
         fig.savefig(out / f"fig1_turbsim_rotor_plane_2d.{ext}", bbox_inches="tight", facecolor="white")
     plt.close(fig)
@@ -437,6 +458,7 @@ def render_rotor_plane_2d(out: Path, meta: dict) -> None:
         "grid_yz": [int(len(y)), int(len(z))], "u_min_mps": float(u.min()),
         "u_max_mps": float(u.max()), "u_std_mps": float(u.std()),
         "truth_boundary": "direct TurbSim rotor-plane sample; no CFD reconstruction or interpolation beyond contour rendering",
+        "layout_audit": layout,
     }
 
 
@@ -652,6 +674,95 @@ def render_batch_field(out: Path, meta: dict) -> None:
     }
 
 
+def render_batch_field_v2(out: Path, meta: dict) -> None:
+    """Dense but legible overview, literal 51-task tile, and time-radius tile."""
+    t = load_tables()
+    data_path, mm, nnodes, nsteps, version = open_dataset()
+    phi_deg = np.rad2deg(np.asarray(mm[3]).reshape(nsteps, nnodes))
+    dt = 600.0 / (nsteps - 1)
+    time = np.arange(nsteps) * dt
+    radii = t["bem_node_r"]
+    sample_step = int(round(306.1 / dt))
+    t0, t1 = 104.0, 116.0
+
+    fig = plt.figure(figsize=(7.25, 5.05))
+    gs = fig.add_gridspec(2, 2, height_ratios=(1.12, 0.88), width_ratios=(1.02, 0.98),
+                          hspace=0.34, wspace=0.38, left=0.085, right=0.90,
+                          bottom=0.09, top=0.965)
+    ax = fig.add_subplot(gs[0, :])
+    im = ax.imshow(phi_deg.T, aspect="auto", origin="lower", interpolation="nearest",
+                   extent=(0, 600, 0.5, 51.5), cmap="twilight_shifted", vmin=-180, vmax=180,
+                   rasterized=True)
+    for yline in (17.5, 34.5):
+        ax.axhline(yline, color="white", lw=0.8, alpha=0.8)
+    ax.set_yticks([9, 26, 43], ["blade 1", "blade 2", "blade 3"])
+    ax.set_xlabel("OpenFAST simulation time  [s]")
+    ax.set_ylabel("51 equations per time step")
+    ax.text(0.006, 0.96, "a", transform=ax.transAxes, color="white", fontweight="bold", va="top")
+    ax.axvline(time[sample_step], color="#f6e8c3", lw=0.9, alpha=0.95)
+    ax.add_patch(Rectangle((t0, 0.5), t1 - t0, 17, fill=False, edgecolor="#f6e8c3", lw=1.0))
+    ax.text(0.50, 1.025, "48,000 time steps × 51 blade elements = 2,448,000 reference roots",
+            transform=ax.transAxes, ha="center", va="bottom", fontsize=8.2)
+
+    axt = fig.add_subplot(gs[1, 0])
+    tile = phi_deg[sample_step].reshape(3, 17)
+    axt.imshow(tile, aspect="auto", origin="lower", interpolation="nearest",
+               extent=(0.5, 17.5, 0.5, 3.5), cmap="twilight_shifted", vmin=-180, vmax=180)
+    axt.set_xticks(np.arange(1, 18, 2))
+    axt.set_yticks([1, 2, 3], ["blade 1", "blade 2", "blade 3"])
+    axt.set_xlabel("radial element index")
+    axt.set_ylabel("51 tasks at one step")
+    axt.set_xticks(np.arange(0.5, 18, 1), minor=True)
+    axt.set_yticks(np.arange(0.5, 4, 1), minor=True)
+    axt.grid(which="minor", color="white", lw=0.45, alpha=0.75)
+    axt.tick_params(which="minor", bottom=False, left=False)
+    cmap = mpl.colormaps["twilight_shifted"]
+    norm = Normalize(-180, 180)
+    for b in range(3):
+        for e in range(17):
+            val = float(tile[b, e])
+            rgb = cmap(norm(val))[:3]
+            luminance = 0.2126 * rgb[0] + 0.7152 * rgb[1] + 0.0722 * rgb[2]
+            axt.text(e + 1, b + 1, f"{val:.0f}", ha="center", va="center",
+                     fontsize=4.4, color="white" if luminance < 0.52 else "#17262e")
+    axt.text(0.012, 0.96, "b", transform=axt.transAxes, color="white", fontweight="bold", va="top")
+    axt.text(0.50, 1.025, f"one time step: 3 blades × 17 roots  (t={time[sample_step]:.3f} s)",
+             transform=axt.transAxes, ha="center", va="bottom", fontsize=7.2)
+
+    axz = fig.add_subplot(gs[1, 1])
+    mask = (time >= t0) & (time <= t1)
+    blade_one = phi_deg[mask, :17].T
+    axz.imshow(blade_one, aspect="auto", origin="lower", interpolation="nearest",
+               extent=(time[mask][0], time[mask][-1], 0.5, 17.5),
+               cmap="twilight_shifted", vmin=-180, vmax=180, rasterized=True)
+    selected = [0, 4, 8, 12, 16]
+    axz.set_yticks([q + 1 for q in selected], [f"e{q+1}  {radii[q]:.1f}m" for q in selected])
+    axz.set_xlabel("simulation time  [s]")
+    axz.text(0.012, 0.96, "c", transform=axz.transAxes, color="white", fontweight="bold", va="top")
+    axz.text(0.98, 0.93, "blade 1", transform=axz.transAxes, ha="right", va="top", fontsize=7.1)
+    axz.text(0.50, 1.025, "blade 1: time × radial-element batch (full resolution)",
+             transform=axz.transAxes, ha="center", va="bottom", fontsize=7.2)
+
+    cax = fig.add_axes([0.94, 0.09, 0.018, 0.875])
+    cb = fig.colorbar(im, cax=cax, orientation="vertical")
+    cb.set_label(r"reference root $\phi$  [deg]")
+    layout = audit_layout(fig, {"overview": ax, "single_step_tile": axt,
+                                "time_radius_tile": axz, "colorbar": cax})
+    for ext in ("png", "pdf", "svg"):
+        fig.savefig(out / f"fig3_batch_field_2d.{ext}", bbox_inches="tight", facecolor="white")
+    plt.close(fig)
+
+    meta["fig3"] = {
+        "files": [f"fig3_batch_field_2d.{x}" for x in ("png", "pdf", "svg")],
+        "dataset": data_path.relative_to(ROOT).as_posix(), "dataset_sha256": sha256(data_path),
+        "records": int(phi_deg.size), "time_steps": nsteps, "nodes_per_step": nnodes,
+        "blades": 3, "elements_per_blade": 17, "valid_roots": int(np.isfinite(phi_deg).sum()),
+        "phi_deg_range": [float(np.nanmin(phi_deg)), float(np.nanmax(phi_deg))],
+        "detail_window_s": [t0, t1], "task_tile_time_s": float(time[sample_step]),
+        "layout_audit": layout,
+    }
+
+
 def write_notes(out: Path, meta: dict) -> None:
     notes = """# Real OpenFAST/BEM two-dimensional publication figures
 
@@ -695,9 +806,10 @@ solvable blade-element root problems: 3 blades × 17 ordinary elements. Over
 parallelism that the GPU implementation batches.
 
 Suggested caption: *Space–time organization of the complete OpenFAST BEM root
-workload. The overview contains all 2,448,000 roots; the full-resolution window
-shows the 51 simultaneous tasks, and the radial profiles retain all 17 elements
-of each blade at the same instant as Figure 1.*
+workload. The overview contains all 2,448,000 roots. The labeled 3-by-17 tile
+shows the 51 independent equations solved at one time step, while the
+full-resolution time-by-radius tile exposes the second batching dimension for
+one blade.*
 
 ## Reproduce
 
@@ -732,7 +844,7 @@ def main() -> None:
             "Only direct two-dimensional OpenFAST/AeroDyn/TurbSim/BEM data views; no 3-D reconstruction"}
     render_rotor_plane_2d(out, meta)
     render_local_section(out, meta)
-    render_batch_field(out, meta)
+    render_batch_field_v2(out, meta)
     write_notes(out, meta)
     print(json.dumps({"output": str(out), "figures": sorted(p.name for p in out.iterdir())}, ensure_ascii=False, indent=2))
 

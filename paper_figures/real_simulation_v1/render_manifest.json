@@ -19,7 +19,36 @@
     "u_min_mps": 6.086783553760063,
     "u_max_mps": 17.606761326303545,
     "u_std_mps": 1.9092975999928987,
-    "truth_boundary": "direct TurbSim rotor-plane sample; no CFD reconstruction or interpolation beyond contour rendering"
+    "truth_boundary": "direct TurbSim rotor-plane sample; no CFD reconstruction or interpolation beyond contour rendering",
+    "layout_audit": {
+      "tight_bboxes_xyxy": {
+        "rotor_plane": [
+          0.010306513409961679,
+          0.04721408261983191,
+          0.5827994886350308,
+          0.9470655266597774
+        ],
+        "vertical_profile": [
+          0.5873194851910599,
+          0.5524114774114773,
+          0.8817805328960214,
+          0.975
+        ],
+        "horizontal_profile": [
+          0.5864574162255427,
+          0.014664224664224653,
+          0.8783854628874764,
+          0.5219047619047619
+        ],
+        "colorbar": [
+          0.9379701391006544,
+          0.10999999999999996,
+          1.0405210727969347,
+          0.9750000000000001
+        ]
+      },
+      "pairwise_overlaps": []
+    }
   },
   "fig2": {
     "files": [
@@ -69,9 +98,38 @@
       179.99666130963666
     ],
     "detail_window_s": [
-      300.0,
-      320.0
+      104.0,
+      116.0
     ],
-    "radial_profile_time_s": 306.09387695576993
+    "task_tile_time_s": 306.09387695576993,
+    "layout_audit": {
+      "tight_bboxes_xyxy": {
+        "overview": [
+          0.004961685823754795,
+          0.47237919945840723,
+          0.9106896551724141,
+          0.9952720656681052
+        ],
+        "single_step_tile": [
+          0.004961685823754795,
+          0.016182618261826143,
+          0.43428571428571444,
+          0.44770711686553266
+        ],
+        "time_radius_tile": [
+          0.48634663060626554,
+          0.016182618261826143,
+          0.9000000000000001,
+          0.44770711686553266
+        ],
+        "colorbar": [
+          0.94,
+          0.09,
+          1.0306245210727967,
+          0.965
+        ]
+      },
+      "pairwise_overlaps": []
+    }
   }
 }

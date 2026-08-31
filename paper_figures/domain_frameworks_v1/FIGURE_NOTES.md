@@ -137,3 +137,13 @@ derating and the STC reference state. Figure 9c uses two full rows so that the
 CSTR temperature and heat-release fields each retain a matched response panel.
 The composite Figure 9 remains an overview; these three figures are the
 recommended versions for normal-size manuscript reading.
+
+The right-hand panels are quantitative evidence panels rather than simple line
+plots. Figure 9a shows all executed cut nodes, the S1--S3 separation envelope
+and `Delta E` at `M=pi/2`. Figure 9b shows all temperature nodes, irradiance-gain
+bands, the 25 degree C reference section and the fitted 1,000 W/m2 thermal slope
+(`-1.06 W/K`, `-0.484%/K`). Figure 9c marks the first 1,000 K crossing for each
+inlet state (`7.71e-4`, `2.18e-4` and at or below `1.00e-4 s`), shades the cold
+branch and cold-state heat-release floor, and identifies the post-ignition
+heat-release decay. These quantities are computed from the same stored field
+tables used by the left-hand panels.

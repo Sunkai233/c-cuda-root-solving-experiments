@@ -1084,10 +1084,26 @@ def render_split_knowledge_figures(out: Path, meta: dict) -> None:
                 linewidths=0.28, alpha=0.48, rasterized=True)
     slices = [(0.60, "#22b8cf", "S1"), (0.90, "#ffc107", "S2"),
               (0.99, "#ff5a5f", "S3")]
+    kcut_series = []
     for es, color, tag in slices:
         ax0.axhline(es, color=color, ls="--", lw=1.25)
         j = int(np.argmin(np.abs(egrid - es)))
-        ax1.plot(mgrid, kval[:, j], color=color, lw=2.0, label=f"{tag}: e={es:g}")
+        values = kval[:, j]
+        kcut_series.append((es, color, tag, values))
+        ax1.plot(mgrid, values, color=color, lw=2.0, marker="o", ms=2.5,
+                 markevery=15, mec="white", mew=0.35, label=f"{tag}: e={es:g}")
+    ax1.fill_between(mgrid, kcut_series[0][3], kcut_series[2][3],
+                     color="#7b2b83", alpha=0.11, zorder=0)
+    probe_m = math.pi / 2
+    probe_i = int(np.argmin(np.abs(mgrid - probe_m)))
+    low_e = kcut_series[0][3][probe_i]
+    high_e = kcut_series[2][3][probe_i]
+    ax1.axvline(probe_m, color="#46566b", ls=":", lw=1.0)
+    ax1.annotate("", xy=(probe_m, high_e), xytext=(probe_m, low_e),
+                 arrowprops={"arrowstyle": "<->", "color": "#7b2b83", "lw": 1.25})
+    ax1.text(probe_m + 0.08, (low_e + high_e) / 2,
+             rf"$\Delta E={high_e-low_e:.2f}$ rad", color="#7b2b83",
+             fontsize=7.3, fontweight="bold", rotation=90, va="center")
     mechanism_arrow(ax0, (0.32, 0.22), (0.80, 0.22),
                     "phase advance\n" r"$M\uparrow\;\Rightarrow\;E\uparrow$",
                     "#145f82", (0.57, 0.31), rad=-0.08)
@@ -1136,11 +1152,46 @@ def render_split_knowledge_figures(out: Path, meta: dict) -> None:
                 linewidths=0.3, alpha=0.62, rasterized=True)
     pslices = [(200, "#29a7ff", "P1"), (600, "#3dcc73", "P2"),
                (1000, "#ffd43b", "P3")]
+    pcut_series = []
     for gsval, color, tag in pslices:
         ax0.axhline(gsval, color=color, ls="--", lw=1.25)
         j = int(np.argmin(np.abs(irradiance - gsval)))
-        ax1.plot(cell_temp, pmp[:, j], color=color, lw=2.0,
+        values = pmp[:, j]
+        pcut_series.append((gsval, color, tag, values))
+        ax1.plot(cell_temp, values, color=color, lw=2.0, marker="o", ms=2.7,
+                 markevery=2, mec="white", mew=0.35,
                  label=f"{tag}: {gsval} W m$^{{-2}}$")
+    ax1.fill_between(cell_temp, pcut_series[0][3], pcut_series[1][3],
+                     color="#3dcc73", alpha=0.075, zorder=0)
+    ax1.fill_between(cell_temp, pcut_series[1][3], pcut_series[2][3],
+                     color="#ffd43b", alpha=0.075, zorder=0)
+    ref_t = 25.0
+    ref_i = int(np.argmin(np.abs(cell_temp - ref_t)))
+    ax1.axvline(ref_t, color="#46566b", ls=":", lw=1.05)
+    for _, color, _, values in pcut_series:
+        ax1.scatter(ref_t, values[ref_i], s=20, marker="D", color=color,
+                    edgecolor="white", linewidth=0.45, zorder=7)
+    p_low = pcut_series[0][3][ref_i]
+    p_high = pcut_series[2][3][ref_i]
+    ax1.annotate("", xy=(ref_t, p_high), xytext=(ref_t, p_low),
+                 arrowprops={"arrowstyle": "<->", "color": "#16854b", "lw": 1.25})
+    ax1.text(ref_t + 2.2, (p_low + p_high) / 2, "irradiance\ngain",
+             color="#16854b", fontsize=7.2, fontweight="bold", va="center")
+    beta_abs = float(np.polyfit(cell_temp, pcut_series[2][3], 1)[0])
+    beta_rel = 100.0 * beta_abs / pcut_series[2][3][ref_i]
+    ax1.text(0.50, 0.035,
+             rf"$\beta_P(1000)={beta_abs:.2f}$ W K$^{{-1}}$ "
+             + rf"({beta_rel:.3f}% K$^{{-1}}$)",
+             transform=ax1.transAxes, fontsize=6.35, color="#8b1e1e", ha="center",
+             bbox={"boxstyle": "round,pad=0.24", "fc": "white", "ec": "#b4232f",
+                   "lw": 0.7, "alpha": 0.88})
+    for _, color, tag, values in pcut_series:
+        direct = ax1.text(cell_temp.max() - 1.5, values[-1] + 3.0, tag,
+                          color=color, fontsize=7.5, fontweight="bold",
+                          ha="right", va="bottom", zorder=8)
+        direct.set_path_effects([
+            pe.Stroke(linewidth=2.5, foreground="white"), pe.Normal()
+        ])
     ax0.plot(25, 1000, marker="*", ms=11, mfc="#00e5ff", mec="#14213d",
              mew=0.75, zorder=15)
     stc = ax0.text(0.49, 0.80, "STC reference\n" r"25$^\circ$C, 1000 W m$^{-2}$",
@@ -1172,8 +1223,6 @@ def render_split_knowledge_figures(out: Path, meta: dict) -> None:
     ax1.tick_params(labelsize=8.0)
     ax1.set_xlim(cell_temp.min(), cell_temp.max())
     ax1.set_ylim(0, np.nanmax(pmp) * 1.05)
-    ax1.legend(loc="lower right", frameon=True, fontsize=7.3,
-               facecolor="white", edgecolor="#aeb8c2", framealpha=0.9)
     style_axis(ax1)
     meta["pv_mechanism_detail"] = save_figure(
         fig, out, "fig9b_pv_power_mechanisms_2d", {"field": ax0, "cuts": ax1}
@@ -1217,12 +1266,31 @@ def render_split_knowledge_figures(out: Path, meta: dict) -> None:
         field_ax.set_ylabel("inlet temperature [K]", fontsize=9.3)
         field_ax.tick_params(labelsize=8.1)
         style_axis(field_ax, False)
+    ccut_series = []
     for tin_value, color, tag in cslices:
         j = int(np.argmin(np.abs(inlet_temp - tin_value)))
-        axtc.plot(tau, rtemp[j, :], color=color, lw=2.0,
+        temp_values = rtemp[j, :]
+        heat_values = qt[j, :]
+        hot_indices = np.flatnonzero(temp_values >= 1000.0)
+        critical_index = int(hot_indices[0]) if len(hot_indices) else 0
+        critical_tau = float(tau[critical_index])
+        ccut_series.append((tin_value, color, tag, temp_values, heat_values,
+                            critical_index, critical_tau))
+        axtc.plot(tau, temp_values, color=color, lw=2.0, marker="o", ms=2.4,
+                  markevery=8, mec="white", mew=0.35,
                   label=f"{tag}: {tin_value} K")
-        axqc.plot(tau, qt[j, :], color=color, lw=2.0,
+        axqc.plot(tau, heat_values, color=color, lw=2.0, marker="o", ms=2.4,
+                  markevery=8, mec="white", mew=0.35,
                   label=f"{tag}: {tin_value} K")
+        axtc.fill_between(tau, inlet_temp.min(), temp_values, color=color,
+                          alpha=0.035, zorder=0)
+        axqc.fill_between(tau, 1e2, heat_values, color=color, alpha=0.045, zorder=0)
+        axtc.axvline(critical_tau, color=color, ls=":", lw=1.0, alpha=0.72)
+        axqc.axvline(critical_tau, color=color, ls=":", lw=1.0, alpha=0.72)
+        axtc.scatter(critical_tau, temp_values[critical_index], marker="D", s=23,
+                     color=color, edgecolor="white", linewidth=0.45, zorder=8)
+        axqc.scatter(critical_tau, heat_values[critical_index], marker="D", s=23,
+                     color=color, edgecolor="white", linewidth=0.45, zorder=8)
     mechanism_arrow(axt, (0.18, 0.22), (0.72, 0.22),
                     r"residence time $\uparrow$" "\nignition / hot branch",
                     "#1479b8", (0.47, 0.32), rad=-0.08)
@@ -1253,6 +1321,16 @@ def render_split_knowledge_figures(out: Path, meta: dict) -> None:
     inset_colorbar(fig, axq, qim, r"heat release [W m$^{-3}$]", width="36%")
     curve_title(axtc, "b", "temperature cuts")
     axtc.set_xscale("log")
+    axtc.axhspan(inlet_temp.min(), 1000, color="#90a4b8", alpha=0.10, zorder=-1)
+    axtc.axhline(1000, color="#007f91", ls="--", lw=1.0)
+    crossing_lines = ["1000 K crossing"]
+    for _, _, tag, _, _, _, critical_tau in ccut_series:
+        prefix = r"$\leq$" if np.isclose(critical_tau, tau.min()) else ""
+        crossing_lines.append(f"{tag}: {prefix}{critical_tau:.2e} s")
+    axtc.text(0.05, 0.34, "\n".join(crossing_lines), transform=axtc.transAxes,
+              fontsize=7.0, color="#334155",
+              bbox={"boxstyle": "round,pad=0.24", "fc": "white", "ec": "#007f91",
+                    "lw": 0.7, "alpha": 0.88})
     axtc.set_xlabel(r"residence time $\tau$ [s]", fontsize=9.0)
     axtc.set_ylabel("reactor temperature [K]", fontsize=9.0)
     axtc.tick_params(labelsize=8.0)
@@ -1262,6 +1340,15 @@ def render_split_knowledge_figures(out: Path, meta: dict) -> None:
     curve_title(axqc, "d", "heat-release cuts")
     axqc.set_xscale("log")
     axqc.set_yscale("log")
+    axqc.axhspan(1e2, 1e3, color="#90a4b8", alpha=0.14, zorder=-1)
+    axqc.text(0.05, 0.08, "cold-state floor", transform=axqc.transAxes,
+              fontsize=6.9, fontweight="bold", color="#426786")
+    axqc.annotate("post-ignition decay\nwith increasing residence time",
+                  xy=(0.82, 0.43), xytext=(0.34, 0.66), xycoords="axes fraction",
+                  textcoords="axes fraction", fontsize=7.1, color="#b4232f",
+                  fontweight="bold", ha="center",
+                  arrowprops={"arrowstyle": "-|>", "color": "#b4232f", "lw": 1.2,
+                              "connectionstyle": "arc3,rad=-0.12"})
     axqc.set_xlabel(r"residence time $\tau$ [s]", fontsize=9.0)
     axqc.set_ylabel(r"heat release [W m$^{-3}$]", fontsize=9.0)
     axqc.tick_params(labelsize=8.0)

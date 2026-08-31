@@ -13,12 +13,12 @@
       },
       {
         "name": "fig4_kepler_orekit_batch_2d.pdf",
-        "sha256": "f2990bf4ea13c698cde38ed199bba4d9014e0bfd9f54638a2738da764138186a",
+        "sha256": "db9c2fd06a6d3e69b0dac8c22754e6c9f399d74fb8f183fdd786afdc86cfbcf8",
         "bytes": 107981
       },
       {
         "name": "fig4_kepler_orekit_batch_2d.svg",
-        "sha256": "bdb50a35a874fb85e75a043f59eef81c4d31d86337b37562ffd58e01bfce985b",
+        "sha256": "647f9d5569ef904ce0a0342f6515c6f66070d414a16fb17b41872e66cf4ee76e",
         "bytes": 256427
       }
     ],
@@ -62,12 +62,12 @@
       },
       {
         "name": "fig5_pvlib_module_batch_2d.pdf",
-        "sha256": "8a5326e77c2625db83d43ed79245d3d210d03d44811986bb2572150440ba7600",
+        "sha256": "8fec14b8ac01ebf5826f92af2413f120300d2278852be797b9ab2609924dd73f",
         "bytes": 123115
       },
       {
         "name": "fig5_pvlib_module_batch_2d.svg",
-        "sha256": "eed17ea5436e5fb236a7bdb9f4735c0656e5cb25f6b8172a8988ac82441a9d4e",
+        "sha256": "f72e9e03b0c61361cdafc9aa5fcc46c423fd9212f6d00cf382af5439e89763f9",
         "bytes": 276548
       }
     ],
@@ -111,12 +111,12 @@
       },
       {
         "name": "fig6_cantera_cstr_batch_2d.pdf",
-        "sha256": "7f45bd20328ca32278872178a6a5a15b1131fea83cbf83b78253cdb489c30879",
+        "sha256": "85407d97f36cfa87cae0a4092cdd459c4cb97a9b1d87719c77d5d483394e6cc7",
         "bytes": 137015
       },
       {
         "name": "fig6_cantera_cstr_batch_2d.svg",
-        "sha256": "345b2993773f01a03efdd169db71fff4d8cad29b4b890e28c4a9bd9c99b29048",
+        "sha256": "e12b9d4a8d64c4cd00d6038b62d82a8d8e0d2a1bb2d2899570dbc564592127e4",
         "bytes": 310163
       }
     ],
@@ -160,12 +160,12 @@
       },
       {
         "name": "fig7_coolprop_peng_robinson_batch_2d.pdf",
-        "sha256": "2916aa3ea63b1ee4105146bdcbabdb71c1c6dec08b45e230ec7786b68d0e372b",
+        "sha256": "5af71916e9b41b65c9cec8d558347f558f101450b55d80d1a739dc2805a4bdee",
         "bytes": 67269
       },
       {
         "name": "fig7_coolprop_peng_robinson_batch_2d.svg",
-        "sha256": "aa243f153bfd0d4cc703f036b56470ebf9b608c40946fa3ad6ef788b8a794334",
+        "sha256": "1876b22981aff959ec7c107c62d528b24a516219c771c56f25ec4e4997425395",
         "bytes": 185283
       }
     ],
@@ -209,12 +209,12 @@
       },
       {
         "name": "fig8_multidomain_geometry_structures_2d.pdf",
-        "sha256": "1e6d499bac05c3c57b17966c96ef5433ceb0909dec94d887f9c1c3e20808d05b",
+        "sha256": "9e9869fdd2fa0d75e58c0f0a8bda805ca5caa0493af9a18d54bb1268d30ac854",
         "bytes": 91688
       },
       {
         "name": "fig8_multidomain_geometry_structures_2d.svg",
-        "sha256": "fab3678a07938e07c29ad684afedf02d9bba832704bafb647340f464c37a2ab9",
+        "sha256": "252d9c5155db1525665376659ce5910eecee77ff37e96d5154980c2b589fa084",
         "bytes": 313357
       }
     ],
@@ -258,12 +258,12 @@
       },
       {
         "name": "fig9_dense_gradient_field_comparison_2d.pdf",
-        "sha256": "b5126b6ec8bf7afe1d9bf359b3ad5d535e0b3a5d0ff10e08a33aafd2e9cb67a6",
+        "sha256": "58151099ff7feb52de05b0e681639410bb930a13c3c716e9efcf84ce7ea9459e",
         "bytes": 474497
       },
       {
         "name": "fig9_dense_gradient_field_comparison_2d.svg",
-        "sha256": "ec4d4128628479d1515837cb0c1b777875d1a31ec830f3b2a035e2b58434dc37",
+        "sha256": "b11ca7dc927fedbdf372e85cedf96dcb5fd518d885bf0f0b2c272c7057835895",
         "bytes": 1535885
       }
     ],
@@ -320,18 +320,18 @@
     "files": [
       {
         "name": "fig9a_kepler_mechanism_field_2d.png",
-        "sha256": "99d77833c496d0cae5be404c1edd33c8bf04dca3b862214ade259b3927e0c252",
-        "bytes": 608976
+        "sha256": "fcd942a49bb63b1748680b69a677fde9cb854a19a1b6a9403d6abbedeb1f0eae",
+        "bytes": 627295
       },
       {
         "name": "fig9a_kepler_mechanism_field_2d.pdf",
-        "sha256": "c9e4f4d158e6888dc16752787f65450b609cd70dd66dd5be9c921565c944e7c7",
-        "bytes": 148706
+        "sha256": "36d4a2d0f7ddf4d68bd552e46feb750acc24b66ca4c936f090342c39ab9ea56d",
+        "bytes": 156060
       },
       {
         "name": "fig9a_kepler_mechanism_field_2d.svg",
-        "sha256": "aba69aa109d2f09a8d41576b6f80f300c5c43bb42783e9ed7f7cffae13121524",
-        "bytes": 391625
+        "sha256": "f94097c9f1beef50f6d944f37190a0cb978c282125f3e1ffd52d61f7c089c89c",
+        "bytes": 412302
       }
     ],
     "layout_audit": {
@@ -357,18 +357,18 @@
     "files": [
       {
         "name": "fig9b_pv_power_mechanisms_2d.png",
-        "sha256": "d2ce40eb4174b360232f4e38db7b781e7b8f157f4fbe15a4350a89f4b697cd1d",
-        "bytes": 578832
+        "sha256": "93f2ef2024e898e2fe541ba4605c1957c1e8ec9f1fa4a670992e76f59317cf60",
+        "bytes": 595586
       },
       {
         "name": "fig9b_pv_power_mechanisms_2d.pdf",
-        "sha256": "f4564236e8d5446d7505c7979a3783d024d0a524d28ec2ff00016fde5a144639",
-        "bytes": 167610
+        "sha256": "aac9b6119bf74d8208322ebc1a54c39e5411a1331d1309f396c191a005371b14",
+        "bytes": 175290
       },
       {
         "name": "fig9b_pv_power_mechanisms_2d.svg",
-        "sha256": "d3a29ed9d6a9cbee895e3e55c355ed21df13805e97909728e387b31a338b5790",
-        "bytes": 426888
+        "sha256": "223a14a750e8b977a3eff940e69af4c5d428085cb04f07ceff57e17883370b53",
+        "bytes": 457654
       }
     ],
     "layout_audit": {
@@ -394,18 +394,18 @@
     "files": [
       {
         "name": "fig9c_cstr_extinction_mechanisms_2d.png",
-        "sha256": "5b6125f317cd853cea07ae117e0dd82a1b5bf3fb814b7cef1b040a49cbf65f32",
-        "bytes": 1076168
+        "sha256": "be5b20f2d211fd79da8589a1cf08d7c6046378ed1a98771ed44becfb9912adae",
+        "bytes": 1169101
       },
       {
         "name": "fig9c_cstr_extinction_mechanisms_2d.pdf",
-        "sha256": "894ff1824f0d800a1680b5fc5b18eb78f5d1508382c44e84dea96c641a9532f9",
-        "bytes": 224985
+        "sha256": "38f99047f5c43a06c21695ebe3017da2d8b523000dd26cbc6108af533726de1a",
+        "bytes": 234919
       },
       {
         "name": "fig9c_cstr_extinction_mechanisms_2d.svg",
-        "sha256": "42d2968d0786f6ba1260e3f0ceb431285b6b29bf5b0a1bea51c0a34e5ae8f2e7",
-        "bytes": 696723
+        "sha256": "dfdfc50eca64cc8b52339fa2e998aea6046be69677286b016c785a6fdcb9366e",
+        "bytes": 753381
       }
     ],
     "layout_audit": {

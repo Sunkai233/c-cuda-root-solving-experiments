@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Render four data-driven 2-D application figures for the non-BEM domains."""
+"""Render data-driven 2-D application figures for the non-BEM domains."""
 
 from __future__ import annotations
 
@@ -703,6 +703,210 @@ def render_pr(out: Path, meta: dict) -> None:
                                          {"isotherms": ax0, "root_map": ax1, "branches": ax2, "dome": ax3})
 
 
+def render_dense_field_plate(out: Path, meta: dict) -> None:
+    """Full-page field/cut plate with almost no non-data-bearing white area."""
+    kepler = pd.read_csv(out / "data" / "kepler_orekit_grid.csv", float_precision="round_trip")
+    pv = pd.read_csv(out / "data" / "pvlib_cec_operating_surface.csv", float_precision="round_trip")
+    cstr = pd.read_csv(out / "data" / "cantera_cstr_hot_branch_surface.csv", float_precision="round_trip")
+
+    egrid, mgrid, eccentric_anomaly = pivot_grid(kepler, "M_rad", "e", "E_rad")
+    irradiance, cell_temp, pmp = pivot_grid(
+        pv, "cell_temperature_C", "effective_irradiance_W_m2", "p_mp"
+    )
+    tau, inlet_temp, reactor_temp = pivot_grid(
+        cstr, "inlet_temperature_K", "residence_time_s", "steady_temperature_K"
+    )
+    _, _, heat_release = pivot_grid(
+        cstr, "inlet_temperature_K", "residence_time_s", "heat_release_rate_W_m3"
+    )
+
+    fig = plt.figure(figsize=(15.4, 11.2), facecolor="white")
+    outer = fig.add_gridspec(
+        3, 1, left=0.062, right=0.985, bottom=0.060, top=0.975,
+        height_ratios=[1.0, 1.0, 1.05], hspace=0.265,
+    )
+    row0 = outer[0].subgridspec(1, 2, width_ratios=[3.65, 1.18], wspace=0.13)
+    row1 = outer[1].subgridspec(1, 2, width_ratios=[3.65, 1.18], wspace=0.13)
+    row2 = outer[2].subgridspec(1, 3, width_ratios=[1.78, 1.78, 1.18], wspace=0.16)
+    ax_k = fig.add_subplot(row0[0])
+    ax_kcut = fig.add_subplot(row0[1])
+    ax_pv = fig.add_subplot(row1[0])
+    ax_pvcut = fig.add_subplot(row1[1])
+    ax_ct = fig.add_subplot(row2[0])
+    ax_cq = fig.add_subplot(row2[1], sharex=ax_ct, sharey=ax_ct)
+    ax_ccut = fig.add_subplot(row2[2])
+
+    def field_header(ax, letter: str, title: str, subtitle: str) -> None:
+        ax.text(
+            0.012, 0.965, letter, transform=ax.transAxes, ha="left", va="top",
+            fontsize=10.5, fontweight="bold", color="white", zorder=12,
+            bbox={"boxstyle": "round,pad=0.20", "fc": "#111827", "ec": "white",
+                  "lw": 0.55, "alpha": 0.92},
+        )
+        ax.text(
+            0.052, 0.965, title, transform=ax.transAxes, ha="left", va="top",
+            fontsize=9.2, fontweight="bold", color="white", zorder=12,
+            bbox={"boxstyle": "round,pad=0.22", "fc": "#111827", "ec": "none",
+                  "alpha": 0.80},
+        )
+        ax.text(
+            0.988, 0.045, subtitle, transform=ax.transAxes, ha="right", va="bottom",
+            fontsize=7.2, color="white", zorder=12,
+            bbox={"boxstyle": "round,pad=0.22", "fc": "#111827", "ec": "white",
+                  "lw": 0.45, "alpha": 0.78},
+        )
+
+    def cut_header(ax, letter: str, title: str) -> None:
+        ax.set_facecolor("#eef2f6")
+        ax.text(0.02, 0.98, letter, transform=ax.transAxes, ha="left", va="top",
+                fontsize=10.5, fontweight="bold")
+        ax.text(0.12, 0.98, title, transform=ax.transAxes, ha="left", va="top",
+                fontsize=8.3, fontweight="bold")
+
+    # Row 1: one root for every (M, e) sample; field and line cuts use identical tags.
+    kmap = ax_k.pcolormesh(mgrid, egrid, eccentric_anomaly.T, shading="auto",
+                           cmap="viridis", rasterized=True)
+    kc = ax_k.contour(mgrid, egrid, eccentric_anomaly.T,
+                      levels=[0.25, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0],
+                      colors="white", linewidths=0.52, alpha=0.88)
+    ax_k.clabel(kc, inline=True, fontsize=5.9, fmt=lambda x: f"E={x:g}")
+    km, ke = np.meshgrid(mgrid[::6], egrid[::3])
+    ax_k.scatter(km, ke, s=3.8, facecolors="none", edgecolors="white",
+                 linewidths=0.24, alpha=0.52, rasterized=True)
+    k_slices = [(0.60, "#26c6da", "S1"), (0.90, "#ffca28", "S2"),
+                (0.99, "#ff7043", "S3")]
+    for es, color, tag in k_slices:
+        ax_k.axhline(es, color=color, ls="--", lw=1.15)
+        ax_k.text(0.10, es - 0.020, f"{tag}  e={es:g}", fontsize=6.6,
+                  color="#111827", ha="left", va="top",
+                  bbox={"boxstyle": "round,pad=0.13", "fc": "white", "ec": color,
+                        "lw": 0.65, "alpha": 0.90})
+        j = int(np.argmin(np.abs(egrid - es)))
+        y = eccentric_anomaly[:, j]
+        ax_kcut.plot(mgrid, y, color=color, lw=1.75, label=f"{tag}  e={es:g}")
+        ax_kcut.fill_between(mgrid, 0, y, color=color, alpha=0.065)
+    field_header(ax_k, "a", "Kepler eccentric-anomaly field",
+                 f"72 eccentricities × 180 anomalies = {len(kepler):,} independent roots")
+    inset_colorbar(fig, ax_k, kmap, r"eccentric anomaly $E$ [rad]", width="27%")
+    ax_k.set_xlabel(r"mean anomaly $M$ [rad]")
+    ax_k.set_ylabel(r"eccentricity $e$")
+    ax_k.set_xlim(mgrid.min(), mgrid.max())
+    ax_k.set_ylim(egrid.min(), egrid.max())
+    style_axis(ax_k, False)
+    cut_header(ax_kcut, "b", "matched anomaly cuts")
+    ax_kcut.set_xlabel(r"$M$ [rad]")
+    ax_kcut.set_ylabel(r"solved $E$ [rad]")
+    ax_kcut.set_xlim(mgrid.min(), mgrid.max())
+    ax_kcut.set_ylim(0, math.pi * 1.02)
+    ax_kcut.legend(frameon=True, facecolor="white", edgecolor="#b9c2cc",
+                   framealpha=0.85, loc="lower right", fontsize=6.8)
+    style_axis(ax_kcut)
+
+    # Row 2: every module state has a separate implicit single-diode root.
+    pvmap = ax_pv.pcolormesh(cell_temp, irradiance, pmp.T, shading="auto",
+                             cmap="inferno", rasterized=True)
+    pvc = ax_pv.contour(cell_temp, irradiance, pmp.T,
+                        levels=[50, 100, 150, 200, 250], colors="white", linewidths=0.55)
+    ax_pv.clabel(pvc, inline=True, fontsize=6.0, fmt="%g W")
+    pt, pg = np.meshgrid(cell_temp, irradiance)
+    ax_pv.scatter(pt, pg, s=6.0, facecolors="none", edgecolors="white",
+                  linewidths=0.30, alpha=0.70, rasterized=True)
+    pv_slices = [(200, "#31a9ff", "P1"), (600, "#52d273", "P2"),
+                 (1000, "#ffd43b", "P3")]
+    for gs, color, tag in pv_slices:
+        ax_pv.axhline(gs, color=color, ls="--", lw=1.15)
+        ax_pv.text(cell_temp.min() + 1.6, gs + 18, f"{tag}  {gs} W m$^{{-2}}$",
+                   fontsize=6.6, color="#111827", ha="left", va="bottom",
+                   bbox={"boxstyle": "round,pad=0.13", "fc": "white", "ec": color,
+                         "lw": 0.65, "alpha": 0.90})
+        j = int(np.argmin(np.abs(irradiance - gs)))
+        y = pmp[:, j]
+        ax_pvcut.plot(cell_temp, y, color=color, lw=1.8,
+                      label=f"{tag}  {gs} W m$^{{-2}}$")
+        ax_pvcut.fill_between(cell_temp, 0, y, color=color, alpha=0.065)
+    field_header(ax_pv, "c", "PV maximum-power operating surface",
+                 f"21 irradiances × 17 temperatures = {len(pv):,} independent roots")
+    inset_colorbar(fig, ax_pv, pvmap, r"maximum power $P_{mp}$ [W]", width="27%")
+    ax_pv.set_xlabel(r"cell temperature [$^\circ$C]")
+    ax_pv.set_ylabel(r"effective irradiance [W m$^{-2}$]")
+    style_axis(ax_pv, False)
+    cut_header(ax_pvcut, "d", "matched power cuts")
+    ax_pvcut.set_xlabel(r"cell temperature [$^\circ$C]")
+    ax_pvcut.set_ylabel(r"$P_{mp}$ [W]")
+    ax_pvcut.set_xlim(cell_temp.min(), cell_temp.max())
+    ax_pvcut.set_ylim(0, np.nanmax(pmp) * 1.05)
+    ax_pvcut.legend(frameon=True, facecolor="white", edgecolor="#b9c2cc",
+                    framealpha=0.85, loc="upper right", fontsize=6.6)
+    style_axis(ax_pvcut)
+
+    # Row 3: two physically complementary fields share the same executed nodes.
+    ctmap = ax_ct.pcolormesh(tau, inlet_temp, reactor_temp, shading="auto",
+                             cmap="inferno", rasterized=True)
+    ax_ct.contour(tau, inlet_temp, reactor_temp, levels=[1000], colors="cyan", linewidths=1.0)
+    ax_ct.contour(tau, inlet_temp, reactor_temp, levels=[1400, 1700],
+                  colors="white", linewidths=0.50, alpha=0.82)
+    qt = np.maximum(heat_release, 1e2)
+    cqmap = ax_cq.pcolormesh(tau, inlet_temp, qt, shading="auto", cmap="magma",
+                             norm=LogNorm(vmin=1e2, vmax=max(1e6, np.nanmax(qt))),
+                             rasterized=True)
+    ax_cq.contour(tau, inlet_temp, reactor_temp, levels=[1000], colors="cyan", linewidths=1.0)
+    hlevels = [v for v in (1e4, 1e6, 1e8) if np.nanmin(qt) < v < np.nanmax(qt)]
+    if hlevels:
+        hc = ax_cq.contour(tau, inlet_temp, qt, levels=hlevels,
+                           colors="white", linewidths=0.48, alpha=0.82)
+        ax_cq.clabel(hc, inline=True, fontsize=5.7,
+                     fmt=lambda x: rf"$10^{{{int(np.log10(x))}}}$")
+    nt, ni = np.meshgrid(tau[::3], inlet_temp)
+    c_slices = [(400, "#31a9ff", "C1"), (600, "#52d273", "C2"),
+                (800, "#ff5a5f", "C3")]
+    for ax in (ax_ct, ax_cq):
+        ax.scatter(nt, ni, s=4.2, facecolors="none", edgecolors="white",
+                   linewidths=0.25, alpha=0.54, rasterized=True)
+        for ts, color, tag in c_slices:
+            ax.axhline(ts, color=color, ls="--", lw=1.0)
+            ax.text(tau.min() * 1.35, ts + (7 if ts < 800 else -9), tag,
+                    fontsize=6.4, color="#111827", ha="left",
+                    va="bottom" if ts < 800 else "top",
+                    bbox={"boxstyle": "round,pad=0.11", "fc": "white", "ec": color,
+                          "lw": 0.60, "alpha": 0.90})
+        ax.set_xscale("log")
+        ax.set_xlabel(r"residence time $\tau$ [s]")
+        style_axis(ax, False)
+    for ts, color, tag in c_slices:
+        j = int(np.argmin(np.abs(inlet_temp - ts)))
+        y = reactor_temp[j, :]
+        ax_ccut.plot(tau, y, color=color, lw=1.65, label=f"{tag}  {ts} K")
+        ax_ccut.fill_between(tau, inlet_temp.min(), y, color=color, alpha=0.055)
+    field_header(ax_ct, "e", "CSTR steady temperature",
+                 f"21 inlet states × 72 residence times = {len(cstr):,} roots")
+    field_header(ax_cq, "f", "CSTR heat release", "cyan: extinction boundary")
+    inset_colorbar(fig, ax_ct, ctmap, "reactor temperature [K]", width="34%")
+    inset_colorbar(fig, ax_cq, cqmap, r"heat release [W m$^{-3}$]", width="34%")
+    ax_ct.set_ylabel("inlet temperature [K]")
+    ax_cq.tick_params(labelleft=False)
+    cut_header(ax_ccut, "g", "matched hot-branch cuts")
+    ax_ccut.set_xscale("log")
+    ax_ccut.set_xlabel(r"residence time $\tau$ [s]")
+    ax_ccut.set_ylabel("steady reactor temperature [K]")
+    ax_ccut.set_ylim(inlet_temp.min(), np.nanmax(reactor_temp) * 1.025)
+    ax_ccut.legend(frameon=True, facecolor="white", edgecolor="#b9c2cc",
+                   framealpha=0.85, loc="lower right", fontsize=6.6)
+    style_axis(ax_ccut)
+
+    for ax in (ax_k, ax_pv, ax_ct, ax_cq):
+        for spine in ax.spines.values():
+            spine.set_color("#ffffff")
+            spine.set_alpha(0.65)
+
+    meta["dense_field_plate"] = save_figure(
+        fig, out, "fig9_dense_gradient_field_comparison_2d",
+        {"kepler_field": ax_k, "kepler_cut": ax_kcut,
+         "pv_field": ax_pv, "pv_cut": ax_pvcut,
+         "cstr_temperature": ax_ct, "cstr_heat_release": ax_cq,
+         "cstr_cut": ax_ccut},
+    )
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", type=Path, default=OUT_DEFAULT)
@@ -711,7 +915,7 @@ def main() -> None:
     out.mkdir(parents=True, exist_ok=True)
     set_paper_style()
     meta = {
-        "description": "Four framework-backed, data-driven 2-D publication figures",
+        "description": "Framework-backed, data-driven 2-D publication figures and dense comparison plate",
         "input_manifests": {
             "orekit": "data/kepler_orekit_manifest.json",
             "pv_cantera_coolprop": "data/framework_experiment_manifest.json",
@@ -722,6 +926,7 @@ def main() -> None:
     render_cstr(out, meta)
     render_pr(out, meta)
     render_geometry_plate(out, meta)
+    render_dense_field_plate(out, meta)
     manifest = out / "render_manifest.json"
     manifest.write_text(json.dumps(meta, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print(json.dumps({k: v for k, v in meta.items() if k not in ("description", "input_manifests")}, indent=2))

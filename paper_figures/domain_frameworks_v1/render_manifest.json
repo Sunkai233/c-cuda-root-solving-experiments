@@ -1,5 +1,5 @@
 {
-  "description": "Four framework-backed, data-driven 2-D publication figures",
+  "description": "Framework-backed, data-driven 2-D publication figures and dense comparison plate",
   "input_manifests": {
     "orekit": "data/kepler_orekit_manifest.json",
     "pv_cantera_coolprop": "data/framework_experiment_manifest.json"
@@ -13,12 +13,12 @@
       },
       {
         "name": "fig4_kepler_orekit_batch_2d.pdf",
-        "sha256": "5fdd5e7bf37b801f86ef8bbf38e98f69f0066cbdb929673153ed939637168e48",
+        "sha256": "aa192c087ebd13bb6b42aa9a160e0d47520bbcdd30eb5f764064710a51da09ee",
         "bytes": 107981
       },
       {
         "name": "fig4_kepler_orekit_batch_2d.svg",
-        "sha256": "bfc52f2ec46d4ea5181e15069c6fe67659d9c9f39f9d9ba491c6f60f52ff8b65",
+        "sha256": "0423e899b6db15d04a51aa7129ff11c4d0a705b259911890f155f10dcb27704d",
         "bytes": 256427
       }
     ],
@@ -62,12 +62,12 @@
       },
       {
         "name": "fig5_pvlib_module_batch_2d.pdf",
-        "sha256": "933c90ed8c5c6323c5d9fd0cca2c15a7075039c0ee636e74ee0e76c5f1c4d810",
+        "sha256": "6608182066a9a1ab27cb6dde997d568d7400f072dab10f67091d92f7f1f91969",
         "bytes": 123115
       },
       {
         "name": "fig5_pvlib_module_batch_2d.svg",
-        "sha256": "f6da8f0fdb0c4440dd8d2080be4ef5623114c87639f5ca7a9e33f8457bed64a0",
+        "sha256": "490d5797054a33bdd8c2b7e237ec79e6c1bd41910282d6923514bffe13773239",
         "bytes": 276548
       }
     ],
@@ -111,12 +111,12 @@
       },
       {
         "name": "fig6_cantera_cstr_batch_2d.pdf",
-        "sha256": "a811b4fbbda2aaa1c521eed0fec28060955fc75f2bd75eda419d4314def49afd",
+        "sha256": "1df61a126d0311d223a9358ed6eff48cd0192390f8b906fe4caeb67e0ba2071b",
         "bytes": 137015
       },
       {
         "name": "fig6_cantera_cstr_batch_2d.svg",
-        "sha256": "c07f5c812197429e3783a9690d0a21f040030b2af6f024806ecd82e7deab0c42",
+        "sha256": "5314105950c8284dfc5d52096aa93640ee9062f89108e4918554a405c198f19a",
         "bytes": 310163
       }
     ],
@@ -160,12 +160,12 @@
       },
       {
         "name": "fig7_coolprop_peng_robinson_batch_2d.pdf",
-        "sha256": "44f301cce131313b42f82945161361ecf4fb9e4e439799b491179fa0d96699a5",
+        "sha256": "df3318a13a5ee3937f59cad7978a47dc3a824a64c446105baf4a253e539539ea",
         "bytes": 67269
       },
       {
         "name": "fig7_coolprop_peng_robinson_batch_2d.svg",
-        "sha256": "ebc3b50aef1f5284d4e1319dd90d5f0281942f9e6abc8927b31a9e4d8af04035",
+        "sha256": "2520bd855d4a57b02048a8e272c48f134b44229352820c9825bd7a43c21655a0",
         "bytes": 185283
       }
     ],
@@ -209,12 +209,12 @@
       },
       {
         "name": "fig8_multidomain_geometry_structures_2d.pdf",
-        "sha256": "6dd7c587be9f20134dcc4d9862dbec1b3ac6217fd786997e02d2648b6b93eeaf",
+        "sha256": "1606e4890c1f99c02065dec0ad020d7858f2518bd8e1dccee92d21a34f65e0e3",
         "bytes": 91688
       },
       {
         "name": "fig8_multidomain_geometry_structures_2d.svg",
-        "sha256": "4b86864efe94019395d9262b91226b51f3e4313b75a9d7465944df044f283c99",
+        "sha256": "f0addb0aee6cb66915671fbda05eabe088749bfcf4d1215508dd8a18a20cebea",
         "bytes": 313357
       }
     ],
@@ -243,6 +243,73 @@
           0.002403846153846154,
           0.9688945431285961,
           0.48601246673125104
+        ]
+      },
+      "pairwise_overlaps": [],
+      "outside_figure": []
+    }
+  },
+  "dense_field_plate": {
+    "files": [
+      {
+        "name": "fig9_dense_gradient_field_comparison_2d.png",
+        "sha256": "573b84dbfff772a6d89a1c5465af767c597e20cc534bec873ad6184191897ad8",
+        "bytes": 1924385
+      },
+      {
+        "name": "fig9_dense_gradient_field_comparison_2d.pdf",
+        "sha256": "806537d097690e8a95bfce6cbb255098ca9cd23138e319b9b8dff74305024b09",
+        "bytes": 211979
+      },
+      {
+        "name": "fig9_dense_gradient_field_comparison_2d.svg",
+        "sha256": "dd2e994fe7b46f652df63ea1d1710f7f5de8dd2b49942b2af7db317bbd25fd8d",
+        "bytes": 511866
+      }
+    ],
+    "layout_audit": {
+      "tight_bboxes_xyxy": {
+        "kepler_field": [
+          0.03369913419913421,
+          0.6838073738702279,
+          0.7169344375431332,
+          0.975
+        ],
+        "kepler_cut": [
+          0.7449669050756007,
+          0.6838073738702279,
+          0.9850000000000001,
+          0.975
+        ],
+        "pv_field": [
+          0.027384199134199136,
+          0.36016006508835824,
+          0.7169344375431332,
+          0.6513526912181302
+        ],
+        "pv_cut": [
+          0.7428889829976786,
+          0.36016006508835824,
+          0.9883685064935066,
+          0.6513526912181302
+        ],
+        "cstr_temperature": [
+          0.03467316017316018,
+          0.01915620349702375,
+          0.3794740318777942,
+          0.3277053824362605
+        ],
+        "cstr_heat_release": [
+          0.415520504059757,
+          0.01915620349702375,
+          0.7371594062868226,
+          0.3277053824362605
+        ],
+        "cstr_cut": [
+          0.7466348180821262,
+          0.01915620349702375,
+          0.9850000000000001,
+          0.3277053824362605
         ]
       },
       "pairwise_overlaps": [],

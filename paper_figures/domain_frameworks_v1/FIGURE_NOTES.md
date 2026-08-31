@@ -97,3 +97,21 @@ independent nonlinear root: eccentric anomaly, terminal current, reactor
 steady state, or compressibility factor. The replicated state markers and
 model topology explain why the workloads are naturally batched without
 reducing them to an abstract workflow diagram.*
+
+## Figure 9 — dense gradient-field comparison plate
+
+This full-page plate is the compact, field-first alternative to Figures 4--6.
+It deliberately removes the separate validation and distribution panels so
+that nearly all available area carries either a solved response field or its
+matched one-dimensional cut. Hollow points are executed operating states, not
+decorative texture. Dashed S/P/C sections use the same colors in the field and
+the adjacent response curves. The embedded count chains report the exact table
+dimensions: 12,960 Kepler roots, 357 PV roots and 1,512 CSTR roots. The CSTR
+temperature and heat-release panels share coordinates; their cyan contour is
+the same 1,000 K extinction boundary.
+
+Suggested caption: *Dense comparison of three framework-backed nonlinear-solve
+fields. Each colored pixel neighborhood is supported by explicitly plotted
+operating nodes, and each labelled section is traced into the adjacent solved
+response. The parameter grids therefore represent 14,829 independent scalar
+root problems rather than three illustrative continuous surfaces.*

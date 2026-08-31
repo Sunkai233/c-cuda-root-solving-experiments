@@ -148,6 +148,16 @@ def render_kepler(out: Path, meta: dict) -> None:
 
     panel(ax1, "b", "Eccentric anomaly over the batched input plane")
     im1 = ax1.pcolormesh(mgrid, egrid, E.T, shading="auto", cmap="viridis", rasterized=True)
+    levels_e = [0.25, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0]
+    ce = ax1.contour(mgrid, egrid, E.T, levels=levels_e, colors="white", linewidths=0.55, alpha=0.9)
+    ax1.clabel(ce, inline=True, fontsize=6.2, fmt=lambda x: f"E={x:g}")
+    # Show the actual two-dimensional sampling lattice without turning the
+    # panel into a decorative gradient.
+    ax1.scatter(mgrid[::12], np.full_like(mgrid[::12], 0.985), s=7, marker="|",
+                color="white", alpha=0.9, linewidths=0.7)
+    ax1.axhline(0.9, color="white", ls="--", lw=0.75, alpha=0.8)
+    ax1.text(0.04, 0.88, "high-e band", color="white", fontsize=7.2,
+             transform=ax1.transAxes, ha="left", va="top")
     c1 = fig.colorbar(im1, ax=ax1, pad=0.02, aspect=28)
     c1.set_label(r"$E$ [rad]")
     ax1.set_xlabel(r"mean anomaly $M$ [rad]")
@@ -159,6 +169,14 @@ def render_kepler(out: Path, meta: dict) -> None:
     positive_m = mgrid > 0
     im2 = ax2.pcolormesh(mgrid[positive_m], egrid, np.log10(condition.T[:, positive_m]), shading="auto", cmap="magma",
                          vmin=0, vmax=9, rasterized=True)
+    logcond = np.log10(condition.T[:, positive_m])
+    cc = ax2.contour(mgrid[positive_m], egrid, logcond, levels=[1, 3, 5, 7],
+                     colors="white", linewidths=0.65, alpha=0.9)
+    ax2.clabel(cc, inline=True, fontsize=6.2, fmt=lambda x: fr"$10^{{{int(x)}}}$")
+    ax2.plot([1e-8], [0.9999999], marker="o", ms=4.5, mfc="none", mec="cyan", mew=1.0)
+    ax2.annotate("hard-corner sampling", xy=(1e-8, 0.9999999), xytext=(3e-7, 0.99999998),
+                 color="white", fontsize=7.0,
+                 arrowprops={"arrowstyle": "->", "color": "white", "lw": 0.7})
     c2 = fig.colorbar(im2, ax=ax2, pad=0.02, aspect=28)
     c2.set_label(r"$\log_{10}|\partial E/\partial M|$")
     ax2.set_xlabel(r"mean anomaly $M$ [rad]")
@@ -225,6 +243,17 @@ def render_pv(out: Path, meta: dict) -> None:
     im = ax1.pcolormesh(T, G, pmp.T, shading="auto", cmap="inferno", rasterized=True)
     cs = ax1.contour(T, G, pmp.T, levels=[50, 100, 150, 200, 250], colors="white", linewidths=0.55)
     ax1.clabel(cs, inline=True, fontsize=6.5, fmt="%g W")
+    tt, gg = np.meshgrid(T, G)
+    ax1.scatter(tt.ravel(), gg.ravel(), s=5, marker="o", facecolors="none",
+                edgecolors="white", linewidths=0.28, alpha=0.65, rasterized=True)
+    stc = surface.iloc[((surface.cell_temperature_C - 25).abs()
+                        + (surface.effective_irradiance_W_m2 - 1000).abs() / 50).argmin()]
+    ax1.plot(stc.cell_temperature_C, stc.effective_irradiance_W_m2, marker="*", ms=8,
+             color="cyan", mec="black", mew=0.35, zorder=4)
+    ax1.annotate(f"near STC\n{stc.p_mp:.1f} W",
+                 (stc.cell_temperature_C, stc.effective_irradiance_W_m2), (43, 1045),
+                 color="white", fontsize=7.0, ha="left",
+                 arrowprops={"arrowstyle": "->", "color": "white", "lw": 0.7})
     cb = fig.colorbar(im, ax=ax1, pad=0.02, aspect=28)
     cb.set_label(r"$P_{mp}$ [W]")
     ax1.set_xlabel(r"cell temperature [$^\circ$C]")
@@ -274,6 +303,21 @@ def render_cstr(out: Path, meta: dict) -> None:
     ax0, ax1, ax2, ax3 = axs.ravel()
     panel(ax0, "a", "Cantera well-stirred combustor: steady temperature field")
     im0 = ax0.pcolormesh(tau, tin, temp, shading="auto", cmap="inferno", rasterized=True)
+    # One strong regime boundary plus two unobtrusive interior contours is more
+    # readable than labeling every temperature level along the discontinuity.
+    ax0.contour(tau, tin, temp, levels=[1000], colors="cyan", linewidths=1.05)
+    ax0.contour(tau, tin, temp, levels=[1400, 1700], colors="white", linewidths=0.55, alpha=0.8)
+    # A sparse subset of the solved lattice makes the batch density explicit.
+    ttau, ttin = np.meshgrid(tau[::6], tin[::2])
+    ax0.scatter(ttau, ttin, s=5, facecolors="none", edgecolors="white",
+                linewidths=0.3, alpha=0.6, rasterized=True)
+    ax0.text(1.7e-4, 340, "extinguished branch", color="white", fontsize=7.2,
+             ha="left", va="bottom")
+    ax0.text(1.8e-2, 730, "reacting branch", color="#3b1d00", fontsize=7.2,
+             ha="center", va="center")
+    ax0.annotate("extinction boundary", xy=(5.3e-4, 455), xytext=(1.6e-4, 535),
+                 color="white", fontsize=7.0,
+                 arrowprops={"arrowstyle": "->", "color": "white", "lw": 0.7})
     cb0 = fig.colorbar(im0, ax=ax0, pad=0.02, aspect=28)
     cb0.set_label("steady reactor temperature [K]")
     ax0.set_xscale("log")
@@ -287,7 +331,16 @@ def render_cstr(out: Path, meta: dict) -> None:
                          norm=LogNorm(vmin=1e2, vmax=max(1e6, np.nanmax(positive))), rasterized=True)
     cb1 = fig.colorbar(im1, ax=ax1, pad=0.02, aspect=28)
     cb1.set_label("heat release rate [W m$^{-3}$]")
-    ax1.contour(tau, tin, temp, levels=[1000], colors="cyan", linewidths=1.1)
+    ignition = ax1.contour(tau, tin, temp, levels=[1000], colors="cyan", linewidths=1.1)
+    ax1.clabel(ignition, inline=True, fontsize=6.5, fmt={1000: "T=1000 K"})
+    hlevels = [1e4, 1e6, 1e8]
+    hcs = ax1.contour(tau, tin, positive, levels=hlevels, colors="white", linewidths=0.5, alpha=0.8)
+    ax1.clabel(hcs, inline=True, fontsize=6.0,
+               fmt={1e4: r"$10^4$", 1e6: r"$10^6$", 1e8: r"$10^8$"})
+    ax1.scatter(ttau, ttin, s=5, facecolors="none", edgecolors="white",
+                linewidths=0.3, alpha=0.55, rasterized=True)
+    ax1.text(1.6e-4, 330, "negligible heat release", color="white", fontsize=7.0,
+             ha="left", va="bottom")
     ax1.set_xscale("log")
     ax1.set_xlabel(r"residence time $\tau$ [s]")
     ax1.set_ylabel("inlet temperature [K]")

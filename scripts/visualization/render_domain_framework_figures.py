@@ -160,8 +160,11 @@ def render_geometry_plate(out: Path, meta: dict) -> None:
                  arrowprops={"arrowstyle": "->", "lw": 0.7})
     ax0.annotate("state $(x,y)$\nsolve $E-e\\sin E=M$", (px, py), (0.38, 0.74), fontsize=9.1,
                  arrowprops={"arrowstyle": "->", "lw": 0.75})
-    ax0.text(-1.72, 0.91, "24 shown / 3,000 frozen cases", fontsize=9.0,
-             bbox={"fc": "white", "ec": "#9aa3ad", "lw": 0.6, "pad": 2.5})
+    ax0.text(-1.72, 0.91,
+             "72 $e$ values  ×  180 $M$ values  ×  1 root/state"
+             "\n$\\mathbf{=12,960}$ Kepler solves  +  3,000 oracle checks",
+             fontsize=8.5, va="top",
+             bbox={"fc": "white", "ec": COLORS["blue"], "lw": 0.8, "pad": 3.0})
     ax0.set_aspect("equal"); ax0.set_xlim(-1.86, 1.05); ax0.set_ylim(-1.05, 1.05)
     ax0.set_xlabel("perifocal coordinate $x/a$"); ax0.set_ylabel("perifocal coordinate $y/a$")
     ax0.legend(frameon=False, loc="lower right", fontsize=8.8); style_axis(ax0)
@@ -219,8 +222,11 @@ def render_geometry_plate(out: Path, meta: dict) -> None:
     ax1.text(dx - 0.018, y0 + 0.10, "$I_D$", fontsize=8.7)
     ax1.text(rx + 0.018, y0, "$R_{sh}$", fontsize=8.7)
     ax1.text(0.78, y0 + 0.24, "$R_s$", fontsize=8.7)
-    ax1.text(0.69, 0.15, "357 $(G,T_c)$ states\nroot: terminal current $I(V)$", fontsize=9.0,
-             ha="center", bbox={"fc": "white", "ec": "#9aa3ad", "lw": 0.6, "pad": 2.5})
+    ax1.text(0.72, 0.15,
+             "21 $G$ levels  ×  17 $T_c$ levels  ×  1 root/state"
+             "\n$\\mathbf{=357}$ module-current solves",
+             fontsize=8.5, ha="center",
+             bbox={"fc": "white", "ec": COLORS["blue"], "lw": 0.8, "pad": 3.0})
     ax1.text(0.965, y0 + 0.20, "+", fontsize=9, ha="left", va="center")
     ax1.text(0.965, y0 - 0.20, "−", fontsize=9, ha="left", va="center")
     ax1.set_xlim(0, 1); ax1.set_ylim(0, 1); ax1.set_aspect("equal"); ax1.axis("off")
@@ -250,8 +256,11 @@ def render_geometry_plate(out: Path, meta: dict) -> None:
     ax2.annotate("impeller", (0.53, 0.44), (0.76, 0.57), fontsize=9.0,
                  arrowprops={"arrowstyle": "->", "lw": 0.7})
     ax2.text(0.75, 0.79, "$\\tau=V/\\dot V$", fontsize=10.5)
-    ax2.text(0.73, 0.67, "21 $T_{in}$ × 72 $\\tau$\n= 1,512 steady solves", fontsize=9.0,
-             bbox={"fc": "white", "ec": "#9aa3ad", "lw": 0.6, "pad": 2.5})
+    ax2.text(0.69, 0.67,
+             "21 $T_{in}$ levels  ×  72 $\\tau$ levels  ×  1 steady root/state"
+             "\n$\\mathbf{=1,512}$ coupled reactor solves",
+             fontsize=8.4,
+             bbox={"fc": "white", "ec": COLORS["blue"], "lw": 0.8, "pad": 3.0})
     ax2.text(0.74, 0.45, "root state:\n$T$, $Y_k$, $\\dot q$", fontsize=9.1)
     ax2.set_xlim(0, 1); ax2.set_ylim(0, 1); ax2.set_aspect("equal"); ax2.axis("off")
 
@@ -283,8 +292,11 @@ def render_geometry_plate(out: Path, meta: dict) -> None:
         ax3.text(xx, 0.11, label, fontsize=8.2, ha="center", va="top")
     ax3.plot([0.55, 0.96], [0.15, 0.15], color="#273444", lw=0.8)
     ax3.text(0.755, 0.91, "same $(P_r,T_r)$ → cubic in $Z$", fontsize=9.5, ha="center")
-    ax3.text(0.755, 0.82, f"{pr.shape[0]:,} batched phase states", fontsize=9.0, ha="center",
-             bbox={"fc": "white", "ec": "#9aa3ad", "lw": 0.6, "pad": 2.5})
+    ax3.text(0.755, 0.82,
+             "151 $P_r$ levels  ×  121 $T_r$ levels  ×  1 cubic/state"
+             f"\n$\\mathbf{{={pr.shape[0]:,}}}$ phase-root solves",
+             fontsize=8.4, ha="center",
+             bbox={"fc": "white", "ec": COLORS["blue"], "lw": 0.8, "pad": 3.0})
     ax3.text(0.755, 0.72, "one root outside dome\nthree roots inside dome", fontsize=8.8, ha="center")
     ax3.set_xlim(0, 1); ax3.set_ylim(0, 1); ax3.set_aspect("equal"); ax3.axis("off")
 

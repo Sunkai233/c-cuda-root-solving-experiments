@@ -71,7 +71,13 @@ physical object and its algebraic solve: an orbital state on a Kepler ellipse,
 the 96-cell CEC module and one-diode equivalent circuit, a jacketed and stirred
 CSTR control volume, and a piston fluid cell with liquid/vapor phase geometry.
 The displayed batch counts are read from the same executed tables as Figures
-4--7 (3,000, 357, 1,512 and 18,271 states respectively).
+4--7 (12,960 Kepler field solves plus 3,000 oracle checks, 357 PV states,
+1,512 CSTR states and 18,271 Peng--Robinson states).
+Each panel now carries the same explicit multiplicity chain: the two sampled
+parameter-axis counts, multiplied by one nonlinear root problem per state,
+followed by the executed total.  For Kepler, the 12,960-state framework field
+and the separate 3,000-case high-precision oracle suite are reported without
+conflating their roles.
 
 Suggested caption: *Physical and computational structure of the four non-BEM
 batch workloads. Each geometry maps a two-parameter operating state to an

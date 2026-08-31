@@ -1365,10 +1365,15 @@ def render_split_knowledge_figures(out: Path, meta: dict) -> None:
     root_map = pd.read_csv(out / "data" / "coolprop_pr_root_map.csv")
     sat = pd.read_csv(out / "data" / "coolprop_pr_propane_saturation.csv")
     pr_grid, tr_grid, root_counts = pivot_grid(root_map, "Tr", "Pr", "root_count")
-    fig = plt.figure(figsize=(7.2, 3.55), facecolor="white")
-    gs = fig.add_gridspec(1, 2, left=0.085, right=0.985, bottom=0.17, top=0.965,
-                          width_ratios=[2.55, 1.0], wspace=0.23)
-    ax0, ax1 = fig.add_subplot(gs[0]), fig.add_subplot(gs[1])
+    fig = plt.figure(figsize=(7.2, 3.80), facecolor="white")
+    gs = fig.add_gridspec(
+        2, 2, left=0.085, right=0.985, bottom=0.12, top=0.965,
+        width_ratios=[2.36, 1.12], height_ratios=[4.75, 1.0],
+        wspace=0.28, hspace=0.34,
+    )
+    ax0 = fig.add_subplot(gs[:, 0])
+    ax1 = fig.add_subplot(gs[0, 1])
+    ax_info = fig.add_subplot(gs[1, 1])
     phase_cmap = mpl.colors.ListedColormap(["#dbeafe", "#f59e0b"])
     phase_norm = BoundaryNorm([0.5, 2.0, 3.5], phase_cmap.N)
     im = ax0.pcolormesh(pr_grid, tr_grid, root_counts, shading="auto",
@@ -1451,23 +1456,24 @@ def render_split_knowledge_figures(out: Path, meta: dict) -> None:
     z_vap = float(three.Z2.iloc[psat_i])
     ax1.annotate("", xy=(psat, z_vap), xytext=(psat, z_liq),
                  arrowprops={"arrowstyle": "<->", "color": "#111827", "lw": 1.25})
-    ax1.text(psat + 0.015, (z_liq + z_vap) / 2, "coexistence\nphase switch",
-             fontsize=7.0, fontweight="bold", color="#111827", va="center")
-    for x, y, text_value, color in [
-        (0.60, 0.12, "liquid", "#2166ac"),
-        (0.68, 0.29, "unstable", "#6b7280"),
-        (0.61, 0.66, "vapor", "#b2182b"),
-    ]:
-        txt = ax1.text(x, y, text_value, color=color, fontsize=7.5,
-                       fontweight="bold", ha="center")
-        txt.set_path_effects([pe.Stroke(linewidth=2.5, foreground="white"), pe.Normal()])
-    ax1.text(0.04, 0.06,
-             f"three-root interval: {p_lo:.3f}–{p_hi:.3f}\n"
-             + f"CoolProp coexistence: $P_r={psat:.3f}$\n"
-             + "three algebraic roots ≠ three stable phases",
-             transform=ax1.transAxes, fontsize=6.7, color="#334155",
-             bbox={"boxstyle": "round,pad=0.24", "fc": "white", "ec": "#aeb8c2",
-                   "lw": 0.7, "alpha": 0.90})
+    ax1.text(psat - 0.012, (z_liq + z_vap) / 2,
+             "coexistence\nphase switch", fontsize=6.9, fontweight="bold",
+             color="#111827", ha="right", va="center")
+
+    label_specs = [
+        ((0.775, float(three.Z2.iloc[-1])), (0.835, 0.57), "vapor", "#b2182b"),
+        ((0.685, float(np.interp(0.685, three.Pr, three.Z1))),
+         (0.825, 0.265), "unstable", "#6b7280"),
+        ((0.775, float(three.Z0.iloc[-1])), (0.835, 0.085), "liquid", "#2166ac"),
+    ]
+    for xy, xytext, text_value, color in label_specs:
+        ax1.annotate(
+            text_value, xy=xy, xytext=xytext, fontsize=7.3,
+            fontweight="bold", color=color, ha="center", va="center",
+            arrowprops={"arrowstyle": "-", "color": color, "lw": 0.8},
+            bbox={"boxstyle": "round,pad=0.10", "fc": "white",
+                  "ec": "none", "alpha": 0.94},
+        )
     curve_title(ax1, "b", r"phase roots at $T_r=0.95$")
     ax1.set_xlim(0.44, 0.88)
     ax1.set_ylim(0.05, 0.82)
@@ -1475,9 +1481,33 @@ def render_split_knowledge_figures(out: Path, meta: dict) -> None:
     ax1.set_ylabel("compressibility root $Z$", fontsize=9.0, labelpad=1.5)
     ax1.tick_params(labelsize=8.0)
     style_axis(ax1)
+    ax_info.set_axis_off()
+    ax_info.set_xlim(0.0, 1.0)
+    ax_info.set_ylim(0.0, 1.0)
+    ax_info.add_patch(mpl.patches.FancyBboxPatch(
+        (0.01, 0.06), 0.98, 0.88,
+        boxstyle="round,pad=0.018,rounding_size=0.025",
+        facecolor="#f8fafc", edgecolor="#aeb8c2", linewidth=0.75,
+        transform=ax_info.transAxes,
+    ))
+    ax_info.text(
+        0.05, 0.72, rf"three-root interval $P_r$: {p_lo:.3f}–{p_hi:.3f}",
+        transform=ax_info.transAxes, fontsize=6.75, color="#25364a",
+        fontweight="bold", ha="left", va="center",
+    )
+    ax_info.text(
+        0.05, 0.46, rf"CoolProp coexistence $P_r$: {psat:.3f}",
+        transform=ax_info.transAxes, fontsize=6.75, color="#25364a",
+        fontweight="bold", ha="left", va="center",
+    )
+    ax_info.text(
+        0.05, 0.20, "three algebraic roots ≠ three stable phases",
+        transform=ax_info.transAxes, fontsize=6.65, color="#4b5d72",
+        ha="left", va="center",
+    )
     meta["peng_robinson_mechanism_detail"] = save_figure(
         fig, out, "fig9d_peng_robinson_phase_mechanisms_2d",
-        {"root_field": ax0, "phase_roots": ax1},
+        {"root_field": ax0, "phase_roots": ax1, "phase_evidence": ax_info},
     )
 
 

@@ -30,6 +30,8 @@ The large-type manuscript versions split the overview by physical domain:
 
 ![CSTR extinction and heat-release mechanisms](paper_figures/domain_frameworks_v1/fig9c_cstr_extinction_mechanisms_2d.png)
 
+![Peng-Robinson root topology and phase selection](paper_figures/domain_frameworks_v1/fig9d_peng_robinson_phase_mechanisms_2d.png)
+
 ![Orekit Kepler orbit and batch condition plane](paper_figures/domain_frameworks_v1/fig4_kepler_orekit_batch_2d.png)
 
 ![pvlib CEC module operating-condition batch](paper_figures/domain_frameworks_v1/fig5_pvlib_module_batch_2d.png)

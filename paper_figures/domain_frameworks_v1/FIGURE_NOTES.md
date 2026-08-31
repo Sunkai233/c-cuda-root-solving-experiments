@@ -125,9 +125,9 @@ operating nodes, and each labelled section is traced into the adjacent solved
 response. The parameter grids therefore represent 14,829 independent scalar
 root problems rather than three illustrative continuous surfaces.*
 
-## Figures 9a--9c — final-size mechanism details
+## Figures 9a--9d — final-size mechanism details
 
-Figures 9a--9c split the dense overview into three manuscript-scale figures.
+Figures 9a--9d split the dense overview into four manuscript-scale figures.
 They are rendered at a true 7.2-inch double-column width rather than relying on
 downscaling a large composite. Mechanism labels are 9 pt, embedded titles are
 10.3 pt, panel letters are 11.5 pt, contour labels are 7.1 pt and axis labels
@@ -135,7 +135,9 @@ are 9--9.5 pt. Figure 9a isolates the Kepler response and near-parabolic hard
 corner. Figure 9b isolates irradiance-driven PV power growth, cell-temperature
 derating and the STC reference state. Figure 9c uses two full rows so that the
 CSTR temperature and heat-release fields each retain a matched response panel.
-The composite Figure 9 remains an overview; these three figures are the
+Figure 9d resolves the Peng--Robinson root-count topology and physical phase
+selection that are only summarized in Figure 7. The composite Figure 9 remains
+an overview; these four figures are the
 recommended versions for normal-size manuscript reading.
 
 The right-hand panels are quantitative evidence panels rather than simple line
@@ -146,4 +148,9 @@ bands, the 25 degree C reference section and the fitted 1,000 W/m2 thermal slope
 inlet state (`7.71e-4`, `2.18e-4` and at or below `1.00e-4 s`), shades the cold
 branch and cold-state heat-release floor, and identifies the post-ignition
 heat-release decay. These quantities are computed from the same stored field
-tables used by the left-hand panels.
+tables used by the left-hand panels. Figure 9d maps 121 by 151 = 18,271
+Peng--Robinson states and extracts the `Tr=0.95` section. It reports the
+three-root interval (`Pr=0.523--0.780`), the CoolProp coexistence pressure
+(`Pr=0.717`), the liquid/unstable/vapor algebraic branches, and the stable
+phase-selection jump. The annotation explicitly distinguishes three algebraic
+roots from three physically stable phases.

@@ -1361,6 +1361,125 @@ def render_split_knowledge_figures(out: Path, meta: dict) -> None:
          "heat_field": axq, "heat_cuts": axqc},
     )
 
+    # Figure 9d: PR root topology and physical phase selection.
+    root_map = pd.read_csv(out / "data" / "coolprop_pr_root_map.csv")
+    sat = pd.read_csv(out / "data" / "coolprop_pr_propane_saturation.csv")
+    pr_grid, tr_grid, root_counts = pivot_grid(root_map, "Tr", "Pr", "root_count")
+    fig = plt.figure(figsize=(7.2, 3.55), facecolor="white")
+    gs = fig.add_gridspec(1, 2, left=0.085, right=0.985, bottom=0.17, top=0.965,
+                          width_ratios=[2.55, 1.0], wspace=0.23)
+    ax0, ax1 = fig.add_subplot(gs[0]), fig.add_subplot(gs[1])
+    phase_cmap = mpl.colors.ListedColormap(["#dbeafe", "#f59e0b"])
+    phase_norm = BoundaryNorm([0.5, 2.0, 3.5], phase_cmap.N)
+    im = ax0.pcolormesh(pr_grid, tr_grid, root_counts, shading="auto",
+                        cmap=phase_cmap, norm=phase_norm, rasterized=True)
+    boundary = ax0.contour(pr_grid, tr_grid, root_counts, levels=[2],
+                           colors="#0f5675", linewidths=1.15)
+    boundary.set_path_effects([
+        pe.Stroke(linewidth=2.8, foreground="white", alpha=0.92), pe.Normal()
+    ])
+    pm, tm = np.meshgrid(pr_grid[::6], tr_grid[::5])
+    ax0.scatter(pm, tm, s=4.5, facecolors="none", edgecolors="#334155",
+                linewidths=0.25, alpha=0.40, rasterized=True)
+    sat_pr = sat.P_Pa.to_numpy(float) / 4251200.0
+    sat_tr = sat.T_K.to_numpy(float) / 369.89
+    ax0.plot(sat_pr, sat_tr, color="#111827", lw=1.35, zorder=8)
+    ax0.plot(1.0, 1.0, marker="*", ms=10.5, mfc="#ef4444", mec="white",
+             mew=0.7, zorder=12)
+    selected_tr = 0.95
+    ax0.axhline(selected_tr, color="#3dcc73", ls="--", lw=1.35)
+    mechanism_arrow(ax0, (0.18, 0.22), (0.76, 0.22),
+                    r"compression $P_r\uparrow$" "\nroot topology changes",
+                    "#145f82", (0.48, 0.31), rad=-0.08)
+    mechanism_arrow(ax0, (0.66, 0.46), (0.66, 0.82),
+                    r"heating $T_r\uparrow$" "\nwedge collapses",
+                    "#16854b", (0.69, 0.64), align="left")
+    three_region = ax0.text(0.23, 0.54, "three real roots\nliquid / unstable / vapor",
+                            transform=ax0.transAxes, fontsize=8.5, fontweight="bold",
+                            color="#8a3f00", ha="center", va="center", zorder=11)
+    three_region.set_path_effects([
+        pe.Stroke(linewidth=3.0, foreground="white"), pe.Normal()
+    ])
+    one_region = ax0.text(0.82, 0.84, "one-root\nsupercritical region",
+                          transform=ax0.transAxes, fontsize=8.5, fontweight="bold",
+                          color="#1e4f82", ha="center", va="center", zorder=11)
+    one_region.set_path_effects([
+        pe.Stroke(linewidth=3.0, foreground="white"), pe.Normal()
+    ])
+    ax0.annotate("critical collapse", xy=(1.0, 1.0), xytext=(1.16, 1.08),
+                 fontsize=7.6, color="#b4232f", fontweight="bold",
+                 arrowprops={"arrowstyle": "->", "color": "#b4232f", "lw": 1.0})
+    field_title(ax0, "a", "Peng–Robinson root-count field",
+                f"121 × 151 = {len(root_map):,} states")
+    cb = inset_colorbar(fig, ax0, im, "number of real PR roots", width="35%")
+    cb.set_ticks([1, 3])
+    cb.set_ticklabels(["one", "three"])
+    ax0.set_xlabel(r"reduced pressure $P_r$", fontsize=9.5)
+    ax0.set_ylabel(r"reduced temperature $T_r$", fontsize=9.5)
+    ax0.tick_params(labelsize=8.2)
+    style_axis(ax0, False)
+
+    cut = root_map[np.isclose(root_map.Tr, selected_tr)].sort_values("Pr").copy()
+    three = cut[cut.root_count == 3].copy()
+    p_lo, p_hi = float(three.Pr.min()), float(three.Pr.max())
+    psat = float(np.interp(selected_tr * 369.89, sat.T_K, sat.P_Pa) / 4251200.0)
+    ax1.axvspan(p_lo, p_hi, color="#f59e0b", alpha=0.11, zorder=0)
+    ax1.axvline(p_lo, color="#7c8795", ls=":", lw=1.0)
+    ax1.axvline(p_hi, color="#7c8795", ls=":", lw=1.0)
+    ax1.axvline(psat, color="#111827", ls="--", lw=1.15)
+    branch_specs = [("Z0", "#2166ac", "liquid root", "-"),
+                    ("Z1", "#6b7280", "unstable root", "--"),
+                    ("Z2", "#b2182b", "vapor root", "-")]
+    for col, color, label, ls in branch_specs:
+        values = three[col].to_numpy(float)
+        ax1.plot(three.Pr, values, color=color, ls=ls, lw=1.75, marker="o",
+                 ms=2.5, markevery=3, mec="white", mew=0.35, zorder=5)
+    ax1.fill_between(three.Pr, three.Z0, three.Z2, color="#f59e0b",
+                     alpha=0.09, zorder=1)
+    stable = np.where(
+        (cut.root_count == 3) & (cut.Pr < psat), cut.Z2,
+        np.where((cut.root_count == 3) & (cut.Pr >= psat), cut.Z0, cut.Z0),
+    )
+    left_stable = cut.Pr <= psat
+    right_stable = cut.Pr >= psat
+    ax1.plot(cut.loc[left_stable, "Pr"], stable[left_stable], color="#111827",
+             lw=2.4, zorder=7)
+    ax1.plot(cut.loc[right_stable, "Pr"], stable[right_stable], color="#111827",
+             lw=2.4, zorder=7)
+    psat_i = int(np.argmin(np.abs(three.Pr.to_numpy(float) - psat)))
+    z_liq = float(three.Z0.iloc[psat_i])
+    z_vap = float(three.Z2.iloc[psat_i])
+    ax1.annotate("", xy=(psat, z_vap), xytext=(psat, z_liq),
+                 arrowprops={"arrowstyle": "<->", "color": "#111827", "lw": 1.25})
+    ax1.text(psat + 0.015, (z_liq + z_vap) / 2, "coexistence\nphase switch",
+             fontsize=7.0, fontweight="bold", color="#111827", va="center")
+    for x, y, text_value, color in [
+        (0.60, 0.12, "liquid", "#2166ac"),
+        (0.68, 0.29, "unstable", "#6b7280"),
+        (0.61, 0.66, "vapor", "#b2182b"),
+    ]:
+        txt = ax1.text(x, y, text_value, color=color, fontsize=7.5,
+                       fontweight="bold", ha="center")
+        txt.set_path_effects([pe.Stroke(linewidth=2.5, foreground="white"), pe.Normal()])
+    ax1.text(0.04, 0.06,
+             f"three-root interval: {p_lo:.3f}–{p_hi:.3f}\n"
+             + f"CoolProp coexistence: $P_r={psat:.3f}$\n"
+             + "three algebraic roots ≠ three stable phases",
+             transform=ax1.transAxes, fontsize=6.7, color="#334155",
+             bbox={"boxstyle": "round,pad=0.24", "fc": "white", "ec": "#aeb8c2",
+                   "lw": 0.7, "alpha": 0.90})
+    curve_title(ax1, "b", r"phase roots at $T_r=0.95$")
+    ax1.set_xlim(0.44, 0.88)
+    ax1.set_ylim(0.05, 0.82)
+    ax1.set_xlabel(r"reduced pressure $P_r$", fontsize=9.0)
+    ax1.set_ylabel("compressibility root $Z$", fontsize=9.0, labelpad=1.5)
+    ax1.tick_params(labelsize=8.0)
+    style_axis(ax1)
+    meta["peng_robinson_mechanism_detail"] = save_figure(
+        fig, out, "fig9d_peng_robinson_phase_mechanisms_2d",
+        {"root_field": ax0, "phase_roots": ax1},
+    )
+
 
 def main() -> None:
     ap = argparse.ArgumentParser()

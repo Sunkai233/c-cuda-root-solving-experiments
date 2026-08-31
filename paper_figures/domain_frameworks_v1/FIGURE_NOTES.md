@@ -124,3 +124,16 @@ fields. Each colored pixel neighborhood is supported by explicitly plotted
 operating nodes, and each labelled section is traced into the adjacent solved
 response. The parameter grids therefore represent 14,829 independent scalar
 root problems rather than three illustrative continuous surfaces.*
+
+## Figures 9a--9c — final-size mechanism details
+
+Figures 9a--9c split the dense overview into three manuscript-scale figures.
+They are rendered at a true 7.2-inch double-column width rather than relying on
+downscaling a large composite. Mechanism labels are 9 pt, embedded titles are
+10.3 pt, panel letters are 11.5 pt, contour labels are 7.1 pt and axis labels
+are 9--9.5 pt. Figure 9a isolates the Kepler response and near-parabolic hard
+corner. Figure 9b isolates irradiance-driven PV power growth, cell-temperature
+derating and the STC reference state. Figure 9c uses two full rows so that the
+CSTR temperature and heat-release fields each retain a matched response panel.
+The composite Figure 9 remains an overview; these three figures are the
+recommended versions for normal-size manuscript reading.

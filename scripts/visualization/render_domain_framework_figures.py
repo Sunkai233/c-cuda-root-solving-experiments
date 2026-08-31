@@ -1001,6 +1001,280 @@ def render_dense_field_plate(out: Path, meta: dict) -> None:
     )
 
 
+def render_split_knowledge_figures(out: Path, meta: dict) -> None:
+    """Render three final-size, large-type mechanism figures for the manuscript."""
+    kepler = pd.read_csv(out / "data" / "kepler_orekit_grid.csv", float_precision="round_trip")
+    pv = pd.read_csv(out / "data" / "pvlib_cec_operating_surface.csv", float_precision="round_trip")
+    cstr = pd.read_csv(out / "data" / "cantera_cstr_hot_branch_surface.csv", float_precision="round_trip")
+    egrid, mgrid, kval = pivot_grid(kepler, "M_rad", "e", "E_rad")
+    irradiance, cell_temp, pmp = pivot_grid(
+        pv, "cell_temperature_C", "effective_irradiance_W_m2", "p_mp"
+    )
+    tau, inlet_temp, rtemp = pivot_grid(
+        cstr, "inlet_temperature_K", "residence_time_s", "steady_temperature_K"
+    )
+    _, _, qdot = pivot_grid(
+        cstr, "inlet_temperature_K", "residence_time_s", "heat_release_rate_W_m3"
+    )
+
+    def mechanism_arrow(ax, start, end, text_value: str, color: str, text_pos,
+                        rad: float = 0.0, align: str = "center") -> None:
+        patch = FancyArrowPatch(
+            start, end, transform=ax.transAxes, arrowstyle="-|>", mutation_scale=13,
+            connectionstyle=f"arc3,rad={rad}", color=color, linewidth=1.9,
+            zorder=12, clip_on=True,
+        )
+        patch.set_path_effects([
+            pe.Stroke(linewidth=4.3, foreground="white", alpha=0.94), pe.Normal()
+        ])
+        ax.add_patch(patch)
+        label = ax.text(
+            text_pos[0], text_pos[1], text_value, transform=ax.transAxes,
+            color=color, fontsize=9.0, fontweight="bold", ha=align, va="center",
+            linespacing=1.04, zorder=13,
+        )
+        label.set_path_effects([
+            pe.Stroke(linewidth=3.4, foreground="white", alpha=0.98), pe.Normal()
+        ])
+
+    def field_title(ax, letter: str, title: str, count_text: str | None = None) -> None:
+        ax.text(0.015, 0.965, letter, transform=ax.transAxes, ha="left", va="top",
+                fontsize=11.5, fontweight="bold", color="white", zorder=15,
+                bbox={"boxstyle": "round,pad=0.18", "fc": "#111827", "ec": "white",
+                      "lw": 0.6, "alpha": 0.94})
+        ax.text(0.070, 0.965, title, transform=ax.transAxes, ha="left", va="top",
+                fontsize=10.3, fontweight="bold", color="white", zorder=15,
+                bbox={"boxstyle": "round,pad=0.20", "fc": "#111827", "ec": "none",
+                      "alpha": 0.82})
+        if count_text:
+            ax.text(0.985, 0.045, count_text, transform=ax.transAxes, ha="right",
+                    va="bottom", fontsize=8.0, color="white", zorder=15,
+                    bbox={"boxstyle": "round,pad=0.20", "fc": "#111827",
+                          "ec": "white", "lw": 0.45, "alpha": 0.82})
+
+    def curve_title(ax, letter: str, title: str) -> None:
+        ax.set_facecolor("#edf2f7")
+        ax.text(0.02, 0.97, letter, transform=ax.transAxes, ha="left", va="top",
+                fontsize=11.5, fontweight="bold")
+        ax.text(0.15, 0.97, title, transform=ax.transAxes, ha="left", va="top",
+                fontsize=9.4, fontweight="bold")
+
+    def contour_halo(contour_set, labels) -> None:
+        contour_set.set_path_effects([
+            pe.Stroke(linewidth=1.85, foreground="#17202a", alpha=0.78), pe.Normal()
+        ])
+        for label in labels:
+            label.set_path_effects([
+                pe.Stroke(linewidth=2.7, foreground="#17202a", alpha=0.92), pe.Normal()
+            ])
+
+    # Figure 9a: Kepler, at final two-column width.
+    fig = plt.figure(figsize=(7.2, 3.55), facecolor="white")
+    gs = fig.add_gridspec(1, 2, left=0.085, right=0.985, bottom=0.17, top=0.965,
+                          width_ratios=[2.55, 1.0], wspace=0.23)
+    ax0, ax1 = fig.add_subplot(gs[0]), fig.add_subplot(gs[1])
+    im = ax0.pcolormesh(mgrid, egrid, kval.T, shading="auto", cmap="viridis",
+                        rasterized=True)
+    cs = ax0.contour(mgrid, egrid, kval.T, levels=[0.5, 1.0, 1.5, 2.0, 2.5, 3.0],
+                     colors="white", linewidths=0.65)
+    labs = ax0.clabel(cs, inline=True, fontsize=7.1, fmt=lambda x: f"E={x:g}")
+    contour_halo(cs, labs)
+    mm, ee = np.meshgrid(mgrid[::8], egrid[::4])
+    ax0.scatter(mm, ee, s=4.5, facecolors="none", edgecolors="white",
+                linewidths=0.28, alpha=0.48, rasterized=True)
+    slices = [(0.60, "#22b8cf", "S1"), (0.90, "#ffc107", "S2"),
+              (0.99, "#ff5a5f", "S3")]
+    for es, color, tag in slices:
+        ax0.axhline(es, color=color, ls="--", lw=1.25)
+        j = int(np.argmin(np.abs(egrid - es)))
+        ax1.plot(mgrid, kval[:, j], color=color, lw=2.0, label=f"{tag}: e={es:g}")
+    mechanism_arrow(ax0, (0.32, 0.22), (0.80, 0.22),
+                    "phase advance\n" r"$M\uparrow\;\Rightarrow\;E\uparrow$",
+                    "#145f82", (0.57, 0.31), rad=-0.08)
+    mechanism_arrow(ax0, (0.22, 0.38), (0.22, 0.72),
+                    r"eccentricity $\uparrow$" "\nnonlinear shift grows",
+                    "#7b2b83", (0.26, 0.55), align="left")
+    mechanism_arrow(ax0, (0.55, 0.76), (0.035, 0.92),
+                    "near-parabolic hard corner\n" r"$|\partial E/\partial M|\gg1$",
+                    "#b4232f", (0.58, 0.82), rad=0.16, align="left")
+    bulk = ax0.text(0.64, 0.08, "well-conditioned bulk", transform=ax0.transAxes,
+                    fontsize=8.8, fontweight="bold", color="#173a5e", ha="center")
+    bulk.set_path_effects([pe.Stroke(linewidth=3.0, foreground="white"), pe.Normal()])
+    field_title(ax0, "a", "Kepler anomaly solve field",
+                f"72 × 180 = {len(kepler):,} roots")
+    inset_colorbar(fig, ax0, im, r"eccentric anomaly $E$ [rad]", width="34%")
+    ax0.set_xlabel(r"mean anomaly $M$ [rad]", fontsize=9.5)
+    ax0.set_ylabel(r"eccentricity $e$", fontsize=9.5)
+    ax0.tick_params(labelsize=8.2)
+    style_axis(ax0, False)
+    curve_title(ax1, "b", "matched solution cuts")
+    ax1.set_xlabel(r"mean anomaly $M$ [rad]", fontsize=9.0)
+    ax1.set_ylabel(r"solved $E$ [rad]", fontsize=9.0)
+    ax1.tick_params(labelsize=8.0)
+    ax1.set_xlim(mgrid.min(), mgrid.max())
+    ax1.set_ylim(0, math.pi * 1.02)
+    ax1.legend(loc="lower right", frameon=True, fontsize=7.7,
+               facecolor="white", edgecolor="#aeb8c2", framealpha=0.9)
+    style_axis(ax1)
+    meta["kepler_mechanism_detail"] = save_figure(
+        fig, out, "fig9a_kepler_mechanism_field_2d", {"field": ax0, "cuts": ax1}
+    )
+
+    # Figure 9b: PV power mechanisms, at final two-column width.
+    fig = plt.figure(figsize=(7.2, 3.55), facecolor="white")
+    gs = fig.add_gridspec(1, 2, left=0.09, right=0.985, bottom=0.17, top=0.965,
+                          width_ratios=[2.55, 1.0], wspace=0.24)
+    ax0, ax1 = fig.add_subplot(gs[0]), fig.add_subplot(gs[1])
+    im = ax0.pcolormesh(cell_temp, irradiance, pmp.T, shading="auto", cmap="inferno",
+                        rasterized=True)
+    cs = ax0.contour(cell_temp, irradiance, pmp.T, levels=[50, 100, 150, 200, 250],
+                     colors="white", linewidths=0.65)
+    labs = ax0.clabel(cs, inline=True, fontsize=7.1, fmt="%g W")
+    contour_halo(cs, labs)
+    pt, pg = np.meshgrid(cell_temp, irradiance)
+    ax0.scatter(pt, pg, s=6, facecolors="none", edgecolors="white",
+                linewidths=0.3, alpha=0.62, rasterized=True)
+    pslices = [(200, "#29a7ff", "P1"), (600, "#3dcc73", "P2"),
+               (1000, "#ffd43b", "P3")]
+    for gsval, color, tag in pslices:
+        ax0.axhline(gsval, color=color, ls="--", lw=1.25)
+        j = int(np.argmin(np.abs(irradiance - gsval)))
+        ax1.plot(cell_temp, pmp[:, j], color=color, lw=2.0,
+                 label=f"{tag}: {gsval} W m$^{{-2}}$")
+    ax0.plot(25, 1000, marker="*", ms=11, mfc="#00e5ff", mec="#14213d",
+             mew=0.75, zorder=15)
+    stc = ax0.text(0.49, 0.80, "STC reference\n" r"25$^\circ$C, 1000 W m$^{-2}$",
+                   transform=ax0.transAxes, fontsize=8.4, fontweight="bold",
+                   color="#083d56", ha="left", va="center", zorder=14)
+    stc.set_path_effects([pe.Stroke(linewidth=3.1, foreground="white"), pe.Normal()])
+    mechanism_arrow(ax0, (0.14, 0.18), (0.14, 0.72),
+                    r"irradiance $\uparrow$" "\n" r"$I_{ph}$ and $P_{mp}\uparrow$",
+                    "#16854b", (0.18, 0.46), align="left")
+    mechanism_arrow(ax0, (0.53, 0.70), (0.86, 0.70),
+                    r"cell heating $\rightarrow$" "\n" r"thermal derating, $P_{mp}\downarrow$",
+                    "#b4232f", (0.70, 0.59), rad=-0.10)
+    low = ax0.text(0.37, 0.09, "low-light region", transform=ax0.transAxes,
+                   fontsize=8.7, fontweight="bold", color="#58d3ff", ha="center")
+    low.set_path_effects([pe.Stroke(linewidth=3.0, foreground="#111827"), pe.Normal()])
+    high = ax0.text(0.78, 0.88, "high-output region", transform=ax0.transAxes,
+                    fontsize=8.7, fontweight="bold", color="#8b1e1e", ha="center")
+    high.set_path_effects([pe.Stroke(linewidth=3.0, foreground="white"), pe.Normal()])
+    field_title(ax0, "a", "PV maximum-power solve field",
+                f"21 × 17 = {len(pv):,} roots")
+    inset_colorbar(fig, ax0, im, r"maximum power $P_{mp}$ [W]", width="34%")
+    ax0.set_xlabel(r"cell temperature [$^\circ$C]", fontsize=9.5)
+    ax0.set_ylabel(r"effective irradiance [W m$^{-2}$]", fontsize=9.5)
+    ax0.tick_params(labelsize=8.2)
+    style_axis(ax0, False)
+    curve_title(ax1, "b", "matched power cuts")
+    ax1.set_xlabel(r"cell temperature [$^\circ$C]", fontsize=9.0)
+    ax1.set_ylabel(r"maximum power $P_{mp}$ [W]", fontsize=9.0)
+    ax1.tick_params(labelsize=8.0)
+    ax1.set_xlim(cell_temp.min(), cell_temp.max())
+    ax1.set_ylim(0, np.nanmax(pmp) * 1.05)
+    ax1.legend(loc="lower right", frameon=True, fontsize=7.3,
+               facecolor="white", edgecolor="#aeb8c2", framealpha=0.9)
+    style_axis(ax1)
+    meta["pv_mechanism_detail"] = save_figure(
+        fig, out, "fig9b_pv_power_mechanisms_2d", {"field": ax0, "cuts": ax1}
+    )
+
+    # Figure 9c: CSTR needs two full rows so temperature and heat release stay legible.
+    fig = plt.figure(figsize=(7.2, 6.25), facecolor="white")
+    outer = fig.add_gridspec(2, 2, left=0.09, right=0.985, bottom=0.09, top=0.98,
+                             width_ratios=[2.55, 1.0], hspace=0.30, wspace=0.24)
+    axt, axtc = fig.add_subplot(outer[0, 0]), fig.add_subplot(outer[0, 1])
+    axq, axqc = fig.add_subplot(outer[1, 0]), fig.add_subplot(outer[1, 1])
+    tim = axt.pcolormesh(tau, inlet_temp, rtemp, shading="auto", cmap="inferno",
+                         rasterized=True)
+    ext = axt.contour(tau, inlet_temp, rtemp, levels=[1000], colors="cyan", linewidths=1.25)
+    ext.set_path_effects([pe.Stroke(linewidth=3.0, foreground="#102a43"), pe.Normal()])
+    hotcs = axt.contour(tau, inlet_temp, rtemp, levels=[1400, 1700], colors="white",
+                        linewidths=0.65)
+    hotlabs = axt.clabel(hotcs, inline=True, fontsize=7.0, fmt=lambda x: f"{int(x)} K")
+    contour_halo(hotcs, hotlabs)
+    qt = np.maximum(qdot, 1e2)
+    qim = axq.pcolormesh(tau, inlet_temp, qt, shading="auto", cmap="magma",
+                         norm=LogNorm(vmin=1e2, vmax=max(1e6, np.nanmax(qt))),
+                         rasterized=True)
+    qext = axq.contour(tau, inlet_temp, rtemp, levels=[1000], colors="cyan", linewidths=1.25)
+    qext.set_path_effects([pe.Stroke(linewidth=3.0, foreground="#102a43"), pe.Normal()])
+    qlevels = [v for v in (1e4, 1e6, 1e8) if np.nanmin(qt) < v < np.nanmax(qt)]
+    qcs = axq.contour(tau, inlet_temp, qt, levels=qlevels, colors="white", linewidths=0.6)
+    qlabs = axq.clabel(qcs, inline=True, fontsize=7.0,
+                       fmt=lambda x: rf"$10^{{{int(np.log10(x))}}}$")
+    contour_halo(qcs, qlabs)
+    nt, ni = np.meshgrid(tau[::3], inlet_temp)
+    cslices = [(400, "#29a7ff", "C1"), (600, "#3dcc73", "C2"),
+               (800, "#ff5a5f", "C3")]
+    for field_ax in (axt, axq):
+        field_ax.scatter(nt, ni, s=4.6, facecolors="none", edgecolors="white",
+                         linewidths=0.28, alpha=0.52, rasterized=True)
+        for tin_value, color, _ in cslices:
+            field_ax.axhline(tin_value, color=color, ls="--", lw=1.2)
+        field_ax.set_xscale("log")
+        field_ax.set_xlabel(r"residence time $\tau$ [s]", fontsize=9.3)
+        field_ax.set_ylabel("inlet temperature [K]", fontsize=9.3)
+        field_ax.tick_params(labelsize=8.1)
+        style_axis(field_ax, False)
+    for tin_value, color, tag in cslices:
+        j = int(np.argmin(np.abs(inlet_temp - tin_value)))
+        axtc.plot(tau, rtemp[j, :], color=color, lw=2.0,
+                  label=f"{tag}: {tin_value} K")
+        axqc.plot(tau, qt[j, :], color=color, lw=2.0,
+                  label=f"{tag}: {tin_value} K")
+    mechanism_arrow(axt, (0.18, 0.22), (0.72, 0.22),
+                    r"residence time $\uparrow$" "\nignition / hot branch",
+                    "#1479b8", (0.47, 0.32), rad=-0.08)
+    mechanism_arrow(axt, (0.27, 0.46), (0.27, 0.76),
+                    r"inlet preheat $\uparrow$" "\nextinction shifts left",
+                    "#16854b", (0.31, 0.62), align="left")
+    cold = axt.text(0.16, 0.10, "cold / extinguished", transform=axt.transAxes,
+                    fontsize=8.7, fontweight="bold", color="#73d7ff", ha="center")
+    cold.set_path_effects([pe.Stroke(linewidth=3.0, foreground="#111827"), pe.Normal()])
+    hot = axt.text(0.68, 0.75, "reacting plateau", transform=axt.transAxes,
+                   fontsize=8.7, fontweight="bold", color="#8b1e1e", ha="center")
+    hot.set_path_effects([pe.Stroke(linewidth=3.0, foreground="white"), pe.Normal()])
+    mechanism_arrow(axq, (0.19, 0.22), (0.75, 0.28),
+                    "after ignition\n" r"heat release $\dot q\uparrow$",
+                    "#b4232f", (0.50, 0.38), rad=-0.10)
+    mechanism_arrow(axq, (0.52, 0.69), (0.19, 0.52),
+                    "same extinction\nboundary", "#007f91", (0.57, 0.72),
+                    rad=0.10)
+    negligible = axq.text(0.17, 0.10, "negligible heat release", transform=axq.transAxes,
+                          fontsize=8.6, fontweight="bold", color="#73d7ff", ha="center")
+    negligible.set_path_effects([
+        pe.Stroke(linewidth=3.0, foreground="#111827"), pe.Normal()
+    ])
+    field_title(axt, "a", "CSTR steady-temperature field",
+                f"21 × 72 = {len(cstr):,} roots")
+    field_title(axq, "c", "CSTR heat-release field", "cyan: 1000 K boundary")
+    inset_colorbar(fig, axt, tim, "reactor temperature [K]", width="36%")
+    inset_colorbar(fig, axq, qim, r"heat release [W m$^{-3}$]", width="36%")
+    curve_title(axtc, "b", "temperature cuts")
+    axtc.set_xscale("log")
+    axtc.set_xlabel(r"residence time $\tau$ [s]", fontsize=9.0)
+    axtc.set_ylabel("reactor temperature [K]", fontsize=9.0)
+    axtc.tick_params(labelsize=8.0)
+    axtc.legend(loc="lower right", frameon=True, fontsize=7.5,
+                facecolor="white", edgecolor="#aeb8c2", framealpha=0.9)
+    style_axis(axtc)
+    curve_title(axqc, "d", "heat-release cuts")
+    axqc.set_xscale("log")
+    axqc.set_yscale("log")
+    axqc.set_xlabel(r"residence time $\tau$ [s]", fontsize=9.0)
+    axqc.set_ylabel(r"heat release [W m$^{-3}$]", fontsize=9.0)
+    axqc.tick_params(labelsize=8.0)
+    axqc.legend(loc="lower right", frameon=True, fontsize=7.5,
+                facecolor="white", edgecolor="#aeb8c2", framealpha=0.9)
+    style_axis(axqc)
+    meta["cstr_mechanism_detail"] = save_figure(
+        fig, out, "fig9c_cstr_extinction_mechanisms_2d",
+        {"temperature_field": axt, "temperature_cuts": axtc,
+         "heat_field": axq, "heat_cuts": axqc},
+    )
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", type=Path, default=OUT_DEFAULT)
@@ -1021,6 +1295,7 @@ def main() -> None:
     render_pr(out, meta)
     render_geometry_plate(out, meta)
     render_dense_field_plate(out, meta)
+    render_split_knowledge_figures(out, meta)
     manifest = out / "render_manifest.json"
     manifest.write_text(json.dumps(meta, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print(json.dumps({k: v for k, v in meta.items() if k not in ("description", "input_manifests")}, indent=2))

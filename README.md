@@ -22,6 +22,14 @@ For a space-efficient manuscript layout, Figure 9 combines the Kepler, PV and CS
 
 ![Dense gradient-field comparison with matched response cuts](paper_figures/domain_frameworks_v1/fig9_dense_gradient_field_comparison_2d.png)
 
+The large-type manuscript versions split the overview by physical domain:
+
+![Kepler mechanism field and matched cuts](paper_figures/domain_frameworks_v1/fig9a_kepler_mechanism_field_2d.png)
+
+![PV power mechanisms and matched cuts](paper_figures/domain_frameworks_v1/fig9b_pv_power_mechanisms_2d.png)
+
+![CSTR extinction and heat-release mechanisms](paper_figures/domain_frameworks_v1/fig9c_cstr_extinction_mechanisms_2d.png)
+
 ![Orekit Kepler orbit and batch condition plane](paper_figures/domain_frameworks_v1/fig4_kepler_orekit_batch_2d.png)
 
 ![pvlib CEC module operating-condition batch](paper_figures/domain_frameworks_v1/fig5_pvlib_module_batch_2d.png)

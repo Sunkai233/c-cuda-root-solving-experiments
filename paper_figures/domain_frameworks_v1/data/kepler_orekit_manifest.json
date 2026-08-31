@@ -1,0 +1,23 @@
+{
+  "framework": "Orekit KeplerianAnomalyUtility.ellipticMeanToEccentric",
+  "orekit_jpype_version": "13.1.5.0",
+  "equation": "E - e*sin(E) - M = 0, 0 <= e < 1, 0 <= M <= pi",
+  "grid": {
+    "file": "kepler_orekit_grid.csv",
+    "rows": 12960,
+    "n_e": 72,
+    "n_M": 180,
+    "max_residual": 1.1449174941446927e-15,
+    "max_condition": 1000000028.2819322,
+    "sha256": "f2bd7e94befe4c144233dbe978279ba215146fb80e857393009b29728378f720"
+  },
+  "reference_check": {
+    "file": "kepler_orekit_reference_check.csv",
+    "rows": 3000,
+    "max_absolute_error_vs_mpmath": 2.6691322763117142e-14,
+    "max_residual": 9.853229343548264e-16,
+    "source": "references/ref_v3_20260824/kepler.csv",
+    "source_sha256": "fbd9bd5244474f2535c1b525a0491063d1f2ba93b71e4dbfc8ddef2c44f08230",
+    "sha256": "5b65f6fdd255b2402dfac7ea54fb6df9f25004a11690cce6e2f9544e8aaf782e"
+  }
+}

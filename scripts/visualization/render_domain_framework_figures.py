@@ -1,0 +1,420 @@
+#!/usr/bin/env python3
+"""Render four data-driven 2-D application figures for the non-BEM domains."""
+
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+import math
+from pathlib import Path
+
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+from matplotlib.colors import BoundaryNorm, LogNorm
+from matplotlib.patches import Circle
+
+
+ROOT = Path(__file__).resolve().parents[2]
+OUT_DEFAULT = ROOT / "paper_figures" / "domain_frameworks_v1"
+
+
+COLORS = {
+    "blue": "#2166ac",
+    "cyan": "#2a9d8f",
+    "orange": "#d97706",
+    "red": "#b2182b",
+    "purple": "#6a51a3",
+    "gray": "#5b6573",
+    "light": "#edf2f7",
+}
+
+
+def sha256(path: Path) -> str:
+    h = hashlib.sha256()
+    with path.open("rb") as f:
+        for block in iter(lambda: f.read(1 << 20), b""):
+            h.update(block)
+    return h.hexdigest()
+
+
+def set_paper_style() -> None:
+    mpl.rcParams.update(
+        {
+            "font.family": "serif",
+            "font.serif": ["Times New Roman", "DejaVu Serif"],
+            "mathtext.fontset": "stix",
+            "axes.linewidth": 0.8,
+            "axes.labelsize": 9,
+            "axes.titlesize": 10,
+            "xtick.labelsize": 7.5,
+            "ytick.labelsize": 7.5,
+            "legend.fontsize": 7.2,
+            "savefig.dpi": 400,
+            "pdf.fonttype": 42,
+            "ps.fonttype": 42,
+            "axes.spines.top": False,
+            "axes.spines.right": False,
+        }
+    )
+
+
+def panel(ax, label: str, title: str) -> None:
+    ax.text(-0.11, 1.06, label, transform=ax.transAxes, fontsize=11, fontweight="bold",
+            va="bottom", ha="left", clip_on=False)
+    ax.set_title(title, loc="left", pad=8)
+
+
+def style_axis(ax, grid: bool = True) -> None:
+    if grid:
+        ax.grid(True, color="#d7dde5", lw=0.45, alpha=0.75)
+    ax.tick_params(direction="out", length=3, width=0.7)
+
+
+def audit_layout(fig, named_axes: dict[str, object]) -> dict:
+    fig.canvas.draw()
+    renderer = fig.canvas.get_renderer()
+    boxes = {}
+    outside = []
+    for name, artist in named_axes.items():
+        bb = artist.get_tightbbox(renderer).transformed(fig.transFigure.inverted())
+        boxes[name] = [float(bb.x0), float(bb.y0), float(bb.x1), float(bb.y1)]
+        if bb.x0 < -0.01 or bb.y0 < -0.01 or bb.x1 > 1.01 or bb.y1 > 1.01:
+            outside.append(name)
+    overlaps = []
+    names = list(boxes)
+    for i, a in enumerate(names):
+        for b in names[i + 1:]:
+            aa, bb = boxes[a], boxes[b]
+            w = max(0.0, min(aa[2], bb[2]) - max(aa[0], bb[0]))
+            h = max(0.0, min(aa[3], bb[3]) - max(aa[1], bb[1]))
+            if w * h > 1e-5:
+                overlaps.append({"elements": [a, b], "normalized_area": float(w * h)})
+    return {"tight_bboxes_xyxy": boxes, "pairwise_overlaps": overlaps, "outside_figure": outside}
+
+
+def save_figure(fig, out: Path, stem: str, axes: dict[str, object]) -> dict:
+    paths = []
+    for ext in ("png", "pdf", "svg"):
+        path = out / f"{stem}.{ext}"
+        fig.savefig(path, bbox_inches="tight", facecolor="white")
+        paths.append(path)
+    audit = audit_layout(fig, axes)
+    plt.close(fig)
+    return {
+        "files": [{"name": p.name, "sha256": sha256(p), "bytes": p.stat().st_size} for p in paths],
+        "layout_audit": audit,
+    }
+
+
+def pivot_grid(df: pd.DataFrame, row: str, col: str, value: str):
+    p = df.pivot(index=row, columns=col, values=value).sort_index().sort_index(axis=1)
+    return p.columns.to_numpy(float), p.index.to_numpy(float), p.to_numpy(float)
+
+
+def render_kepler(out: Path, meta: dict) -> None:
+    data = pd.read_csv(out / "data" / "kepler_orekit_grid.csv", float_precision="round_trip")
+    check = pd.read_csv(out / "data" / "kepler_orekit_reference_check.csv", float_precision="round_trip")
+    egrid, mgrid, E = pivot_grid(data, "M_rad", "e", "E_rad")
+    _, _, condition = pivot_grid(data, "M_rad", "e", "condition_dE_dM")
+
+    fig, axs = plt.subplots(2, 2, figsize=(14.8, 8.5), layout="constrained")
+    ax0, ax1, ax2, ax3 = axs.ravel()
+
+    panel(ax0, "a", "Orekit-propagated elliptic orbit family")
+    cmap = mpl.colormaps["viridis"]
+    for j, e in enumerate((0.0, 0.6, 0.9, 0.99)):
+        sub = data.iloc[(data["e"] - e).abs().argsort()[:180]].sort_values("M_rad")
+        # The benchmark exploits Kepler symmetry and stores M in [0, pi].
+        # Reflecting the same solved samples draws the complete physical orbit.
+        ax0.plot(sub.x_over_a, sub.y_over_a, lw=1.6, color=cmap(j / 3), label=fr"$e={e:g}$")
+        ax0.plot(sub.x_over_a, -sub.y_over_a, lw=1.6, color=cmap(j / 3))
+        ids = np.linspace(0, len(sub) - 1, 13).astype(int)
+        ax0.scatter(sub.x_over_a.iloc[ids], sub.y_over_a.iloc[ids], s=12, color=cmap(j / 3),
+                    edgecolor="white", linewidth=0.3, zorder=3)
+        ax0.plot(-e, 0, marker="+", ms=7, mew=1.2, color=cmap(j / 3))
+    earth = Circle((0, 0), 0.055, color="#3b82c4", ec="#153b5b", lw=0.6, zorder=5)
+    ax0.add_patch(earth)
+    ax0.annotate("focus", (0, 0), (0.12, -0.18), arrowprops={"arrowstyle": "->", "lw": 0.7}, fontsize=7.5)
+    ax0.set_aspect("equal", adjustable="box")
+    ax0.set_xlabel(r"$x/a=\cos E-e$")
+    ax0.set_ylabel(r"$y/a=\sqrt{1-e^2}\sin E$")
+    ax0.set_xlim(-2.08, 1.1)
+    ax0.set_ylim(-1.12, 1.12)
+    ax0.legend(loc="upper left", frameon=False, ncol=2)
+    style_axis(ax0)
+
+    panel(ax1, "b", "Eccentric anomaly over the batched input plane")
+    im1 = ax1.pcolormesh(mgrid, egrid, E.T, shading="auto", cmap="viridis", rasterized=True)
+    c1 = fig.colorbar(im1, ax=ax1, pad=0.02, aspect=28)
+    c1.set_label(r"$E$ [rad]")
+    ax1.set_xlabel(r"mean anomaly $M$ [rad]")
+    ax1.set_ylabel(r"eccentricity $e$")
+    ax1.set_ylim(0, 1.0)
+    style_axis(ax1, False)
+
+    panel(ax2, "c", "Sensitivity resolved across the near-parabolic corner")
+    positive_m = mgrid > 0
+    im2 = ax2.pcolormesh(mgrid[positive_m], egrid, np.log10(condition.T[:, positive_m]), shading="auto", cmap="magma",
+                         vmin=0, vmax=9, rasterized=True)
+    c2 = fig.colorbar(im2, ax=ax2, pad=0.02, aspect=28)
+    c2.set_label(r"$\log_{10}|\partial E/\partial M|$")
+    ax2.set_xlabel(r"mean anomaly $M$ [rad]")
+    ax2.set_ylabel(r"eccentricity $e$")
+    ax2.set_ylim(0.90, 1.0001)
+    ax2.set_xscale("log")
+    ax2.set_xlim(1e-10, 1e-1)
+    ax2.set_yscale("function", functions=(lambda y: -np.log10(np.clip(1-y, 1e-10, None)),
+                                           lambda y: 1-10**(-y)))
+    ax2.set_yticks([0.9, 0.99, 0.9999, 0.999999, 0.99999999])
+    ax2.set_yticklabels(["0.9", "0.99", "0.9999", "0.999999", "0.99999999"])
+    style_axis(ax2, False)
+
+    panel(ax3, "d", "Production-library agreement across all 3,000 frozen cases")
+    branch_order = ["ordinary", "high_e", "difficult"]
+    labels = ["ordinary", "high eccentricity", "difficult corner"]
+    for k, (branch, label) in enumerate(zip(branch_order, labels)):
+        v = check.loc[check.branch == branch, "absolute_error"].to_numpy()
+        v = np.maximum(v, 1e-18)
+        ax3.scatter(np.full_like(v, k) + np.linspace(-0.18, 0.18, len(v)), v, s=4.5, alpha=0.32,
+                    color=[COLORS["blue"], COLORS["cyan"], COLORS["red"]][k], rasterized=True)
+        ax3.boxplot(v, positions=[k], widths=0.34, showfliers=False, patch_artist=True,
+                    boxprops={"facecolor": "white", "edgecolor": COLORS["gray"], "linewidth": 0.9},
+                    medianprops={"color": "black", "linewidth": 1.1},
+                    whiskerprops={"color": COLORS["gray"]}, capprops={"color": COLORS["gray"]})
+    ax3.set_yscale("log")
+    ax3.set_xticks(range(3), labels)
+    ax3.set_ylabel("|Orekit E - 80-digit reference| [rad]")
+    ax3.axhline(np.finfo(float).eps, color=COLORS["orange"], ls="--", lw=0.9, label="binary64 epsilon")
+    ax3.legend(frameon=False, loc="upper left")
+    style_axis(ax3)
+    meta["kepler"] = save_figure(fig, out, "fig4_kepler_orekit_batch_2d",
+                                  {"orbit": ax0, "root_surface": ax1, "condition": ax2, "agreement": ax3})
+
+
+def render_pv(out: Path, meta: dict) -> None:
+    surface = pd.read_csv(out / "data" / "pvlib_cec_operating_surface.csv")
+    curves = pd.read_csv(out / "data" / "pvlib_cec_iv_curves.csv")
+    frozen = pd.read_csv(ROOT / "references" / "pv_extended_ref_v1_20260824" / "pv_extended.csv",
+                         float_precision="round_trip")
+    check = pd.read_csv(out / "data" / "pvlib_benchmark_reference_check.csv", float_precision="round_trip")
+    G, T, pmp = pivot_grid(surface, "cell_temperature_C", "effective_irradiance_W_m2", "p_mp")
+
+    fig, axs = plt.subplots(2, 2, figsize=(14.8, 8.5), layout="constrained")
+    ax0, ax1, ax2, ax3 = axs.ravel()
+    panel(ax0, "a", "CEC module I-V and P-V curves from pvlib")
+    for (g, t), grp in curves.groupby(["effective_irradiance_W_m2", "cell_temperature_C"]):
+        color = mpl.colormaps["plasma"]((g - 200) / 800)
+        ls = "-" if t == 10 else "--"
+        label = fr"{g:.0f} W m$^{{-2}}$, {t:.0f}$^\circ$C"
+        ax0.plot(grp.V, grp.I, color=color, ls=ls, lw=1.35, label=label)
+    ax0.set_xlabel("module voltage [V]")
+    ax0.set_ylabel("module current [A]")
+    ax0.legend(frameon=False, ncol=2, loc="lower left")
+    style_axis(ax0)
+    power_ax = ax0.twinx()
+    ref = curves[(curves.effective_irradiance_W_m2 == 1000) & (curves.cell_temperature_C == 10)]
+    power_ax.plot(ref.V, ref.P, color=COLORS["red"], lw=1.0, alpha=0.9)
+    power_ax.set_ylabel("power at 1000 W m$^{-2}$ [W]", color=COLORS["red"])
+    power_ax.tick_params(axis="y", colors=COLORS["red"])
+    power_ax.spines["right"].set_visible(True)
+
+    panel(ax1, "b", "Maximum-power surface: 357 independent operating points")
+    im = ax1.pcolormesh(T, G, pmp.T, shading="auto", cmap="inferno", rasterized=True)
+    cs = ax1.contour(T, G, pmp.T, levels=[50, 100, 150, 200, 250], colors="white", linewidths=0.55)
+    ax1.clabel(cs, inline=True, fontsize=6.5, fmt="%g W")
+    cb = fig.colorbar(im, ax=ax1, pad=0.02, aspect=28)
+    cb.set_label(r"$P_{mp}$ [W]")
+    ax1.set_xlabel(r"cell temperature [$^\circ$C]")
+    ax1.set_ylabel("effective irradiance [W m$^{-2}$]")
+    style_axis(ax1, False)
+
+    panel(ax2, "c", "Frozen benchmark coverage in normalized electrical coordinates")
+    region_colors = {"short_circuit": COLORS["blue"], "open_circuit": COLORS["red"],
+                     "mpp_near": COLORS["orange"], "interior": COLORS["cyan"]}
+    for region, grp in frozen.groupby("region"):
+        ax2.scatter(grp.V / grp.Voc, grp.I / grp.IL, s=7, alpha=0.48, color=region_colors[region],
+                    label=region.replace("_", " "), rasterized=True)
+    ax2.set_xlabel(r"normalized voltage $V/V_{oc}$")
+    ax2.set_ylabel(r"normalized current $I/I_L$")
+    ax2.set_xlim(-0.02, 1.02)
+    ax2.set_ylim(-0.03, 1.03)
+    ax2.legend(frameon=False, ncol=2, loc="lower left")
+    style_axis(ax2)
+
+    panel(ax3, "d", "Independent pvlib Brent check against the 70-digit oracle")
+    values = [np.maximum(check.loc[check.region == r, "absolute_error"], 1e-16) for r in region_colors]
+    vp = ax3.violinplot(values, positions=np.arange(4), showmeans=False, showextrema=False, widths=0.72)
+    for body, color in zip(vp["bodies"], region_colors.values()):
+        body.set_facecolor(color)
+        body.set_edgecolor("none")
+        body.set_alpha(0.65)
+    for i, vals in enumerate(values):
+        ax3.scatter(i, np.median(vals), marker="D", s=24, color="black", zorder=3)
+    ax3.set_yscale("log")
+    ax3.set_xticks(range(4), [r.replace("_", "\n") for r in region_colors])
+    ax3.set_ylabel("|pvlib current - 70-digit current| [A]")
+    ax3.text(0.02, 0.97, f"max = {check.absolute_error.max():.2e} A",
+             transform=ax3.transAxes, va="top", ha="left", fontsize=7.5)
+    style_axis(ax3)
+    meta["pv"] = save_figure(fig, out, "fig5_pvlib_module_batch_2d",
+                              {"iv": ax0, "power_surface": ax1, "coverage": ax2, "agreement": ax3})
+
+
+def render_cstr(out: Path, meta: dict) -> None:
+    field = pd.read_csv(out / "data" / "cantera_cstr_hot_branch_surface.csv")
+    cont = pd.read_csv(ROOT / "references" / "cstr_fold_ref_v2_20260824" / "cstr_continuation.csv",
+                       float_precision="round_trip")
+    tau, tin, temp = pivot_grid(field, "inlet_temperature_K", "residence_time_s", "steady_temperature_K")
+    _, _, qdot = pivot_grid(field, "inlet_temperature_K", "residence_time_s", "heat_release_rate_W_m3")
+
+    fig, axs = plt.subplots(2, 2, figsize=(14.8, 8.5), layout="constrained")
+    ax0, ax1, ax2, ax3 = axs.ravel()
+    panel(ax0, "a", "Cantera well-stirred combustor: steady temperature field")
+    im0 = ax0.pcolormesh(tau, tin, temp, shading="auto", cmap="inferno", rasterized=True)
+    cb0 = fig.colorbar(im0, ax=ax0, pad=0.02, aspect=28)
+    cb0.set_label("steady reactor temperature [K]")
+    ax0.set_xscale("log")
+    ax0.set_xlabel(r"residence time $\tau$ [s]")
+    ax0.set_ylabel("inlet temperature [K]")
+    style_axis(ax0, False)
+
+    panel(ax1, "b", "Heat-release field reveals the extinction boundary")
+    positive = np.maximum(qdot, 1e-2)
+    im1 = ax1.pcolormesh(tau, tin, positive, shading="auto", cmap="magma",
+                         norm=LogNorm(vmin=1e2, vmax=max(1e6, np.nanmax(positive))), rasterized=True)
+    cb1 = fig.colorbar(im1, ax=ax1, pad=0.02, aspect=28)
+    cb1.set_label("heat release rate [W m$^{-3}$]")
+    ax1.contour(tau, tin, temp, levels=[1000], colors="cyan", linewidths=1.1)
+    ax1.set_xscale("log")
+    ax1.set_xlabel(r"residence time $\tau$ [s]")
+    ax1.set_ylabel("inlet temperature [K]")
+    style_axis(ax1, False)
+
+    panel(ax2, "c", "Hot-branch continuation for selected inlet states")
+    for k, target in enumerate((300, 400, 500, 600, 700, 800)):
+        grp = field[field.inlet_temperature_K == target].sort_values("residence_time_s")
+        ax2.plot(grp.residence_time_s, grp.steady_temperature_K, lw=1.35,
+                 color=mpl.colormaps["viridis"](k / 5), label=f"{target} K")
+    ax2.set_xscale("log")
+    ax2.set_xlabel(r"residence time $\tau$ [s]")
+    ax2.set_ylabel("steady reactor temperature [K]")
+    ax2.legend(frameon=False, ncol=2, loc="upper left")
+    style_axis(ax2)
+
+    panel(ax3, "d", "Exact reduced-model folds require branch history")
+    case = cont[cont.history_id.str.startswith("case0_")].copy()
+    base = case[case.direction == "cold_up"]
+    roots_by_branch = {0: ([], []), 1: ([], []), 2: ([], [])}
+    for _, row in base.iterrows():
+        roots = [float(x) for x in str(row.roots).split(";")]
+        for j, root in enumerate(roots):
+            roots_by_branch[j][0].append(row.Da)
+            roots_by_branch[j][1].append(root)
+    for j, (xs, ys) in roots_by_branch.items():
+        if xs:
+            ax3.plot(xs, ys, ["-", "--", "-"][j], lw=1.5,
+                     color=[COLORS["blue"], COLORS["gray"], COLORS["red"]][j],
+                     label=["low root", "middle root", "high root"][j])
+    for direction, color, marker in (("cold_up", COLORS["blue"], "o"), ("hot_down", COLORS["red"], "s")):
+        grp = case[case.direction == direction].sort_values("Da")
+        ax3.scatter(grp.Da, grp.selected_root, s=9, marker=marker, color=color, alpha=0.65,
+                    label=direction.replace("_", " "), rasterized=True)
+    ax3.set_xscale("log")
+    ax3.set_xlabel(r"Damk\"ohler number $Da$")
+    ax3.set_ylabel("conversion root $x$")
+    ax3.set_ylim(-0.03, 1.03)
+    ax3.legend(frameon=False, ncol=2, loc="center right")
+    style_axis(ax3)
+    meta["cstr"] = save_figure(fig, out, "fig6_cantera_cstr_batch_2d",
+                                {"temperature": ax0, "heat_release": ax1, "continuation": ax2, "folds": ax3})
+
+
+def render_pr(out: Path, meta: dict) -> None:
+    root_map = pd.read_csv(out / "data" / "coolprop_pr_root_map.csv")
+    isotherms = pd.read_csv(out / "data" / "coolprop_pr_isotherms.csv")
+    sat = pd.read_csv(out / "data" / "coolprop_pr_propane_saturation.csv")
+    Pr, Tr, counts = pivot_grid(root_map, "Tr", "Pr", "root_count")
+
+    fig, axs = plt.subplots(2, 2, figsize=(14.8, 8.5), layout="constrained")
+    ax0, ax1, ax2, ax3 = axs.ravel()
+    panel(ax0, "a", "Peng-Robinson propane isotherms")
+    for k, (tr, grp) in enumerate(isotherms.groupby("Tr")):
+        valid = (grp.P_over_Pc > -0.5) & (grp.P_over_Pc < 3.0)
+        ax0.plot(grp.loc[valid, "v_over_b"], grp.loc[valid, "P_over_Pc"], lw=1.35,
+                 color=mpl.colormaps["turbo"](k / 4), label=fr"$T_r={tr:.2f}$")
+    ax0.axhline(0, color="#9aa3ad", lw=0.6)
+    ax0.set_xscale("log")
+    ax0.set_ylim(-0.35, 2.4)
+    ax0.set_xlabel(r"reduced molar volume $v/b$")
+    ax0.set_ylabel(r"reduced pressure $P/P_c$")
+    ax0.legend(frameon=False, ncol=2)
+    style_axis(ax0)
+
+    panel(ax1, "b", "Cubic root-count map: the batched phase-classification plane")
+    cmap = mpl.colors.ListedColormap(["#dbeafe", "#f59e0b"])
+    norm = BoundaryNorm([0.5, 2.0, 3.5], cmap.N)
+    im = ax1.pcolormesh(Pr, Tr, counts, shading="auto", cmap=cmap, norm=norm, rasterized=True)
+    cb = fig.colorbar(im, ax=ax1, pad=0.02, aspect=28, ticks=[1, 3])
+    cb.ax.set_yticklabels(["one real root", "three real roots"])
+    ax1.plot(sat.P_Pa / 4251200.0, sat.T_K / 369.89, color="black", lw=1.2,
+             label="CoolProp PR saturation")
+    ax1.scatter([1], [1], marker="*", s=70, color=COLORS["red"], edgecolor="white", linewidth=0.5)
+    ax1.set_xlabel(r"reduced pressure $P_r$")
+    ax1.set_ylabel(r"reduced temperature $T_r$")
+    ax1.legend(frameon=False, loc="lower right")
+    style_axis(ax1, False)
+
+    panel(ax2, "c", "Liquid, unstable and vapor Z branches at $T_r=0.90$")
+    cut = root_map[np.isclose(root_map.Tr, 0.90)].sort_values("Pr")
+    for z, label, color, ls in (("Z0", "liquid", COLORS["blue"], "-"),
+                                ("Z1", "unstable", COLORS["gray"], "--"),
+                                ("Z2", "vapor", COLORS["red"], "-")):
+        ax2.plot(cut.Pr, cut[z], color=color, ls=ls, lw=1.55, label=label)
+    ax2.set_xlabel(r"reduced pressure $P_r$")
+    ax2.set_ylabel("compressibility root Z")
+    ax2.set_ylim(0, 1.15)
+    ax2.legend(frameon=False)
+    style_axis(ax2)
+
+    panel(ax3, "d", "CoolProp PR saturation dome in density-temperature space")
+    ax3.fill_betweenx(sat.T_K, sat.rho_vap_mol_m3, sat.rho_liq_mol_m3,
+                      color="#dbeafe", alpha=0.75, label="two-phase region")
+    ax3.plot(sat.rho_vap_mol_m3, sat.T_K, color=COLORS["red"], lw=1.5, label="saturated vapor")
+    ax3.plot(sat.rho_liq_mol_m3, sat.T_K, color=COLORS["blue"], lw=1.5, label="saturated liquid")
+    ax3.set_xscale("log")
+    ax3.set_xlabel(r"molar density [mol m$^{-3}$]")
+    ax3.set_ylabel("temperature [K]")
+    ax3.legend(frameon=False, loc="lower center", ncol=2)
+    style_axis(ax3)
+    meta["peng_robinson"] = save_figure(fig, out, "fig7_coolprop_peng_robinson_batch_2d",
+                                         {"isotherms": ax0, "root_map": ax1, "branches": ax2, "dome": ax3})
+
+
+def main() -> None:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--out", type=Path, default=OUT_DEFAULT)
+    args = ap.parse_args()
+    out = args.out.resolve()
+    out.mkdir(parents=True, exist_ok=True)
+    set_paper_style()
+    meta = {
+        "description": "Four framework-backed, data-driven 2-D publication figures",
+        "input_manifests": {
+            "orekit": "data/kepler_orekit_manifest.json",
+            "pv_cantera_coolprop": "data/framework_experiment_manifest.json",
+        },
+    }
+    render_kepler(out, meta)
+    render_pv(out, meta)
+    render_cstr(out, meta)
+    render_pr(out, meta)
+    manifest = out / "render_manifest.json"
+    manifest.write_text(json.dumps(meta, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    print(json.dumps({k: v for k, v in meta.items() if k not in ("description", "input_manifests")}, indent=2))
+
+
+if __name__ == "__main__":
+    main()

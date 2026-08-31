@@ -14,6 +14,18 @@
 
 ![Complete two-dimensional 2,448,000-root OpenFAST batch field](paper_figures/real_simulation_v1/fig3_batch_field_2d.png)
 
+## Four non-BEM application-framework figures
+
+[`paper_figures/domain_frameworks_v1/`](paper_figures/domain_frameworks_v1/) extends the same data-driven two-dimensional treatment to Kepler, photovoltaic, CSTR and Peng-Robinson cases.  The application calculations were actually run with Orekit 13.1.5, pvlib 0.15.2, Cantera 3.2.0 and CoolProp 8.0.0.  Framework outputs, exact benchmark checks, source hashes and zero-overlap layout audits are committed with the figures.  The framework-to-equation mapping and the important CSTR non-identity boundary are documented in [`DOMAIN_FRAMEWORK_RESEARCH_V1.md`](docs/DOMAIN_FRAMEWORK_RESEARCH_V1.md).
+
+![Orekit Kepler orbit and batch condition plane](paper_figures/domain_frameworks_v1/fig4_kepler_orekit_batch_2d.png)
+
+![pvlib CEC module operating-condition batch](paper_figures/domain_frameworks_v1/fig5_pvlib_module_batch_2d.png)
+
+![Cantera well-stirred reactor batch and exact reduced CSTR folds](paper_figures/domain_frameworks_v1/fig6_cantera_cstr_batch_2d.png)
+
+![CoolProp Peng-Robinson phase-state batch](paper_figures/domain_frameworks_v1/fig7_coolprop_peng_robinson_batch_2d.png)
+
 ## 权威结果
 
 - `results_processed/FROZEN_CORRECTNESS_V3.md`：五域冻结高精度正确性；V1/V2 保留为历史/失败候选。

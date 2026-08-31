@@ -13,12 +13,12 @@
       },
       {
         "name": "fig4_kepler_orekit_batch_2d.pdf",
-        "sha256": "610185075eb585d932ae1475ec37a49b7da9f4aedb064a9e2f248dedeacd3ead",
+        "sha256": "c82aa4d49d1ed04f87ade0ff983d0489987d1b925c2bb79a935d23db0fea6146",
         "bytes": 267604
       },
       {
         "name": "fig4_kepler_orekit_batch_2d.svg",
-        "sha256": "ca8dc571f212f18bd06fb80c9aeed6139eb2ad30af91a4b048f9250aaed99cc5",
+        "sha256": "bf3744e7cb66daa20d5e7e87a1022e89d9412a4415233deeb6e276dd73b65f5b",
         "bytes": 515423
       }
     ],
@@ -62,12 +62,12 @@
       },
       {
         "name": "fig5_pvlib_module_batch_2d.pdf",
-        "sha256": "43758299a23d0c59f313327d6db16e3f1e37a106aba11e20ffa2592585025eee",
+        "sha256": "3ea01143136e5ef47a3fc34b71898f566c867358415ac99bfd126d4d6c28d661",
         "bytes": 409148
       },
       {
         "name": "fig5_pvlib_module_batch_2d.svg",
-        "sha256": "65aea4136550a9f5bfb2b8a38ea8b1b887e9cdde0c3a35f7551f508682c03172",
+        "sha256": "f266af147e108f142056978754b1dd9a22de5c3608cb2f13948a20832f8f2040",
         "bytes": 721703
       }
     ],
@@ -111,12 +111,12 @@
       },
       {
         "name": "fig6_cantera_cstr_batch_2d.pdf",
-        "sha256": "1c3b008d98e8c32a8de0dd82977c735d833d828b134d836d64c08e2464880a45",
+        "sha256": "e2638bb000cd0d44349a4d801f9b0e51470e3d1b5cd3b4127eed4ade10959ebb",
         "bytes": 233997
       },
       {
         "name": "fig6_cantera_cstr_batch_2d.svg",
-        "sha256": "e543c60c622a23f15f4512f894603f037a5568034e7d6be82d5261d83cde7403",
+        "sha256": "7f4e5a414e9ba57230a7b85027b701b12b167bd01e14e216f1a136b2ce3b91df",
         "bytes": 469079
       }
     ],
@@ -160,12 +160,12 @@
       },
       {
         "name": "fig7_coolprop_peng_robinson_batch_2d.pdf",
-        "sha256": "3bdd2a508cea8bb2be1746f9a4271a9e00474114a8fc10bfcbf37e8a7b52cb82",
+        "sha256": "1a1f0d80379ba9b37900ce1d0b03fe4950e4fa705a51da39c58baeec16583168",
         "bytes": 67269
       },
       {
         "name": "fig7_coolprop_peng_robinson_batch_2d.svg",
-        "sha256": "0885ade817df5c06bfb2d6118a917d73e26b96e57dff6c5124913ade36991b33",
+        "sha256": "aa46fdda6105614c71cee572481458985e6d4e9caa5ecc221cfd1a92f352bd7c",
         "bytes": 185283
       }
     ],
@@ -204,45 +204,45 @@
     "files": [
       {
         "name": "fig8_multidomain_geometry_structures_2d.png",
-        "sha256": "0199e329c9729b68403233c7556eecb9a81ba6766a09693a4a3d9f86cbcc1396",
-        "bytes": 722741
+        "sha256": "5f58c3c0a4c4c360437cec1777f5f2a787176d471fc4cfaf20b6e30d3c494743",
+        "bytes": 810122
       },
       {
         "name": "fig8_multidomain_geometry_structures_2d.pdf",
-        "sha256": "5ac23e9549c1b0f9d27bedc7bca46a2e7bf7b8cce7a1d62da5fd4e86635619fc",
-        "bytes": 88791
+        "sha256": "d57a20160c4dd02e94a9c699f61e4803081be71d732db9958754d9e503e4e5cd",
+        "bytes": 88808
       },
       {
         "name": "fig8_multidomain_geometry_structures_2d.svg",
-        "sha256": "7ccabcd2e0cd160d052e8ca12b0c086a7ec0fcb89fc3718d46a7ad567a7f2dda",
-        "bytes": 291811
+        "sha256": "7623920dbfada9602cad06294aab9b997181a32099faa9a0d934e7ff1c9f9bb6",
+        "bytes": 291964
       }
     ],
     "layout_audit": {
       "tight_bboxes_xyxy": {
         "kepler_geometry": [
-          0.029601654028556298,
-          0.48294384057971007,
-          0.4285994693035992,
-          0.9954789932602075
+          0.002049180359498377,
+          0.5009315931635224,
+          0.5167533602822577,
+          0.9723960276118
         ],
         "pv_structure": [
-          0.5928938652240802,
-          0.5270561594202897,
-          0.880830432948338,
-          0.9954789932602075
+          0.5386064897009727,
+          0.5213260382714466,
+          0.9525738934822944,
+          0.9975670696037452
         ],
         "cstr_structure": [
-          0.09063531259250134,
-          0.004529347826086957,
-          0.3785718803167589,
-          0.47295218166600467
+          0.05740903031109921,
+          0.002403846153846154,
+          0.4713764340924208,
+          0.47864487748614454
         ],
         "pr_structure": [
-          0.5928938652240802,
-          0.004529347826086957,
-          0.8808304329483378,
-          0.47295218166600467
+          0.5386064897009727,
+          0.002403846153846154,
+          0.9525738934822943,
+          0.47864487748614454
         ]
       },
       "pairwise_overlaps": [],

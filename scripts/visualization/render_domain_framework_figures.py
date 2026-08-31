@@ -126,7 +126,10 @@ def render_geometry_plate(out: Path, meta: dict) -> None:
     cstr = pd.read_csv(out / "data" / "cantera_cstr_hot_branch_surface.csv")
     pr = pd.read_csv(out / "data" / "coolprop_pr_root_map.csv")
 
-    fig, axs = plt.subplots(2, 2, figsize=(15.2, 9.2), layout="constrained")
+    # Near-square panels let the physical objects fill the page instead of
+    # leaving the unused side margins produced by equal-aspect geometry.
+    fig, axs = plt.subplots(2, 2, figsize=(12.2, 10.4), layout="constrained")
+    fig.set_constrained_layout_pads(w_pad=0.025, h_pad=0.025, wspace=0.035, hspace=0.045)
     ax0, ax1, ax2, ax3 = axs.ravel()
 
     # Kepler: actual solved ellipse, perifocal frame and anomaly construction.
@@ -151,17 +154,19 @@ def render_geometry_plate(out: Path, meta: dict) -> None:
     ax0.add_patch(Arc((0, 0), 0.75, 0.75, theta1=0, theta2=np.degrees(np.arctan2(py, px)),
                       color=COLORS["red"], lw=1.0))
     ax0.text(0.24, 0.08, "$E$", color=COLORS["red"], fontsize=9)
-    ax0.annotate("central focus", (0, 0), (0.10, -0.25), fontsize=7.4,
+    ax0.annotate("central focus", (0, 0), (0.10, -0.25), fontsize=9.0,
                  arrowprops={"arrowstyle": "->", "lw": 0.7})
-    ax0.annotate("empty focus", (-e, 0), (-1.08, -0.28), fontsize=7.4,
+    ax0.annotate("empty focus", (-e, 0), (-1.08, -0.28), fontsize=9.0,
                  arrowprops={"arrowstyle": "->", "lw": 0.7})
-    ax0.annotate("state $(x,y)$\nsolve $E-e\\sin E=M$", (px, py), (0.38, 0.74), fontsize=7.6,
+    ax0.annotate("state $(x,y)$\nsolve $E-e\\sin E=M$", (px, py), (0.38, 0.74), fontsize=9.1,
                  arrowprops={"arrowstyle": "->", "lw": 0.75})
-    ax0.text(-1.72, 0.91, "24 shown / 3,000 frozen cases", fontsize=7.4,
+    ax0.text(-1.72, 0.91, "24 shown / 3,000 frozen cases", fontsize=9.0,
              bbox={"fc": "white", "ec": "#9aa3ad", "lw": 0.6, "pad": 2.5})
     ax0.set_aspect("equal"); ax0.set_xlim(-1.86, 1.05); ax0.set_ylim(-1.05, 1.05)
     ax0.set_xlabel("perifocal coordinate $x/a$"); ax0.set_ylabel("perifocal coordinate $y/a$")
-    ax0.legend(frameon=False, loc="lower right"); style_axis(ax0)
+    ax0.legend(frameon=False, loc="lower right", fontsize=8.8); style_axis(ax0)
+    ax0.tick_params(labelsize=8.8)
+    ax0.xaxis.label.set_size(10.0); ax0.yaxis.label.set_size(10.0)
 
     # PV: module geometry and the exact one-diode electrical structure.
     panel(ax1, "b", "PV module: cell lattice, environmental batch and one-diode solve")
@@ -179,10 +184,10 @@ def render_geometry_plate(out: Path, meta: dict) -> None:
     # Incoming irradiance and thermal boundary.
     for xx in np.linspace(0.09, 0.43, 5):
         arrow(ax1, (xx - 0.06, 0.98), (xx, 0.88), COLORS["orange"], 1.0, 8)
-    ax1.text(0.055, 0.965, "$G=100$–$1100$ W m$^{-2}$", fontsize=7.5, color=COLORS["orange"])
-    ax1.annotate("96 series-connected cells", (0.26, 0.50), (0.49, 0.72), fontsize=7.4,
+    ax1.text(0.055, 0.965, "$G=100$–$1100$ W m$^{-2}$", fontsize=9.1, color=COLORS["orange"])
+    ax1.annotate("96 series-connected cells", (0.26, 0.50), (0.49, 0.72), fontsize=8.8,
                  arrowprops={"arrowstyle": "->", "lw": 0.7})
-    ax1.annotate("junction box / terminals", (0.255, 0.105), (0.47, 0.08), fontsize=7.2,
+    ax1.annotate("junction box / terminals", (0.255, 0.105), (0.47, 0.08), fontsize=8.6,
                  arrowprops={"arrowstyle": "->", "lw": 0.7})
     # One-diode equivalent circuit, tied directly to the module terminals.
     x0, y0 = 0.58, 0.50
@@ -210,11 +215,11 @@ def render_geometry_plate(out: Path, meta: dict) -> None:
     sy = y0 + 0.20 + 0.018 * np.array([0, 1, -1, 1, -1, 1, -1, 1, 0])
     ax1.plot(sx, sy, color="#273444", lw=1.0)
     ax1.plot([0.90, 0.95], [y0 + 0.20, y0 + 0.20], color="#273444", lw=1.0)
-    ax1.text(x0 + 0.01, y0 - 0.10, "$I_L$", fontsize=7.2)
-    ax1.text(dx - 0.018, y0 + 0.10, "$I_D$", fontsize=7.2)
-    ax1.text(rx + 0.018, y0, "$R_{sh}$", fontsize=7.2)
-    ax1.text(0.78, y0 + 0.24, "$R_s$", fontsize=7.2)
-    ax1.text(0.69, 0.15, "357 $(G,T_c)$ states\nroot: terminal current $I(V)$", fontsize=7.7,
+    ax1.text(x0 + 0.01, y0 - 0.10, "$I_L$", fontsize=8.7)
+    ax1.text(dx - 0.018, y0 + 0.10, "$I_D$", fontsize=8.7)
+    ax1.text(rx + 0.018, y0, "$R_{sh}$", fontsize=8.7)
+    ax1.text(0.78, y0 + 0.24, "$R_s$", fontsize=8.7)
+    ax1.text(0.69, 0.15, "357 $(G,T_c)$ states\nroot: terminal current $I(V)$", fontsize=9.0,
              ha="center", bbox={"fc": "white", "ec": "#9aa3ad", "lw": 0.6, "pad": 2.5})
     ax1.text(0.965, y0 + 0.20, "+", fontsize=9, ha="left", va="center")
     ax1.text(0.965, y0 - 0.20, "−", fontsize=9, ha="left", va="center")
@@ -238,16 +243,16 @@ def render_geometry_plate(out: Path, meta: dict) -> None:
         ax2.add_patch(Arc((0.43, cy), 0.25, 0.17, theta1=20, theta2=330,
                           color="white", lw=1.25))
         arrow(ax2, (0.51, cy + 0.065), (0.54, cy + 0.015), "white", 1.0, 7)
-    ax2.text(0.035, 0.74, "$T_{in}$, $\\dot m$, composition", fontsize=7.6, color=COLORS["blue"])
-    ax2.text(0.69, 0.28, "$T$, species", fontsize=7.6, color=COLORS["red"])
-    ax2.text(0.14, 0.47, "cooling\njacket", fontsize=7.2, ha="right", color=COLORS["cyan"])
-    ax2.text(0.43, 0.20, "perfectly mixed control volume $V$", fontsize=7.2, ha="center")
-    ax2.annotate("impeller", (0.53, 0.44), (0.76, 0.57), fontsize=7.4,
+    ax2.text(0.035, 0.74, "$T_{in}$, $\\dot m$, composition", fontsize=9.0, color=COLORS["blue"])
+    ax2.text(0.69, 0.28, "$T$, species", fontsize=9.0, color=COLORS["red"])
+    ax2.text(0.14, 0.47, "cooling\njacket", fontsize=8.7, ha="right", color=COLORS["cyan"])
+    ax2.text(0.43, 0.20, "perfectly mixed control volume $V$", fontsize=8.5, ha="center")
+    ax2.annotate("impeller", (0.53, 0.44), (0.76, 0.57), fontsize=9.0,
                  arrowprops={"arrowstyle": "->", "lw": 0.7})
-    ax2.text(0.75, 0.79, "$\\tau=V/\\dot V$", fontsize=9)
-    ax2.text(0.73, 0.67, "21 $T_{in}$ × 72 $\\tau$\n= 1,512 steady solves", fontsize=7.7,
+    ax2.text(0.75, 0.79, "$\\tau=V/\\dot V$", fontsize=10.5)
+    ax2.text(0.73, 0.67, "21 $T_{in}$ × 72 $\\tau$\n= 1,512 steady solves", fontsize=9.0,
              bbox={"fc": "white", "ec": "#9aa3ad", "lw": 0.6, "pad": 2.5})
-    ax2.text(0.74, 0.45, "root state:\n$T$, $Y_k$, $\\dot q$", fontsize=7.7)
+    ax2.text(0.74, 0.45, "root state:\n$T$, $Y_k$, $\\dot q$", fontsize=9.1)
     ax2.set_xlim(0, 1); ax2.set_ylim(0, 1); ax2.set_aspect("equal"); ax2.axis("off")
 
     # Peng-Robinson: physical control volume and three algebraic volume roots.
@@ -263,10 +268,10 @@ def render_geometry_plate(out: Path, meta: dict) -> None:
         ax3.add_patch(Circle((xx, yy), 0.008, fc="#0b5f9a", ec="white", lw=0.25))
     for xx, yy in zip(rng.uniform(0.12, 0.44, 20), rng.uniform(0.47, 0.74, 20)):
         ax3.add_patch(Circle((xx, yy), 0.008, fc=COLORS["orange"], ec="white", lw=0.25))
-    ax3.text(0.285, 0.28, "dense liquid", fontsize=7.5, color="white", ha="center")
-    ax3.text(0.285, 0.60, "dilute vapor", fontsize=7.5, ha="center")
-    ax3.text(0.13, 0.89, "piston pressure $P$", fontsize=7.5)
-    ax3.annotate("phase interface", (0.43, 0.43), (0.50, 0.50), fontsize=7.3,
+    ax3.text(0.285, 0.28, "dense liquid", fontsize=9.0, color="white", ha="center")
+    ax3.text(0.285, 0.60, "dilute vapor", fontsize=9.0, ha="center")
+    ax3.text(0.13, 0.89, "piston pressure $P$", fontsize=9.0)
+    ax3.annotate("phase interface", (0.43, 0.43), (0.50, 0.50), fontsize=8.7,
                  arrowprops={"arrowstyle": "->", "lw": 0.7})
     # Root structure at the same T,P state.
     bx = [0.61, 0.75, 0.89]
@@ -275,13 +280,16 @@ def render_geometry_plate(out: Path, meta: dict) -> None:
     colors = [COLORS["blue"], COLORS["gray"], COLORS["red"]]
     for xx, hh, label, color in zip(bx, heights, labels, colors):
         ax3.add_patch(Rectangle((xx - 0.045, 0.15), 0.09, hh, fc=color, ec="white", lw=0.7, alpha=0.88))
-        ax3.text(xx, 0.11, label, fontsize=7.0, ha="center", va="top")
+        ax3.text(xx, 0.11, label, fontsize=8.2, ha="center", va="top")
     ax3.plot([0.55, 0.96], [0.15, 0.15], color="#273444", lw=0.8)
-    ax3.text(0.755, 0.91, "same $(P_r,T_r)$ → cubic in $Z$", fontsize=8.2, ha="center")
-    ax3.text(0.755, 0.82, f"{pr.shape[0]:,} batched phase states", fontsize=7.5, ha="center",
+    ax3.text(0.755, 0.91, "same $(P_r,T_r)$ → cubic in $Z$", fontsize=9.5, ha="center")
+    ax3.text(0.755, 0.82, f"{pr.shape[0]:,} batched phase states", fontsize=9.0, ha="center",
              bbox={"fc": "white", "ec": "#9aa3ad", "lw": 0.6, "pad": 2.5})
-    ax3.text(0.755, 0.72, "one root outside dome\nthree roots inside dome", fontsize=7.4, ha="center")
+    ax3.text(0.755, 0.72, "one root outside dome\nthree roots inside dome", fontsize=8.8, ha="center")
     ax3.set_xlim(0, 1); ax3.set_ylim(0, 1); ax3.set_aspect("equal"); ax3.axis("off")
+
+    for ax in axs.ravel():
+        ax.title.set_fontsize(11.2)
 
     meta["geometry_structures"] = save_figure(
         fig, out, "fig8_multidomain_geometry_structures_2d",
